@@ -1,0 +1,1 @@
+heroku scale worker=0 && heroku scale bots=0 && git push heroku master && heroku scale worker=1 && heroku scale bots=1
