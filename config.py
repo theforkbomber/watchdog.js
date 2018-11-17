@@ -1,6 +1,0 @@
-client_id   = '506885595470102549'
-token = 'NTA2ODg1NTk1NDcwMTAyNTQ5.DroqMw.DG5GCGzXFlvKdpvGTFTROd5__xk'
-host = 'ec2-75-101-142-91.compute-1.amazonaws.com'
-database = 'ddes18rvff58b8'
-user = 'tubslfyhbjijfm'
-password = 'fcbe9ec3c9ff81f7b7202c26011f6ad1bce8e392740ab072569cc0ace8e28716'
