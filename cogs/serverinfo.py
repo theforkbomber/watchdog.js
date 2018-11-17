@@ -7,6 +7,7 @@ import config
 from discord.ext.commands import HelpFormatter
 import re
 import platform
+import os
 import sys
 _mentions_transforms = {
     '@everyone': '@\u200beveryone',
