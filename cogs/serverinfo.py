@@ -25,7 +25,7 @@ class ServerInfo:
             except:
                 return "N/A"
 
-        await self.bot.say("""Python version: %s
+        await self.bot.say("""```pyPython version: %s
 dist: %s
 linux_distribution: %s
 system: %s
@@ -33,7 +33,7 @@ machine: %s
 platform: %s
 uname: %s
 version: %s
-""" % (
+```""" % (
 sys.version.split('\n'),
 str(platform.dist()),
 linux_distribution(),
