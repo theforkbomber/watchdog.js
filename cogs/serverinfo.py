@@ -6,6 +6,8 @@ from datetime import datetime
 import config
 from discord.ext.commands import HelpFormatter
 import re
+import platform
+import sys
 _mentions_transforms = {
     '@everyone': '@\u200beveryone',
     '@here': '@\u200bhere'
@@ -14,6 +16,33 @@ _mention_pattern = re.compile('|'.join(_mentions_transforms.keys()))
 class ServerInfo:
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.command
+    async def botstats(self, ctx):
+        def linux_distribution():
+            try:
+                return platform.linux_distribution()
+            except:
+                return "N/A"
+
+        await self.bot.say("""Python version: %s
+        dist: %s
+        linux_distribution: %s
+        system: %s
+        machine: %s
+        platform: %s
+        uname: %s
+        version: %s
+        """ % (
+        sys.version.split('\n'),
+        str(platform.dist()),
+        linux_distribution(),
+        platform.system(),
+        platform.machine(),
+        platform.platform(),
+        platform.uname(),
+        platform.version(),
+        ))
 
     @commands.command(pass_context=True, brief="pings mods online, if possible. Misuse this and you will get a strike.")
     async def pingmods(self, ctx, *, reason):
