@@ -32,7 +32,6 @@ linux_distribution: %s
 system: %s
 machine: %s
 platform: %s
-uname: %s
 version: %s
 ```""" % (
 sys.version.split('\n'),
@@ -41,7 +40,6 @@ linux_distribution(),
 platform.system(),
 platform.machine(),
 platform.platform(),
-platform.uname(),
 platform.version(),
 ))
 
