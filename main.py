@@ -141,7 +141,8 @@ async def on_server_join(server):
 @bot.event
 async def on_member_join(member):
     server = member.server
-
+    dokis = ["Monika", "Misao", "Sayori", "Natsuki", "Protagonist", "Yuri"]
+    Doki = False
     def nicknamecheck(a):
         names = ["Monika", "Natsuki", "Yuri", "Dan", "Misao", "Sayori"]
         for x in range(0,len(names)):
@@ -185,112 +186,117 @@ async def on_member_join(member):
                                 thingy = role
                                 await bot.add_roles(member, thingy)
                                 await asyncio.sleep(2)
+                            if role.name in dokis:
+                                Doki = True
                 except:
                     pass
     except Exception as e:
         print(e)
     db.close()
-    randomnum = random.randint(0,5)
-    if randomnum == 0:
-        for role in server.roles:
-            if role.name == "Monika":
-                moni = role
-        await bot.add_roles(member, moni)
-        randomnume = random.randint(0,6000000)
-        if randomnume == 0:
+    if Doki == False:
+        randomnum = random.randint(0,5)
+        if randomnum == 0:
             for role in server.roles:
-                if role.name == "Monika (Rare)":
+                if role.name == "Monika":
                     moni = role
-            await asyncio.sleep(2)
             await bot.add_roles(member, moni)
-            
-    if randomnum == 1:
-        for role in server.roles:
-            if role.name == "Natsuki":
-                moni = role
-        await bot.add_roles(member, moni)
-        randomnume = random.randint(0,6000000)
-        if randomnume == 0:
+            randomnume = random.randint(0,6000000)
+            if randomnume == 0:
+                for role in server.roles:
+                    if role.name == "Monika (Rare)":
+                        moni = role
+                await asyncio.sleep(2)
+                await bot.add_roles(member, moni)
+                
+        if randomnum == 1:
             for role in server.roles:
-                if role.name == "Natsuki (Rare)":
+                if role.name == "Natsuki":
                     moni = role
-            await asyncio.sleep(2)
             await bot.add_roles(member, moni)
-            
-    if randomnum == 2:
-        for role in server.roles:
-            if role.name == "Yuri":
-                moni = role
-        await bot.add_roles(member, moni)
-        randomnume = random.randint(0,6000000)
-        if randomnume == 0:
+            randomnume = random.randint(0,6000000)
+            if randomnume == 0:
+                for role in server.roles:
+                    if role.name == "Natsuki (Rare)":
+                        moni = role
+                await asyncio.sleep(2)
+                await bot.add_roles(member, moni)
+                
+        if randomnum == 2:
             for role in server.roles:
-                if role.name == "Yuri (Rare)":
+                if role.name == "Yuri":
                     moni = role
-            await asyncio.sleep(2)
             await bot.add_roles(member, moni)
+            randomnume = random.randint(0,6000000)
+            if randomnume == 0:
+                for role in server.roles:
+                    if role.name == "Yuri (Rare)":
+                        moni = role
+                await asyncio.sleep(2)
+                await bot.add_roles(member, moni)
 
-    if randomnum == 3:
-        for role in server.roles:
-            if role.name == "Misao":
-                moni = role
-        await bot.add_roles(member, moni)
-        randomnume = random.randint(0,6000000)
-        if randomnume == 0:
+        if randomnum == 3:
             for role in server.roles:
-                if role.name == "Misao (Rare)":
+                if role.name == "Misao":
+                    moni = role
+            await bot.add_roles(member, moni)
+            randomnume = random.randint(0,6000000)
+            if randomnume == 0:
+                for role in server.roles:
+                    if role.name == "Misao (Rare)":
+                        moni = role
+                await asyncio.sleep(2)
+                await bot.add_roles(member, moni)
+        if randomnum == 4:
+            for role in server.roles:
+                if role.name == "Protagonist":
+                    moni = role
+            await bot.add_roles(member, moni)
+            randomnume = random.randint(0,6000000)
+            if randomnume == 0:
+                for role in server.roles:
+                    if role.name == "Protagonist (Rare)":
+                        moni = role
+                await asyncio.sleep(2)
+                await bot.add_roles(member, moni)
+        if randomnum == 5:
+            for role in server.roles:
+                if role.name == "Sayori":
+                    moni = role
+            await bot.add_roles(member, moni)
+            randomnume = random.randint(0,6000000)
+            if randomnume == 0:
+                for role in server.roles:
+                    if role.name == "Sayori (Rare)":
+                        moni = role
+                await asyncio.sleep(2)
+                await bot.add_roles(member, moni)
+        checker = random.randint(0,1000000000)
+        if checker == 0:
+            for role in server.roles:
+                if role.name == "Dog":
                     moni = role
             await asyncio.sleep(2)
             await bot.add_roles(member, moni)
-    if randomnum == 4:
-        for role in server.roles:
-            if role.name == "Protagonist":
-                moni = role
-        await bot.add_roles(member, moni)
-        randomnume = random.randint(0,6000000)
-        if randomnume == 0:
+        if checker == 1:
             for role in server.roles:
-                if role.name == "Protagonist (Rare)":
+                if role.name == "Cat":
                     moni = role
             await asyncio.sleep(2)
             await bot.add_roles(member, moni)
-    if randomnum == 5:
-        for role in server.roles:
-            if role.name == "Sayori":
-                moni = role
-        await bot.add_roles(member, moni)
-        randomnume = random.randint(0,6000000)
-        if randomnume == 0:
+        if checker == 2:
             for role in server.roles:
-                if role.name == "Sayori (Rare)":
+                if role.name == "$PLAYER$":
                     moni = role
             await asyncio.sleep(2)
             await bot.add_roles(member, moni)
-    checker = random.randint(0,1000000000)
-    if checker == 0:
-        for role in server.roles:
-            if role.name == "Dog":
-                moni = role
-        await asyncio.sleep(2)
-        await bot.add_roles(member, moni)
-    if checker == 1:
-        for role in server.roles:
-            if role.name == "Cat":
-                moni = role
-        await asyncio.sleep(2)
-        await bot.add_roles(member, moni)
-    if checker == 2:
-        for role in server.roles:
-            if role.name == "$PLAYER$":
-                moni = role
-        await asyncio.sleep(2)
-        await bot.add_roles(member, moni)
-    if checker == 3:
-        for role in server.roles:
-            if role.name == "Piano Pass":
-                moni = role
-        await asyncio.sleep(2)
-        await bot.add_roles(member, moni)
+        if checker == 3:
+            for role in server.roles:
+                if role.name == "Piano Pass":
+                    moni = role
+            await asyncio.sleep(2)
+            await bot.add_roles(member, moni)
+    else:
+        pass
 
 @bot.event
 async def on_member_update(before, after):
