@@ -79,7 +79,7 @@ async def on_ready():
         activity = discord.Game(name="CPU: "+str(psutil.cpu_percent())+"%\nRAM: "+str(m.percent)+"%\nUptime: "+str(uptime))
         # await bot.change_presence(status=discord.Status.dnd, game=discord.Game(name="Under maintenance..."))
         await bot.change_presence(status=mystatus, game=activity)
-        await asyncio.sleep(12)
+        await asyncio.sleep(15)
 
 @bot.event
 async def on_message_edit(before, after):
