@@ -141,6 +141,55 @@ async def on_server_join(server):
 @bot.event
 async def on_member_join(member):
     server = member.server
+
+    def nicknamecheck(a):
+        names = ["Monika", "Natsuki", "Yuri", "Dan", "Misao", "Sayori"]
+        for x in range(0,len(names)):
+            if a == names[x]:
+                nick = names[x]
+                return nick
+    if member.nick == None:
+        name = member.name
+    else:
+        name = member.nick
+    nickcheck = nicknamecheck(name)
+    if nickcheck != None:
+        await bot.change_nickname(member, "Not"+nickcheck)
+    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+    cursor = db.cursor()
+    try:
+        username = str(member.id)
+        cursor.execute("SELECT * FROM detention WHERE username= %s", (username,))
+        results = cursor.fetchone()
+        print(results)
+        if results[1] == "TRUE":
+            for role in server.roles:
+                if role.name == "Detention":
+                    det = role
+                    await bot.add_roles(member, det)
+
+        elif results[1] == "FALSE":
+            cursor.execute("SELECT * FROM roles WHERE username= %s", (username,))
+            c = cursor.fetchall()
+            print(c)
+            rolled = c[0][2]
+            print(rolled)
+            rolled = rolled.split("|")
+            for x in rolled:
+                try:
+                    for role in server.roles:
+                        if role.name == str(x):
+                            if role.name == "@everyone":
+                                pass
+                            else:
+                                thingy = role
+                                await bot.add_roles(member, thingy)
+                                await asyncio.sleep(2)
+                except:
+                    pass
+    except Exception as e:
+        print(e)
+    db.close()
     randomnum = random.randint(0,5)
     if randomnum == 0:
         for role in server.roles:
@@ -242,55 +291,6 @@ async def on_member_join(member):
                 moni = role
         await asyncio.sleep(2)
         await bot.add_roles(member, moni)
-
-    def nicknamecheck(a):
-        names = ["Monika", "Natsuki", "Yuri", "Dan", "Misao", "Sayori"]
-        for x in range(0,len(names)):
-            if a == names[x]:
-                nick = names[x]
-                return nick
-    if member.nick == None:
-        name = member.name
-    else:
-        name = member.nick
-    nickcheck = nicknamecheck(name)
-    if nickcheck != None:
-        await bot.change_nickname(member, "Not"+nickcheck)
-    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-    cursor = db.cursor()
-    try:
-        username = str(member.id)
-        cursor.execute("SELECT * FROM detention WHERE username= %s", (username,))
-        results = cursor.fetchone()
-        print(results)
-        if results[1] == "TRUE":
-            for role in server.roles:
-                if role.name == "Detention":
-                    det = role
-                    await bot.add_roles(member, det)
-
-        elif results[1] == "FALSE":
-            cursor.execute("SELECT * FROM roles WHERE username= %s", (username,))
-            c = cursor.fetchall()
-            print(c)
-            rolled = c[0][2]
-            print(rolled)
-            rolled = rolled.split("|")
-            for x in rolled:
-                try:
-                    for role in server.roles:
-                        if role.name == str(x):
-                            if role.name == "@everyone":
-                                pass
-                            else:
-                                thingy = role
-                                await bot.add_roles(member, thingy)
-                                await asyncio.sleep(2)
-                except:
-                    pass
-    except Exception as e:
-        print(e)
-    db.close()
 
 @bot.event
 async def on_member_update(before, after):
