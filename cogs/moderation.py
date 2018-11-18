@@ -13,12 +13,24 @@ class Moderation:
     @commands.has_permissions(manage_roles=True)
     async def remove(self, ctx, member, typer=None, *, reason=None):
         if typer == "--pm":
+            go = True
+            nums = ["1","2","3","4","5","6","7"]
+            await self.bot.say("How many days worth of messages do you want to purge? (1-7)")
+            while go == True:
+                checker = await self.bot.wait_for_message(author = ctx.message.author, channel = ctx.message.channel)
+                if checker.content in nums:
+                    go = False
+                    numchosen = int(checker.content)
+                else:
+                    go = True
+                    await self.bot.say("That was an invalid value, try again...")
             if reason == None:
                 for user in ctx.message.mentions:
                     em = discord.Embed(description='No reason given.', colour=0xf44242)
                     em.set_author(name="You have been removed from directory `"+ctx.message.server.name+"` by "+ctx.message.author.name, icon_url=ctx.message.author.avatar_url)
                     await self.bot.send_message(user, embed=em)
-                    await self.bot.ban(user, delete_message_days=7)
+                    
+                    await self.bot.ban(user, delete_message_days=numchosen)
                     await self.bot.say("*"+user.name+".chr deleted successfully.*")
             else:
                 for user in ctx.message.mentions:
