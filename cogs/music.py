@@ -470,7 +470,7 @@ class Music:
 
         
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True, no_pm=True, aliases = ["p"])
     @commands.has_permissions(send_messages=True)
     async def play(self, ctx, *, song: str):
         """Plays a song.
@@ -555,7 +555,7 @@ class Music:
             return
         await self.bot.say('Enqueued ' + str(_entry))
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True, no_pm=True, aliases = ["vol"])
     @commands.has_permissions(kick_members=True)
     async def volume(self, ctx, value: int = None):
         """Sets the volume of the currently playing song."""
@@ -652,7 +652,7 @@ class Music:
             return
         await self.bot.say("ETA till your next play is: {0[0]}m {0[1]}s".format(divmod(round(count, 0), 60)))
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True, no_pm=True, aliases = ["q"])
     @commands.has_permissions(send_messages=True)
     async def queue(self, ctx):
         """Provides a printout of the songs that are in the queue"""
@@ -675,7 +675,7 @@ class Music:
         await self.bot.say("There are a total of {} songs in the queue"
                            .format(len(self.get_voice_state(ctx.message.server).songs.entries)))
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True, no_pm=True, aliases = ["s"])
     @commands.has_permissions(send_messages=True)
     async def skip(self, ctx):
         """Vote to skip a song. The song requester can automatically skip.
@@ -719,7 +719,7 @@ class Music:
         state.skip()
         await self.bot.say('Song has just been skipped.')
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True, no_pm=True, aliases = ["np"])
     @commands.has_permissions(send_messages=True)
     async def playing(self, ctx):
         """Shows info about the currently played song."""

@@ -1,0 +1,14 @@
+now = datetime.now()
+d = datetime.now()
+m = psutil.virtual_memory()
+uptime = now-then
+server = bot.get_server('427450243253272598')
+me = discord.utils.get(server.members, id = '275312272975462411')
+mystatus = me.status
+if me.status != discord.Status.offline:
+    pass
+else:
+    mystatus = discord.Status.dnd
+activity = discord.Game(name="CPU: "+str(psutil.cpu_percent())+"%\nRAM: "+str(m.percent)+"%\nUptime: "+str(uptime))
+# await bot.change_presence(status=discord.Status.dnd, game=discord.Game(name="Under maintenance..."))
+await bot.change_presence(status=mystatus, game=activity)
