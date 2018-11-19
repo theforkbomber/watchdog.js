@@ -265,7 +265,7 @@ class EpDesign:
     @epdesign.command(pass_context=True)
     @commands.has_role("DOKI DOKI Literature Club!")
     async def list(self, ctx):
-        conn = psycopg2.connect(host="ec2-75-101-142-91.compute-1.amazonaws.com",database="ddes18rvff58b8", user="tubslfyhbjijfm", password="fcbe9ec3c9ff81f7b7202c26011f6ad1bce8e392740ab072569cc0ace8e28716")
+        conn = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         c = conn.cursor()
         a = ""
         d = c.execute("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';")
@@ -290,7 +290,7 @@ class EpDesign:
                 pass
                 await self.bot.say("**Don't even try.**")
             else:
-                conn = psycopg2.connect(host="ec2-75-101-142-91.compute-1.amazonaws.com",database="ddes18rvff58b8", user="tubslfyhbjijfm", password="fcbe9ec3c9ff81f7b7202c26011f6ad1bce8e392740ab072569cc0ace8e28716")
+                conn = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
                 c = conn.cursor()
                 c.execute('DROP TABLE '+tablename)
                 conn.commit()
