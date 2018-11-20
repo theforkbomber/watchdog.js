@@ -91,7 +91,7 @@ class Moderation:
             try:
                 username = str(member.id)
                 cursor.execute("SELECT * FROM detention WHERE username= %s", (username,))
-                results = cursor.fetchone()
+                results = cursor.fetchall()
                 print(results)
                 if results[1] == "FALSE":
                     print("help")
