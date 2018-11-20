@@ -394,7 +394,10 @@ async def on_message(message):
 # Type >os.help command for more info on a command.
 # You can also type >os.help category for more info on a category.```"""
 #         await bot.send_message(message.channel, arg)
-
+    if message.content.startswith(">os.silly sausage"):
+        d = message.content.replace(">os.silly sausage", ">os.detent")
+        print(d)
+        message.content = d
     if message.content.startswith(">os."):
         await bot.process_commands(message)
     # try:
