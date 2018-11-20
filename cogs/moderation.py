@@ -99,6 +99,7 @@ class Moderation:
                         if role.name == "Detention":
                             det = role
                             await self.bot.add_roles(member, det)
+                            print("hm?")
                             break
                     for role in member.roles:
                         if role.name == "Detention":
