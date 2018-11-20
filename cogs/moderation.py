@@ -93,7 +93,7 @@ class Moderation:
                 cursor.execute("SELECT * FROM detention WHERE username= %s", (username,))
                 results = cursor.fetchall()
                 print(results)
-                if results[1] == "FALSE":
+                if results[0][1] == "FALSE":
                     print("help")
                     for role in server.roles:
                         if role.name == "Detention":
@@ -108,7 +108,7 @@ class Moderation:
                             await self.bot.remove_roles(user, role)
                             await asyncio.sleep(2)
 
-                elif results[1] == "TRUE":
+                elif results[0][1] == "TRUE":
                     cursor.execute("SELECT * FROM roles WHERE username= %s", (username,))
                     c = cursor.fetchall()
                     print(c)
