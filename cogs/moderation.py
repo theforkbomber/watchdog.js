@@ -78,7 +78,7 @@ class Moderation:
         else:
             await self.bot.create_channel(server, typer)
 
-    @commands.command(pass_context=True, aliases = ["sillysausage", "detent", "detention"])
+    @commands.command(pass_context=True, aliases = ["detent", "detention"])
     @commands.has_permissions(manage_roles=True)
     async def detain(self, ctx):
         server = ctx.message.server

@@ -50,6 +50,7 @@ platform.version(),
             return
         else:
             server = ctx.message.server
+            member = ctx.message.author
             mod = []
             role =  discord.utils.get(server.roles, server = server, name = "Detention")
             for x in server.members:
@@ -61,7 +62,6 @@ platform.version(),
             offline = []
             away = []
             dnd = []
-
             on = []
             aw = []
             off = []
@@ -83,6 +83,8 @@ platform.version(),
             o = ""
             d = ""
             of = ""
+            def check(reaction):
+                return reaction.user in tocontact
             if len(online) is not 0:
                 for i in online:
                     o = o+"<:Online:498506339203416064> "+i+"\n"
@@ -90,9 +92,20 @@ platform.version(),
                 await self.bot.say("Available mods:\n"+o)
                 for x in tocontact:
                     msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
-                    await self.bot.add_reaction(emoji="🚫", message=msg)
-                    await self.bot.wait_for_reaction(emoji="🚫",user=x,message=msg)
-                    await self.bot.add_roles(ctx.message.author, role)
+                    await self.bot.add_reaction(emoji="🚫",check = check, message=msg)
+                    await self.bot.wait_for_reaction(emoji="🚫",check = check,message=msg)
+                    for role in server.roles:
+                        if role.name == "Detention":
+                            det = role
+                            await self.bot.add_roles(member, det)
+                            print("hm?")
+                            break
+                    for role in member.roles:
+                        if role.name == "Detention":
+                            pass
+                        else:
+                            await self.bot.remove_roles(member, role)
+                            await asyncio.sleep(2)
 
             elif len(away) is not 0:
                 for i in away:
@@ -102,8 +115,19 @@ platform.version(),
                 for x in tocontact:
                     msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
                     await self.bot.add_reaction(emoji="🚫", message=msg)
-                    await self.bot.wait_for_reaction(emoji="🚫",user=x,message=msg)
-                    await self.bot.add_roles(ctx.message.author, role)
+                    await self.bot.wait_for_reaction(emoji="🚫",check = check,message=msg)
+                    for role in server.roles:
+                        if role.name == "Detention":
+                            det = role
+                            await self.bot.add_roles(member, det)
+                            print("hm?")
+                            break
+                    for role in member.roles:
+                        if role.name == "Detention":
+                            pass
+                        else:
+                            await self.bot.remove_roles(member, role)
+                            await asyncio.sleep(2)
             elif len(dnd) is not 0:
                 for i in dnd:
                     d = d+"<:DnD:498506339052421163> "+i+"\n"
@@ -112,8 +136,19 @@ platform.version(),
                 for x in tocontact:
                     msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
                     await self.bot.add_reaction(emoji="🚫", message=msg)
-                    await self.bot.wait_for_reaction(emoji="🚫",user=x,message=msg)
-                    await self.bot.add_roles(ctx.message.author, role)
+                    await self.bot.wait_for_reaction(emoji="🚫",check = check,message=msg)
+                    for role in server.roles:
+                        if role.name == "Detention":
+                            det = role
+                            await self.bot.add_roles(member, det)
+                            print("hm?")
+                            break
+                    for role in member.roles:
+                        if role.name == "Detention":
+                            pass
+                        else:
+                            await self.bot.remove_roles(member, role)
+                            await asyncio.sleep(2)
             elif len(offline) is not 0:
                 for i in offline:
                     of = of+"<:Offline:498506339287564293> "+i+"\n"
@@ -122,8 +157,19 @@ platform.version(),
                 for x in tocontact:
                     msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
                     await self.bot.add_reaction(emoji="🚫", message=msg)
-                    await self.bot.wait_for_reaction(emoji="🚫",user=x,message=msg)
-                    await self.bot.add_roles(ctx.message.author, role)
+                    await self.bot.wait_for_reaction(emoji="🚫",check = check,message=msg)
+                    for role in server.roles:
+                        if role.name == "Detention":
+                            det = role
+                            await self.bot.add_roles(member, det)
+                            print("hm?")
+                            break
+                    for role in member.roles:
+                        if role.name == "Detention":
+                            pass
+                        else:
+                            await self.bot.remove_roles(member, role)
+                            await asyncio.sleep(2)
 
     @commands.command(pass_context=True, brief="displays info about the server")
     async def info(self, ctx):
