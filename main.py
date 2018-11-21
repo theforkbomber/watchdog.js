@@ -83,7 +83,7 @@ async def on_ready():
         await asyncio.sleep(15)
         await bot.change_presence(status=mystatus, game=discord.Game(name = "over JMAF", type = 3))
         await asyncio.sleep(15)
-        await bot.change_presence(status=mystatus, game=discord.Game(name = "to #suggestions", type = 2))
+        await bot.change_presence(status=mystatus, game=discord.Game(name = "#suggestions", type = 2))
         await asyncio.sleep(15)
 
 @bot.event
