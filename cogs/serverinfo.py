@@ -83,8 +83,8 @@ platform.version(),
             o = ""
             d = ""
             of = ""
-            def check(reaction):
-                return reaction.user in tocontact
+            def check(react):
+                return react.user in tocontact
             if len(online) is not 0:
                 for i in online:
                     o = o+"<:Online:498506339203416064> "+i+"\n"
