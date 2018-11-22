@@ -128,9 +128,9 @@ class Moderation:
                                         await asyncio.sleep(2)
                             for role in server.roles:
                                 if role.name == "Detention":
-                                    det = role
+                                    dete = role
                                     break
-                            await self.bot.remove_roles(member, det)
+                            await self.bot.remove_roles(member, dete)
             
                         except Exception as e:
                             print(e)
