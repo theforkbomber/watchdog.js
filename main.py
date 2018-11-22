@@ -135,7 +135,7 @@ async def on_message_delete(message):
 
 @bot.event
 async def on_server_join(server):
-    if server.id != '369252350927306752' or server.id != '427450243253272598' or server.id != '454338814865965099':
+    if server.id != '369252350927306752' or server.id != '454338814865965099':
         try:
             await bot.send_message(server.default_channel, "Currently, Watchdog can't join other servers for security purposes, sorry.")
             await bot.leave_server(server)
