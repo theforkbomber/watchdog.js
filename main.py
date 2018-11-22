@@ -525,7 +525,7 @@ async def on_message(message):
                                 else:
                                     roler.append(role)
                             print(roler)
-                            await bot.remove_roles(message.author.roles, *roler)
+                            await bot.remove_roles(message.author, *roler)
                             desc = "Spammed the same message 6 times."
                         elif message.content == results[3]:
                             strikes = str(int(results[4])+1)
