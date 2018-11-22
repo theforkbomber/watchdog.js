@@ -172,6 +172,7 @@ async def on_member_join(member):
             for role in server.roles:
                 if role.name == "Detention":
                     det = role
+                    Doki = True
                     break
             await bot.add_roles(member, det)
 
@@ -190,7 +191,7 @@ async def on_member_join(member):
                                 continue
                             else:
                                 wb.append(role)
-                        if role.name in dokis or role.name == "Detention":
+                        if role.name in dokis:
                             Doki = True
                 except:
                     pass
