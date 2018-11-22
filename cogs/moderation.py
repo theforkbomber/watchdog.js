@@ -87,6 +87,7 @@ class Moderation:
         for user in ctx.message.mentions:
             member = server.get_member(user.id)
             print("DT")
+            undetent = []
             db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
             cursor = db.cursor()
             try:
@@ -123,9 +124,8 @@ class Moderation:
                                     if role.name == "@everyone" or role.name == "Detention":
                                         continue
                                     else:
-                                        thingy = role
-                                        await self.bot.add_roles(member, thingy)
-                                        await asyncio.sleep(2)
+                                        undetent.append(role)
+                            await self.bot.add_roles(member, *undetent)
                             for role in server.roles:
                                 if role.name == "Detention":
                                     dete = role
