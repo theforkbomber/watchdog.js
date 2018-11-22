@@ -86,7 +86,7 @@ platform.version(),
             d = ""
             of = ""
             def check(react, usr):
-                return usr in tocontact and react.message in msgs
+                return react.message in msgs
             if len(online) is not 0:
                 for i in online:
                     o = o+"<:Online:498506339203416064> "+i+"\n"
