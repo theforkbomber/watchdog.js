@@ -43,50 +43,50 @@ async def on_member_join(member):
     else:
         await client.send_message(channel, greetchosenfirst+mention+greetlast)
 
-    @commands.command(pass_context=True)
-    @commands.check(admincheck)
-    async def run(self, ctx, *, body: str):
-        env = {
-            'bot': self.bot,
-            'ctx': ctx,
-            'channel': ctx.message.channel,
-            'author': ctx.message.author,
-            'server': ctx.message.server,
-            'message': ctx.message,
-            '_': self._last_result
-        }
+@commands.command(pass_context=True)
+@commands.check(admincheck)
+async def run(self, ctx, *, body: str):
+    env = {
+        'bot': self.bot,
+        'ctx': ctx,
+        'channel': ctx.message.channel,
+        'author': ctx.message.author,
+        'server': ctx.message.server,
+        'message': ctx.message,
+        '_': self._last_result
+    }
 
-        env.update(globals())
+    env.update(globals())
 
-        body = self.cleanup_code(body)
-        stdout = io.StringIO()
+    body = self.cleanup_code(body)
+    stdout = io.StringIO()
 
-        to_compile = 'async def func():\n%s' % textwrap.indent(body, '  ')
+    to_compile = 'async def func():\n%s' % textwrap.indent(body, '  ')
 
+    try:
+        exec(to_compile, env)
+    except SyntaxError as e:
+        return await self.bot.say(self.get_syntax_error(e))
+
+    func = env['func']
+    try:
+        with redirect_stdout(stdout):
+            ret = await func()
+    except Exception as e:
+        value = stdout.getvalue()
+        await self.bot.say('```py\n{}{}\n```'.format(value, traceback.format_exc()))
+    else:
+        value = stdout.getvalue()
         try:
-            exec(to_compile, env)
-        except SyntaxError as e:
-            return await self.bot.say(self.get_syntax_error(e))
+            await self.bot.add_reaction(ctx.message, '\u2705')
+        except:
+            pass
 
-        func = env['func']
-        try:
-            with redirect_stdout(stdout):
-                ret = await func()
-        except Exception as e:
-            value = stdout.getvalue()
-            await self.bot.say('```py\n{}{}\n```'.format(value, traceback.format_exc()))
+        if ret is None:
+            if value:
+                await self.bot.say('```py\n%s\n```' % value)
         else:
-            value = stdout.getvalue()
-            try:
-                await self.bot.add_reaction(ctx.message, '\u2705')
-            except:
-                pass
-
-            if ret is None:
-                if value:
-                    await self.bot.say('```py\n%s\n```' % value)
-            else:
-                self._last_result = ret
-                await self.bot.say('```py\n%s%s\n```' % (value, ret))
+            self._last_result = ret
+            await self.bot.say('```py\n%s%s\n```' % (value, ret))
 
 client.run("NTA2MDczNjY1MjUxNTczNzYy.Drc3Vg._3iM6CzLcpBOUelv6piq5Z-AD_o")
