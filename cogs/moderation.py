@@ -203,7 +203,7 @@ class Moderation:
             if num == None:
                 try:
                     def check(message):
-                        return message.author == user
+                        return message.author == x
                     await self.bot.purge_from(channel, limit=20, check = check)
                     mess = await self.bot.send_message(ctx.message.channel,"Done!")
                     
@@ -221,7 +221,7 @@ class Moderation:
                 try:
                     todelet = int(num)
                     def check(message):
-                        return message.author == user
+                        return message.author == x
                     await self.bot.purge_from(channel, limit=todelet, check = check)
                     mess = await self.bot.send_message(ctx.message.channel,"Done!")
                     
