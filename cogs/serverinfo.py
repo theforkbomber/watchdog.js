@@ -124,7 +124,11 @@ platform.version(),
                     msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
                     msgs.append(msg)
                     await self.bot.add_reaction(emoji="🚫", message=msg)
-                waiter = await self.bot.wait_for_reaction(emoji="🚫",check = check)
+                waiter = await self.bot.wait_for_reaction(emoji="🚫")
+                if waiter.message in msgs:
+                    pass
+                else:
+                    waiter = await self.bot.wait_for_reaction(emoji="🚫")
                 await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waiter.user.name))
                 for role in server.roles:
                     if role.name == "Detention":
@@ -148,7 +152,11 @@ platform.version(),
                     msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
                     msgs.append(msg)
                     await self.bot.add_reaction(emoji="🚫", message=msg)
-                waiting = await self.bot.wait_for_reaction(emoji="🚫",check = check)
+                waiting = await self.bot.wait_for_reaction(emoji="🚫")
+                if waiting.message in msgs:
+                    pass
+                else:
+                    waiting = await self.bot.wait_for_reaction(emoji="🚫")
                 await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waiting.user.name))
                 for role in server.roles:
                     if role.name == "Detention":
@@ -171,7 +179,11 @@ platform.version(),
                     msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
                     msgs.append(msg)
                     await self.bot.add_reaction(emoji="🚫", message=msg)
-                wait = await self.bot.wait_for_reaction(emoji="🚫",check = check)
+                wait = await self.bot.wait_for_reaction(emoji="🚫")
+                if wait.message in msgs:
+                    pass
+                else:
+                    wait = await self.bot.wait_for_reaction(emoji="🚫")
                 await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(wait.user.name))
                 for role in server.roles:
                     if role.name == "Detention":
