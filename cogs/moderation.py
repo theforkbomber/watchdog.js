@@ -195,6 +195,48 @@ class Moderation:
                     em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                     my_message = await self.bot.send_message(ctx.message.channel, embed=em)
 
+    @commands.command(pass_context=True)
+    @commands.has_permissions(manage_roles=True)
+    async def userpurge(self, ctx, user, num=None):
+        channel = ctx.message.channel
+        for x in ctx.message.mentions:          
+            if num == None:
+                try:
+                    def check(message):
+                        return message.author == user
+                    await self.bot.purge_from(channel, limit=20, check = check)
+                    mess = await self.bot.send_message(ctx.message.channel,"Done!")
+                    
+                except Exception as e:
+                    getid = ctx.message.server.get_member("506885595470102549")
+                    if getid.server_permissions.manage_server == False:
+                        em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+e, colour=0xf44242)
+                        em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
+                        my_message = await self.bot.send_message(ctx.message.channel, embed=em)  
+                    else:
+                        em = discord.Embed(description="Caught an error!\nDETAILS:\n"+e, colour=0xf44242)
+                        em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
+                        my_message = await self.bot.send_message(ctx.message.channel, embed=em) 
+            else:
+                try:
+                    todelet = int(num)
+                    def check(message):
+                        return message.author == user
+                    await self.bot.purge_from(channel, limit=todelet, check = check)
+                    mess = await self.bot.send_message(ctx.message.channel,"Done!")
+                    
+                except Exception as e:
+                    e = str(e)
+                    getid = ctx.message.server.get_member("506885595470102549")
+                    if getid.server_permissions.manage_server == False:
+                        em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+e, colour=0xf44242)
+                        em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
+                        my_message = await self.bot.send_message(ctx.message.channel, embed=em)  
+                    else:
+                        em = discord.Embed(description="Caught an error!\nDETAILS:\n"+e, colour=0xf44242)
+                        em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
+                        my_message = await self.bot.send_message(ctx.message.channel, embed=em)
+
     @commands.command(aliases = ["exterminatus","clean","clear"], pass_context=True)
     @commands.has_permissions(manage_roles=True)
     async def purge(self, ctx, num=None):
