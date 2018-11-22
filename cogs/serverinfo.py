@@ -115,10 +115,10 @@ platform.version(),
                 tocontact = aw
                 await self.bot.say("Available mods:\n"+a)
                 for x in tocontact:
-                    msg = await self.bot.send_message(*tocontact,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
+                    msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
                     await self.bot.add_reaction(emoji="🚫", message=msg)
                     waiter = await self.bot.wait_for_reaction(emoji="🚫",check = check,message=msg)
-                    await self.bot.send_message(*tocontact, str(ctx.message.author.name)+" has been detained by "+str(waiter.user.name))
+                    #await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waiter.user.name))
                     for role in server.roles:
                         if role.name == "Detention":
                             det = role
