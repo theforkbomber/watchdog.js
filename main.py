@@ -172,7 +172,8 @@ async def on_member_join(member):
             for role in server.roles:
                 if role.name == "Detention":
                     det = role
-                    await bot.add_roles(member, det)
+                    break
+            await bot.add_roles(member, det)
 
         elif results[1] == "FALSE":
             cursor.execute("SELECT * FROM roles WHERE username= %s", (username,))
