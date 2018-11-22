@@ -119,7 +119,7 @@ platform.version(),
                     await self.bot.add_reaction(emoji="🚫", message=msg)
                     next
                 waiter = await self.bot.wait_for_reaction(emoji="🚫",check = check,message=msg)
-                #await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waiter.user.name))
+                await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waiter.user.name))
                 for role in server.roles:
                     if role.name == "Detention":
                         det = role
