@@ -128,8 +128,8 @@ class Moderation:
                                         await asyncio.sleep(2)
                             await self.bot.remove_roles(member, det)
             
-                        except:
-                            pass
+                        except Exception as e:
+                            print(e)
             except Exception as e:
                 print(e)
             
