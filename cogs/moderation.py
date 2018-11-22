@@ -156,7 +156,7 @@ class Moderation:
 
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
-    async def mute(self, ctx, minutes):
+    async def mute(self, ctx, user, minutes):
         for user in ctx.message.mentions:
             for c in ctx.message.server.channels:
                 overwrite = discord.PermissionOverwrite()
