@@ -154,6 +154,28 @@ class Moderation:
                 #     await self.bot.add_roles(member, teckk)
                 # await self.bot.remove_roles(user, det)
 
+    @commands.command(pass_context=True)
+    @commands.has_permissions(manage_roles=True)
+    async def mute(self, ctx, minutes):
+        for user in ctx.message.mentions:
+            for c in ctx.message.server.channels:
+                overwrite = discord.PermissionOverwrite()
+                overwrite.send_messages = False
+                await self.bot.edit_channel_permissions(c, user, overwrite)
+                print("Before:",user.permissions_in(c).send_messages)
+            try:
+                time = int(minutes) * 60
+            except:
+                await self.bot.say("""Invalid parameter [MINUTES]""")
+                break
+            def check(msg):
+                return (msg.author.permissions_in(c).manage_roles == True) and (msg.server == ctx.message.server)
+            await self.bot.wait_for_message(content = ">os.unmute <@"+user.id+">", check = check, timeout = time)
+            overwrite = discord.PermissionOverwrite()
+            overwrite.send_messages = True
+            await self.bot.edit_channel_permissions(c, user, overwrite)
+            print("After:",user.permissions_in(c).send_messages)
+
     @commands.command(aliases = ["clearbots"],pass_context=True)
     @commands.has_permissions(manage_roles=True)
     async def cleanbots(self, ctx, num=None):
