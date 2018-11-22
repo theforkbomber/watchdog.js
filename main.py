@@ -189,7 +189,7 @@ async def on_member_join(member):
                                 continue
                             else:
                                 wb.append(role)
-                        if role.name in dokis:
+                        if role.name in dokis or role.name == "Detention":
                             Doki = True
                 except:
                     pass
