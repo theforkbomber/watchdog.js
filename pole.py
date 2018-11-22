@@ -9,7 +9,7 @@ import textwrap
 from contextlib import redirect_stdout
 import io
 
-client = discord.Client()
+client = commands.Bot(command_prefix="a-")
 greetfirst = ["Greetings ","Hello there "]
 greets = ["! Please read the rules in <#448470389836742656>! Also please check out the <#396008626017271811> for better introduction to the server!","! Please read the server's rules in <#448470389836742656>! Also, please check out <#396008626017271811> for a better introduction to the server show! Most importantly, however, I hope you'll enjoy your stay here!"]
 
