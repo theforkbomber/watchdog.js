@@ -524,6 +524,7 @@ async def on_message(message):
                                     continue
                                 else:
                                     roler.append(role)
+                            print(roler)
                             await bot.remove_roles(message.author.roles, *roler)
                             desc = "Spammed the same message 6 times."
                         elif message.content == results[3]:
