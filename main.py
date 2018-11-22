@@ -147,6 +147,7 @@ async def on_member_join(member):
     server = member.server
     dokis = ["Monika", "Misao", "Sayori", "Natsuki", "Protagonist", "Yuri"]
     Doki = False
+    wb = []
     def nicknamecheck(a):
         names = ["Monika", "Natsuki", "Yuri", "Dan", "Misao", "Sayori"]
         for x in range(0,len(names)):
@@ -185,17 +186,16 @@ async def on_member_join(member):
                     for role in server.roles:
                         if role.name == str(x):
                             if role.name == "@everyone":
-                                pass
+                                continue
                             else:
-                                thingy = role
-                                await bot.add_roles(member, thingy)
-                                await asyncio.sleep(2)
-                            if role.name in dokis:
-                                Doki = True
+                                wb.append(role)
+                        if role.name in dokis:
+                            Doki = True
                 except:
                     pass
     except Exception as e:
         print(e)
+    await bot.add_roles(member, *wb)
     db.close()
     if Doki == False:
         randomnum = random.randint(0,5)
@@ -515,7 +515,7 @@ async def on_message(message):
                                     await bot.add_roles(message.author, det)
                             for role in message.author.roles:
                                 if role.name == "Detention":
-                                    pass
+                                    continue
                                 else:
                                     roler.append(role)
                             await bot.remove_roles(message.author.roles, *roler)
