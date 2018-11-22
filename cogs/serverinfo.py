@@ -85,8 +85,6 @@ platform.version(),
             roler = []
             d = ""
             of = ""
-            def check(react, usr):
-                return react.message in msgs
             if len(online) is not 0:
                 for i in online:
                     o = o+"<:Online:498506339203416064> "+i+"\n"
@@ -98,7 +96,11 @@ platform.version(),
                     await self.bot.add_reaction(emoji="🚫", message=msg)
                 print(msgs)
                 print(msg)
-                waited = await self.bot.wait_for_reaction(emoji="🚫",check = check)
+                waited = await self.bot.wait_for_reaction(emoji="🚫")
+                if waited.message in msgs:
+                    pass
+                else:
+                    waited = await self.bot.wait_for_reaction(emoji="🚫")
                 await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waited.user.name))
                 for role in server.roles:
                     if role.name == "Detention":
