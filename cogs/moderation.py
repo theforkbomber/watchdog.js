@@ -125,15 +125,15 @@ class Moderation:
                                         continue
                                     else:
                                         undetent.append(role)
-                            await self.bot.add_roles(member, *undetent)
-                            for role in server.roles:
-                                if role.name == "Detention":
-                                    dete = role
-                                    break
-                            await self.bot.remove_roles(member, dete)
             
                         except Exception as e:
                             print(e)
+                    await self.bot.add_roles(member, *undetent)
+                    for role in server.roles:
+                        if role.name == "Detention":
+                            dete = role
+                            break
+                    await self.bot.remove_roles(member, dete)
             except Exception as e:
                 print(e)
             
