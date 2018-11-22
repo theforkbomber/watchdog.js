@@ -191,8 +191,10 @@ async def on_member_join(member):
                                 continue
                             else:
                                 wb.append(role)
+                    for role in wb:
                         if role.name in dokis:
                             Doki = True
+                            break
                 except:
                     pass
     except Exception as e:
