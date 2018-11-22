@@ -81,6 +81,7 @@ platform.version(),
                     dn.append(x)
             a = ""
             o = ""
+            roler = []
             d = ""
             of = ""
             def check(react):
@@ -104,8 +105,8 @@ platform.version(),
                         if role.name == "Detention":
                             pass
                         else:
-                            await self.bot.remove_roles(member, role)
-                            await asyncio.sleep(2)
+                            roler.append(role)
+                    await self.bot.remove_roles(member, *roler)
 
             elif len(away) is not 0:
                 for i in away:
@@ -126,8 +127,9 @@ platform.version(),
                         if role.name == "Detention":
                             pass
                         else:
-                            await self.bot.remove_roles(member, role)
-                            await asyncio.sleep(2)
+                            roler.append(role)
+                    await self.bot.remove_roles(member, *roler)
+                        
             elif len(dnd) is not 0:
                 for i in dnd:
                     d = d+"<:DnD:498506339052421163> "+i+"\n"
@@ -147,8 +149,8 @@ platform.version(),
                         if role.name == "Detention":
                             pass
                         else:
-                            await self.bot.remove_roles(member, role)
-                            await asyncio.sleep(2)
+                            roler.append(role)
+                    await self.bot.remove_roles(member, *roler)
             elif len(offline) is not 0:
                 for i in offline:
                     of = of+"<:Offline:498506339287564293> "+i+"\n"
@@ -168,8 +170,8 @@ platform.version(),
                         if role.name == "Detention":
                             pass
                         else:
-                            await self.bot.remove_roles(member, role)
-                            await asyncio.sleep(2)
+                            roler.append(role)
+                    await self.bot.remove_roles(member, *roler)
 
     @commands.command(pass_context=True, brief="displays info about the server")
     async def info(self, ctx):

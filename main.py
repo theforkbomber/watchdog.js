@@ -471,6 +471,7 @@ async def on_message(message):
     if message.content.startswith(">os.") == False:
         db = sqlite3.connect("audits.db")
         cursor = db.cursor()
+        roler = []
         server = message.server
         authormsg = str(message.author.id)
         warned = False
@@ -516,8 +517,8 @@ async def on_message(message):
                                 if role.name == "Detention":
                                     pass
                                 else:
-                                    await bot.remove_roles(message.author, role)
-                                    await asyncio.sleep(2)
+                                    roler.append(role)
+                            await self.bot.remove_roles(message.author.roles, *roler)
                             desc = "Spammed the same message 6 times."
                         elif message.content == results[3]:
                             strikes = str(int(results[4])+1)
@@ -542,3 +543,5 @@ for extension in initial_extensions:
     bot.load_extension(extension)
 
 bot.run(config.token)
+
+i

@@ -82,6 +82,7 @@ class Moderation:
     @commands.has_permissions(manage_roles=True)
     async def detain(self, ctx):
         server = ctx.message.server
+        roler = []
         detented = False
         for user in ctx.message.mentions:
             member = server.get_member(user.id)
@@ -105,8 +106,8 @@ class Moderation:
                         if role.name == "Detention":
                             pass
                         else:
-                            await self.bot.remove_roles(user, role)
-                            await asyncio.sleep(2)
+                            roler.append(role)
+                    await self.bot.remove_roles(member, *roler)
 
                 elif results[0][1] == "TRUE":
                     cursor.execute("SELECT * FROM roles WHERE username= %s", (username,))
@@ -114,10 +115,6 @@ class Moderation:
                     print(c)
                     rolled = c[0][2]
                     print(rolled)
-                    for role in server.roles:
-                        if role.name == "Detention":
-                            det = role
-                            await self.bot.add_roles(member, det)
                     rolled = rolled.split("|")
                     for x in rolled:
                         try:
