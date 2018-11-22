@@ -98,7 +98,8 @@ platform.version(),
                     await self.bot.add_reaction(emoji="🚫", message=msg)
                     next
                 waited = await self.bot.wait_for_reaction(emoji="🚫",check = check)
-                await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waited.user.name))
+                for x in tocontact:
+                    await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waited.user.name))
                 for role in server.roles:
                     if role.name == "Detention":
                         det = role
@@ -123,7 +124,8 @@ platform.version(),
                     await self.bot.add_reaction(emoji="🚫", message=msg)
                     next
                 waiter = await self.bot.wait_for_reaction(emoji="🚫",check = check)
-                await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waiter.user.name))
+                for x in tocontact:
+                    await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waiter.user.name))
                 for role in server.roles:
                     if role.name == "Detention":
                         det = role
@@ -136,7 +138,7 @@ platform.version(),
                     else:
                         roler.append(role)
                 await self.bot.remove_roles(member, *roler)
-                        
+                    
             elif len(dnd) is not 0:
                 for i in dnd:
                     d = d+"<:DnD:498506339052421163> "+i+"\n"
@@ -146,19 +148,20 @@ platform.version(),
                     msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
                     await self.bot.add_reaction(emoji="🚫", message=msg)
                     waiting = await self.bot.wait_for_reaction(emoji="🚫",check = check,message=msg)
+                for x in tocontact:
                     await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(waiting.user.name))
-                    for role in server.roles:
-                        if role.name == "Detention":
-                            det = role
-                            await self.bot.add_roles(member, det)
-                            print("hm?")
-                            break
-                    for role in member.roles:
-                        if role.name == "Detention":
-                            continue
-                        else:
-                            roler.append(role)
-                    await self.bot.remove_roles(member, *roler)
+                for role in server.roles:
+                    if role.name == "Detention":
+                        det = role
+                        await self.bot.add_roles(member, det)
+                        print("hm?")
+                        break
+                for role in member.roles:
+                    if role.name == "Detention":
+                        continue
+                    else:
+                        roler.append(role)
+                await self.bot.remove_roles(member, *roler)
             elif len(offline) is not 0:
                 for i in offline:
                     of = of+"<:Offline:498506339287564293> "+i+"\n"
@@ -168,7 +171,8 @@ platform.version(),
                     msg = await self.bot.send_message(x,str(ctx.message.author.name)+" has pinged you because:\n`"+reason+"`\nReact with the 🚫 emote to give "+str(ctx.message.author.name)+" a detention.")
                     await self.bot.add_reaction(emoji="🚫", message=msg)
                     wait = await self.bot.wait_for_reaction(emoji="🚫",check = check,message=msg)
-                    await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(wait.user.name))
+                    for x in tocontact:
+                        await self.bot.send_message(x, str(ctx.message.author.name)+" has been detained by "+str(wait.user.name))
                     for role in server.roles:
                         if role.name == "Detention":
                             det = role
