@@ -163,14 +163,16 @@ class Moderation:
                 overwrite.send_messages = False
                 await self.bot.edit_channel_permissions(c, user, overwrite)
                 print("Before:",user.permissions_in(c).send_messages)
-                try:
-                    time = int(minutes) * 60
-                except:
-                    await self.bot.say("""Invalid parameter [MINUTES]""")
-                    break
-                def check(msg):
-                    return (msg.author.permissions_in(c).manage_roles == True) and (msg.server == ctx.message.server)
-                await self.bot.wait_for_message(content = "unmute <@"+user.id+">", check = check, timeout = time)
+                stuff = c
+            try:
+                time = int(minutes) * 60
+            except:
+                await self.bot.say("""Invalid parameter [MINUTES]""")
+                break
+            def check(msg):
+                return (msg.author.permissions_in(stuff).manage_roles == True) and (msg.server == ctx.message.server)
+            await self.bot.wait_for_message(content = "unmute <@"+user.id+">", check = check, timeout = time)
+            for c in ctx.message.server.channels:
                 overwrite = discord.PermissionOverwrite()
                 overwrite.send_messages = True
                 await self.bot.edit_channel_permissions(c, user, overwrite)
