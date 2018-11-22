@@ -121,7 +121,7 @@ class Moderation:
                             for role in server.roles:
                                 if role.name == str(x):
                                     if role.name == "@everyone" or role.name == "Detention":
-                                        pass
+                                        continue
                                     else:
                                         thingy = role
                                         await self.bot.add_roles(member, thingy)
