@@ -125,7 +125,7 @@ platform.version(),
                             break
                     for role in member.roles:
                         if role.name == "Detention":
-                            pass
+                            continue
                         else:
                             roler.append(role)
                     await self.bot.remove_roles(member, *roler)
@@ -147,7 +147,7 @@ platform.version(),
                             break
                     for role in member.roles:
                         if role.name == "Detention":
-                            pass
+                            continue
                         else:
                             roler.append(role)
                     await self.bot.remove_roles(member, *roler)
@@ -168,7 +168,7 @@ platform.version(),
                             break
                     for role in member.roles:
                         if role.name == "Detention":
-                            pass
+                            continue
                         else:
                             roler.append(role)
                     await self.bot.remove_roles(member, *roler)
