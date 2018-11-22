@@ -120,12 +120,16 @@ class Moderation:
                         try:
                             for role in server.roles:
                                 if role.name == str(x):
-                                    if role.name == "@everyone":
+                                    if role.name == "@everyone" or role.name == "Detention":
                                         pass
                                     else:
                                         thingy = role
                                         await self.bot.add_roles(member, thingy)
                                         await asyncio.sleep(2)
+                            for role in server.roles:
+                                if role.name == "Detention":
+                                    det = role
+                                    break
                             await self.bot.remove_roles(member, det)
             
                         except Exception as e:
