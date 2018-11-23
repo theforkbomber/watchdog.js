@@ -157,6 +157,7 @@ class Moderation:
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
     async def mute(self, ctx, user, minutes):
+        await self.bot.say("Use 'unmute @User' to remove the mute before the timer")
         for user in ctx.message.mentions:
             for c in ctx.message.server.channels:
                 overwrite = discord.PermissionOverwrite()
