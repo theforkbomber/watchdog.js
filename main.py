@@ -7,7 +7,7 @@ import re
 import sys
 import time
 import traceback
-from datetime import datetime
+from datetime import datetime, timedelta
 import sqlite3
 from os import listdir
 from os.path import isfile, join
@@ -90,7 +90,8 @@ async def on_ready():
 @bot.event
 async def on_command_error(error, ctx):
     if isinstance(error, commands.CommandOnCooldown):
-        await bot.send_message(ctx.message.channel, content='This command is on a %.2fs cooldown' % error.retry_after)
+        my_time = (datetime(1970,1,1) + timedelta(seconds=int("%.2f"))).time() % error.retry_after
+        await bot.send_message(ctx.message.channel, content=my_time+' left on the cooldown.')
     raise error  # re-raise the error so all the errors will still show up in console
 
 @bot.event
