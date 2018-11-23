@@ -174,7 +174,6 @@ class Moderation:
                 break
             def check(msg):
                 return (msg.author.permissions_in(stuff).manage_roles == True) and (msg.server == ctx.message.server)
-            await self.bot.wait_for_message(content = "unmute <@"+user.id+">", check = check, timeout = time)
             overwrite = discord.PermissionOverwrite()
             overwrite.send_messages = True
             await self.bot.edit_channel_permissions(d, user, overwrite)
