@@ -16,7 +16,7 @@ class Roles:
             return
 
 
-    @roleme.command(pass_context=True)
+    @roleme.command(pass_context=True, aliases = ["Monika", "moni","Moni"])
     async def monika(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -106,8 +106,9 @@ class Roles:
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+        await self.bot.say("`Assigned user "+ctx.message.author.name+" the Monika flag.`")
 
-    @roleme.command(pass_context=True)
+    @roleme.command(pass_context=True, aliases = ["Cinnamon bun", "Cinnamon Bun", "cinnamon bun", "cinnamon Bun", "Sayori"])
     async def sayori(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -197,8 +198,9 @@ class Roles:
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+        await self.bot.say("`Assigned user "+ctx.message.author.name+" the Sayori flag.`")
 
-    @roleme.command(pass_context=True)
+    @roleme.command(pass_context=True, aliases = ["Nat", "Natsuki", "nat", "tsundere"])
     async def natsuki(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -238,58 +240,59 @@ class Roles:
 
         if PenNorm in ctx.message.author.roles:
             rolestoremove.append(PenNorm)
-            rolestogive.append(PenNorm)
+            rolestogive.append(NatNorm)
         if PenRare in ctx.message.author.roles:
             rolestoremove.append(PenRare)
-            rolestogive.append(PenRare)
+            rolestogive.append(NatRare)
         if PenLegacy in ctx.message.author.roles:
             rolestoremove.append(PenLegacy)
-            rolestogive.append(PenLegacy)
+            rolestogive.append(NatLegacy)
         
         if CinnamonNorm in ctx.message.author.roles:
             rolestoremove.append(CinnamonNorm)
-            rolestogive.append(PenNorm)
+            rolestogive.append(NatNorm)
         if CinnamonRare in ctx.message.author.roles:
             rolestoremove.append(CinnamonRare)
-            rolestogive.append(PenRare)
+            rolestogive.append(NatRare)
         if CinnamonLegacy in ctx.message.author.roles:
             rolestoremove.append(CinnamonLegacy)
-            rolestogive.append(PenLegacy)
+            rolestogive.append(NatLegacy)
             
         if FagNorm in ctx.message.author.roles:
             rolestoremove.append(FagNorm)
-            rolestogive.append(PenNorm)
+            rolestogive.append(NatNorm)
         if FagRare in ctx.message.author.roles:
             rolestoremove.append(FagRare)
-            rolestogive.append(PenRare)
+            rolestogive.append(NatRare)
         if FagLegacy in ctx.message.author.roles:
             rolestoremove.append(FagLegacy)
-            rolestogive.append(PenLegacy)
+            rolestogive.append(NatLegacy)
 
         if BestBoyNorm in ctx.message.author.roles:
             rolestoremove.append(BestBoyNorm)
-            rolestogive.append(PenNorm)
+            rolestogive.append(NatNorm)
         if BestBoyRare in ctx.message.author.roles:
             rolestoremove.append(BestBoyRare)
-            rolestogive.append(PenRare)
+            rolestogive.append(NatRare)
         if BestBoyLegacy in ctx.message.author.roles:
             rolestoremove.append(BestBoyLegacy)
-            rolestogive.append(PenLegacy)
+            rolestogive.append(NatLegacy)
         
         if Moni in ctx.message.author.roles:
             rolestoremove.append(Moni)
-            rolestogive.append(PenNorm)
+            rolestogive.append(NatNorm)
         if MoniRare in ctx.message.author.roles:
             rolestoremove.append(MoniRare)
-            rolestogive.append(PenRare)
+            rolestogive.append(NatRare)
         if MoniLegacy in ctx.message.author.roles:
             rolestoremove.append(MoniLegacy)
-            rolestogive.append(PenLegacy)
+            rolestogive.append(NatLegacy)
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+        await self.bot.say("`Assigned user "+ctx.message.author.name+" the Yuri flag.`")
 
-    @roleme.command(pass_context=True)
+    @roleme.command(pass_context=True, aliases = ["Misao"])
     async def misao(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -380,8 +383,9 @@ class Roles:
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+        await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Misao} flag.`")
 
-    @roleme.command(pass_context=True)
+    @roleme.command(pass_context=True, aliases = ["Dan","Protag"])
     async def protag(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -472,8 +476,9 @@ class Roles:
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+        await self.bot.say("`Assigned user"+ctx.message.author.name+" the {Protagonist} flag.`")
 
-    @roleme.command(pass_context=True)
+    @roleme.command(pass_context=True, aliases = ["Yuri"])
     async def yuri(self, ctx):
             rolestoremove = []
             rolestogive = []
@@ -564,6 +569,7 @@ class Roles:
 
             await self.bot.add_roles(ctx.message.author, *rolestogive)
             await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+            await self.bot.say("`Assigned user "+ctx.message.author.name+" the Yuri flag.`")
 
 def setup(bot):
     bot.add_cog(Roles(bot))
