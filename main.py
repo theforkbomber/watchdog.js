@@ -47,6 +47,7 @@ initial_extensions = (
     'cogs.moderation',
     'cogs.serverinfo',
     'cogs.admin',
+    'cogs.roles',
     'cogs.fun',
     'cogs.music',
 )

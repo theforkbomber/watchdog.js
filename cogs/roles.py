@@ -1,1015 +1,562 @@
-# from discord.ext import commands
-# import discord
-# import asyncio
+from discord.ext import commands
+import discord
+import asyncio
 
-# ###########role###################rolerare###############rolelegacy
+###########role###################rolerare###############rolelegacy
 
 
-# class Roles:
-#     def __init__(self, bot):
-#         self.bot = bot
+class Roles:
+    def __init__(self, bot):
+        self.bot = bot
 
-#     @commands.command(pass_context=True)
-#     async def monika(self, ctx):
-#         natsuki = ["369253424124133396","384447386153517056","390191979645894666"]          
-#         monika = ["369253075137069057","396333414565019661","390191886108983306"]
-#         yuri = ["369254043056472065","396333080886902795","390192874484006914"]
-#         sayori = ["369261933343408129","396333588854997002","390191678859902987"]
-#         misao = ["486963160201297920","396333868694896640","389540219835121684"]
-#         protagonist = ["369254217015099414","460284706877865985","409462716432908299"]
-#         norm = False
-#         rare = False
-#         legacy = False
-#         server = ctx.message.server
-#         user = server.get_member(ctx.message.author.id)
-#         for role in user.roles:
-#             while norm == False and rare == False and legacy == False:
+    @commands.command(pass_context=True)
+    async def monika(self, ctx):
+        rolestoremove = []
+        rolestogive = []
+        norm = False
+        rare = False
+        legacy = False
+        server = ctx.message.server
+        user = server.get_member(ctx.message.author.id)
+        server = self.bot.get_server('369252350927306752')
+        NatNorm = discord.utils.get(ctx.message.server.roles, name='Natsuki')
+        PenNorm = discord.utils.get(ctx.message.server.roles, name='Yuri')
+        FagNorm = discord.utils.get(ctx.message.server.roles, name='Misao')
+        CinnamonNorm = discord.utils.get(ctx.message.server.roles, name='Sayori')
+        BestBoyNorm = discord.utils.get(ctx.message.server.roles, name='Protagonist')
+        NatRare = discord.utils.get(ctx.message.server.roles, name='Natsuki (Rare)')
+        PenRare = discord.utils.get(ctx.message.server.roles, name='Yuri (Rare)')
+        FagRare = discord.utils.get(ctx.message.server.roles, name='Misao (Rare)')
+        CinnamonRare = discord.utils.get(ctx.message.server.roles, name='Sayori (Rare)')
+        BestBoyRare = discord.utils.get(ctx.message.server.roles, name='Protagonist (Rare)')
+        NatLegacy = discord.utils.get(ctx.message.server.roles, name='Natsuki (Legacy)')
+        PenLegacy = discord.utils.get(ctx.message.server.roles, name='Yuri (Legacy)')
+        FagLegacy = discord.utils.get(ctx.message.server.roles, name='Misao (Legacy)')
+        CinnamonLegacy = discord.utils.get(ctx.message.server.roles, name='Sayori (Legacy)')
+        BestBoyLegacy = discord.utils.get(ctx.message.server.roles, name='Protagonist (Legacy)')
+        Moni = discord.utils.get(ctx.message.server.roles, name='Monika')
+        MoniRare = discord.utils.get(ctx.message.server.roles, name='Monika (Rare)')
+        MoniLegacy = discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)')
+        if NatNorm in ctx.message.author.roles:
+            rolestoremove.append(NatNorm)
+            rolestogive.append(Moni)
+        if NatRare in ctx.message.author.roles:
+            rolestoremove.append(NatRare)
+            rolestogive.append(MoniRare)
+        if NatLegacy in ctx.message.author.roles:
+            rolestoremove.append(NatLegacy)
+            rolestogive.append(MoniLegacy)
 
-#                 if role.id == natsuki[0]:
-#                     norm = True
-#                 if role.id == natsuki[1]:
-#                     rare = True
-#                 if role.id == natsuki[2]:
-#                     legacy = True
-
-#                 if role.id == sayori[0]:
-#                     norm = True
-#                 if role.id == sayori[1]:
-#                     rare = True
-#                 if role.id == sayori[2]:
-#                     legacy = True
-
-#                 if role.id == misao[0]:
-#                     norm = True
-#                 if role.id == misao[1]:
-#                     rare = True
-#                 if role.id == misao[2]:
-#                     legacy = True
-
-#                 if role.id == yuri[0]:
-#                     norm = True
-#                 if role.id == yuri[1]:
-#                     rare = True
-#                 if role.id == yuri[2]:
-#                     legacy = True
-
-#                 if role.id == protagonist[0]:
-#                     norm = True
-#                 if role.id == protagonist[1]:
-#                     rare = True
-#                 if role.id == protagonist[2]:
-#                     legacy = True
-#                 break
+        if PenNorm in ctx.message.author.roles:
+            rolestoremove.append(PenNorm)
+            rolestogive.append(Moni)
+        if PenRare in ctx.message.author.roles:
+            rolestoremove.append(PenRare)
+            rolestogive.append(MoniRare)
+        if PenLegacy in ctx.message.author.roles:
+            rolestoremove.append(PenLegacy)
+            rolestogive.append(MoniLegacy)
+        
+        if CinnamonNorm in ctx.message.author.roles:
+            rolestoremove.append(CinnamonNorm)
+            rolestogive.append(Moni)
+        if CinnamonRare in ctx.message.author.roles:
+            rolestoremove.append(CinnamonRare)
+            rolestogive.append(MoniRare)
+        if CinnamonLegacy in ctx.message.author.roles:
+            rolestoremove.append(CinnamonLegacy)
+            rolestogive.append(MoniLegacy)
             
-#             if norm == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[0]:
-#                         moni = role
-#                     if role.id == natsuki[0]:
-#                         nat = role
-#                     if role.id == yuri[0]:
-#                         yuri = role
-#                     if role.id == misao[0]:
-#                         misao = role
-#                     if role.id == sayori[0]:
-#                         sayori = role
-#                     if role.id == protagonist[0]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if rare == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[1]:
-#                         moni = role
-#                     if role.id == natsuki[1]:
-#                         nat = role
-#                     if role.id == yuri[1]:
-#                         yuri = role
-#                     if role.id == misao[1]:
-#                         misao = role
-#                     if role.id == sayori[1]:
-#                         sayori = role
-#                     if role.id == protagonist[1]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if legacy == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[2]:
-#                         moni = role
-#                     if role.id == natsuki[2]:
-#                         nat = role
-#                     if role.id == yuri[2]:
-#                         yuri = role
-#                     if role.id == misao[2]:
-#                         misao = role
-#                     if role.id == sayori[2]:
-#                         sayori = role
-#                     if role.id == protagonist[2]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             else:
-#                 await self.bot.say("An error occurred...")
-#                 break
-    
-#     @commands.command(pass_context=True)
-#     async def natsuki(self, ctx):
-#         natsuki = ["369253424124133396","384447386153517056","390191979645894666"]          
-#         monika = ["369253075137069057","396333414565019661","390191886108983306"]
-#         yuri = ["369254043056472065","396333080886902795","390192874484006914"]
-#         sayori = ["369261933343408129","396333588854997002","390191678859902987"]
-#         misao = ["486963160201297920","396333868694896640","389540219835121684"]
-#         protagonist = ["369254217015099414","460284706877865985","409462716432908299"]
-#         norm = False
-#         rare = False
-#         legacy = False
-#         server = ctx.message.server
-#         user = server.get_member(ctx.message.author.id)
-#         for role in user.roles:
-#             while norm == False and rare == False and legacy == False:
+        if FagNorm in ctx.message.author.roles:
+            rolestoremove.append(FagNorm)
+            rolestogive.append(Moni)
+        if FagRare in ctx.message.author.roles:
+            rolestoremove.append(FagRare)
+            rolestogive.append(MoniRare)
+        if FagLegacy in ctx.message.author.roles:
+            rolestoremove.append(FagLegacy)
+            rolestogive.append(MoniLegacy)
 
-#                 if role.id == monika[0]:
-#                     norm = True
-#                 if role.id == monika[1]:
-#                     rare = True
-#                 if role.id == monika[2]:
-#                     legacy = True
+        if BestBoyNorm in ctx.message.author.roles:
+            rolestoremove.append(BestBoyNorm)
+            rolestogive.append(Moni)
+        if BestBoyRare in ctx.message.author.roles:
+            rolestoremove.append(BestBoyRare)
+            rolestogive.append(MoniRare)
+        if BestBoyLegacy in ctx.message.author.roles:
+            rolestoremove.append(BestBoyLegacy)
+            rolestogive.append(MoniLegacy)
+        
+        # if Moni in ctx.message.author.roles:
+        #     rolestoremove.append(Moni)
+        #     rolestogive.append(Moni)
+        # if MoniRare in ctx.message.author.roles:
+        #     rolestoremove.append(MoniRare)
+        #     rolestogive.append(MoniRare)
+        # if MoniLegacy in ctx.message.author.roles:
+        #     rolestoremove.append(MoniLegacy)
+        #     rolestogive.append(MoniLegacy)
 
-#                 if role.id == sayori[0]:
-#                     norm = True
-#                 if role.id == sayori[1]:
-#                     rare = True
-#                 if role.id == sayori[2]:
-#                     legacy = True
+        await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await self.bot.remove_roles(ctx.message.author, *rolestoremove)
 
-#                 if role.id == misao[0]:
-#                     norm = True
-#                 if role.id == misao[1]:
-#                     rare = True
-#                 if role.id == misao[2]:
-#                     legacy = True
+    @commands.command(pass_context=True)
+    async def sayori(self, ctx):
+        rolestoremove = []
+        rolestogive = []
+        norm = False
+        rare = False
+        legacy = False
+        server = ctx.message.server
+        user = server.get_member(ctx.message.author.id)
+        server = self.bot.get_server('369252350927306752')
+        NatNorm = discord.utils.get(ctx.message.server.roles, name='Natsuki')
+        PenNorm = discord.utils.get(ctx.message.server.roles, name='Yuri')
+        FagNorm = discord.utils.get(ctx.message.server.roles, name='Misao')
+        CinnamonNorm = discord.utils.get(ctx.message.server.roles, name='Sayori')
+        BestBoyNorm = discord.utils.get(ctx.message.server.roles, name='Protagonist')
+        NatRare = discord.utils.get(ctx.message.server.roles, name='Natsuki (Rare)')
+        PenRare = discord.utils.get(ctx.message.server.roles, name='Yuri (Rare)')
+        FagRare = discord.utils.get(ctx.message.server.roles, name='Misao (Rare)')
+        CinnamonRare = discord.utils.get(ctx.message.server.roles, name='Sayori (Rare)')
+        BestBoyRare = discord.utils.get(ctx.message.server.roles, name='Protagonist (Rare)')
+        NatLegacy = discord.utils.get(ctx.message.server.roles, name='Natsuki (Legacy)')
+        PenLegacy = discord.utils.get(ctx.message.server.roles, name='Yuri (Legacy)')
+        FagLegacy = discord.utils.get(ctx.message.server.roles, name='Misao (Legacy)')
+        CinnamonLegacy = discord.utils.get(ctx.message.server.roles, name='Sayori (Legacy)')
+        BestBoyLegacy = discord.utils.get(ctx.message.server.roles, name='Protagonist (Legacy)')
+        Moni = discord.utils.get(ctx.message.server.roles, name='Monika')
+        MoniRare = discord.utils.get(ctx.message.server.roles, name='Monika (Rare)')
+        MoniLegacy = discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)')
+        if NatNorm in ctx.message.author.roles:
+            rolestoremove.append(NatNorm)
+            rolestogive.append(CinnamonNorm)
+        if NatRare in ctx.message.author.roles:
+            rolestoremove.append(NatRare)
+            rolestogive.append(CinnamonRare)
+        if NatLegacy in ctx.message.author.roles:
+            rolestoremove.append(NatLegacy)
+            rolestogive.append(CinnamonLegacy)
 
-#                 if role.id == yuri[0]:
-#                     norm = True
-#                 if role.id == yuri[1]:
-#                     rare = True
-#                 if role.id == yuri[2]:
-#                     legacy = True
-
-#                 if role.id == protagonist[0]:
-#                     norm = True
-#                 if role.id == protagonist[1]:
-#                     rare = True
-#                 if role.id == protagonist[2]:
-#                     legacy = True
-#                 break
+        if PenNorm in ctx.message.author.roles:
+            rolestoremove.append(PenNorm)
+            rolestogive.append(CinnamonNorm)
+        if PenRare in ctx.message.author.roles:
+            rolestoremove.append(PenRare)
+            rolestogive.append(CinnamonRare)
+        if PenLegacy in ctx.message.author.roles:
+            rolestoremove.append(PenLegacy)
+            rolestogive.append(CinnamonLegacy)
+        
+        # if CinnamonNorm in ctx.message.author.roles:
+        #     rolestoremove.append(CinnamonNorm)
+        #     rolestogive.append(Moni)
+        # if CinnamonRare in ctx.message.author.roles:
+        #     rolestoremove.append(CinnamonRare)
+        #     rolestogive.append(MoniRare)
+        # if CinnamonLegacy in ctx.message.author.roles:
+        #     rolestoremove.append(CinnamonLegacy)
+        #     rolestogive.append(MoniLegacy)
             
-#             if norm == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[0]:
-#                         moni = role
-#                     if role.id == natsuki[0]:
-#                         nat = role
-#                     if role.id == yuri[0]:
-#                         yuri = role
-#                     if role.id == misao[0]:
-#                         misao = role
-#                     if role.id == sayori[0]:
-#                         sayori = role
-#                     if role.id == protagonist[0]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if rare == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[1]:
-#                         moni = role
-#                     if role.id == natsuki[1]:
-#                         nat = role
-#                     if role.id == yuri[1]:
-#                         yuri = role
-#                     if role.id == misao[1]:
-#                         misao = role
-#                     if role.id == sayori[1]:
-#                         sayori = role
-#                     if role.id == protagonist[1]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if legacy == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[2]:
-#                         moni = role
-#                     if role.id == natsuki[2]:
-#                         nat = role
-#                     if role.id == yuri[2]:
-#                         yuri = role
-#                     if role.id == misao[2]:
-#                         misao = role
-#                     if role.id == sayori[2]:
-#                         sayori = role
-#                     if role.id == protagonist[2]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             else:
-#                 await self.bot.say("An error occurred...")
-#                 break
+        if FagNorm in ctx.message.author.roles:
+            rolestoremove.append(FagNorm)
+            rolestogive.append(CinnamonNorm)
+        if FagRare in ctx.message.author.roles:
+            rolestoremove.append(FagRare)
+            rolestogive.append(CinnamonRare)
+        if FagLegacy in ctx.message.author.roles:
+            rolestoremove.append(FagLegacy)
+            rolestogive.append(CinnamonLegacy)
 
-#     @commands.command(pass_context=True)
-#     async def yuri(self, ctx):
-#         natsuki = ["369253424124133396","384447386153517056","390191979645894666"]          
-#         monika = ["369253075137069057","396333414565019661","390191886108983306"]
-#         yuri = ["369254043056472065","396333080886902795","390192874484006914"]
-#         sayori = ["369261933343408129","396333588854997002","390191678859902987"]
-#         misao = ["486963160201297920","396333868694896640","389540219835121684"]
-#         protagonist = ["369254217015099414","460284706877865985","409462716432908299"]
-#         norm = False
-#         rare = False
-#         legacy = False
-#         server = ctx.message.server
-#         user = server.get_member(ctx.message.author.id)
-#         for role in user.roles:
-#             while norm == False and rare == False and legacy == False:
+        if BestBoyNorm in ctx.message.author.roles:
+            rolestoremove.append(BestBoyNorm)
+            rolestogive.append(CinnamonNorm)
+        if BestBoyRare in ctx.message.author.roles:
+            rolestoremove.append(BestBoyRare)
+            rolestogive.append(CinnamonRare)
+        if BestBoyLegacy in ctx.message.author.roles:
+            rolestoremove.append(BestBoyLegacy)
+            rolestogive.append(CinnamonLegacy)
+        
+        if Moni in ctx.message.author.roles:
+            rolestoremove.append(Moni)
+            rolestogive.append(CinnamonNorm)
+        if MoniRare in ctx.message.author.roles:
+            rolestoremove.append(MoniRare)
+            rolestogive.append(CinnamonRare)
+        if MoniLegacy in ctx.message.author.roles:
+            rolestoremove.append(MoniLegacy)
+            rolestogive.append(CinnamonLegacy)
 
-#                 if role.id == monika[0]:
-#                     norm = True
-#                 if role.id == monika[1]:
-#                     rare = True
-#                 if role.id == monika[2]:
-#                     legacy = True
+        await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await self.bot.remove_roles(ctx.message.author, *rolestoremove)
 
-#                 if role.id == sayori[0]:
-#                     norm = True
-#                 if role.id == sayori[1]:
-#                     rare = True
-#                 if role.id == sayori[2]:
-#                     legacy = True
+    @commands.command(pass_context=True)
+    async def natsuki(self, ctx):
+        rolestoremove = []
+        rolestogive = []
+        norm = False
+        rare = False
+        legacy = False
+        server = ctx.message.server
+        user = server.get_member(ctx.message.author.id)
+        server = self.bot.get_server('369252350927306752')
+        NatNorm = discord.utils.get(ctx.message.server.roles, name='Natsuki')
+        PenNorm = discord.utils.get(ctx.message.server.roles, name='Yuri')
+        FagNorm = discord.utils.get(ctx.message.server.roles, name='Misao')
+        CinnamonNorm = discord.utils.get(ctx.message.server.roles, name='Sayori')
+        BestBoyNorm = discord.utils.get(ctx.message.server.roles, name='Protagonist')
+        NatRare = discord.utils.get(ctx.message.server.roles, name='Natsuki (Rare)')
+        PenRare = discord.utils.get(ctx.message.server.roles, name='Yuri (Rare)')
+        FagRare = discord.utils.get(ctx.message.server.roles, name='Misao (Rare)')
+        CinnamonRare = discord.utils.get(ctx.message.server.roles, name='Sayori (Rare)')
+        BestBoyRare = discord.utils.get(ctx.message.server.roles, name='Protagonist (Rare)')
+        NatLegacy = discord.utils.get(ctx.message.server.roles, name='Natsuki (Legacy)')
+        PenLegacy = discord.utils.get(ctx.message.server.roles, name='Yuri (Legacy)')
+        FagLegacy = discord.utils.get(ctx.message.server.roles, name='Misao (Legacy)')
+        CinnamonLegacy = discord.utils.get(ctx.message.server.roles, name='Sayori (Legacy)')
+        BestBoyLegacy = discord.utils.get(ctx.message.server.roles, name='Protagonist (Legacy)')
+        Moni = discord.utils.get(ctx.message.server.roles, name='Monika')
+        MoniRare = discord.utils.get(ctx.message.server.roles, name='Monika (Rare)')
+        MoniLegacy = discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)')
+        # if NatNorm in ctx.message.author.roles:
+        #     rolestoremove.append(NatNorm)
+        #     rolestogive.append(Cinnamon)
+        # if NatRare in ctx.message.author.roles:
+        #     rolestoremove.append(NatRare)
+        #     rolestogive.append(CinnamonRare)
+        # if NatLegacy in ctx.message.author.roles:
+        #     rolestoremove.append(NatLegacy)
+        #     rolestogive.append(CinnamonLegacy)
 
-#                 if role.id == misao[0]:
-#                     norm = True
-#                 if role.id == misao[1]:
-#                     rare = True
-#                 if role.id == misao[2]:
-#                     legacy = True
-
-#                 if role.id == natsuki[0]:
-#                     norm = True
-#                 if role.id == natsuki[1]:
-#                     rare = True
-#                 if role.id == natsuki[2]:
-#                     legacy = True
-
-#                 if role.id == protagonist[0]:
-#                     norm = True
-#                 if role.id == protagonist[1]:
-#                     rare = True
-#                 if role.id == protagonist[2]:
-#                     legacy = True
-#                 break
+        if PenNorm in ctx.message.author.roles:
+            rolestoremove.append(PenNorm)
+            rolestogive.append(PenNorm)
+        if PenRare in ctx.message.author.roles:
+            rolestoremove.append(PenRare)
+            rolestogive.append(PenRare)
+        if PenLegacy in ctx.message.author.roles:
+            rolestoremove.append(PenLegacy)
+            rolestogive.append(PenLegacy)
+        
+        if CinnamonNorm in ctx.message.author.roles:
+            rolestoremove.append(CinnamonNorm)
+            rolestogive.append(PenNorm)
+        if CinnamonRare in ctx.message.author.roles:
+            rolestoremove.append(CinnamonRare)
+            rolestogive.append(PenRare)
+        if CinnamonLegacy in ctx.message.author.roles:
+            rolestoremove.append(CinnamonLegacy)
+            rolestogive.append(PenLegacy)
             
-#             if norm == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[0]:
-#                         moni = role
-#                     if role.id == natsuki[0]:
-#                         nat = role
-#                     if role.id == yuri[0]:
-#                         yuri = role
-#                     if role.id == misao[0]:
-#                         misao = role
-#                     if role.id == sayori[0]:
-#                         sayori = role
-#                     if role.id == protagonist[0]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if rare == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[1]:
-#                         moni = role
-#                     if role.id == natsuki[1]:
-#                         nat = role
-#                     if role.id == yuri[1]:
-#                         yuri = role
-#                     if role.id == misao[1]:
-#                         misao = role
-#                     if role.id == sayori[1]:
-#                         sayori = role
-#                     if role.id == protagonist[1]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if legacy == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[2]:
-#                         moni = role
-#                     if role.id == natsuki[2]:
-#                         nat = role
-#                     if role.id == yuri[2]:
-#                         yuri = role
-#                     if role.id == misao[2]:
-#                         misao = role
-#                     if role.id == sayori[2]:
-#                         sayori = role
-#                     if role.id == protagonist[2]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             else:
-#                 await self.bot.say("An error occurred...")
-#                 break
+        if FagNorm in ctx.message.author.roles:
+            rolestoremove.append(FagNorm)
+            rolestogive.append(PenNorm)
+        if FagRare in ctx.message.author.roles:
+            rolestoremove.append(FagRare)
+            rolestogive.append(PenRare)
+        if FagLegacy in ctx.message.author.roles:
+            rolestoremove.append(FagLegacy)
+            rolestogive.append(PenLegacy)
 
-#     @commands.command(pass_context=True)
-#     async def misao(self, ctx):
-#         natsuki = ["369253424124133396","384447386153517056","390191979645894666"]          
-#         monika = ["369253075137069057","396333414565019661","390191886108983306"]
-#         yuri = ["369254043056472065","396333080886902795","390192874484006914"]
-#         sayori = ["369261933343408129","396333588854997002","390191678859902987"]
-#         misao = ["486963160201297920","396333868694896640","389540219835121684"]
-#         protagonist = ["369254217015099414","460284706877865985","409462716432908299"]
-#         norm = False
-#         rare = False
-#         legacy = False
-#         server = ctx.message.server
-#         user = server.get_member(ctx.message.author.id)
-#         for role in user.roles:
-#             while norm == False and rare == False and legacy == False:
+        if BestBoyNorm in ctx.message.author.roles:
+            rolestoremove.append(BestBoyNorm)
+            rolestogive.append(PenNorm)
+        if BestBoyRare in ctx.message.author.roles:
+            rolestoremove.append(BestBoyRare)
+            rolestogive.append(PenRare)
+        if BestBoyLegacy in ctx.message.author.roles:
+            rolestoremove.append(BestBoyLegacy)
+            rolestogive.append(PenLegacy)
+        
+        if Moni in ctx.message.author.roles:
+            rolestoremove.append(Moni)
+            rolestogive.append(PenNorm)
+        if MoniRare in ctx.message.author.roles:
+            rolestoremove.append(MoniRare)
+            rolestogive.append(PenRare)
+        if MoniLegacy in ctx.message.author.roles:
+            rolestoremove.append(MoniLegacy)
+            rolestogive.append(PenLegacy)
 
-#                 if role.id == monika[0]:
-#                     norm = True
-#                 if role.id == monika[1]:
-#                     rare = True
-#                 if role.id == monika[2]:
-#                     legacy = True
+        await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+ 
+    @commands.command(pass_context=True)
+    async def misao(self, ctx):
+        rolestoremove = []
+        rolestogive = []
+        norm = False
+        rare = False
+        legacy = False
+        server = ctx.message.server
+        user = server.get_member(ctx.message.author.id)
+        server = self.bot.get_server('369252350927306752')
+        NatNorm = discord.utils.get(ctx.message.server.roles, name='Natsuki')
+        PenNorm = discord.utils.get(ctx.message.server.roles, name='Yuri')
+        FagNorm = discord.utils.get(ctx.message.server.roles, name='Misao')
+        CinnamonNorm = discord.utils.get(ctx.message.server.roles, name='Sayori')
+        BestBoyNorm = discord.utils.get(ctx.message.server.roles, name='Protagonist')
+        NatRare = discord.utils.get(ctx.message.server.roles, name='Natsuki (Rare)')
+        PenRare = discord.utils.get(ctx.message.server.roles, name='Yuri (Rare)')
+        FagRare = discord.utils.get(ctx.message.server.roles, name='Misao (Rare)')
+        CinnamonRare = discord.utils.get(ctx.message.server.roles, name='Sayori (Rare)')
+        BestBoyRare = discord.utils.get(ctx.message.server.roles, name='Protagonist (Rare)')
+        NatLegacy = discord.utils.get(ctx.message.server.roles, name='Natsuki (Legacy)')
+        PenLegacy = discord.utils.get(ctx.message.server.roles, name='Yuri (Legacy)')
+        FagLegacy = discord.utils.get(ctx.message.server.roles, name='Misao (Legacy)')
+        CinnamonLegacy = discord.utils.get(ctx.message.server.roles, name='Sayori (Legacy)')
+        BestBoyLegacy = discord.utils.get(ctx.message.server.roles, name='Protagonist (Legacy)')
+        Moni = discord.utils.get(ctx.message.server.roles, name='Monika')
+        MoniRare = discord.utils.get(ctx.message.server.roles, name='Monika (Rare)')
+        MoniLegacy = discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)')
 
-#                 if role.id == sayori[0]:
-#                     norm = True
-#                 if role.id == sayori[1]:
-#                     rare = True
-#                 if role.id == sayori[2]:
-#                     legacy = True
+        if NatNorm in ctx.message.author.roles:
+            rolestoremove.append(NatNorm)
+            rolestogive.append(FagNorm)
+        if NatRare in ctx.message.author.roles:
+            rolestoremove.append(NatRare)
+            rolestogive.append(FagRare)
+        if NatLegacy in ctx.message.author.roles:
+            rolestoremove.append(NatLegacy)
+            rolestogive.append(FagLegacy)
 
-#                 if role.id == natsuki[0]:
-#                     norm = True
-#                 if role.id == natsuki[1]:
-#                     rare = True
-#                 if role.id == natsuki[2]:
-#                     legacy = True
-
-#                 if role.id == yuri[0]:
-#                     norm = True
-#                 if role.id == yuri[1]:
-#                     rare = True
-#                 if role.id == yuri[2]:
-#                     legacy = True
-
-#                 if role.id == protagonist[0]:
-#                     norm = True
-#                 if role.id == protagonist[1]:
-#                     rare = True
-#                 if role.id == protagonist[2]:
-#                     legacy = True
-#                 break
+        if PenNorm in ctx.message.author.roles:
+            rolestoremove.append(PenNorm)
+            rolestogive.append(FagNorm)
+        if PenRare in ctx.message.author.roles:
+            rolestoremove.append(PenRare)
+            rolestogive.append(FagRare)
+        if PenLegacy in ctx.message.author.roles:
+            rolestoremove.append(PenLegacy)
+            rolestogive.append(FagLegacy)
+        
+        if CinnamonNorm in ctx.message.author.roles:
+            rolestoremove.append(CinnamonNorm)
+            rolestogive.append(FagNorm)
+        if CinnamonRare in ctx.message.author.roles:
+            rolestoremove.append(CinnamonRare)
+            rolestogive.append(FagRare)
+        if CinnamonLegacy in ctx.message.author.roles:
+            rolestoremove.append(CinnamonLegacy)
+            rolestogive.append(FagLegacy)
             
-#             if norm == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[0]:
-#                         moni = role
-#                     if role.id == natsuki[0]:
-#                         nat = role
-#                     if role.id == yuri[0]:
-#                         yuri = role
-#                     if role.id == misao[0]:
-#                         misao = role
-#                     if role.id == sayori[0]:
-#                         sayori = role
-#                     if role.id == protagonist[0]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if rare == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[1]:
-#                         moni = role
-#                     if role.id == natsuki[1]:
-#                         nat = role
-#                     if role.id == yuri[1]:
-#                         yuri = role
-#                     if role.id == misao[1]:
-#                         misao = role
-#                     if role.id == sayori[1]:
-#                         sayori = role
-#                     if role.id == protagonist[1]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if legacy == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[2]:
-#                         moni = role
-#                     if role.id == natsuki[2]:
-#                         nat = role
-#                     if role.id == yuri[2]:
-#                         yuri = role
-#                     if role.id == misao[2]:
-#                         misao = role
-#                     if role.id == sayori[2]:
-#                         sayori = role
-#                     if role.id == protagonist[2]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             else:
-#                 await self.bot.say("An error occurred...")
-#                 break
+        # if FagNorm in ctx.message.author.roles:
+        #     rolestoremove.append(FagNorm)
+        #     rolestogive.append(PenNorm)
+        # if FagRare in ctx.message.author.roles:
+        #     rolestoremove.append(FagRare)
+        #     rolestogive.append(PenRare)
+        # if FagLegacy in ctx.message.author.roles:
+        #     rolestoremove.append(FagLegacy)
+        #     rolestogive.append(PenLegacy)
 
-#     @commands.command(pass_context=True)
-#     async def sayori(self, ctx):
-#         natsuki = ["369253424124133396","384447386153517056","390191979645894666"]          
-#         monika = ["369253075137069057","396333414565019661","390191886108983306"]
-#         yuri = ["369254043056472065","396333080886902795","390192874484006914"]
-#         sayori = ["369261933343408129","396333588854997002","390191678859902987"]
-#         misao = ["486963160201297920","396333868694896640","389540219835121684"]
-#         protagonist = ["369254217015099414","460284706877865985","409462716432908299"]
-#         norm = False
-#         rare = False
-#         legacy = False
-#         server = ctx.message.server
-#         user = server.get_member(ctx.message.author.id)
-#         for role in user.roles:
-#             while norm == False and rare == False and legacy == False:
+        if BestBoyNorm in ctx.message.author.roles:
+            rolestoremove.append(BestBoyNorm)
+            rolestogive.append(FagNorm)
+        if BestBoyRare in ctx.message.author.roles:
+            rolestoremove.append(BestBoyRare)
+            rolestogive.append(FagRare)
+        if BestBoyLegacy in ctx.message.author.roles:
+            rolestoremove.append(BestBoyLegacy)
+            rolestogive.append(FagLegacy)
+        
+        if Moni in ctx.message.author.roles:
+            rolestoremove.append(Moni)
+            rolestogive.append(FagNorm)
+        if MoniRare in ctx.message.author.roles:
+            rolestoremove.append(MoniRare)
+            rolestogive.append(FagRare)
+        if MoniLegacy in ctx.message.author.roles:
+            rolestoremove.append(MoniLegacy)
+            rolestogive.append(FagLegacy)
 
-#                 if role.id == monika[0]:
-#                     norm = True
-#                 if role.id == monika[1]:
-#                     rare = True
-#                 if role.id == monika[2]:
-#                     legacy = True
+        await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await self.bot.remove_roles(ctx.message.author, *rolestoremove)
 
-#                 if role.id == natsuki[0]:
-#                     norm = True
-#                 if role.id == natsuki[1]:
-#                     rare = True
-#                 if role.id == natsuki[2]:
-#                     legacy = True
+    @commands.command(pass_context=True)
+    async def protag(self, ctx):
+        rolestoremove = []
+        rolestogive = []
+        norm = False
+        rare = False
+        legacy = False
+        server = ctx.message.server
+        user = server.get_member(ctx.message.author.id)
+        server = self.bot.get_server('369252350927306752')
+        NatNorm = discord.utils.get(ctx.message.server.roles, name='Natsuki')
+        PenNorm = discord.utils.get(ctx.message.server.roles, name='Yuri')
+        FagNorm = discord.utils.get(ctx.message.server.roles, name='Misao')
+        CinnamonNorm = discord.utils.get(ctx.message.server.roles, name='Sayori')
+        BestBoyNorm = discord.utils.get(ctx.message.server.roles, name='Protagonist')
+        NatRare = discord.utils.get(ctx.message.server.roles, name='Natsuki (Rare)')
+        PenRare = discord.utils.get(ctx.message.server.roles, name='Yuri (Rare)')
+        FagRare = discord.utils.get(ctx.message.server.roles, name='Misao (Rare)')
+        CinnamonRare = discord.utils.get(ctx.message.server.roles, name='Sayori (Rare)')
+        BestBoyRare = discord.utils.get(ctx.message.server.roles, name='Protagonist (Rare)')
+        NatLegacy = discord.utils.get(ctx.message.server.roles, name='Natsuki (Legacy)')
+        PenLegacy = discord.utils.get(ctx.message.server.roles, name='Yuri (Legacy)')
+        FagLegacy = discord.utils.get(ctx.message.server.roles, name='Misao (Legacy)')
+        CinnamonLegacy = discord.utils.get(ctx.message.server.roles, name='Sayori (Legacy)')
+        BestBoyLegacy = discord.utils.get(ctx.message.server.roles, name='Protagonist (Legacy)')
+        Moni = discord.utils.get(ctx.message.server.roles, name='Monika')
+        MoniRare = discord.utils.get(ctx.message.server.roles, name='Monika (Rare)')
+        MoniLegacy = discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)')
 
-#                 if role.id == misao[0]:
-#                     norm = True
-#                 if role.id == misao[1]:
-#                     rare = True
-#                 if role.id == misao[2]:
-#                     legacy = True
+        if NatNorm in ctx.message.author.roles:
+            rolestoremove.append(NatNorm)
+            rolestogive.append(BestBoyNorm)
+        if NatRare in ctx.message.author.roles:
+            rolestoremove.append(NatRare)
+            rolestogive.append(BestBoyRare)
+        if NatLegacy in ctx.message.author.roles:
+            rolestoremove.append(NatLegacy)
+            rolestogive.append(BestBoyLegacy)
 
-#                 if role.id == yuri[0]:
-#                     norm = True
-#                 if role.id == yuri[1]:
-#                     rare = True
-#                 if role.id == yuri[2]:
-#                     legacy = True
-
-#                 if role.id == protagonist[0]:
-#                     norm = True
-#                 if role.id == protagonist[1]:
-#                     rare = True
-#                 if role.id == protagonist[2]:
-#                     legacy = True
-#                 break
+        if PenNorm in ctx.message.author.roles:
+            rolestoremove.append(PenNorm)
+            rolestogive.append(BestBoyNorm)
+        if PenRare in ctx.message.author.roles:
+            rolestoremove.append(PenRare)
+            rolestogive.append(BestBoyRare)
+        if PenLegacy in ctx.message.author.roles:
+            rolestoremove.append(PenLegacy)
+            rolestogive.append(BestBoyLegacy)
+        
+        if CinnamonNorm in ctx.message.author.roles:
+            rolestoremove.append(CinnamonNorm)
+            rolestogive.append(BestBoyNorm)
+        if CinnamonRare in ctx.message.author.roles:
+            rolestoremove.append(CinnamonRare)
+            rolestogive.append(BestBoyRare)
+        if CinnamonLegacy in ctx.message.author.roles:
+            rolestoremove.append(CinnamonLegacy)
+            rolestogive.append(BestBoyLegacy)
             
-#             if norm == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[0]:
-#                         moni = role
-#                     if role.id == natsuki[0]:
-#                         nat = role
-#                     if role.id == yuri[0]:
-#                         yuri = role
-#                     if role.id == misao[0]:
-#                         misao = role
-#                     if role.id == sayori[0]:
-#                         sayori = role
-#                     if role.id == protagonist[0]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if rare == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[1]:
-#                         moni = role
-#                     if role.id == natsuki[1]:
-#                         nat = role
-#                     if role.id == yuri[1]:
-#                         yuri = role
-#                     if role.id == misao[1]:
-#                         misao = role
-#                     if role.id == sayori[1]:
-#                         sayori = role
-#                     if role.id == protagonist[1]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if legacy == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[2]:
-#                         moni = role
-#                     if role.id == natsuki[2]:
-#                         nat = role
-#                     if role.id == yuri[2]:
-#                         yuri = role
-#                     if role.id == misao[2]:
-#                         misao = role
-#                     if role.id == sayori[2]:
-#                         sayori = role
-#                     if role.id == protagonist[2]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             else:
-#                 await self.bot.say("An error occurred...")
-#                 break
+        if FagNorm in ctx.message.author.roles:
+            rolestoremove.append(FagNorm)
+            rolestogive.append(BestBoyNorm)
+        if FagRare in ctx.message.author.roles:
+            rolestoremove.append(FagRare)
+            rolestogive.append(BestBoyRare)
+        if FagLegacy in ctx.message.author.roles:
+            rolestoremove.append(FagLegacy)
+            rolestogive.append(BestBoyLegacy)
 
-#     @commands.command(pass_context=True)
-#     async def protag(self, ctx):
-#         natsuki = ["369253424124133396","384447386153517056","390191979645894666"]          
-#         monika = ["369253075137069057","396333414565019661","390191886108983306"]
-#         yuri = ["369254043056472065","396333080886902795","390192874484006914"]
-#         sayori = ["369261933343408129","396333588854997002","390191678859902987"]
-#         misao = ["486963160201297920","396333868694896640","389540219835121684"]
-#         protagonist = ["369254217015099414","460284706877865985","409462716432908299"]
-#         norm = False
-#         rare = False
-#         legacy = False
-#         server = ctx.message.server
-#         user = server.get_member(ctx.message.author.id)
-#         for role in user.roles:
-#             while norm == False and rare == False and legacy == False:
+        # if BestBoyNorm in ctx.message.author.roles:
+        #     rolestoremove.append(BestBoyNorm)
+        #     rolestogive.append(FagNorm)
+        # if BestBoyRare in ctx.message.author.roles:
+        #     rolestoremove.append(BestBoyRare)
+        #     rolestogive.append(FagRare)
+        # if BestBoyLegacy in ctx.message.author.roles:
+        #     rolestoremove.append(BestBoyLegacy)
+        #     rolestogive.append(FagLegacy)
+        
+        if Moni in ctx.message.author.roles:
+            rolestoremove.append(Moni)
+            rolestogive.append(BestBoyNorm)
+        if MoniRare in ctx.message.author.roles:
+            rolestoremove.append(MoniRare)
+            rolestogive.append(BestBoyRare)
+        if MoniLegacy in ctx.message.author.roles:
+            rolestoremove.append(MoniLegacy)
+            rolestogive.append(BestBoyLegacy)
 
-#                 if role.id == monika[0]:
-#                     norm = True
-#                 if role.id == monika[1]:
-#                     rare = True
-#                 if role.id == monika[2]:
-#                     legacy = True
+        await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+  
+    @commands.command(pass_context=True)
+    async def yuri(self, ctx):
+        rolestoremove = []
+        rolestogive = []
+        norm = False
+        rare = False
+        legacy = False
+        server = ctx.message.server
+        user = server.get_member(ctx.message.author.id)
+        server = self.bot.get_server('369252350927306752')
+        NatNorm = discord.utils.get(ctx.message.server.roles, name='Natsuki')
+        PenNorm = discord.utils.get(ctx.message.server.roles, name='Yuri')
+        FagNorm = discord.utils.get(ctx.message.server.roles, name='Misao')
+        CinnamonNorm = discord.utils.get(ctx.message.server.roles, name='Sayori')
+        BestBoyNorm = discord.utils.get(ctx.message.server.roles, name='Protagonist')
+        NatRare = discord.utils.get(ctx.message.server.roles, name='Natsuki (Rare)')
+        PenRare = discord.utils.get(ctx.message.server.roles, name='Yuri (Rare)')
+        FagRare = discord.utils.get(ctx.message.server.roles, name='Misao (Rare)')
+        CinnamonRare = discord.utils.get(ctx.message.server.roles, name='Sayori (Rare)')
+        BestBoyRare = discord.utils.get(ctx.message.server.roles, name='Protagonist (Rare)')
+        NatLegacy = discord.utils.get(ctx.message.server.roles, name='Natsuki (Legacy)')
+        PenLegacy = discord.utils.get(ctx.message.server.roles, name='Yuri (Legacy)')
+        FagLegacy = discord.utils.get(ctx.message.server.roles, name='Misao (Legacy)')
+        CinnamonLegacy = discord.utils.get(ctx.message.server.roles, name='Sayori (Legacy)')
+        BestBoyLegacy = discord.utils.get(ctx.message.server.roles, name='Protagonist (Legacy)')
+        Moni = discord.utils.get(ctx.message.server.roles, name='Monika')
+        MoniRare = discord.utils.get(ctx.message.server.roles, name='Monika (Rare)')
+        MoniLegacy = discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)')
 
-#                 if role.id == sayori[0]:
-#                     norm = True
-#                 if role.id == sayori[1]:
-#                     rare = True
-#                 if role.id == sayori[2]:
-#                     legacy = True
+        if NatNorm in ctx.message.author.roles:
+            rolestoremove.append(NatNorm)
+            rolestogive.append(PenNorm)
+        if NatRare in ctx.message.author.roles:
+            rolestoremove.append(NatRare)
+            rolestogive.append(PenRare)
+        if NatLegacy in ctx.message.author.roles:
+            rolestoremove.append(NatLegacy)
+            rolestogive.append(PenLegacy)
 
-#                 if role.id == misao[0]:
-#                     norm = True
-#                 if role.id == misao[1]:
-#                     rare = True
-#                 if role.id == misao[2]:
-#                     legacy = True
-
-#                 if role.id == yuri[0]:
-#                     norm = True
-#                 if role.id == yuri[1]:
-#                     rare = True
-#                 if role.id == yuri[2]:
-#                     legacy = True
-
-#                 if role.id == natsuki[0]:
-#                     norm = True
-#                 if role.id == natsuki[1]:
-#                     rare = True
-#                 if role.id == natsuki[2]:
-#                     legacy = True
-#                 break
+        if PenNorm in ctx.message.author.roles:
+            rolestoremove.append(PenNorm)
+            rolestogive.append(PenNorm)
+        if PenRare in ctx.message.author.roles:
+            rolestoremove.append(PenRare)
+            rolestogive.append(PenRare)
+        if PenLegacy in ctx.message.author.roles:
+            rolestoremove.append(PenLegacy)
+            rolestogive.append(PenLegacy)
+        
+        if CinnamonNorm in ctx.message.author.roles:
+            rolestoremove.append(CinnamonNorm)
+            rolestogive.append(PenNorm)
+        if CinnamonRare in ctx.message.author.roles:
+            rolestoremove.append(CinnamonRare)
+            rolestogive.append(PenRare)
+        if CinnamonLegacy in ctx.message.author.roles:
+            rolestoremove.append(CinnamonLegacy)
+            rolestogive.append(PenLegacy)
             
-#             if norm == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[0]:
-#                         moni = role
-#                     if role.id == natsuki[0]:
-#                         nat = role
-#                     if role.id == yuri[0]:
-#                         yuri = role
-#                     if role.id == misao[0]:
-#                         misao = role
-#                     if role.id == sayori[0]:
-#                         sayori = role
-#                     if role.id == protagonist[0]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if rare == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[1]:
-#                         moni = role
-#                     if role.id == natsuki[1]:
-#                         nat = role
-#                     if role.id == yuri[1]:
-#                         yuri = role
-#                     if role.id == misao[1]:
-#                         misao = role
-#                     if role.id == sayori[1]:
-#                         sayori = role
-#                     if role.id == protagonist[1]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             if legacy == True:
-#                 moni = None
-#                 yuri = None
-#                 sayori = None
-#                 misao = None
-#                 nat = None
-#                 protag = None
-#                 falsey = False
-#                 for role in server.roles:
-#                     if role.id == monika[2]:
-#                         moni = role
-#                     if role.id == natsuki[2]:
-#                         nat = role
-#                     if role.id == yuri[2]:
-#                         yuri = role
-#                     if role.id == misao[2]:
-#                         misao = role
-#                     if role.id == sayori[2]:
-#                         sayori = role
-#                     if role.id == protagonist[2]:
-#                         protag = role
-#                 if moni != None:
-#                     await self.bot.remove_roles(user, moni)
-#                 if nat != None:
-#                     await self.bot.remove_roles(user, nat)
-#                 if yuri != None:
-#                     await self.bot.remove_roles(user, yuri)
-#                 if misao != None:
-#                     await self.bot.remove_roles(user, misao)
-#                 if sayori != None:
-#                     await self.bot.remove_roles(user, sayori)
-#                 if protag != None:
-#                     await self.bot.remove_roles(user, protag)
-#                 else:
-#                     falsey = True
-#                 if falsey == False:
-#                     await self.bot.add_roles(user, moni)
-#             else:
-#                 await self.bot.say("An error occurred...")
-#                 break
+        if FagNorm in ctx.message.author.roles:
+            rolestoremove.append(FagNorm)
+            rolestogive.append(PenNorm)
+        if FagRare in ctx.message.author.roles:
+            rolestoremove.append(FagRare)
+            rolestogive.append(PenRare)
+        if FagLegacy in ctx.message.author.roles:
+            rolestoremove.append(FagLegacy)
+            rolestogive.append(PenLegacy)
 
-# def setup(bot):
-#     bot.add_cog(Roles(bot))
+        if BestBoyNorm in ctx.message.author.roles:
+            rolestoremove.append(BestBoyNorm)
+            rolestogive.append(PenNorm)
+        if BestBoyRare in ctx.message.author.roles:
+            rolestoremove.append(BestBoyRare)
+            rolestogive.append(PenRare)
+        if BestBoyLegacy in ctx.message.author.roles:
+            rolestoremove.append(BestBoyLegacy)
+            rolestogive.append(PenLegacy)
+        
+        if Moni in ctx.message.author.roles:
+            rolestoremove.append(Moni)
+            rolestogive.append(PenNorm)
+        if MoniRare in ctx.message.author.roles:
+            rolestoremove.append(MoniRare)
+            rolestogive.append(PenRare)
+        if MoniLegacy in ctx.message.author.roles:
+            rolestoremove.append(MoniLegacy)
+            rolestogive.append(PenLegacy)
+
+        await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+
+def setup(bot):
+    bot.add_cog(Roles(bot))
