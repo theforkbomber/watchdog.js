@@ -157,7 +157,7 @@ class Moderation:
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
     async def mute(self, ctx, user, minutes):
-        await self.bot.say("Use 'unmute @User' to remove the mute before the timer")
+        await self.bot.say("Use '>os.unmute @User' to remove the mute before the timer")
         for user in ctx.message.mentions:
             for c in ctx.message.server.channels:
                 if c.name == "general":
@@ -175,7 +175,18 @@ class Moderation:
             def check(msg):
                 return (msg.author.permissions_in(stuff).manage_roles == True) and (msg.server == ctx.message.server)
             await self.bot.wait_for_message(content = "unmute <@"+user.id+">", check = check, timeout = time)
+            overwrite = discord.PermissionOverwrite()
+            overwrite.send_messages = True
+            await self.bot.edit_channel_permissions(d, user, overwrite)
+            print("After:",user.permissions_in(d).send_messages)
+
+    @commands.command(pass_context= True)
+    @commands.has_permissions(manage_roles=True)
+    async def unmute(self, ctx, user):
+        for user in ctx.message.mentions:
             for c in ctx.message.server.channels:
+                if c.name == "general":
+                    d = c
                 overwrite = discord.PermissionOverwrite()
                 overwrite.send_messages = True
                 await self.bot.edit_channel_permissions(d, user, overwrite)
