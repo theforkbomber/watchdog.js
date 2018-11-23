@@ -316,8 +316,11 @@ platform.version(),
         await self.bot.say("Your server's roles are: ```\n{}```".format("\n".join(server_roles)))
 
     @commands.command(pass_context=True, hidden = True)
-    async def find(self, ctx, text):
-        if text == "you":
+    async def find(self, ctx, text=None):
+        if text == None:
+            await self.bot.say("What should I find?")
+
+        elif text == "you":
             await self.bot.say("I am where scrapped features go when they aren't needed anymore. miyuki.chr is my file.")
 
         elif text == "miyuki.chr":
