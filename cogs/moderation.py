@@ -186,10 +186,10 @@ class Moderation:
             for c in ctx.message.server.channels:
                 if c.name == "general":
                     d = c
-                overwrite = discord.PermissionOverwrite()
-                overwrite.send_messages = True
-                await self.bot.edit_channel_permissions(d, user, overwrite)
-                print("After:",user.permissions_in(d).send_messages)
+            overwrite = discord.PermissionOverwrite()
+            overwrite.send_messages = True
+            await self.bot.edit_channel_permissions(d, user, overwrite)
+            print("After:",user.permissions_in(d).send_messages)
 
     @commands.command(aliases = ["clearbots"],pass_context=True)
     @commands.has_permissions(manage_roles=True)
