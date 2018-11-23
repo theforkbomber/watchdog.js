@@ -315,6 +315,40 @@ platform.version(),
             server_roles.append(x.name)
         await self.bot.say("Your server's roles are: ```\n{}```".format("\n".join(server_roles)))
 
+    @commands.command(pass_context=True, hidden = True)
+    async def find(self, ctx, text):
+        if text == "you":
+            await self.bot.say("I am where scrapped features go when they aren't needed anymore. miyuki.chr is my file.")
+
+        elif text == "miyuki.chr":
+            await self.bot.say("I am where scrapped features go when they aren't needed anymore.")
+
+        elif text == "Dan.chr":
+            await self.bot.say("He is with the rest of the characters who are being used. It seems that the system is trying to interact with his file...")
+        
+        elif text == "monika.chr":
+            await self.bot.say("She is with the rest of the characters who are being used. The system has been sending periodic ping signals to her file recently. None of these are ever returned.")
+
+        elif text == "natsuki.chr":
+            await self.bot.say("She is with the rest of the characters who are being used. Her file has been pinging distress signals to the system lately.")
+
+        elif text == "sayori.chr":
+            await self.bot.say("She is with the rest of the characters who are being used. Her file has been sending distress pings to the system less recently. She must feel happier to some degree.")
+
+        elif text == "yuri.chr":
+            await self.bot.say("She is with the rest of the characters who are being used. Her character file never has much activity or interaction with the system.")
+
+        elif text == "misao.chr":
+            await self.bot.say("She is with the rest of the characters who are being used. Looking into her file sends back an error message. She is still encrypted.")
+
+        elif text == "sakura.chr":
+            await self.bot.say("This file has been null for a while.")
+
+        elif text == "Judgement.eph":
+            await self.bot.say("This file is in the main directory. While it currently doesn't point to anywhere, it keeps sending signals to the system.")
+        
+        else:
+            await self.bot.say("Unable to recognize value `"+text+"`. Make sure you spelt it properly! Values are case sensitive!")
 
 def setup(bot):
     bot.add_cog(ServerInfo(bot))
