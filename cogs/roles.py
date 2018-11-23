@@ -9,7 +9,10 @@ class Roles:
     def __init__(self, bot):
         self.bot = bot
 
+ 
+
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 60*60*24, commands.BucketType.user)
     async def monika(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -101,6 +104,7 @@ class Roles:
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 60*60*24, commands.BucketType.user)
     async def sayori(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -192,6 +196,7 @@ class Roles:
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 60*60*24, commands.BucketType.user)
     async def natsuki(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -283,6 +288,7 @@ class Roles:
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
  
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 60*60*24, commands.BucketType.user)
     async def misao(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -375,6 +381,7 @@ class Roles:
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
 
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 60*60*24, commands.BucketType.user)
     async def protag(self, ctx):
         rolestoremove = []
         rolestogive = []
@@ -467,6 +474,7 @@ class Roles:
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
   
     @commands.command(pass_context=True)
+    @commands.cooldown(1, 60*60*24, commands.BucketType.user)
     async def yuri(self, ctx):
         rolestoremove = []
         rolestogive = []
