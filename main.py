@@ -59,11 +59,6 @@ def translate(payload, lang):
     translatedtext = translated.text
     return translatedtext
 
-@bot.event
-async def on_command_error(error, ctx):
-    if isinstance(error, commands.CommandOnCooldown):
-        await bot.send_message(ctx.message.channel, content='This command is on a %.2fs cooldown' % error.retry_after)
-    raise error  # re-raise the error so all the errors will still show up in console
 
 
 @bot.event
@@ -91,6 +86,12 @@ async def on_ready():
         await asyncio.sleep(15)
         await bot.change_presence(status=mystatus, game=discord.Game(name = "#suggestions", type = 2))
         await asyncio.sleep(15)
+
+@bot.event
+async def on_command_error(error, ctx):
+    if isinstance(error, commands.CommandOnCooldown):
+        await bot.send_message(ctx.message.channel, content='This command is on a %.2fs cooldown' % error.retry_after)
+raise error  # re-raise the error so all the errors will still show up in console
 
 @bot.event
 async def on_message_edit(before, after):
