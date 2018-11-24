@@ -376,7 +376,9 @@ December 12th, I will be unveiling the final chapter to my story.
 I've written this story with a lot of regret. I find myself unsure of what my story truly is, but rather, I look forward to what it will become.
 Because even if what has been written does not fly high, what is yet to be written is yet to leave the nest. 
 Perhaps this season, the final season, and the most heartbreaking, exciting, dark season will be the one to truly take flight.
-This season, I plan to [REDACTED].```""")
+This season, I plan to [REDACTED].```
+
+Hmm. This is odd. The rest of the file is filled with error sendbacks and zalgo text. I'm going to close it before anything goes wrong.""")
 
             
 
