@@ -106,7 +106,7 @@ class Roles:
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
-        await self.bot.say("`Assigned user "+ctx.message.author.name+" the Monika flag.`")
+        await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Monika} flag.`")
 
     @roleme.command(pass_context=True, aliases = ["Cinnamon bun", "Cinnamon Bun", "cinnamon bun", "cinnamon Bun", "Sayori"])
     async def sayori(self, ctx):
@@ -198,7 +198,7 @@ class Roles:
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
-        await self.bot.say("`Assigned user "+ctx.message.author.name+" the Sayori flag.`")
+        await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Sayori} flag.`")
 
     @roleme.command(pass_context=True, aliases = ["Nat", "Natsuki", "nat", "tsundere"])
     async def natsuki(self, ctx):
@@ -569,7 +569,7 @@ class Roles:
 
             await self.bot.add_roles(ctx.message.author, *rolestogive)
             await self.bot.remove_roles(ctx.message.author, *rolestoremove)
-            await self.bot.say("`Assigned user "+ctx.message.author.name+" the Yuri flag.`")
+            await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Yuri} flag.`")
 
 def setup(bot):
     bot.add_cog(Roles(bot))
