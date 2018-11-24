@@ -316,7 +316,7 @@ platform.version(),
         await self.bot.say("Your server's roles are: ```\n{}```".format("\n".join(server_roles)))
 
     @commands.command(pass_context=True, hidden = True)
-    async def find(self, ctx, text=None):
+    async def find(self, ctx, *, text=None):
         if text == None:
             await self.bot.say("What should I find?")
 
@@ -350,6 +350,36 @@ platform.version(),
         elif text == "Judgement.eph":
             await self.bot.say("This file is in the main directory. While it currently doesn't point to anywhere, it keeps sending signals to the system.")
         
+        elif text == "Marissa Marilland":
+            await self.bot.say("""*"Being a hero doesn’t mean you’re invincible. It just means that you’re brave enough to stand up and do what’s needed."*
+― Rick Riordan, The Mark of Athena""")
+        elif text == "Dan Salvato":
+            await self.bot.say(""""*Life is an unfoldment, and the further we travel the more truth we can comprehend. To understand the things that are at our door is the best preparation for understanding those that lie beyond."*
+— Hypatia""")
+        elif text == "Season 0":
+            await self.bot.say("Arcs: Season 0")
+        elif text == "Season 1":
+            await self.bot.say("Arcs: Repeat, Heartwarming, Change the Past")
+        elif text == "Season 2":
+            await self.bot.say("Arcs: Days of Peace, Monika's Redemption, Talent Show")
+        elif text == "Season 3":
+            await self.bot.say("Arcs: America, Sayori's Arc, Empathy")
+        elif text == "Season 4":
+            await self.bot.say("Arcs: Refer to filename `plans.txt`")
+        elif text == "Season 5":
+            await self.bot.say("Arcs: Epilogue")
+        elif text == "plans.txt":
+            await self.bot.say("""```
+- Marissa Marilland
+
+December 12th, I will be unveiling the final chapter to my story.
+I've written this story with a lot of regret. I find myself unsure of what my story truly is, but rather, I look forward to what it will become.
+Because even if what has been written does not fly high, what is yet to be written is yet to leave the nest. 
+Perhaps this season, the final season, and the most heartbreaking, exciting, dark season will be the one to truly take flight.
+This season, I plan to [REDACTED].```""")
+
+            
+
         else:
             await self.bot.say("Unable to recognize value `"+text+"`. Make sure you spelt it properly! Values are case sensitive!")
 

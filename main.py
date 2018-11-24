@@ -483,73 +483,76 @@ async def on_message(message):
     #             await bot.send_message(message.channel, embed=em)
 
     if message.content.startswith(">os.") == False:
-        db = sqlite3.connect("audits.db")
-        cursor = db.cursor()
-        roler = []
-        server = message.server
-        authormsg = str(message.author.id)
-        warned = False
-        if len(message.attachments) > 0:
-            record = message.attachments[0]["url"]
+        if str(message.type) != "MessageType.default":
+            return
         else:
-            record = message.content
-        description = ""
-        desc = ""
-        strikes = "0"
-        getbot = server.get_member(message.author.id)
-        checker = await bot.wait_for_message(author = message.author, channel = message.channel, timeout = 60)
-        if checker == None:
-            message = "nothing"
-            cursor.execute('''DELETE FROM audit_list WHERE username = (?)''', (authormsg,))
-            db.commit()
-            db.close()
-        elif checker.content == message.content:
-            if message.channel.id == "493528500892991492" or message.channel.id == "417756656684761118" or message.channel.id == "395690294659776532":
-                db.close()
-                pass
+            db = sqlite3.connect("audits.db")
+            cursor = db.cursor()
+            roler = []
+            server = message.server
+            authormsg = str(message.author.id)
+            warned = False
+            if len(message.attachments) > 0:
+                record = message.attachments[0]["url"]
             else:
-                if getbot.bot == False:
-                    cursor.execute("SELECT * FROM audit_list WHERE username=(?)", (authormsg,))
-                    results = cursor.fetchone()
-                    if results == None:
-                        cursor.execute('''INSERT INTO audit_list(username, warned, record, recstrike, description)VALUES(?,?,?,?,?)''', (authormsg, warned, record, strikes, description,))
-                        db.commit()
-                        db.close()
-                    else:
-                        if message.content == results[3] and 6 > int(results[4]) >= 3:
-                            warned = True
-                            steps = int(results[4])+1
-                            steps = str(steps)
-                            await bot.send_message(message.author, "Warning, you've posted the same message "+steps+" times, carry on and you will be placed in detention.")
-                            strikes = str(int(results[4])+1)
-                        elif message.content == results[3] and int(results[4]) == 6:
-                            for role in message.server.roles:
-                                if role.name == "Detention":
-                                    det = role
-                                    await bot.add_roles(message.author, det)
-                            for role in message.author.roles:
-                                if role.name == "Detention":
-                                    continue
-                                else:
-                                    roler.append(role)
-                            print(roler)
-                            await bot.remove_roles(message.author, *roler)
-                            desc = "Spammed the same message 6 times."
-                        elif message.content == results[3]:
-                            strikes = str(int(results[4])+1)
-                        
+                record = message.content
+            description = ""
+            desc = ""
+            strikes = "0"
+            getbot = server.get_member(message.author.id)
+            checker = await bot.wait_for_message(author = message.author, channel = message.channel, timeout = 60)
+            if checker == None:
+                message = "nothing"
+                cursor.execute('''DELETE FROM audit_list WHERE username = (?)''', (authormsg,))
+                db.commit()
+                db.close()
+            elif checker.content == message.content:
+                if message.channel.id == "493528500892991492" or message.channel.id == "417756656684761118" or message.channel.id == "395690294659776532":
+                    db.close()
+                    pass
+                else:
+                    if getbot.bot == False:
+                        cursor.execute("SELECT * FROM audit_list WHERE username=(?)", (authormsg,))
+                        results = cursor.fetchone()
+                        if results == None:
+                            cursor.execute('''INSERT INTO audit_list(username, warned, record, recstrike, description)VALUES(?,?,?,?,?)''', (authormsg, warned, record, strikes, description,))
+                            db.commit()
+                            db.close()
                         else:
-                            pass
-                        if results[1] == True:
-                            warned = True
-                        description = results[5]+desc
-                        cursor.execute('''DELETE FROM audit_list WHERE username = (?)''', (authormsg,))
-                        cursor.execute('''INSERT INTO audit_list(username, warned, record, recstrike, description)VALUES(?,?,?,?,?)''', (authormsg, warned, record, strikes, description,))
-                        db.commit()
-                        db.close()
-# except Exception as e:
-#     print(e)
-#     pass
+                            if message.content == results[3] and 6 > int(results[4]) >= 3:
+                                warned = True
+                                steps = int(results[4])+1
+                                steps = str(steps)
+                                await bot.send_message(message.author, "Warning, you've posted the same message "+steps+" times, carry on and you will be placed in detention.")
+                                strikes = str(int(results[4])+1)
+                            elif message.content == results[3] and int(results[4]) == 6:
+                                for role in message.server.roles:
+                                    if role.name == "Detention":
+                                        det = role
+                                        await bot.add_roles(message.author, det)
+                                for role in message.author.roles:
+                                    if role.name == "Detention":
+                                        continue
+                                    else:
+                                        roler.append(role)
+                                print(roler)
+                                await bot.remove_roles(message.author, *roler)
+                                desc = "Spammed the same message 6 times."
+                            elif message.content == results[3]:
+                                strikes = str(int(results[4])+1)
+                            
+                            else:
+                                pass
+                            if results[1] == True:
+                                warned = True
+                            description = results[5]+desc
+                            cursor.execute('''DELETE FROM audit_list WHERE username = (?)''', (authormsg,))
+                            cursor.execute('''INSERT INTO audit_list(username, warned, record, recstrike, description)VALUES(?,?,?,?,?)''', (authormsg, warned, record, strikes, description,))
+                            db.commit()
+                            db.close()
+    # except Exception as e:
+    #     print(e)
+    #     pass
 
 
 
