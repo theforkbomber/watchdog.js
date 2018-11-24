@@ -217,7 +217,7 @@ platform.version(),
         em.add_field(name='Number of emotes', value=str(emoji_count), inline=True)
         em.add_field(name='Created At', value=ctx.message.server.created_at.__format__('%A, %d. %B %Y @ %H:%M:%S'))
         em.set_thumbnail(url=ctx.message.server.icon_url)
-        em.set_author(name='Server Info', icon_url='https://i.imgur.com/RHagTDg.png')
+        em.set_author(name='Server Info', icon_url=ctx.message.author.icon_url)
         em.set_footer(text='Server ID: %s' % ctx.message.server.id)
         await self.bot.say(embed=em)
 
