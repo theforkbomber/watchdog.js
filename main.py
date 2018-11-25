@@ -59,7 +59,15 @@ def translate(payload, lang):
     translatedtext = translated.text
     return translatedtext
 
-
+def statusmaker():
+    server = bot.get_server('427450243253272598')
+    me = discord.utils.get(server.members, id = '275312272975462411')
+    mystatus = me.status
+    if me.status != discord.Status.offline:
+        pass
+    else:
+        mystatus = discord.Status.dnd
+    return mystatus
 
 @bot.event
 async def on_ready():
@@ -71,20 +79,13 @@ async def on_ready():
         d = datetime.now()
         m = psutil.virtual_memory()
         uptime = now-then
-        server = bot.get_server('427450243253272598')
-        me = discord.utils.get(server.members, id = '275312272975462411')
-        mystatus = me.status
-        if me.status != discord.Status.offline:
-            pass
-        else:
-            mystatus = discord.Status.dnd
         activity = discord.Game(name="CPU: "+str(psutil.cpu_percent())+"%\nRAM: "+str(m.percent)+"%\nUptime: "+str(uptime))
         # await bot.change_presence(status=discord.Status.dnd, game=discord.Game(name="Under maintenance..."))
-        await bot.change_presence(status=mystatus, game=activity)
+        await bot.change_presence(status=statusmaker(), game=activity)
         await asyncio.sleep(15)
-        await bot.change_presence(status=mystatus, game=discord.Game(name = "over JMAF", type = 3))
+        await bot.change_presence(status=statusmaker(), game=discord.Game(name = "over JMAF", type = 3))
         await asyncio.sleep(15)
-        await bot.change_presence(status=mystatus, game=discord.Game(name = "#suggestions", type = 2))
+        await bot.change_presence(status=statusmaker(), game=discord.Game(name = "#suggestions", type = 2))
         await asyncio.sleep(15)
 
 @bot.event
