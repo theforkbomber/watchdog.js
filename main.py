@@ -91,7 +91,7 @@ async def on_ready():
 @bot.event
 async def on_reaction_add(reaction, user):
     if len(reaction.message.embeds) != 0:
-        payload = reaction.message.embeds[0][1]
+        payload = reaction.message.embeds[0]['description']
     else:
         payload = reaction.message.content
     if reaction == uk or reaction == us:
