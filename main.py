@@ -22,6 +22,7 @@ from discord.ext.commands.core import Command, GroupMixin, command
 from discord.ext.commands.errors import CommandError, CommandNotFound
 from discord.ext.commands.view import StringView
 from googletrans import Translator
+from googletrans import LANGUAGES
 from PyDictionary import PyDictionary
 
 import config
@@ -32,17 +33,101 @@ then = datetime.now()
 bot = commands.Bot(command_prefix=">os.")
 cogs_dir = "cogs"
 # bot.remove_command("help")
-uk = discord.Reaction(emoji="\U0001f1ec\U0001f1e7")
-us = discord.Reaction(emoji="\U0001f1fa\U0001f1f8")
-jp = discord.Reaction(emoji="\U0001f1ef\U0001f1f5")
-ind = discord.Reaction(emoji="\U0001f1ee\U0001f1f3")
-es = discord.Reaction(emoji="\U0001f1ea\U0001f1f8")
-de = discord.Reaction(emoji="\U0001f1ea\U0001f1f8")
-fr = discord.Reaction(emoji="\U0001f1eb\U0001f1f7")
-pt = discord.Reaction(emoji="\U0001f1f5\U0001f1f9")
-cn = discord.Reaction(emoji="\U0001f1e8\U0001f1f3")
-pole = discord.Reaction(emoji="\U0001f1f5\U0001f1f1")
-
+listoflangs = {
+    discord.Reaction(emoji="\U0001f1ec\U0001f1e7"):"en", #uk
+    discord.Reaction(emoji="\U0001f1fa\U0001f1f8"):"en", #us
+    discord.Reaction(emoji="\U0001f1ef\U0001f1f5"):"ja", #japan
+    discord.Reaction(emoji="\U0001f1ee\U0001f1f3"):"hi", #india
+    discord.Reaction(emoji="\U0001f1ea\U0001f1f8"):"es", #spain
+    discord.Reaction(emoji="\U0001f1ea\U0001f1f8"):"de", #germany
+    discord.Reaction(emoji="\U0001f1eb\U0001f1f7"):"fr", #france
+    discord.Reaction(emoji="\U0001f1f5\U0001f1f9"):"pt", #portugal
+    discord.Reaction(emoji="\U0001f1e7\U0001f1f7"):"pt", #brazil
+    discord.Reaction(emoji="\U0001f1f3\U0001f1e6"):"af", #namibia
+    discord.Reaction(emoji="\U0001f1ff\U0001f1e6"):"af", #southafrica
+    discord.Reaction(emoji="\U0001f1f1\U0001f1fe"):"ar", #libya
+    discord.Reaction(emoji="\U0001f1f8\U0001f1e6"):"ar", #saudi
+    discord.Reaction(emoji="\U0001f1ea\U0001f1ec"):"ar", #egypt
+    discord.Reaction(emoji="\U0001f1e7\U0001f1ed"):"ar", #bahrain
+    discord.Reaction(emoji="\U0001f1e9\U0001f1ff"):"ar", #algeria
+    discord.Reaction(emoji="\U0001f1ee\U0001f1f6"):"ar", #iraq
+    discord.Reaction(emoji="\U0001f1ef\U0001f1f4"):"ar", #jordan
+    discord.Reaction(emoji="\U0001f1f0\U0001f1fc"):"ar", #kuwait
+    discord.Reaction(emoji="\U0001f1f1\U0001f1e7"):"ar", #lebanon
+    discord.Reaction(emoji="\U0001f1f2\U0001f1f7"):"ar", #mauritania
+    discord.Reaction(emoji="\U0001f1f2\U0001f1e6"):"ar", #morocco
+    discord.Reaction(emoji="\U0001f1f4\U0001f1f2"):"ar", #oman
+    discord.Reaction(emoji="\U0001f1f5\U0001f1f8"):"ar", #palestine
+    discord.Reaction(emoji="\U0001f1f6\U0001f1e6"):"ar", #qatar
+    discord.Reaction(emoji="\U0001f1f8\U0001f1e9"):"ar", #sudan
+    discord.Reaction(emoji="\U0001f1f8\U0001f1fe"):"ar", #syria
+    discord.Reaction(emoji="\U0001f1f9\U0001f1f3"):"ar", #tunisia
+    discord.Reaction(emoji="\U0001f1e6\U0001f1ea"):"ar", #uae
+    discord.Reaction(emoji="\U0001f1fe\U0001f1ea"):"ar", #yemen
+    discord.Reaction(emoji="\U0001f1e6\U0001f1f2"):"hy", #armenia
+    discord.Reaction(emoji="\U0001f1e6\U0001f1ff"):"az", #azer.....?
+    discord.Reaction(emoji="\U0001f1e7\U0001f1fe"):"be", #belarus
+    discord.Reaction(emoji="\U0001f1ed\U0001f1f7"):"hr", #croatia
+    discord.Reaction(emoji="\U0001f1f2\U0001f1fd"):"es", #mexico
+    discord.Reaction(emoji="\U0001f1e8\U0001f1ff"):"cs", #czech republic
+    discord.Reaction(emoji="\U0001f1e9\U0001f1f0"):"da", #denmark
+    discord.Reaction(emoji="\U0001f1ea\U0001f1ea"):"et", #estonia
+    discord.Reaction(emoji="\U0001f1f5\U0001f1ed"):"tl", #phillipines
+    discord.Reaction(emoji="\U0001f1eb\U0001f1ee"):"fi", #finland
+    discord.Reaction(emoji="\U0001f1f3\U0001f1f1"):"nl", #netherlands
+    discord.Reaction(emoji="\U0001f1ec\U0001f1ea"):"ka", #georgia
+    discord.Reaction(emoji="\U0001f1ec\U0001f1f7"):"el", #greece
+    discord.Reaction(emoji="\U0001f1ed\U0001f1f9"):"ht", #haiti
+    discord.Reaction(emoji="\U0001f1f3\U0001f1ec"):"ha", #nigeria
+    discord.Reaction(emoji="\U0001f1f3\U0001f1ea"):"ha", #niger
+    discord.Reaction(emoji="\U0001f1ec\U0001f1ed"):"ha", #ghana
+    discord.Reaction(emoji="\U0001f1ee\U0001f1f1"):"iw", #israel
+    discord.Reaction(emoji="\U0001f1f1\U0001f1e6"):"lo", #laos
+    discord.Reaction(emoji="\U0001f1ed\U0001f1fa"):"hu", #hungarian
+    discord.Reaction(emoji="\U0001f1ee\U0001f1f8"):"is", #iceland
+    discord.Reaction(emoji="\U0001f1ee\U0001f1e9"):"id", #indonesia
+    discord.Reaction(emoji="\U0001f1ee\U0001f1ea"):"ga", #ireland
+    discord.Reaction(emoji="\U0001f1ee\U0001f1f9"):"it", #italy
+    discord.Reaction(emoji="\U0001f1f0\U0001f1ff"):"kk", #kazakhstan
+    discord.Reaction(emoji="\U0001f1f0\U0001f1ed"):"km", #cambodia
+    discord.Reaction(emoji="\U0001f1f0\U0001f1f7"):"ko", #south korea
+    discord.Reaction(emoji="\U0001f1f0\U0001f1f5"):"ko", #north korea
+    discord.Reaction(emoji="\U0001f1f0\U0001f1ec"):"ky", #kyrgyzstan
+    discord.Reaction(emoji="\U0001f1f1\U0001f1fb"):"lv", #latvia
+    discord.Reaction(emoji="\U0001f1f1\U0001f1f9"):"lt", #lithuania
+    discord.Reaction(emoji="\U0001f1f1\U0001f1fa"):"lb", #luxembourg
+    discord.Reaction(emoji="\U0001f1f2\U0001f1f0"):"mk", #macedonia
+    discord.Reaction(emoji="\U0001f1f2\U0001f1ec"):"mg", #madagascar
+    discord.Reaction(emoji="\U0001f1f8\U0001f1ec"):"ms", #singapore
+    discord.Reaction(emoji="\U0001f1e7\U0001f1f3"):"ms", #brunei
+    discord.Reaction(emoji="\U0001f1f2\U0001f1fe"):"ms", #malaysia
+    discord.Reaction(emoji="\U0001f1f2\U0001f1f9"):"mt", #malta
+    discord.Reaction(emoji="\U0001f1f3\U0001f1ff"):"mi", #new zealand
+    discord.Reaction(emoji="\U0001f1f2\U0001f1f3"):"mn", #mongolia
+    discord.Reaction(emoji="\U0001f1f2\U0001f1f2"):"my", #myanmar/burma
+    discord.Reaction(emoji="\U0001f1f3\U0001f1f5"):"ne", #nepali
+    discord.Reaction(emoji="\U0001f1f3\U0001f1f4"):"no", #norway
+    discord.Reaction(emoji="\U0001f1ee\U0001f1f7"):"fa", #iran
+    discord.Reaction(emoij="\U0001f1f7\U0001f1f4"):"ro", #romania
+    discord.Reaction(emoji="\U0001f1f7\U0001f1fa"):"ru", #russia
+    discord.Reaction(emoji="\U0001f1fc\U0001f1f8"):"sm", #samoa
+    discord.Reaction(emoji="\U0001f1f7\U0001f1f8"):"sr", #serbia
+    discord.Reaction(emoji="\U0001f1ff\U0001f1fc"):"sn", #zimbabwe
+    discord.Reaction(emoij="\U0001f1f8\U0001f1f0"):"sk", #slovakia
+    discord.Reaction(emoji="\U0001f1f8\U0001f1ee"):"sl", #slovenia
+    discord.Reaction(emoji="\U0001f1f8\U0001f1f4"):"so", #somalia
+    discord.Reaction(emoji="\U0001f1f0\U0001f1ea"):"sw", #kenya
+    discord.Reaction(emoji="\U0001f1f8\U0001f1ea"):"sv", #sweden
+    discord.Reaction(emoji="\U0001f1f9\U0001f1ef"):"tg", #tajikistan
+    discord.Reaction(emoji="\U0001f1f5\U0001f1f0"):"sd", #pakistan
+    discord.Reaction(emoji="\U0001f1f9\U0001f1ed"):"th", #thailand
+    discord.Reaction(emoji="\U0001f1f9\U0001f1f7"):"tr", #turkish
+    discord.Reaction(emoji="\U0001f1fa\U0001f1e6"):"uk", #ukraine
+    discord.Reaction(emoji="\U0001f1fa\U0001f1ff"):"uz", #uzbekistan
+    discord.Reaction(emoji="\U0001f1fb\U0001f1f3"):"vi", #vietnam
+    discord.Reaction(emoji="\U0001f1e8\U0001f1f3"):"zh-tw", #china
+    discord.Reaction(emoji="\U0001f1f5\U0001f1f1"):"pl", #poland
+}
 initial_extensions = (
     'cogs.moderation',
     'cogs.serverinfo',
@@ -53,7 +138,7 @@ initial_extensions = (
 )
 
 
-def translate(payload, lang):
+def translateerrr(payload, lang):
     translating = Translator()
     translated = translating.translate(payload, dest=lang)
     translatedtext = translated.text
@@ -94,67 +179,10 @@ async def on_reaction_add(reaction, user):
         payload = reaction.message.embeds[0]['description']
     else:
         payload = reaction.message.content
-    if reaction == uk or reaction == us:
-        lang = "en"
-        
+    if reaction in listoflangs:
+        lang = listoflangs[reaction]
         await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
-        await bot.send_message(reaction.message.channel, embed=em)
-
-    elif reaction == cn:
-        lang = "zh-tw"
-        
-        await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
-        await bot.send_message(reaction.message.channel, embed=em)
-
-    elif reaction == fr:
-        lang = "fr"
-        
-        await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
-        await bot.send_message(reaction.message.channel, embed=em)
-
-    elif reaction == es:
-        lang = "es"
-        
-        await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
-        await bot.send_message(reaction.message.channel, embed=em)
-
-    elif reaction == pt:
-        lang = "pt"
-        
-        await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
-        await bot.send_message(reaction.message.channel, embed=em)
-
-    elif reaction == jp:
-        lang = "ja"
-        
-        await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
-        await bot.send_message(reaction.message.channel, embed=em)
-
-    elif reaction == de:
-        lang = "de"
-        
-        await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
-        await bot.send_message(reaction.message.channel, embed=em)
-
-    elif reaction == ind:
-        lang = "in"
-        
-        await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
-        await bot.send_message(reaction.message.channel, embed=em)
-
-    elif reaction == pole:
-        lang = "pl"
-        
-        await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
+        em = discord.Embed(description=translateerrr(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
 
 @bot.event
@@ -561,7 +589,24 @@ async def on_message(message):
     #     pass
 
 
-
+@bot.command(pass_context=True)
+async def translate(ctx):
+    lol = ctx.message.author.name
+    em = discord.Embed(description="Translation successful!", colour=0x53bceb)
+    async for message in bot.logs_from(ctx.message.channel, limit=1, reverse=True):
+        translator = Translator()
+        totranslate = message.content
+        orig = message.content
+        lang = translator.detect(totranslate)
+        newlang = lang.lang
+        translated = translator.translate(totranslate, dest='en')
+        translatedd = translated.text
+        await bot.send_typing(ctx.message.channel)
+        # a.append(orig)
+        # b.append(translatedd)
+        # c.append(message.author)
+        em.add_field(name=ctx.message.author.name+", "+LANGUAGES[newlang]+' -> english', value=orig+"\n"+translatedd, inline=True)
+        await bot.send_message(ctx.message.channel, embed=em)
 
 for extension in initial_extensions:
     bot.load_extension(extension)
