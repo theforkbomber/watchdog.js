@@ -90,65 +90,69 @@ async def on_ready():
 
 @bot.event
 async def on_reaction_add(reaction, user):
+    if len(reaction.message.embeds) != 0:
+        payload = reaction.message.embeds[0][1]
+    else:
+        payload = reaction.message.content
     if reaction == uk or reaction == us:
         lang = "en"
-        payload = reaction.message.content
+        
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
 
     elif reaction == cn:
         lang = "zh-tw"
-        payload = reaction.message.content
+        
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
 
     elif reaction == fr:
         lang = "fr"
-        payload = reaction.message.content
+        
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
 
     elif reaction == es:
         lang = "es"
-        payload = reaction.message.content
+        
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
 
     elif reaction == pt:
         lang = "pt"
-        payload = reaction.message.content
+        
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
 
     elif reaction == jp:
         lang = "ja"
-        payload = reaction.message.content
+        
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
 
     elif reaction == de:
         lang = "de"
-        payload = reaction.message.content
+        
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
 
     elif reaction == ind:
         lang = "in"
-        payload = reaction.message.content
+        
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
 
     elif reaction == pole:
         lang = "pl"
-        payload = reaction.message.content
+        
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translate(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
