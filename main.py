@@ -594,7 +594,9 @@ async def on_message(message):
 async def translate(ctx):
     lol = ctx.message.author.name
     em = discord.Embed(description="Translation successful!", colour=0x53bceb)
-    async for message in bot.logs_from(ctx.message.channel, limit=1, reverse=True):
+    async for message in bot.logs_from(ctx.message.channel, limit=2, reverse=True):
+        if message.id == ctx.message.id:
+            continue
         translator = Translator()
         totranslate = message.content
         orig = message.content
