@@ -252,9 +252,24 @@ async def on_server_join(server):
             await bot.leave_server(server)
         except:
             await bot.leave_server(server)
-
+369252350927306752
 @bot.event
 async def on_member_join(member):
+    greetfirst = ["Greetings ","Hello there "]
+    greets = ["! Please read the rules in <#448470389836742656>! Also please check out the <#396008626017271811> for better introduction to the server!","! Please read the server's rules in <#448470389836742656>! Also, please check out <#396008626017271811> for a better introduction to the server show! Most importantly, however, I hope you'll enjoy your stay here!"]
+    server = member.server
+    mention = "<@"+member.id+">"
+    if server.id == "454338814865965099":
+        channels = "454338815310430239"
+    elif server.id == "369252350927306752":
+        channels = "390221854830362624"
+    elif server.id == "427450243253272598":
+        channels = "487662594312765441"
+    channel = server.get_channel(channels)
+    randomnum = random.randint(0,len(greetfirst)-1)
+    greetchosenfirst = greetfirst[randomnum]
+    greetlast = greets[randomnum]
+    await bot.send_message(channel, greetchosenfirst+mention+greetlast)
     server = member.server
     dokis = ["Monika", "Misao", "Sayori", "Natsuki", "Protagonist", "Yuri"]
     Doki = False
