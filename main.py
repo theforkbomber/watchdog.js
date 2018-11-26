@@ -185,6 +185,8 @@ async def on_reaction_add(reaction, user):
         await bot.send_typing(reaction.message.channel)
         em = discord.Embed(description=translateerrr(payload, lang), colour=0x53bceb)
         await bot.send_message(reaction.message.channel, embed=em)
+    if reaction == discord.Reaction(emoji="🛑") and user.id == "275312272975462411":
+        await bot.delete_message(reaction.message)
 
 @bot.event
 async def on_command_error(error, ctx):
