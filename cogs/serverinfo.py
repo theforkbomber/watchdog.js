@@ -88,8 +88,11 @@ platform.version(),
             def check(react, usr):
                 return usr in tocontact
             if len(online) is not 0:
-                for i in online:
-                    o = o+"<:Online:498506339203416064> "+i+"\n"
+                for i in range(0,len(online)):
+                    if on[i].game.type == 1:
+                        o = o+"<:Streaming:498506338935242753> "+online[i]+"\n"
+                    else:
+                        o = o+"<:Online:498506339203416064> "+online[i]+"\n"
                 tocontact = on
                 await self.bot.say("Available mods:\n"+o)
                 for x in tocontact:
@@ -114,11 +117,11 @@ platform.version(),
                 await self.bot.remove_roles(member, *roler)
 
             elif len(away) is not 0:
-                for i in away:
+                for i in range(0,len(away)):
                     if aw[i].game.type == 1:
-                        a = a+"<:Streaming:498506338935242753> "+i+"\n"
+                        a = a+"<:Streaming:498506338935242753> "+away[i]+"\n"
                     else:
-                        a = a+"<:Away:498506339052552242> "+i+"\n"
+                        a = a[x]+"<:Away:498506339052552242> "+away[i]+"\n"
                 tocontact = aw
                 await self.bot.say("Available mods:\n"+a)
                 for x in tocontact:
@@ -143,8 +146,11 @@ platform.version(),
                 await self.bot.remove_roles(member, *roler)
                     
             elif len(dnd) is not 0:
-                for i in dnd:
-                    d = d+"<:DnD:498506339052421163> "+i+"\n"
+                for i in range(0,len(dnd)):
+                    if dn[i].game.type == 1:
+                        d = d+"<:Streaming:498506338935242753> "+dnd[i]+"\n"
+                    else:
+                        d = d+"<:DnD:498506339052421163> "+dnd[i]+"\n"
                 tocontact = dn
                 await self.bot.say("Available mods:\n"+d)
                 for x in tocontact:
@@ -166,8 +172,11 @@ platform.version(),
                         roler.append(role)
                 await self.bot.remove_roles(member, *roler)
             elif len(offline) is not 0:
-                for i in offline:
-                    of = of+"<:Offline:498506339287564293> "+i+"\n"
+                for i in range(0,len(offline)):
+                    if off[i].game.type == 1:
+                        of = of+"<:Streaming:498506338935242753> "+offline[i]+"\n"
+                    else:
+                        of = of+"<:Offline:498506339287564293> "+offline[i]+"\n"
                 tocontact = off
                 await self.bot.say("Available mods:\n"+of)
                 for x in tocontact:
@@ -192,7 +201,7 @@ platform.version(),
     @commands.command(pass_context=True, brief="displays info about the server")
     async def info(self, ctx):
         online = 0
-        for i in ctx.message.server.members:
+        for i in range(0,len())ctx.message.server.members:
             if str(i.status) == 'online' or str(i.status) == 'idle' or str(i.status) == 'dnd':
                 online += 1
         all_users = []
