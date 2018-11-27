@@ -326,22 +326,22 @@ platform.version(),
         elif text == "miyuki.chr":
             await self.bot.say("I am where scrapped features go when they aren't needed anymore.")
 
-        elif text == "Dan.chr":
+        elif (text == "Dan.chr") or (text == "Dan") or (text == "Dan Voslata"):
             await self.bot.say("He is with the rest of the characters who are being used. It seems that the system is trying to interact with his file...")
         
-        elif text == "monika.chr":
+        elif (text == "monika.chr") or (text == "Monika") or (text == "Monika Salvato"):
             await self.bot.say("She is with the rest of the characters who are being used. The system has been sending periodic ping signals to her file recently. None of these are ever returned.")
 
-        elif text == "natsuki.chr":
+        elif (text == "natsuki.chr") or (text == "Natsuki") or (text == "Natsuki Takara"):
             await self.bot.say("She is with the rest of the characters who are being used. Her file has been pinging distress signals to the system lately.")
 
-        elif text == "sayori.chr":
+        elif (text == "sayori.chr") or (text == "Sayori") or (text == "Sayori Kanzaki"):
             await self.bot.say("She is with the rest of the characters who are being used. Her file has been sending distress pings to the system less recently. She must feel happier to some degree.")
 
-        elif text == "yuri.chr":
+        elif (text == "yuri.chr") or (text == "Yuri") or (text == "Yuri Libitina"):
             await self.bot.say("She is with the rest of the characters who are being used. Her character file never has much activity or interaction with the system.")
 
-        elif text == "misao.chr":
+        elif (text == "misao.chr") or (text == "Misao") or (text == "Misao Sanguine"):
             await self.bot.say("She is with the rest of the characters who are being used. Looking into her file sends back an error message. She is still encrypted.")
 
         elif text == "sakura.chr":
@@ -380,7 +380,6 @@ This season, I plan to [REDACTED].```
 
 Hmm. This is odd. The rest of the file is filled with error sendbacks and zalgo text. I'm going to close it before anything goes wrong.""")
 
-            
 
         else:
             await self.bot.say("Unable to recognize value `"+text+"`. Make sure you spelt it properly! Values are case sensitive!")
