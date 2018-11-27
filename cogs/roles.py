@@ -105,6 +105,7 @@ class Roles:
         #     rolestogive.append(MoniLegacy)
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await asyncio.sleep(2)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
         await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Monika} flag.`")
 
@@ -197,6 +198,7 @@ class Roles:
             rolestogive.append(CinnamonLegacy)
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await asyncio.sleep(2)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
         await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Sayori} flag.`")
 
@@ -289,6 +291,7 @@ class Roles:
             rolestogive.append(NatLegacy)
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await asyncio.sleep(2)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
         await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Natsuki} flag.`")
 
@@ -382,6 +385,7 @@ class Roles:
             rolestogive.append(FagLegacy)
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await asyncio.sleep(2)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
         await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Misao} flag.`")
 
@@ -475,6 +479,7 @@ class Roles:
             rolestogive.append(BestBoyLegacy)
 
         await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await asyncio.sleep(2)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
         await self.bot.say("`Assigned user"+ctx.message.author.name+" the {Protagonist} flag.`")
 
@@ -568,6 +573,7 @@ class Roles:
                 rolestogive.append(PenLegacy)
 
             await self.bot.add_roles(ctx.message.author, *rolestogive)
+            await asyncio.sleep(2)
             await self.bot.remove_roles(ctx.message.author, *rolestoremove)
             await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Yuri} flag.`")
 
