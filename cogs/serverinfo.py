@@ -92,6 +92,8 @@ platform.version(),
                     try:
                         if on[i].game.type == 1:
                             o = o+"<:Streaming:498506338935242753> "+online[i]+"\n"
+                        else:
+                            o = o+"<:Online:498506339203416064> "+online[i]+"\n"
                     except:
                         o = o+"<:Online:498506339203416064> "+online[i]+"\n"
                         
@@ -123,6 +125,8 @@ platform.version(),
                     try:
                         if aw[i].game.type == 1:
                             a = a+"<:Streaming:498506338935242753> "+away[i]+"\n"
+                        else:
+                            a = a+"<:Away:498506339052552242> "+away[i]+"\n"
                     except:
                         a = a+"<:Away:498506339052552242> "+away[i]+"\n"
                 tocontact = aw
@@ -153,6 +157,8 @@ platform.version(),
                     try:
                         if dn[i].game.type == 1:
                             d = d+"<:Streaming:498506338935242753> "+dnd[i]+"\n"
+                        else:
+                            d = d+"<:DnD:498506339052421163> "+dnd[i]+"\n"
                     except:
                         d = d+"<:DnD:498506339052421163> "+dnd[i]+"\n"
                 tocontact = dn
@@ -180,6 +186,8 @@ platform.version(),
                     try:
                         if off[i].game.type == 1:
                             of = of+"<:Streaming:498506338935242753> "+offline[i]+"\n"
+                        else:
+                            of = of+"<:Offline:498506339287564293> "+offline[i]+"\n"
                     except:
                         of = of+"<:Offline:498506339287564293> "+offline[i]+"\n"
                 tocontact = off
