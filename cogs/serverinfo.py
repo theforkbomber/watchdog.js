@@ -124,7 +124,7 @@ platform.version(),
                         if aw[i].game.type == 1:
                             a = a+"<:Streaming:498506338935242753> "+away[i]+"\n"
                     except:
-                        a = a[x]+"<:Away:498506339052552242> "+away[i]+"\n"
+                        a = a+"<:Away:498506339052552242> "+away[i]+"\n"
                 tocontact = aw
                 await self.bot.say("Available mods:\n"+a)
                 for x in tocontact:
