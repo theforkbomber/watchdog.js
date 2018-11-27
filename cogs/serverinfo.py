@@ -89,10 +89,12 @@ platform.version(),
                 return usr in tocontact
             if len(online) is not 0:
                 for i in range(0,len(online)):
-                    if on[i].game.type == 1:
-                        o = o+"<:Streaming:498506338935242753> "+online[i]+"\n"
-                    else:
+                    try:
+                        if on[i].game.type == 1:
+                            o = o+"<:Streaming:498506338935242753> "+online[i]+"\n"
+                    except:
                         o = o+"<:Online:498506339203416064> "+online[i]+"\n"
+                        
                 tocontact = on
                 await self.bot.say("Available mods:\n"+o)
                 for x in tocontact:
@@ -118,9 +120,10 @@ platform.version(),
 
             elif len(away) is not 0:
                 for i in range(0,len(away)):
-                    if aw[i].game.type == 1:
-                        a = a+"<:Streaming:498506338935242753> "+away[i]+"\n"
-                    else:
+                    try:
+                        if aw[i].game.type == 1:
+                            a = a+"<:Streaming:498506338935242753> "+away[i]+"\n"
+                    except:
                         a = a[x]+"<:Away:498506339052552242> "+away[i]+"\n"
                 tocontact = aw
                 await self.bot.say("Available mods:\n"+a)
@@ -147,9 +150,10 @@ platform.version(),
                     
             elif len(dnd) is not 0:
                 for i in range(0,len(dnd)):
-                    if dn[i].game.type == 1:
-                        d = d+"<:Streaming:498506338935242753> "+dnd[i]+"\n"
-                    else:
+                    try:
+                        if dn[i].game.type == 1:
+                            d = d+"<:Streaming:498506338935242753> "+dnd[i]+"\n"
+                    except:
                         d = d+"<:DnD:498506339052421163> "+dnd[i]+"\n"
                 tocontact = dn
                 await self.bot.say("Available mods:\n"+d)
@@ -173,9 +177,10 @@ platform.version(),
                 await self.bot.remove_roles(member, *roler)
             elif len(offline) is not 0:
                 for i in range(0,len(offline)):
-                    if off[i].game.type == 1:
-                        of = of+"<:Streaming:498506338935242753> "+offline[i]+"\n"
-                    else:
+                    try:
+                        if off[i].game.type == 1:
+                            of = of+"<:Streaming:498506338935242753> "+offline[i]+"\n"
+                    except:
                         of = of+"<:Offline:498506339287564293> "+offline[i]+"\n"
                 tocontact = off
                 await self.bot.say("Available mods:\n"+of)
