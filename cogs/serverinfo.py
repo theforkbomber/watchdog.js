@@ -201,7 +201,7 @@ platform.version(),
     @commands.command(pass_context=True, brief="displays info about the server")
     async def info(self, ctx):
         online = 0
-        for i in range(0,len())ctx.message.server.members:
+        for i in ctx.message.server.members:
             if str(i.status) == 'online' or str(i.status) == 'idle' or str(i.status) == 'dnd':
                 online += 1
         all_users = []
