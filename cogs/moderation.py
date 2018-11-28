@@ -129,6 +129,7 @@ class Moderation:
                         except Exception as e:
                             print(e)
                     await self.bot.add_roles(member, *undetent)
+                    await asyncio.sleep(2)
                     for role in server.roles:
                         if role.name == "Detention":
                             dete = role
@@ -136,7 +137,7 @@ class Moderation:
                     await self.bot.remove_roles(member, dete)
             except Exception as e:
                 print(e)
-            
+
             db.close()
         await self.bot.add_reaction(emoji="\u2705", message=ctx.message)
 
