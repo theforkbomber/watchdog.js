@@ -448,7 +448,7 @@ async def on_member_update(before, after):
         else:
             name = after.nick
         nickcheck = nicknamecheck(name)
-        if nickcheck != None:
+        if nickcheck != None and after.id != '419293764528635905':
             await bot.change_nickname(after, "Not"+nickcheck)
         for role in after.roles:
             roles = roles + str(role.name)+"|"
