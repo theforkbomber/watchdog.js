@@ -84,7 +84,8 @@ class Moderation:
         for x in c:
             todisplay = x[1]
             details = x[3]
-            txt.writelines(details+"\n"+todisplay+"\n\n")
+            txt.write(details+"\n"+todisplay+"\n\n")
+        txt.close()
         await self.bot.send_file(destination=destination, fp=open("Logs.txt","rb"), filename="Logs")
         
 
