@@ -83,7 +83,7 @@ class Moderation:
             os.remove("tmp/"+ctx.message.channel.name+".txt")
         except:
             pass
-        txt = open("tmp/"+ctx.message.channel.name+".txt","at")
+        txt = open("tmp/"+ctx.message.channel.name+".txt","wb")
         for x in c:
             todisplay = x[1]
             details = x[3]
