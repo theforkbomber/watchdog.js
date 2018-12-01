@@ -246,7 +246,7 @@ async def on_message_edit(before, after):
     author = after.author.id
     server = after.server
     mem = server.get_member(author)
-    if mem.bot == True:
+    if mem == bot.user:
         db.close()
         return
     else:
