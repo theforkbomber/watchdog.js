@@ -206,29 +206,41 @@ async def on_message_edit(before, after):
     aftermsg = after.content
     if len(after.attachments) > 0:
         try:
-            msg = after.attachments[0]["proxy_url"]
+            aftermsg = after.attachments[0]["proxy_url"]
         except:
             pass
     if len(after.embeds) > 0:
-        if after.embeds[0]["author"]["name"] is not None:
-            msg = after.embeds[0]["author"]["name"]
-        if after.embeds[0]["description"] is not None:
-            msg = msg +"\n"+after.embeds[0]["description"]
-        if after.embeds[0]["footer"]["text"] is not None:
-            msg = msg +"\n"+after.embeds[0]["footer"]["text"]
-    beforemsg = before.content
-    if len(after.attachments) > 0:
         try:
-            msg = after.attachments[0]["proxy_url"]
+            aftermsg = after.embeds[0]["author"]["name"]
+        except:
+            pass
+        try:
+            aftermsg = aftermsg +"\n"+after.embeds[0]["description"]
+        except:
+            pass
+        try:
+            aftermsg = aftermsg +"\n"+after.embeds[0]["footer"]["text"]
+        except:
+            pass
+    beforemsg = before.content
+    if len(before.attachments) > 0:
+        try:
+            beforemsg = before.attachments[0]["proxy_url"]
         except:
             pass
     if len(before.embeds) > 0:
-        if before.embeds[0]["author"]["name"] is not None:
-            msg = before.embeds[0]["author"]["name"]
-        if before.embeds[0]["description"] is not None:
-            msg = msg +"\n"+before.embeds[0]["description"]
-        if before.embeds[0]["footer"]["text"] is not None:
-            msg = msg +"\n"+before.embeds[0]["footer"]["text"]
+        try:
+            beforemsg = before.embeds[0]["author"]["name"]
+        except:
+            pass
+        try:
+            beforemsg = beforemsg +"\n"+before.embeds[0]["description"]
+        except:
+            pass
+        try:
+            beforemsg = beforemsg +"\n"+before.embeds[0]["footer"]["text"]
+        except:
+            pass
     ts = str(after.timestamp)
     ch = str(after.channel.id)
     author = after.author.id
@@ -267,13 +279,18 @@ async def on_message_delete(message):
                 msg = message.attachments[0]["proxy_url"]
             except:
                 pass
-        if len(message.embeds) > 0:
-            if message.embeds[0]["author"]["name"] is not None:
-                msg = message.embeds[0]["author"]["name"]
-            if message.embeds[0]["description"] is not None:
-                msg = msg +"\n"+message.embeds[0]["description"]
-            if message.embeds[0]["footer"]["text"] is not None:
-                msg = msg +"\n"+message.embeds[0]["footer"]["text"]
+        try:
+            msg = message.embeds[0]["author"]["name"]
+        except:
+            pass
+        try:
+            msg = msg +"\n"+message.embeds[0]["description"]
+        except:
+            pass
+        try:
+            msg = msg +"\n"+message.embeds[0]["footer"]["text"]
+        except:
+            pass
         ts = message.timestamp
         ch = str(message.channel.id)
         author = message.author.id
@@ -543,12 +560,18 @@ async def on_message(message):
         except:
             pass
     if len(message.embeds) > 0:
-        if message.embeds[0]["author"]["name"] is not None:
+        try:
             msg = message.embeds[0]["author"]["name"]
-        if message.embeds[0]["description"] is not None:
+        except:
+            pass
+        try:
             msg = msg +"\n"+message.embeds[0]["description"]
-        if message.embeds[0]["footer"]["text"] is not None:
+        except:
+            pass
+        try:
             msg = msg +"\n"+message.embeds[0]["footer"]["text"]
+        except:
+            pass
     cursor.execute("INSERT INTO logs (todisplay, id, details, channel)VALUES(%s,%s,%s,%s) RETURNING id;", (str(msg), str(message.id), str(details), str(message.channel.id)))
     db.commit()
     db.close()
