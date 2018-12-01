@@ -1,6 +1,7 @@
 import asyncio
 import discord
 import re
+import os
 from discord.ext import commands
 import config
 import psycopg2
@@ -78,7 +79,13 @@ class Moderation:
         cursor = db.cursor()
         cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
         c = cursor.fetchall()
-        await self.bot.send_message(destination, c)
+        txt = open("Logs.txt")
+        for x in c:
+            todisplay = x[1]
+            details = x[3]
+            txt.writelines(details+"\n"+todisplay+"\n\n")
+        await self.bot.send_file(destination, txt)
+        os.remove("Logs.txt")
 
     @commands.command(pass_context="True")
     @commands.has_permissions(manage_roles=True)
