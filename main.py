@@ -242,7 +242,7 @@ async def on_message_delete(message):
         ch = str(message.channel.id)
         author = message.author.id
         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
-        cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = '%s';''', (todisplay, str(message.id)))
+        cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
         cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
         cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
         db.commit()
