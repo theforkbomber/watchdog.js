@@ -79,7 +79,7 @@ class Moderation:
         cursor = db.cursor()
         cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
         c = cursor.fetchall()
-        txt = open("Logs.txt")
+        txt = open("Logs.txt","at")
         for x in c:
             todisplay = x[1]
             details = x[3]
