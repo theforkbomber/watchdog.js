@@ -69,6 +69,17 @@ class Moderation:
             channels = self.bot.get_channel(channels)
             await self.bot.edit_channel(name=name, channel=channels)
 
+    @commands.command(pass_context=True, brief="Experimental, don't touch")
+    @commands.has_permissions(manage_roles=True)
+    async def logs(self, ctx):
+        channel = ctx.message.channel
+        destination = ctx.message.author
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM logs WHERE channel = "+str(channel.id))
+        c = cursor.fetchall()
+        await self.bot.send_message(destination, c)
+
     @commands.command(pass_context="True")
     @commands.has_permissions(manage_roles=True)
     async def addchannel(self, ctx, typer=None, *, name=None):

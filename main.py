@@ -214,6 +214,11 @@ async def on_message_edit(before, after):
         db.close()
         return
     else:
+        cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
+        r = cursor.fetchone()
+        r = r[0]
+        todisplay = r+"\n(EDITED)"+ts+" UTC"+"\n"+aftermsg
+        cursor.execute('''UPDATE logs SET todisplay = '%s' WHERE id = '%s';''', (todisplay, before.id))
         cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
         cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
         db.commit()
@@ -236,6 +241,11 @@ async def on_message_delete(message):
         ts = message.timestamp
         ch = str(message.channel.id)
         author = message.author.id
+        cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
+        r = cursor.fetchone()
+        r = r[0]
+        todisplay = "(DELETED)"+ts+" UTC"+"\n"+msg
+        cursor.execute('''UPDATE logs SET todisplay = '%s' WHERE id = '%s';''', (todisplay, message.id))
         cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
         cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, ts, author))
         db.commit()
@@ -448,7 +458,7 @@ async def on_member_update(before, after):
         else:
             name = after.nick
         nickcheck = nicknamecheck(name)
-        if nickcheck != None and after.id != '419293764528635905':
+        if nickcheck != None and after.id != '` 1`':
             await bot.change_nickname(after, "Not"+nickcheck)
         for role in after.roles:
             roles = roles + str(role.name)+"|"
@@ -490,6 +500,12 @@ async def on_member_update(before, after):
 @bot.event
 async def on_message(message):
 
+    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+    cursor = db.cursor()
+    details = "Sent by "+message.author.name+" @"+message.timestamp+"UTC"
+    cursor.execute("INSERT INTO logs (todisplay, id, details)VALUES(%s,%s) RETURNING id;", (message.content, message.id, details))
+    db.commit()
+    db.close()
     if message.author.bot == True:
         return
     
