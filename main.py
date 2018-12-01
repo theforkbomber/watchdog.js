@@ -211,11 +211,11 @@ async def on_message_edit(before, after):
             pass
     if len(after.embeds) > 0:
         if after.embeds[0]["author"]["name"] is not None:
-            msg = after.embeds[0]["name"]
+            msg = after.embeds[0]["author"]["name"]
         if after.embeds[0]["description"] is not None:
             msg = msg +"\n"+after.embeds[0]["description"]
         if after.embeds[0]["footer"]["text"] is not None:
-            msg = msg +"\n"+after.embeds[0]["text"]
+            msg = msg +"\n"+after.embeds[0]["footer"]["text"]
     beforemsg = before.content
     if len(after.attachments) > 0:
         try:
@@ -224,11 +224,11 @@ async def on_message_edit(before, after):
             pass
     if len(before.embeds) > 0:
         if before.embeds[0]["author"]["name"] is not None:
-            msg = before.embeds[0]["name"]
+            msg = before.embeds[0]["author"]["name"]
         if before.embeds[0]["description"] is not None:
             msg = msg +"\n"+before.embeds[0]["description"]
         if before.embeds[0]["footer"]["text"] is not None:
-            msg = msg +"\n"+before.embeds[0]["text"]
+            msg = msg +"\n"+before.embeds[0]["footer"]["text"]
     ts = str(after.timestamp)
     ch = str(after.channel.id)
     author = after.author.id
@@ -269,11 +269,11 @@ async def on_message_delete(message):
                 pass
         if len(message.embeds) > 0:
             if message.embeds[0]["author"]["name"] is not None:
-                msg = message.embeds[0]["name"]
+                msg = message.embeds[0]["author"]["name"]
             if message.embeds[0]["description"] is not None:
                 msg = msg +"\n"+message.embeds[0]["description"]
             if message.embeds[0]["footer"]["text"] is not None:
-                msg = msg +"\n"+message.embeds[0]["text"]
+                msg = msg +"\n"+message.embeds[0]["footer"]["text"]
         ts = message.timestamp
         ch = str(message.channel.id)
         author = message.author.id
@@ -544,11 +544,11 @@ async def on_message(message):
             pass
     if len(message.embeds) > 0:
         if message.embeds[0]["author"]["name"] is not None:
-            msg = message.embeds[0]["name"]
+            msg = message.embeds[0]["author"]["name"]
         if message.embeds[0]["description"] is not None:
             msg = msg +"\n"+message.embeds[0]["description"]
         if message.embeds[0]["footer"]["text"] is not None:
-            msg = msg +"\n"+message.embeds[0]["text"]
+            msg = msg +"\n"+message.embeds[0]["footer"]["text"]
     cursor.execute("INSERT INTO logs (todisplay, id, details, channel)VALUES(%s,%s,%s,%s) RETURNING id;", (str(msg), str(message.id), str(details), str(message.channel.id)))
     db.commit()
     db.close()
