@@ -218,7 +218,7 @@ async def on_message_edit(before, after):
         r = cursor.fetchone()
         r = r[0]
         todisplay = r+"\n(EDITED)"+ts+" UTC"+"\n"+aftermsg
-        cursor.execute('''UPDATE logs SET todisplay = '%s' WHERE id = '%s';''', (todisplay, before.id))
+        cursor.execute('''UPDATE logs SET todisplay = '%s' WHERE id = '%s';''', (todisplay, str(before.id)))
         cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
         cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
         db.commit()
@@ -245,9 +245,9 @@ async def on_message_delete(message):
         r = cursor.fetchone()
         r = r[0]
         todisplay = "(DELETED)"+ts+" UTC"+"\n"+msg
-        cursor.execute('''UPDATE logs SET todisplay = '%s' WHERE id = '%s';''', (todisplay, message.id))
+        cursor.execute('''UPDATE logs SET todisplay = '%s' WHERE id = '%s';''', (todisplay, str(message.id)))
         cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
-        cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, ts, author))
+        cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
         db.commit()
         db.close()
     db.close()
@@ -503,7 +503,7 @@ async def on_message(message):
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
     details = "Sent by "+message.author.name+" @"+str(message.timestamp)+"UTC"
-    cursor.execute("INSERT INTO logs (todisplay, id, details, channel)VALUES(%s,%s) RETURNING id;", (message.content, message.id, details, message.channel))
+    cursor.execute("INSERT INTO logs (todisplay, id, details, channel)VALUES(%s,%s) RETURNING id;", (str(message.content), str(message.id), details, str(message.channel.id)))
     db.commit()
     db.close()
     if message.author.bot == True:
