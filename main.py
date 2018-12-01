@@ -507,11 +507,11 @@ async def on_message(message):
         except:
             pass
     if len(message.embeds) > 0:
-        if message.embeds[0]["name"] is not None:
+        if message.embeds[0]["author"]["name"] is not None:
             msg = message.embeds[0]["name"]
         if message.embeds[0]["description"] is not None:
             msg = msg +"\n"+message.embeds[0]["description"]
-        if message.embeds[0]["text"] is not None:
+        if message.embeds[0]["footer"]["text"] is not None:
             msg = msg +"\n"+message.embeds[0]["text"]
     cursor.execute("INSERT INTO logs (todisplay, id, details, channel)VALUES(%s,%s,%s,%s) RETURNING id;", (str(msg), str(message.id), str(details), str(message.channel.id)))
     db.commit()
