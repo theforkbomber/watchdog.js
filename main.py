@@ -204,7 +204,31 @@ async def on_message_edit(before, after):
     # cursor.execute('''CREATE TABLE edited(id SERIAL PRIMARY KEY, channel TEXT, messagebefore TEXT, messageafter TEXT, timestamp TIME, author TEXT)''')
     # db.commit()
     aftermsg = after.content
+    if len(after.attachments) > 0:
+        try:
+            msg = after.attachments[0]["proxy_url"]
+        except:
+            pass
+    if len(after.embeds) > 0:
+        if after.embeds[0]["author"]["name"] is not None:
+            msg = after.embeds[0]["name"]
+        if after.embeds[0]["description"] is not None:
+            msg = msg +"\n"+after.embeds[0]["description"]
+        if after.embeds[0]["footer"]["text"] is not None:
+            msg = msg +"\n"+after.embeds[0]["text"]
     beforemsg = before.content
+    if len(after.attachments) > 0:
+        try:
+            msg = after.attachments[0]["proxy_url"]
+        except:
+            pass
+    if len(before.embeds) > 0:
+        if before.embeds[0]["author"]["name"] is not None:
+            msg = before.embeds[0]["name"]
+        if before.embeds[0]["description"] is not None:
+            msg = msg +"\n"+before.embeds[0]["description"]
+        if before.embeds[0]["footer"]["text"] is not None:
+            msg = msg +"\n"+before.embeds[0]["text"]
     ts = str(after.timestamp)
     ch = str(after.channel.id)
     author = after.author.id
@@ -238,6 +262,18 @@ async def on_message_delete(message):
     # db.commit()
     else:
         msg = message.content
+        if len(message.attachments) > 0:
+            try:
+                msg = message.attachments[0]["proxy_url"]
+            except:
+                pass
+        if len(message.embeds) > 0:
+            if message.embeds[0]["author"]["name"] is not None:
+                msg = message.embeds[0]["name"]
+            if message.embeds[0]["description"] is not None:
+                msg = msg +"\n"+message.embeds[0]["description"]
+            if message.embeds[0]["footer"]["text"] is not None:
+                msg = msg +"\n"+message.embeds[0]["text"]
         ts = message.timestamp
         ch = str(message.channel.id)
         author = message.author.id
