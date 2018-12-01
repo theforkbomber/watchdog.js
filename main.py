@@ -206,7 +206,7 @@ async def on_message_edit(before, after):
     aftermsg = after.content
     if len(after.attachments) > 0:
         try:
-            aftermsg = after.attachments[0]["proxy_url"]
+            aftermsg = aftermsg+"\n"+after.attachments[0]["proxy_url"]
         except:
             pass
     if len(after.embeds) > 0:
