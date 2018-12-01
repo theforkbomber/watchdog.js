@@ -92,7 +92,7 @@ class Moderation:
             details = x[3]
             txt.write(details+"\n"+todisplay+"\n\n")
         txt.close()
-        await self.bot.send_file(destination=destination, fp=open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","rb"), filename="Logs")
+        await self.bot.send_file(destination=destination, fp=open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","rb"), filename=ctx.message.channel.name)
         
 
     @commands.command(pass_context="True")
