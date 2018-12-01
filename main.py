@@ -217,8 +217,8 @@ async def on_message_edit(before, after):
         cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
         r = cursor.fetchone()
         r = r[0]
-        todisplay = r+"\n(EDITED)"+ts+" UTC"+"\n"+aftermsg
-        cursor.execute('''UPDATE logs SET todisplay = '%s' WHERE id = '%s';''', (todisplay, str(before.id)))
+        todisplay = r+"\n(EDITED)"+str(ts)+" UTC"+"\n"+aftermsg
+        cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(before.id)))
         cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
         cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
         db.commit()
@@ -244,7 +244,7 @@ async def on_message_delete(message):
         cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
         r = cursor.fetchone()
         r = r[0]
-        todisplay = "(DELETED)"+ts+" UTC"+"\n"+msg
+        todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
         cursor.execute('''UPDATE logs SET todisplay = '%s' WHERE id = '%s';''', (todisplay, str(message.id)))
         cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
         cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
