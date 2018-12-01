@@ -76,7 +76,7 @@ class Moderation:
         destination = ctx.message.author
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
-        cursor.execute("SELECT * FROM logs WHERE channel = "+str(channel.id))
+        cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
         c = cursor.fetchall()
         await self.bot.send_message(destination, c)
 
