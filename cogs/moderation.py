@@ -79,7 +79,10 @@ class Moderation:
         cursor = db.cursor()
         cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
         c = cursor.fetchall()
-        os.remove("tmp/"+ctx.message.channel.name+".txt")
+        try:
+            os.remove("tmp/"+ctx.message.channel.name+".txt")
+        except:
+            pass
         txt = open("tmp/"+ctx.message.channel.name+".txt","at")
         for x in c:
             todisplay = x[1]
