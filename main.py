@@ -211,7 +211,7 @@ async def on_message_edit(before, after):
             pass
     if len(after.embeds) > 0:
         try:
-            aftermsg = after.embeds[0]["author"]["name"]
+            aftermsg = aftermsg+"\n"+after.embeds[0]["author"]["name"]
         except:
             pass
         try:
@@ -225,12 +225,12 @@ async def on_message_edit(before, after):
     beforemsg = before.content
     if len(before.attachments) > 0:
         try:
-            beforemsg = before.attachments[0]["proxy_url"]
+            beforemsg = beforemsg +"\n"+before.attachments[0]["proxy_url"]
         except:
             pass
     if len(before.embeds) > 0:
         try:
-            beforemsg = before.embeds[0]["author"]["name"]
+            beforemsg = beforemsg+"\n"+before.embeds[0]["author"]["name"]
         except:
             pass
         try:
@@ -556,12 +556,12 @@ async def on_message(message):
     msg = message.content
     if len(message.attachments) > 0:
         try:
-            msg = message.attachments[0]["proxy_url"]
+            msg = msg+"\n"+message.attachments[0]["proxy_url"]
         except:
             pass
     if len(message.embeds) > 0:
         try:
-            msg = message.embeds[0]["author"]["name"]
+            msg = msg +"\n"+message.embeds[0]["author"]["name"]
         except:
             pass
         try:
