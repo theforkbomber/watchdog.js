@@ -79,6 +79,9 @@ class Moderation:
         cursor = db.cursor()
         cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
         c = cursor.fetchall()
+        path = ctx.message.server.name+"/"
+        if not os.path.exists(path):
+            os.makedirs(path)
         try:
             os.remove(ctx.message.server.name+"/"+ctx.message.channel.name+".txt")
         except:
