@@ -36,6 +36,23 @@ class Admin():
         if e.text is None:
             return '```py\n{0.__class__.__name__}: {0}\n```'.format(e)
         return '```py\n{0.text}{1:>{0.offset}}\n{2}: {0}```'.format(e, '^', type(e).__name__)
+    @commands.command(pass_context=True, brief="Experimental, don't touch")
+    @commands.check(admincheck)
+    async def logs(self, ctx):
+        channel = ctx.message.channel
+        destination = ctx.message.author
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
+        c = cursor.fetchall()
+        os.remove("Logs.txt")
+        txt = open("Logs.txt","at")
+        for x in c:
+            todisplay = x[1]
+            details = x[3]
+            txt.write(details+"\n"+todisplay+"\n\n")
+        txt.close()
+        await self.bot.send_file(destination=destination, fp=open("Logs.txt","rb"), filename="Logs")
 
     @commands.command(pass_context=True)
     @commands.check(admincheck)
