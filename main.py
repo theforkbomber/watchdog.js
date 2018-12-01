@@ -502,8 +502,8 @@ async def on_message(message):
 
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
-    details = "Sent by "+message.author.name+" @"+message.timestamp+"UTC"
-    cursor.execute("INSERT INTO logs (todisplay, id, details)VALUES(%s,%s) RETURNING id;", (message.content, message.id, details))
+    details = "Sent by "+message.author.name+" @"+str(message.timestamp)+"UTC"
+    cursor.execute("INSERT INTO logs (todisplay, id, details, channel)VALUES(%s,%s) RETURNING id;", (message.content, message.id, details, message.channel))
     db.commit()
     db.close()
     if message.author.bot == True:
