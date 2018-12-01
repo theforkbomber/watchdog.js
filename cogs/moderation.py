@@ -80,16 +80,16 @@ class Moderation:
         cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
         c = cursor.fetchall()
         try:
-            os.remove("tmp/"+ctx.message.channel.name+".txt")
+            os.remove(ctx.message.server.name+"/"+ctx.message.channel.name+".txt")
         except:
             pass
-        txt = open("tmp/"+ctx.message.channel.name+".txt","wb")
+        txt = open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","wb")
         for x in c:
             todisplay = x[1]
             details = x[3]
             txt.write(details+"\n"+todisplay+"\n\n")
         txt.close()
-        await self.bot.send_file(destination=destination, fp=open("tmp/"+ctx.message.channel.name+".txt","rb"), filename="Logs")
+        await self.bot.send_file(destination=destination, fp=open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","rb"), filename="Logs")
         
 
     @commands.command(pass_context="True")
