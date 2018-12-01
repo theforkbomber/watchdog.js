@@ -79,14 +79,14 @@ class Moderation:
         cursor = db.cursor()
         cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
         c = cursor.fetchall()
-        os.remove("Logs.txt")
-        txt = open("Logs.txt","at")
+        os.remove("tmp/"+ctx.message.channel.name+".txt")
+        txt = open("tmp/"+ctx.message.channel.name+".txt","at")
         for x in c:
             todisplay = x[1]
             details = x[3]
             txt.write(details+"\n"+todisplay+"\n\n")
         txt.close()
-        await self.bot.send_file(destination=destination, fp=open("Logs.txt","rb"), filename="Logs")
+        await self.bot.send_file(destination=destination, fp=open("tmp/"+ctx.message.channel.name+".txt","rb"), filename="Logs")
         
 
     @commands.command(pass_context="True")
