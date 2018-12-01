@@ -85,7 +85,7 @@ class Moderation:
             todisplay = x[1]
             details = x[3]
             txt.writelines(details+"\n"+todisplay+"\n\n")
-        await self.bot.send_file(destination=destination, fp=txt, filename="Logs")
+        await self.bot.send_file(destination=destination, fp=open("Logs.txt","rb"), filename="Logs")
         
 
     @commands.command(pass_context="True")
