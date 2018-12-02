@@ -162,9 +162,9 @@ async def on_ready():
     print('Username -> ' + bot.user.name)
     print('ID -> ' + str(bot.user.id))
     channel = bot.get_channel('518554813093380098')
-    server = bot.get_server('')
+    server = bot.get_server('518554813093380098')
     while True:
-        if str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second) == "165430":
+        if str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second) == "165810":
             destination = channel
             db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
             cursor = db.cursor()
