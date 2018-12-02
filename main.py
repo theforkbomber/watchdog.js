@@ -14,6 +14,7 @@ from os import listdir
 from os.path import isfile, join
 import random
 import io
+import shutil
 
 import discord
 import psutil
@@ -212,7 +213,7 @@ async def zipper():
     zipf.close()
     b.seek(0)
     await bot.send_file(channel, fp=b, filename=str(datetime.now().day)+"/"+str(datetime.now().month)+"/"+str(datetime.now().year)+"JMAFLogs.zip")
-    os.rmdir("Just Monika (And Friends) #DAENATAKEOVER/")
+    shutil.rmtree("Just Monika (And Friends) #DAENATAKEOVER/")
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
     cursor.execute("truncate logs;")
