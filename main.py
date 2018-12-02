@@ -734,7 +734,7 @@ async def zipper():
     cursor = db.cursor()
     for x in server.channels:
         try:
-            cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
+            cursor.execute("SELECT * FROM logs WHERE channel = '"+str(x.id)+"';")
             c = cursor.fetchall()
             path = "Just Monika (And Friends) #DAENATAKEOVER/"
             if not os.path.exists(path):
@@ -762,7 +762,7 @@ async def zipper():
     zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
     zipf.close()
     b.seek(0)
-    await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
+    await bot.send_file(channel, fp=b, filename=str(datetime.now().day)+"/"+str(datetime.now().month)+"/"+str(datetime.now().year)+"JMAFLogs.zip")
     shutil.rmtree("Just Monika (And Friends) #DAENATAKEOVER/")
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
