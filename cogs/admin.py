@@ -46,14 +46,20 @@ class Admin():
         cursor = db.cursor()
         cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
         c = cursor.fetchall()
-        os.remove("Logs.txt")
-        txt = open("Logs.txt","at")
+        path = ctx.message.server.name+"/"
+        if not os.path.exists(path):
+            os.makedirs(path)
+        try:
+            os.remove(ctx.message.server.name+"/"+ctx.message.channel.name+".txt")
+        except:
+            pass
+        txt = open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","at")
         for x in c:
             todisplay = x[1]
             details = x[3]
             txt.write(details+"\n"+todisplay+"\n\n")
         txt.close()
-        await self.bot.send_file(destination=destination, fp=open("Logs.txt","rb"), filename="Logs")
+        await self.bot.send_file(destination=destination, fp=open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","rb"), filename=ctx.message.channel.name+".txt")
 
     @commands.command(pass_context=True)
     @commands.check(admincheck)
