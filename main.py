@@ -15,7 +15,6 @@ from os.path import isfile, join
 import random
 import io
 import shutil
-
 import discord
 import psutil
 import psycopg2
@@ -162,7 +161,27 @@ async def on_ready():
     print('Successfully logged in.')
     print('Username -> ' + bot.user.name)
     print('ID -> ' + str(bot.user.id))
+    channel = bot.get_channel('518554813093380098')
     while True:
+        if str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second) == "000":
+            await bot.wait_until_ready()
+            def zipdir(path, ziph):
+                # ziph is zipfile handle
+                for root, dirs, files in os.walk(path):
+                    for file in files:
+                        ziph.write(os.path.join(root, file))
+            b = io.BytesIO()
+            zipf = zipfile.ZipFile(b, mode="w")
+            zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
+            zipf.close()
+            b.seek(0)
+            await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
+            shutil.rmtree("Just Monika (And Friends) #DAENATAKEOVER/")
+            db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+            cursor = db.cursor()
+            cursor.execute("truncate logs;")
+            db.commit()
+            db.close()
         now = datetime.now()
         d = datetime.now()
         m = psutil.virtual_memory()
@@ -197,29 +216,6 @@ async def on_command_error(error, ctx):
         my_time = (datetime(1970,1,1) + timedelta(seconds=int(error.retry_after))).time() 
         await bot.send_message(ctx.message.channel, content=str(my_time)+' left on the cooldown.')
     raise error  # re-raise the error so all the errors will still show up in console
-
-async def zipper():
-    await bot.wait_until_ready()
-    server = bot.get_server('427450243253272598')
-    channel = server.get_channel('518554813093380098')
-    def zipdir(path, ziph):
-        # ziph is zipfile handle
-        for root, dirs, files in os.walk(path):
-            for file in files:
-                ziph.write(os.path.join(root, file))
-    b = io.BytesIO()
-    zipf = zipfile.ZipFile(b, mode="w")
-    zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
-    zipf.close()
-    b.seek(0)
-    await bot.send_file(channel, fp=b, filename=str(datetime.now().day)+"/"+str(datetime.now().month)+"/"+str(datetime.now().year)+"JMAFLogs.zip")
-    shutil.rmtree("Just Monika (And Friends) #DAENATAKEOVER/")
-    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-    cursor = db.cursor()
-    cursor.execute("truncate logs;")
-    db.commit()
-    db.close()
-    await asyncio.sleep(60*60*24)
 
 @bot.event
 async def on_message_edit(before, after):
@@ -749,5 +745,4 @@ async def translate(ctx):
 for extension in initial_extensions:
     bot.load_extension(extension)
 
-bot.loop.create_task(zipper())
 bot.run(config.token)
