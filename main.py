@@ -308,7 +308,6 @@ async def on_message_delete(message):
     cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
     db.commit()
     db.close()
-    db.close()
 
 @bot.event
 async def on_server_join(server):
@@ -350,8 +349,14 @@ async def on_member_join(member):
         if results[1] == "TRUE":
             for role in server.roles:
                 if role.name == "Detention":
-                    det = role
-                    Doki = True
+                    rolee = False
+                    while rolee == False:
+                        det = role
+                        Doki = True
+                        await bot.add_roles(member, det)
+                        print("hm?")
+                        if det in member.roles:
+                            rolee = True
                     break
             await bot.add_roles(member, det)
 
@@ -674,8 +679,14 @@ async def on_message(message):
                             elif message.content == results[3] and int(results[4]) == 6:
                                 for role in message.server.roles:
                                     if role.name == "Detention":
-                                        det = role
+                                        rolee = False
+                                        while rolee == False:
+                                            det = role
+                                            print("hm?")
+                                            if det in member.roles:
+                                                rolee = True
                                         await bot.add_roles(message.author, det)
+                                        break
                                 for role in message.author.roles:
                                     if role.name == "Detention":
                                         continue

@@ -126,9 +126,13 @@ class Moderation:
                     print("help")
                     for role in server.roles:
                         if role.name == "Detention":
-                            det = role
-                            await self.bot.add_roles(member, det)
-                            print("hm?")
+                            rolee = False
+                            while rolee == False:
+                                det = role
+                                await self.bot.add_roles(member, det)
+                                print("hm?")
+                                if det in member.roles:
+                                    rolee = True
                             break
                     for role in member.roles:
                         if role.name == "Detention":
