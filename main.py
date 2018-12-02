@@ -198,6 +198,7 @@ async def on_command_error(error, ctx):
     raise error  # re-raise the error so all the errors will still show up in console
 
 async def zipper():
+    await bot.wait_until_ready()
     server = bot.get_server('427450243253272598')
     channel = server.get_channel('518554813093380098')
     def zipdir(path, ziph):
