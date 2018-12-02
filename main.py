@@ -162,8 +162,31 @@ async def on_ready():
     print('Username -> ' + bot.user.name)
     print('ID -> ' + str(bot.user.id))
     channel = bot.get_channel('518554813093380098')
+    server = bot.get_server('')
     while True:
-        if str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second) == "000":
+        if str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second) == "165430":
+            destination = channel
+            db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+            cursor = db.cursor()
+            for x in server.channels:
+                try:
+                    cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
+                    c = cursor.fetchall()
+                    path = "Just Monika (And Friends) #DAENATAKEOVER/"
+                    if not os.path.exists(path):
+                        os.makedirs(path)
+                    try:
+                        os.remove("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt")
+                    except:
+                        pass
+                    txt = open("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt","at")
+                    for x in c:
+                        todisplay = x[1]
+                        details = x[3]
+                        txt.write(details+"\n"+todisplay+"\n\n")
+                    txt.close()
+                except Exception as e:
+                    print(e)
             await bot.wait_until_ready()
             def zipdir(path, ziph):
                 # ziph is zipfile handle
