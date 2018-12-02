@@ -211,7 +211,7 @@ async def zipper():
     zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
     zipf.close()
     b.seek(0)
-    await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
+    await bot.send_file(channel, fp=b, filename=str(datetime.now().day)+"/"+str(datetime.now().month)+"/"+str(datetime.now().year)+"JMAFLogs.zip")
     os.remove("Just Monika (And Friends) #DAENATAKEOVER/")
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
