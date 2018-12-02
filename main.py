@@ -157,7 +157,8 @@ def statusmaker():
     return mystatus
 
 async def zipper():
-    channel = bot.get_channel('518554813093380098')
+    server = bot.get_server('427450243253272598')
+    channel = server.get_channel('518554813093380098')
     def zipdir(path, ziph):
         # ziph is zipfile handle
         for root, dirs, files in os.walk(path):
