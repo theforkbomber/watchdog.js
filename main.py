@@ -313,7 +313,7 @@ async def on_message_delete(message):
     ch = str(message.channel.id)
     author = message.author.id
     if message.edited_timestamp != None:
-        cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
+        cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
         r = cursor.fetchone()
         r = r[0]
         todisplay = r+"(DELETED)"+str(ts)+" UTC"+"\n"
