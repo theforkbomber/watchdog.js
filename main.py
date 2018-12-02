@@ -286,41 +286,47 @@ async def on_message_edit(before, after):
 async def on_message_delete(message):
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
-    if message.edited_timestamp != None:
-        db.close()
-        pass
+    
     # cursor.execute('''DROP TABLE deleted''')
     # db.commit()
     # cursor.execute('''CREATE TABLE deleted(id SERIAL PRIMARY KEY, channel TEXT, message TEXT, timestamp TIME, author TEXT)''')
     # db.commit()
+    msg = message.content
+    if len(message.attachments) > 0:
+        try:
+            msg = message.attachments[0]["proxy_url"]
+        except:
+            pass
+    try:
+        msg = message.embeds[0]["author"]["name"]
+    except:
+        pass
+    try:
+        msg = msg +"\n"+message.embeds[0]["description"]
+    except:
+        pass
+    try:
+        msg = msg +"\n"+message.embeds[0]["footer"]["text"]
+    except:
+        pass
+    ts = message.timestamp
+    ch = str(message.channel.id)
+    author = message.author.id
+    if message.edited_timestamp != None:
+        cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
+        r = cursor.fetchone()
+        r = r[0]
+        todisplay = r+"(DELETED)"+str(ts)+" UTC"+"\n"
+        cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
+        db.close()
+        return
     else:
-        msg = message.content
-        if len(message.attachments) > 0:
-            try:
-                msg = message.attachments[0]["proxy_url"]
-            except:
-                pass
-        try:
-            msg = message.embeds[0]["author"]["name"]
-        except:
-            pass
-        try:
-            msg = msg +"\n"+message.embeds[0]["description"]
-        except:
-            pass
-        try:
-            msg = msg +"\n"+message.embeds[0]["footer"]["text"]
-        except:
-            pass
-        ts = message.timestamp
-        ch = str(message.channel.id)
-        author = message.author.id
         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
-        cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
-        cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
-        db.commit()
-        db.close()
+    cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
+    cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
+    db.commit()
+    db.close()
     db.close()
 
 @bot.event
