@@ -156,28 +156,6 @@ def statusmaker():
         mystatus = discord.Status.dnd
     return mystatus
 
-async def zipper():
-    server = bot.get_server('427450243253272598')
-    channel = server.get_channel('518554813093380098')
-    def zipdir(path, ziph):
-        # ziph is zipfile handle
-        for root, dirs, files in os.walk(path):
-            for file in files:
-                ziph.write(os.path.join(root, file))
-    b = io.BytesIO()
-    zipf = zipfile.ZipFile(b, mode="w")
-    zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
-    zipf.close()
-    b.seek(0)
-    await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
-    os.remove("Just Monika (And Friends) #DAENATAKEOVER/")
-    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-    cursor = db.cursor()
-    cursor.execute("truncate logs;")
-    db.commit()
-    db.close()
-    await asyncio.sleep(60*60*24)
-
 @bot.event
 async def on_ready():
     print('Successfully logged in.')
@@ -218,6 +196,28 @@ async def on_command_error(error, ctx):
         my_time = (datetime(1970,1,1) + timedelta(seconds=int(error.retry_after))).time() 
         await bot.send_message(ctx.message.channel, content=str(my_time)+' left on the cooldown.')
     raise error  # re-raise the error so all the errors will still show up in console
+
+async def zipper():
+    server = bot.get_server('427450243253272598')
+    channel = server.get_channel('518554813093380098')
+    def zipdir(path, ziph):
+        # ziph is zipfile handle
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                ziph.write(os.path.join(root, file))
+    b = io.BytesIO()
+    zipf = zipfile.ZipFile(b, mode="w")
+    zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
+    zipf.close()
+    b.seek(0)
+    await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
+    os.remove("Just Monika (And Friends) #DAENATAKEOVER/")
+    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+    cursor = db.cursor()
+    cursor.execute("truncate logs;")
+    db.commit()
+    db.close()
+    await asyncio.sleep(60*60*24)
 
 @bot.event
 async def on_message_edit(before, after):
