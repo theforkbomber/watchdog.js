@@ -161,50 +161,7 @@ async def on_ready():
     print('Successfully logged in.')
     print('Username -> ' + bot.user.name)
     print('ID -> ' + str(bot.user.id))
-    channel = bot.get_channel('518554813093380098')
-    server = bot.get_server('518554813093380098')
     while True:
-        if str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second) == "165810":
-            destination = channel
-            db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-            cursor = db.cursor()
-            for x in server.channels:
-                try:
-                    cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
-                    c = cursor.fetchall()
-                    path = "Just Monika (And Friends) #DAENATAKEOVER/"
-                    if not os.path.exists(path):
-                        os.makedirs(path)
-                    try:
-                        os.remove("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt")
-                    except:
-                        pass
-                    txt = open("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt","at")
-                    for x in c:
-                        todisplay = x[1]
-                        details = x[3]
-                        txt.write(details+"\n"+todisplay+"\n\n")
-                    txt.close()
-                except Exception as e:
-                    print(e)
-            await bot.wait_until_ready()
-            def zipdir(path, ziph):
-                # ziph is zipfile handle
-                for root, dirs, files in os.walk(path):
-                    for file in files:
-                        ziph.write(os.path.join(root, file))
-            b = io.BytesIO()
-            zipf = zipfile.ZipFile(b, mode="w")
-            zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
-            zipf.close()
-            b.seek(0)
-            await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
-            shutil.rmtree("Just Monika (And Friends) #DAENATAKEOVER/")
-            db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-            cursor = db.cursor()
-            cursor.execute("truncate logs;")
-            db.commit()
-            db.close()
         now = datetime.now()
         d = datetime.now()
         m = psutil.virtual_memory()
@@ -768,4 +725,49 @@ async def translate(ctx):
 for extension in initial_extensions:
     bot.load_extension(extension)
 
+async def zipper():
+    channel = bot.get_channel('518554813093380098')
+    server = bot.get_server('518554813093380098')
+    destination = channel
+    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+    cursor = db.cursor()
+    for x in server.channels:
+        try:
+            cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
+            c = cursor.fetchall()
+            path = "Just Monika (And Friends) #DAENATAKEOVER/"
+            if not os.path.exists(path):
+                os.makedirs(path)
+            try:
+                os.remove("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt")
+            except:
+                pass
+            txt = open("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt","at")
+            for x in c:
+                todisplay = x[1]
+                details = x[3]
+                txt.write(details+"\n"+todisplay+"\n\n")
+            txt.close()
+        except Exception as e:
+            print(e)
+    await bot.wait_until_ready()
+    def zipdir(path, ziph):
+        # ziph is zipfile handle
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                ziph.write(os.path.join(root, file))
+    b = io.BytesIO()
+    zipf = zipfile.ZipFile(b, mode="w")
+    zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
+    zipf.close()
+    b.seek(0)
+    await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
+    shutil.rmtree("Just Monika (And Friends) #DAENATAKEOVER/")
+    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+    cursor = db.cursor()
+    cursor.execute("truncate logs;")
+    db.commit()
+    db.close()
+
+bot.loop.create_task(zipper())
 bot.run(config.token)
