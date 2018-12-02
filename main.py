@@ -769,6 +769,7 @@ async def zipper():
     cursor.execute("truncate logs;")
     db.commit()
     db.close()
+    await asyncio.sleep(60*60*24)
 
 bot.loop.create_task(zipper())
 bot.run(config.token)
