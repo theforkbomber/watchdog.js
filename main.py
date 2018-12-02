@@ -198,8 +198,7 @@ async def on_command_error(error, ctx):
     raise error  # re-raise the error so all the errors will still show up in console
 
 async def zipper():
-    server = bot.get_server('427450243253272598')
-    channel = server.get_channel('518554813093380098')
+    bot.appinfo = await bot.application_info()
     def zipdir(path, ziph):
         # ziph is zipfile handle
         for root, dirs, files in os.walk(path):
@@ -210,7 +209,7 @@ async def zipper():
     zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
     zipf.close()
     b.seek(0)
-    await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
+    await bot.send_file(bot.appinfo.owner, fp=b, filename="JMAFLogs.zip")
     os.remove("Just Monika (And Friends) #DAENATAKEOVER/")
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
