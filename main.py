@@ -320,7 +320,7 @@ async def on_message_delete(message):
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
         db.close()
         return
-    else:
+    elif message.edited_timestamp == None:
         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
     cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
