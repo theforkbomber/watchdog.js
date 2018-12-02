@@ -642,6 +642,8 @@ async def on_message(message):
     if message.content.startswith(">os.") == False:
         if str(message.type) != "MessageType.default":
             return
+        if message.author.permissions_in(message.channel).manage_roles == True or message.author.id == '275312272975462411':
+            return
         else:
             db = sqlite3.connect("audits.db")
             cursor = db.cursor()

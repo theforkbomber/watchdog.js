@@ -39,6 +39,7 @@ class Admin():
     @commands.command(pass_context=True, brief="Experimental, don't touch")
     @commands.check(admincheck)
     async def flogs(self, ctx):
+        await self.bot.delete_message(ctx.message)
         channel = ctx.message.channel
         destination = ctx.message.author
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)

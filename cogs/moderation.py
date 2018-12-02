@@ -73,6 +73,7 @@ class Moderation:
     @commands.command(pass_context=True, brief="Experimental, don't touch")
     @commands.has_permissions(manage_roles=True)
     async def logs(self, ctx):
+        await self.bot.delete_message(ctx.message)
         channel = ctx.message.channel
         destination = ctx.message.author
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
