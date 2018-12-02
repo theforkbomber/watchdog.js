@@ -733,24 +733,25 @@ async def zipper():
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
     for x in server.channels:
-        try:
-            cursor.execute("SELECT * FROM logs WHERE channel = '"+str(x.id)+"';")
-            c = cursor.fetchall()
-            path = "Just Monika (And Friends) #DAENATAKEOVER/"
-            if not os.path.exists(path):
-                os.makedirs(path)
+        if str(x.type) == "text":
             try:
-                os.remove("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt")
-            except:
-                pass
-            txt = open("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt","at")
-            for x in c:
-                todisplay = x[1]
-                details = x[3]
-                txt.write(details+"\n"+todisplay+"\n\n")
-            txt.close()
-        except Exception as e:
-            print(e)
+                cursor.execute("SELECT * FROM logs WHERE channel = '"+str(x.id)+"';")
+                c = cursor.fetchall()
+                path = "Just Monika (And Friends) #DAENATAKEOVER/"
+                if not os.path.exists(path):
+                    os.makedirs(path)
+                try:
+                    os.remove("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt")
+                except:
+                    pass
+                txt = open("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt","at")
+                for x in c:
+                    todisplay = x[1]
+                    details = x[3]
+                    txt.write(details+"\n"+todisplay+"\n\n")
+                txt.close()
+            except Exception as e:
+                print(e)
     await bot.wait_until_ready()
     def zipdir(path, ziph):
         # ziph is zipfile handle
