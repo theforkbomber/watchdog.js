@@ -728,7 +728,7 @@ for extension in initial_extensions:
 async def zipper():
     await bot.wait_until_ready()
     channel = bot.get_channel('518554813093380098')
-    server = bot.get_server('518554813093380098')
+    server = bot.get_server('369252350927306752')
     destination = channel
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
