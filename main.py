@@ -156,6 +156,26 @@ def statusmaker():
         mystatus = discord.Status.dnd
     return mystatus
 
+async def zipper():
+    def zipdir(path, ziph):
+        # ziph is zipfile handle
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                ziph.write(os.path.join(root, file))
+    b = io.BytesIO()
+    zipf = zipfile.ZipFile(b, mode="w")
+    zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
+    zipf.close()
+    b.seek(0)
+    await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
+    os.remove("Just Monika (And Friends) #DAENATAKEOVER/")
+    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+    cursor = db.cursor()
+    cursor.execute("truncate logs;")
+    db.commit()
+    db.close()
+    await asyncio.sleep(60*60*24)
+
 @bot.event
 async def on_ready():
     print('Successfully logged in.')
@@ -163,24 +183,6 @@ async def on_ready():
     print('ID -> ' + str(bot.user.id))
     channel = bot.get_channel('518554813093380098')
     while True:
-        if str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second) == "000":
-            def zipdir(path, ziph):
-                # ziph is zipfile handle
-                for root, dirs, files in os.walk(path):
-                    for file in files:
-                        ziph.write(os.path.join(root, file))
-            b = io.BytesIO()
-            zipf = zipfile.ZipFile(b, mode="w")
-            zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
-            zipf.close()
-            b.seek(0)
-            await bot.send_file(channel, fp=b, filename="JMAFLogs.zip")
-            os.remove("Just Monika (And Friends) #DAENATAKEOVER/")
-            db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-            cursor = db.cursor()
-            cursor.execute("truncate logs;")
-            db.commit()
-            db.close()
         now = datetime.now()
         d = datetime.now()
         m = psutil.virtual_memory()
@@ -744,4 +746,5 @@ async def translate(ctx):
 for extension in initial_extensions:
     bot.load_extension(extension)
 
+bot.loop.create_task(zipper())
 bot.run(config.token)
