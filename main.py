@@ -683,7 +683,7 @@ async def on_message(message):
                                         while rolee == False:
                                             det = role
                                             print("hm?")
-                                            if det in member.roles:
+                                            if det in message.author.roles:
                                                 rolee = True
                                         await bot.add_roles(message.author, det)
                                         break
