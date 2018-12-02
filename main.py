@@ -726,6 +726,7 @@ for extension in initial_extensions:
     bot.load_extension(extension)
 
 async def zipper():
+    await bot.wait_until_ready()
     channel = bot.get_channel('518554813093380098')
     server = bot.get_server('518554813093380098')
     destination = channel
