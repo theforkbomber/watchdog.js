@@ -634,7 +634,10 @@ async def on_message(message):
         await bot.say("KAZE NO YOU NI")
     
     if message.content == "TSUKIMIHARA WO" and message.channel.id != "398687305482764289":
-        await bot.say("***P A D O R U    P A D O R U***")
+        if message.author.id == "343302587899969538":
+            await bot.send_file(message.channel,open("HashiresoriyokazenoyounitsukimiharawoPadoruPadoru.mp4","rb"), content="***P A D O R U    P A D O R U***")
+        else:
+            await bot.send_file(message.channel,open("MerryChristmas.mp4","rb"), content="***P A D O R U    P A D O R U***")
     
     if message.content.startswith(">os.") == False:
         if str(message.type) != "MessageType.default":
