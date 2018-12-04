@@ -631,9 +631,11 @@ async def on_message(message):
     
     # else:
     if message.content == "HASHIRE SORI YO" and message.channel.id != "398687305482764289":
-        await bot.say("KAZE NO YOU NI")
+        await bot.wait_until_ready()
+        await bot.send_message(message.channel, "KAZE NO YOU NI")
     
     if message.content == "TSUKIMIHARA WO" and message.channel.id != "398687305482764289":
+        await bot.wait_until_ready()
         if message.author.id == "343302587899969538":
             await bot.send_file(message.channel,open("HashiresoriyokazenoyounitsukimiharawoPadoruPadoru.mp4","rb"), content="***P A D O R U    P A D O R U***")
         else:
