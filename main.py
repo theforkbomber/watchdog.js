@@ -630,10 +630,10 @@ async def on_message(message):
     # try:
     
     # else:
-    if message.content == "HASHIRE SORI YO":
+    if message.content == "HASHIRE SORI YO" and message.channel.id != "398687305482764289":
         await bot.say("KAZE NO YOU NI")
     
-    if message.content == "TSUKIMIHARA WO":
+    if message.content == "TSUKIMIHARA WO" and message.channel.id != "398687305482764289":
         await bot.say("***P A D O R U    P A D O R U***")
     
     if message.content.startswith(">os.") == False:
