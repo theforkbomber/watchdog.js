@@ -630,6 +630,11 @@ async def on_message(message):
     # try:
     
     # else:
+    if message.content == "HASHIRE SORI YO":
+        await bot.say("KAZE NO YOU NI")
+    
+    if message.content == "TSUKIMIHARA WO":
+        await bot.say("***P A D O R U    P A D O R U***")
     
     if message.content.startswith(">os.") == False:
         if str(message.type) != "MessageType.default":
