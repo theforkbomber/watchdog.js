@@ -197,120 +197,120 @@ async def on_command_error(error, ctx):
         await bot.send_message(ctx.message.channel, content=str(my_time)+' left on the cooldown.')
     raise error  # re-raise the error so all the errors will still show up in console
 
-# @bot.event
-# async def on_message_edit(before, after):
-#     if before.channel.type == "private":
-#         return
-#     else:
-#         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-#         cursor = db.cursor()
-#         # cursor.execute('''DROP TABLE edited''')
-#         # db.commit()
-#         # cursor.execute('''CREATE TABLE edited(id SERIAL PRIMARY KEY, channel TEXT, messagebefore TEXT, messageafter TEXT, timestamp TIME, author TEXT)''')
-#         # db.commit()
-#         aftermsg = after.content
-#         if len(after.attachments) > 0:
-#             try:
-#                 aftermsg = aftermsg+"\n"+after.attachments[0]["proxy_url"]
-#             except:
-#                 pass
-#         if len(after.embeds) > 0:
-#             try:
-#                 aftermsg = aftermsg+"\n"+after.embeds[0]["author"]["name"]
-#             except:
-#                 pass
-#             try:
-#                 aftermsg = aftermsg +"\n"+after.embeds[0]["description"]
-#             except:
-#                 pass
-#             try:
-#                 aftermsg = aftermsg +"\n"+after.embeds[0]["footer"]["text"]
-#             except:
-#                 pass
-#         beforemsg = before.content
-#         if len(before.attachments) > 0:
-#             try:
-#                 beforemsg = beforemsg +"\n"+before.attachments[0]["proxy_url"]
-#             except:
-#                 pass
-#         if len(before.embeds) > 0:
-#             try:
-#                 beforemsg = beforemsg+"\n"+before.embeds[0]["author"]["name"]
-#             except:
-#                 pass
-#             try:
-#                 beforemsg = beforemsg +"\n"+before.embeds[0]["description"]
-#             except:
-#                 pass
-#             try:
-#                 beforemsg = beforemsg +"\n"+before.embeds[0]["footer"]["text"]
-#             except:
-#                 pass
-#         ts = str(after.timestamp)
-#         ch = str(after.channel.id)
-#         author = after.author.id
-#         server = after.server
-#         mem = server.get_member(author)
-#         if mem == bot.user:
-#             db.close()
-#             return
-#         else:
-#             cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
-#             r = cursor.fetchone()
-#             r = r[0]
-#             todisplay = r+"\n(EDITED)"+str(ts)+" UTC"+"\n"+aftermsg
-#             cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(before.id)))
-#             cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
-#             cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
-#             db.commit()
-#             db.close()
-#         db.close()
+@bot.event
+async def on_message_edit(before, after):
+    if before.channel.type == "private":
+        return
+    else:
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        # cursor.execute('''DROP TABLE edited''')
+        # db.commit()
+        # cursor.execute('''CREATE TABLE edited(id SERIAL PRIMARY KEY, channel TEXT, messagebefore TEXT, messageafter TEXT, timestamp TIME, author TEXT)''')
+        # db.commit()
+        aftermsg = after.content
+        if len(after.attachments) > 0:
+            try:
+                aftermsg = aftermsg+"\n"+after.attachments[0]["proxy_url"]
+            except:
+                pass
+        if len(after.embeds) > 0:
+            try:
+                aftermsg = aftermsg+"\n"+after.embeds[0]["author"]["name"]
+            except:
+                pass
+            try:
+                aftermsg = aftermsg +"\n"+after.embeds[0]["description"]
+            except:
+                pass
+            try:
+                aftermsg = aftermsg +"\n"+after.embeds[0]["footer"]["text"]
+            except:
+                pass
+        beforemsg = before.content
+        if len(before.attachments) > 0:
+            try:
+                beforemsg = beforemsg +"\n"+before.attachments[0]["proxy_url"]
+            except:
+                pass
+        if len(before.embeds) > 0:
+            try:
+                beforemsg = beforemsg+"\n"+before.embeds[0]["author"]["name"]
+            except:
+                pass
+            try:
+                beforemsg = beforemsg +"\n"+before.embeds[0]["description"]
+            except:
+                pass
+            try:
+                beforemsg = beforemsg +"\n"+before.embeds[0]["footer"]["text"]
+            except:
+                pass
+        ts = str(after.timestamp)
+        ch = str(after.channel.id)
+        author = after.author.id
+        server = after.server
+        mem = server.get_member(author)
+        if mem == bot.user:
+            db.close()
+            return
+        else:
+            cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
+            r = cursor.fetchone()
+            r = r[0]
+            todisplay = r+"\n(EDITED)"+str(ts)+" UTC"+"\n"+aftermsg
+            cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(before.id)))
+            cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
+            cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
+            db.commit()
+            db.close()
+        db.close()
 
-# @bot.event
-# async def on_message_delete(message):
-#     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-#     cursor = db.cursor()
+@bot.event
+async def on_message_delete(message):
+    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+    cursor = db.cursor()
     
-#     # cursor.execute('''DROP TABLE deleted''')
-#     # db.commit()
-#     # cursor.execute('''CREATE TABLE deleted(id SERIAL PRIMARY KEY, channel TEXT, message TEXT, timestamp TIME, author TEXT)''')
-#     # db.commit()
-#     msg = message.content
-#     if len(message.attachments) > 0:
-#         try:
-#             msg = message.attachments[0]["proxy_url"]
-#         except:
-#             pass
-#     try:
-#         msg = message.embeds[0]["author"]["name"]
-#     except:
-#         pass
-#     try:
-#         msg = msg +"\n"+message.embeds[0]["description"]
-#     except:
-#         pass
-#     try:
-#         msg = msg +"\n"+message.embeds[0]["footer"]["text"]
-#     except:
-#         pass
-#     ts = message.timestamp
-#     ch = str(message.channel.id)
-#     author = message.author.id
-#     if message.edited_timestamp != None:
-#         cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
-#         r = cursor.fetchone()
-#         r = r[0]
-#         todisplay = r+"(DELETED)"+str(ts)+" UTC"+"\n"
-#         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
-#         db.close()
-#         return
-#     elif message.edited_timestamp == None:
-#         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
-#         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
-#     cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
-#     cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
-#     db.commit()
-#     db.close()
+    # cursor.execute('''DROP TABLE deleted''')
+    # db.commit()
+    # cursor.execute('''CREATE TABLE deleted(id SERIAL PRIMARY KEY, channel TEXT, message TEXT, timestamp TIME, author TEXT)''')
+    # db.commit()
+    msg = message.content
+    if len(message.attachments) > 0:
+        try:
+            msg = message.attachments[0]["proxy_url"]
+        except:
+            pass
+    try:
+        msg = message.embeds[0]["author"]["name"]
+    except:
+        pass
+    try:
+        msg = msg +"\n"+message.embeds[0]["description"]
+    except:
+        pass
+    try:
+        msg = msg +"\n"+message.embeds[0]["footer"]["text"]
+    except:
+        pass
+    ts = message.timestamp
+    ch = str(message.channel.id)
+    author = message.author.id
+    if message.edited_timestamp != None:
+        cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
+        r = cursor.fetchone()
+        r = r[0]
+        todisplay = r+"(DELETED)"+str(ts)+" UTC"+"\n"
+        cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
+        db.close()
+        return
+    elif message.edited_timestamp == None:
+        todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
+        cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
+    cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
+    cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
+    db.commit()
+    db.close()
 
 @bot.event
 async def on_server_join(server):
@@ -588,7 +588,7 @@ async def on_message(message):
             msg = msg +"\n"+message.embeds[0]["footer"]["text"]
         except:
             pass
-    cursor.execute("INSERT INTO logs (todisplay, id, details, time, channel)VALUES(%s,%s,%s,%s) RETURNING id;", (str(msg), str(message.id), str(details), message.timestamp, str(message.channel.id)))
+    cursor.execute("INSERT INTO logs (todisplay, id, details, time, channel)VALUES(%s,%s,%s,%s,%s) RETURNING id;", (str(msg), str(message.id), str(details), message.timestamp, str(message.channel.id)))
     db.commit()
     db.close()
     if message.author.bot == True:
