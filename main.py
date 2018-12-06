@@ -797,5 +797,5 @@ for extension in initial_extensions:
 #     db.close()
 #     await asyncio.sleep(60*60*24)
 
-bot.loop.create_task(zipper())
+# bot.loop.create_task(zipper())
 bot.run(config.token)
