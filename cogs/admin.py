@@ -44,7 +44,7 @@ class Admin():
         destination = ctx.message.author
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
-        cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"';")
+        cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"' ORDER BY time;")
         c = cursor.fetchall()
         path = ctx.message.server.name+"/"
         if not os.path.exists(path):

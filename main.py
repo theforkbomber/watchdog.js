@@ -199,69 +199,72 @@ async def on_command_error(error, ctx):
 
 @bot.event
 async def on_message_edit(before, after):
-    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-    cursor = db.cursor()
-    # cursor.execute('''DROP TABLE edited''')
-    # db.commit()
-    # cursor.execute('''CREATE TABLE edited(id SERIAL PRIMARY KEY, channel TEXT, messagebefore TEXT, messageafter TEXT, timestamp TIME, author TEXT)''')
-    # db.commit()
-    aftermsg = after.content
-    if len(after.attachments) > 0:
-        try:
-            aftermsg = aftermsg+"\n"+after.attachments[0]["proxy_url"]
-        except:
-            pass
-    if len(after.embeds) > 0:
-        try:
-            aftermsg = aftermsg+"\n"+after.embeds[0]["author"]["name"]
-        except:
-            pass
-        try:
-            aftermsg = aftermsg +"\n"+after.embeds[0]["description"]
-        except:
-            pass
-        try:
-            aftermsg = aftermsg +"\n"+after.embeds[0]["footer"]["text"]
-        except:
-            pass
-    beforemsg = before.content
-    if len(before.attachments) > 0:
-        try:
-            beforemsg = beforemsg +"\n"+before.attachments[0]["proxy_url"]
-        except:
-            pass
-    if len(before.embeds) > 0:
-        try:
-            beforemsg = beforemsg+"\n"+before.embeds[0]["author"]["name"]
-        except:
-            pass
-        try:
-            beforemsg = beforemsg +"\n"+before.embeds[0]["description"]
-        except:
-            pass
-        try:
-            beforemsg = beforemsg +"\n"+before.embeds[0]["footer"]["text"]
-        except:
-            pass
-    ts = str(after.timestamp)
-    ch = str(after.channel.id)
-    author = after.author.id
-    server = after.server
-    mem = server.get_member(author)
-    if mem == bot.user:
-        db.close()
+    if before.channel.type == "private":
         return
     else:
-        cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
-        r = cursor.fetchone()
-        r = r[0]
-        todisplay = r+"\n(EDITED)"+str(ts)+" UTC"+"\n"+aftermsg
-        cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(before.id)))
-        cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
-        cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
-        db.commit()
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        # cursor.execute('''DROP TABLE edited''')
+        # db.commit()
+        # cursor.execute('''CREATE TABLE edited(id SERIAL PRIMARY KEY, channel TEXT, messagebefore TEXT, messageafter TEXT, timestamp TIME, author TEXT)''')
+        # db.commit()
+        aftermsg = after.content
+        if len(after.attachments) > 0:
+            try:
+                aftermsg = aftermsg+"\n"+after.attachments[0]["proxy_url"]
+            except:
+                pass
+        if len(after.embeds) > 0:
+            try:
+                aftermsg = aftermsg+"\n"+after.embeds[0]["author"]["name"]
+            except:
+                pass
+            try:
+                aftermsg = aftermsg +"\n"+after.embeds[0]["description"]
+            except:
+                pass
+            try:
+                aftermsg = aftermsg +"\n"+after.embeds[0]["footer"]["text"]
+            except:
+                pass
+        beforemsg = before.content
+        if len(before.attachments) > 0:
+            try:
+                beforemsg = beforemsg +"\n"+before.attachments[0]["proxy_url"]
+            except:
+                pass
+        if len(before.embeds) > 0:
+            try:
+                beforemsg = beforemsg+"\n"+before.embeds[0]["author"]["name"]
+            except:
+                pass
+            try:
+                beforemsg = beforemsg +"\n"+before.embeds[0]["description"]
+            except:
+                pass
+            try:
+                beforemsg = beforemsg +"\n"+before.embeds[0]["footer"]["text"]
+            except:
+                pass
+        ts = str(after.timestamp)
+        ch = str(after.channel.id)
+        author = after.author.id
+        server = after.server
+        mem = server.get_member(author)
+        if mem == bot.user:
+            db.close()
+            return
+        else:
+            cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
+            r = cursor.fetchone()
+            r = r[0]
+            todisplay = r+"\n(EDITED)"+str(ts)+" UTC"+"\n"+aftermsg
+            cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(before.id)))
+            cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
+            cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
+            db.commit()
+            db.close()
         db.close()
-    db.close()
 
 @bot.event
 async def on_message_delete(message):
@@ -507,54 +510,55 @@ async def on_member_join(member):
 @bot.event
 async def on_member_update(before, after):
     server = after.server
-    roles = ""
-    try:
-        def nicknamecheck(a):
-            names = ["Monika", "Natsuki", "Yuri", "Dan", "Misao", "Sayori"]
-            for x in range(0,len(names)):
-                if a == names[x]:
-                    nick = names[x]
-                    return nick
-        if after.nick == None:
-            name = after.name
-        else:
-            name = after.nick
-        nickcheck = nicknamecheck(name)
-        if nickcheck != None and after.id != '` 1`':
-            await bot.change_nickname(after, "Not"+nickcheck)
-        for role in after.roles:
-            roles = roles + str(role.name)+"|"
-        if after.roles == before.roles:
+    if server.id == "369252350927306752":
+        roles = ""
+        try:
+            def nicknamecheck(a):
+                names = ["Monika", "Natsuki", "Yuri", "Dan", "Misao", "Sayori"]
+                for x in range(0,len(names)):
+                    if a == names[x]:
+                        nick = names[x]
+                        return nick
+            if after.nick == None:
+                name = after.name
+            else:
+                name = after.nick
+            nickcheck = nicknamecheck(name)
+            if nickcheck != None and after.id != '` 1`':
+                await bot.change_nickname(after, "Not"+nickcheck)
+            for role in after.roles:
+                roles = roles + str(role.name)+"|"
+            if after.roles == before.roles:
+                pass
+            else:
+                for role in server.roles:
+                    if role.name == "Detention":
+                        det = role
+                        status = "FALSE"
+                        for role in after.roles:
+                            if role == det:
+                                status = "TRUE"
+                                username = str(after.id)
+                                db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+                                cursor = db.cursor()
+                                cursor.execute('''DELETE FROM detention WHERE username ='%s';'''% str(username),)
+                                cursor.execute('''INSERT INTO detention(status, username)VALUES(%s,%s) RETURNING id;''', (status, username))
+                                db.commit()
+                                db.close()
+                                break
+                                
+                if status == "FALSE":
+                    username = str(after.id)
+                    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+                    cursor = db.cursor()
+                    cursor.execute('''DELETE FROM detention WHERE username = '%s';'''% str(username),)
+                    cursor.execute('''DELETE FROM roles WHERE username = '%s';'''% str(username),)
+                    cursor.execute('''INSERT INTO detention(status, username)VALUES(%s,%s) RETURNING id;''', (status, username))
+                    cursor.execute('''INSERT INTO roles(username, roles)VALUES(%s,%s) RETURNING id;''', (username, roles))
+                    db.commit()
+                    db.close()
+        except:
             pass
-        else:
-            for role in server.roles:
-                if role.name == "Detention":
-                    det = role
-                    status = "FALSE"
-                    for role in after.roles:
-                        if role == det:
-                            status = "TRUE"
-                            username = str(after.id)
-                            db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-                            cursor = db.cursor()
-                            cursor.execute('''DELETE FROM detention WHERE username ='%s';'''% str(username),)
-                            cursor.execute('''INSERT INTO detention(status, username)VALUES(%s,%s) RETURNING id;''', (status, username))
-                            db.commit()
-                            db.close()
-                            break
-                            
-            if status == "FALSE":
-                username = str(after.id)
-                db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-                cursor = db.cursor()
-                cursor.execute('''DELETE FROM detention WHERE username = '%s';'''% str(username),)
-                cursor.execute('''DELETE FROM roles WHERE username = '%s';'''% str(username),)
-                cursor.execute('''INSERT INTO detention(status, username)VALUES(%s,%s) RETURNING id;''', (status, username))
-                cursor.execute('''INSERT INTO roles(username, roles)VALUES(%s,%s) RETURNING id;''', (username, roles))
-                db.commit()
-                db.close()
-    except:
-        pass
                     
             
 
@@ -584,7 +588,7 @@ async def on_message(message):
             msg = msg +"\n"+message.embeds[0]["footer"]["text"]
         except:
             pass
-    cursor.execute("INSERT INTO logs (todisplay, id, details, channel)VALUES(%s,%s,%s,%s) RETURNING id;", (str(msg), str(message.id), str(details), str(message.channel.id)))
+    cursor.execute("INSERT INTO logs (todisplay, id, details, time, channel)VALUES(%s,%s,%s,%s) RETURNING id;", (str(msg), str(message.id), str(details), message.timestamp, str(message.channel.id)))
     db.commit()
     db.close()
     if message.author.bot == True:
