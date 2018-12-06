@@ -197,120 +197,120 @@ async def on_command_error(error, ctx):
         await bot.send_message(ctx.message.channel, content=str(my_time)+' left on the cooldown.')
     raise error  # re-raise the error so all the errors will still show up in console
 
-@bot.event
-async def on_message_edit(before, after):
-    if before.channel.type == "private":
-        return
-    else:
-        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-        cursor = db.cursor()
-        # cursor.execute('''DROP TABLE edited''')
-        # db.commit()
-        # cursor.execute('''CREATE TABLE edited(id SERIAL PRIMARY KEY, channel TEXT, messagebefore TEXT, messageafter TEXT, timestamp TIME, author TEXT)''')
-        # db.commit()
-        aftermsg = after.content
-        if len(after.attachments) > 0:
-            try:
-                aftermsg = aftermsg+"\n"+after.attachments[0]["proxy_url"]
-            except:
-                pass
-        if len(after.embeds) > 0:
-            try:
-                aftermsg = aftermsg+"\n"+after.embeds[0]["author"]["name"]
-            except:
-                pass
-            try:
-                aftermsg = aftermsg +"\n"+after.embeds[0]["description"]
-            except:
-                pass
-            try:
-                aftermsg = aftermsg +"\n"+after.embeds[0]["footer"]["text"]
-            except:
-                pass
-        beforemsg = before.content
-        if len(before.attachments) > 0:
-            try:
-                beforemsg = beforemsg +"\n"+before.attachments[0]["proxy_url"]
-            except:
-                pass
-        if len(before.embeds) > 0:
-            try:
-                beforemsg = beforemsg+"\n"+before.embeds[0]["author"]["name"]
-            except:
-                pass
-            try:
-                beforemsg = beforemsg +"\n"+before.embeds[0]["description"]
-            except:
-                pass
-            try:
-                beforemsg = beforemsg +"\n"+before.embeds[0]["footer"]["text"]
-            except:
-                pass
-        ts = str(after.timestamp)
-        ch = str(after.channel.id)
-        author = after.author.id
-        server = after.server
-        mem = server.get_member(author)
-        if mem == bot.user:
-            db.close()
-            return
-        else:
-            cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
-            r = cursor.fetchone()
-            r = r[0]
-            todisplay = r+"\n(EDITED)"+str(ts)+" UTC"+"\n"+aftermsg
-            cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(before.id)))
-            cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
-            cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
-            db.commit()
-            db.close()
-        db.close()
+# @bot.event
+# async def on_message_edit(before, after):
+#     if before.channel.type == "private":
+#         return
+#     else:
+#         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+#         cursor = db.cursor()
+#         # cursor.execute('''DROP TABLE edited''')
+#         # db.commit()
+#         # cursor.execute('''CREATE TABLE edited(id SERIAL PRIMARY KEY, channel TEXT, messagebefore TEXT, messageafter TEXT, timestamp TIME, author TEXT)''')
+#         # db.commit()
+#         aftermsg = after.content
+#         if len(after.attachments) > 0:
+#             try:
+#                 aftermsg = aftermsg+"\n"+after.attachments[0]["proxy_url"]
+#             except:
+#                 pass
+#         if len(after.embeds) > 0:
+#             try:
+#                 aftermsg = aftermsg+"\n"+after.embeds[0]["author"]["name"]
+#             except:
+#                 pass
+#             try:
+#                 aftermsg = aftermsg +"\n"+after.embeds[0]["description"]
+#             except:
+#                 pass
+#             try:
+#                 aftermsg = aftermsg +"\n"+after.embeds[0]["footer"]["text"]
+#             except:
+#                 pass
+#         beforemsg = before.content
+#         if len(before.attachments) > 0:
+#             try:
+#                 beforemsg = beforemsg +"\n"+before.attachments[0]["proxy_url"]
+#             except:
+#                 pass
+#         if len(before.embeds) > 0:
+#             try:
+#                 beforemsg = beforemsg+"\n"+before.embeds[0]["author"]["name"]
+#             except:
+#                 pass
+#             try:
+#                 beforemsg = beforemsg +"\n"+before.embeds[0]["description"]
+#             except:
+#                 pass
+#             try:
+#                 beforemsg = beforemsg +"\n"+before.embeds[0]["footer"]["text"]
+#             except:
+#                 pass
+#         ts = str(after.timestamp)
+#         ch = str(after.channel.id)
+#         author = after.author.id
+#         server = after.server
+#         mem = server.get_member(author)
+#         if mem == bot.user:
+#             db.close()
+#             return
+#         else:
+#             cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(before.id))
+#             r = cursor.fetchone()
+#             r = r[0]
+#             todisplay = r+"\n(EDITED)"+str(ts)+" UTC"+"\n"+aftermsg
+#             cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(before.id)))
+#             cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
+#             cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
+#             db.commit()
+#             db.close()
+#         db.close()
 
-@bot.event
-async def on_message_delete(message):
-    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-    cursor = db.cursor()
+# @bot.event
+# async def on_message_delete(message):
+#     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+#     cursor = db.cursor()
     
-    # cursor.execute('''DROP TABLE deleted''')
-    # db.commit()
-    # cursor.execute('''CREATE TABLE deleted(id SERIAL PRIMARY KEY, channel TEXT, message TEXT, timestamp TIME, author TEXT)''')
-    # db.commit()
-    msg = message.content
-    if len(message.attachments) > 0:
-        try:
-            msg = message.attachments[0]["proxy_url"]
-        except:
-            pass
-    try:
-        msg = message.embeds[0]["author"]["name"]
-    except:
-        pass
-    try:
-        msg = msg +"\n"+message.embeds[0]["description"]
-    except:
-        pass
-    try:
-        msg = msg +"\n"+message.embeds[0]["footer"]["text"]
-    except:
-        pass
-    ts = message.timestamp
-    ch = str(message.channel.id)
-    author = message.author.id
-    if message.edited_timestamp != None:
-        cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
-        r = cursor.fetchone()
-        r = r[0]
-        todisplay = r+"(DELETED)"+str(ts)+" UTC"+"\n"
-        cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
-        db.close()
-        return
-    elif message.edited_timestamp == None:
-        todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
-        cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
-    cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
-    cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
-    db.commit()
-    db.close()
+#     # cursor.execute('''DROP TABLE deleted''')
+#     # db.commit()
+#     # cursor.execute('''CREATE TABLE deleted(id SERIAL PRIMARY KEY, channel TEXT, message TEXT, timestamp TIME, author TEXT)''')
+#     # db.commit()
+#     msg = message.content
+#     if len(message.attachments) > 0:
+#         try:
+#             msg = message.attachments[0]["proxy_url"]
+#         except:
+#             pass
+#     try:
+#         msg = message.embeds[0]["author"]["name"]
+#     except:
+#         pass
+#     try:
+#         msg = msg +"\n"+message.embeds[0]["description"]
+#     except:
+#         pass
+#     try:
+#         msg = msg +"\n"+message.embeds[0]["footer"]["text"]
+#     except:
+#         pass
+#     ts = message.timestamp
+#     ch = str(message.channel.id)
+#     author = message.author.id
+#     if message.edited_timestamp != None:
+#         cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
+#         r = cursor.fetchone()
+#         r = r[0]
+#         todisplay = r+"(DELETED)"+str(ts)+" UTC"+"\n"
+#         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
+#         db.close()
+#         return
+#     elif message.edited_timestamp == None:
+#         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
+#         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
+#     cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
+#     cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
+#     db.commit()
+#     db.close()
 
 @bot.event
 async def on_server_join(server):
@@ -751,51 +751,54 @@ for extension in initial_extensions:
     bot.load_extension(extension)
 
 async def zipper():
-    await bot.wait_until_ready()
-    channel = bot.get_channel('518554813093380098')
-    server = bot.get_server('369252350927306752')
-    destination = channel
-    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-    cursor = db.cursor()
-    for x in server.channels:
-        if str(x.type) == "text":
-            try:
-                cursor.execute("SELECT * FROM logs WHERE channel = '"+str(x.id)+"' ORDER BY time;")
-                c = cursor.fetchall()
-                path = "Just Monika (And Friends) #DAENATAKEOVER/"
-                if not os.path.exists(path):
-                    os.makedirs(path)
+    try:
+        await bot.wait_until_ready()
+        channel = bot.get_channel('518554813093380098')
+        server = bot.get_server('369252350927306752')
+        destination = channel
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        for x in server.channels:
+            if str(x.type) == "text":
                 try:
-                    os.remove("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt")
-                except:
-                    pass
-                txt = open("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt","at")
-                for x in c:
-                    todisplay = x[1]
-                    details = x[3]
-                    txt.write(details+"\n"+todisplay+"\n\n")
-                txt.close()
-            except Exception as e:
-                print(e)
-    await bot.wait_until_ready()
-    def zipdir(path, ziph):
-        # ziph is zipfile handle
-        for root, dirs, files in os.walk(path):
-            for file in files:
-                ziph.write(os.path.join(root, file))
-    b = io.BytesIO()
-    zipf = zipfile.ZipFile(b, mode="w")
-    zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
-    zipf.close()
-    b.seek(0)
-    await bot.send_file(channel, fp=b, filename=str(datetime.now().day)+"/"+str(datetime.now().month)+"/"+str(datetime.now().year)+"JMAFLogs.zip")
-    shutil.rmtree("Just Monika (And Friends) #DAENATAKEOVER/")
-    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-    cursor = db.cursor()
-    cursor.execute("truncate logs;")
-    db.commit()
-    db.close()
-    await asyncio.sleep(60*60*24)
+                    cursor.execute("SELECT * FROM logs WHERE channel = '"+str(x.id)+"' ORDER BY time;")
+                    c = cursor.fetchall()
+                    path = "Just Monika (And Friends) #DAENATAKEOVER/"
+                    if not os.path.exists(path):
+                        os.makedirs(path)
+                    try:
+                        os.remove("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt")
+                    except:
+                        pass
+                    txt = open("Just Monika (And Friends) #DAENATAKEOVER/"+x.name+".txt","at")
+                    for x in c:
+                        todisplay = x[1]
+                        details = x[3]
+                        txt.write(details+"\n"+todisplay+"\n\n")
+                    txt.close()
+                except Exception as e:
+                    print(e)
+        await bot.wait_until_ready()
+        def zipdir(path, ziph):
+            # ziph is zipfile handle
+            for root, dirs, files in os.walk(path):
+                for file in files:
+                    ziph.write(os.path.join(root, file))
+        b = io.BytesIO()
+        zipf = zipfile.ZipFile(b, mode="w")
+        zipdir('Just Monika (And Friends) #DAENATAKEOVER/', zipf)
+        zipf.close()
+        b.seek(0)
+        await bot.send_file(channel, fp=b, filename=str(datetime.now().day)+"/"+str(datetime.now().month)+"/"+str(datetime.now().year)+"JMAFLogs.zip")
+        shutil.rmtree("Just Monika (And Friends) #DAENATAKEOVER/")
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        cursor.execute("truncate logs;")
+        db.commit()
+        db.close()
+        await asyncio.sleep(60*60*24)
+    except:
+        print("lolno")
 
 bot.loop.create_task(zipper())
 bot.run(config.token)
