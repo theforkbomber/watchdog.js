@@ -800,5 +800,5 @@ async def zipper():
     except:
         print("lolno")
 
-bot.run(config.token)
 bot.loop.create_task(zipper())
+bot.run(config.token)
