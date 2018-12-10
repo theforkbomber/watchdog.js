@@ -199,7 +199,7 @@ async def on_command_error(error, ctx):
 
 @bot.event
 async def on_message_edit(before, after):
-    if before.channel.type == "private":
+    if str(before.channel.type) == "private":
         return
     else:
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
