@@ -801,9 +801,5 @@ async def zipper():
         print("lolno")
         
 bot.loop.create_task(zipper())
-while True:
-	try:
-		bot.loop.run_until_complete(bot.start(config.token))
-	except BaseException:
-		time.sleep(5)
+bot.run(config.token)
 
