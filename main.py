@@ -510,55 +510,54 @@ async def on_member_join(member):
 @bot.event
 async def on_member_update(before, after):
     server = after.server
-    if server.id == "369252350927306752":
-        roles = ""
-        try:
-            def nicknamecheck(a):
-                names = ["Monika", "Natsuki", "Yuri", "Dan", "Misao", "Sayori"]
-                for x in range(0,len(names)):
-                    if a == names[x]:
-                        nick = names[x]
-                        return nick
-            if after.nick == None:
-                name = after.name
-            else:
-                name = after.nick
-            nickcheck = nicknamecheck(name)
-            if nickcheck != None and after.id != '` 1`':
-                await bot.change_nickname(after, "Not"+nickcheck)
-            for role in after.roles:
-                roles = roles + str(role.name)+"|"
-            if after.roles == before.roles:
-                pass
-            else:
-                for role in server.roles:
-                    if role.name == "Detention":
-                        det = role
-                        status = "FALSE"
-                        for role in after.roles:
-                            if role == det:
-                                status = "TRUE"
-                                username = str(after.id)
-                                db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-                                cursor = db.cursor()
-                                cursor.execute('''DELETE FROM detention WHERE username ='%s';'''% str(username),)
-                                cursor.execute('''INSERT INTO detention(status, username)VALUES(%s,%s) RETURNING id;''', (status, username))
-                                db.commit()
-                                db.close()
-                                break
-                                
-                if status == "FALSE":
-                    username = str(after.id)
-                    db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-                    cursor = db.cursor()
-                    cursor.execute('''DELETE FROM detention WHERE username = '%s';'''% str(username),)
-                    cursor.execute('''DELETE FROM roles WHERE username = '%s';'''% str(username),)
-                    cursor.execute('''INSERT INTO detention(status, username)VALUES(%s,%s) RETURNING id;''', (status, username))
-                    cursor.execute('''INSERT INTO roles(username, roles)VALUES(%s,%s) RETURNING id;''', (username, roles))
-                    db.commit()
-                    db.close()
-        except:
+    roles = ""
+    try:
+        def nicknamecheck(a):
+            names = ["Monika", "Natsuki", "Yuri", "Dan", "Misao", "Sayori"]
+            for x in range(0,len(names)):
+                if a == names[x]:
+                    nick = names[x]
+                    return nick
+        if after.nick == None:
+            name = after.name
+        else:
+            name = after.nick
+        nickcheck = nicknamecheck(name)
+        if nickcheck != None and after.id != '` 1`':
+            await bot.change_nickname(after, "Not"+nickcheck)
+        for role in after.roles:
+            roles = roles + str(role.name)+"|"
+        if after.roles == before.roles:
             pass
+        else:
+            for role in server.roles:
+                if role.name == "Detention":
+                    det = role
+                    status = "FALSE"
+                    for role in after.roles:
+                        if role == det:
+                            status = "TRUE"
+                            username = str(after.id)
+                            db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+                            cursor = db.cursor()
+                            cursor.execute('''DELETE FROM detention WHERE username ='%s';'''% str(username),)
+                            cursor.execute('''INSERT INTO detention(status, username)VALUES(%s,%s) RETURNING id;''', (status, username))
+                            db.commit()
+                            db.close()
+                            break
+                            
+            if status == "FALSE":
+                username = str(after.id)
+                db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+                cursor = db.cursor()
+                cursor.execute('''DELETE FROM detention WHERE username = '%s';'''% str(username),)
+                cursor.execute('''DELETE FROM roles WHERE username = '%s';'''% str(username),)
+                cursor.execute('''INSERT INTO detention(status, username)VALUES(%s,%s) RETURNING id;''', (status, username))
+                cursor.execute('''INSERT INTO roles(username, roles)VALUES(%s,%s) RETURNING id;''', (username, roles))
+                db.commit()
+                db.close()
+    except:
+        pass
                     
             
 
