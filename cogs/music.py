@@ -494,7 +494,7 @@ class Music:
                 channel = self.bot.get_channel(channel)
                 voice = await self.bot.join_voice_channel(channel)
             except Exception as e:
-                print("except: "+e)
+                print("except: "+str(e))
                 voice = self.bot.get_voice_client(ctx.message.server)
 
             # If the queue is full, we ain't adding anything to it
