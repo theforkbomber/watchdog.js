@@ -543,7 +543,10 @@ class Music:
         song = re.sub('[<>\[\]]', '', song)
 
         try:
-            _entry, position = await state.songs.add_entry(song, ctx.message.author)
+            if arg == False:
+                _entry, position = await state.songs.add_entry(song, ctx.message.author)
+            else:
+                _entry, position = await state.songs.add_entry(song, "The system")
         except WrongEntryTypeError:
             # This means that a song was attempted to be searched, instead of a link provided
             try:
@@ -561,7 +564,10 @@ class Music:
                 await self.bot.send_message(ctx.message.channel, error)
                 return
             try:
-                _entry, position = await state.songs.add_entry(song, ctx.message.author)
+                if arg == False:
+                    _entry, position = await state.songs.add_entry(song, ctx.message.author)
+                else:
+                    _entry, position = await state.songs.add_entry(song, "The system")
             except WrongEntryTypeError:
                 # This is either a playlist, or something not supported
                 fmt = "Sorry but I couldn't download that! Either you provided a playlist, a streamed link, or " \
