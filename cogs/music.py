@@ -3,7 +3,7 @@ from cogs.voice_utilities.playlist import *
 import discord
 from discord.ext import commands
 from pydub import AudioSegment
-import urllib3
+import urllib
 import math
 import time
 import asyncio
@@ -619,16 +619,16 @@ class Music:
     @commands.command(pass_context=True)
     @commands.check(dokicheck)
     async def playfile(self, ctx, channel):
-        channel = bot.get_channel(channel)
+        channel = self.bot.get_channel(channel)
         if len(ctx.message.attachments) != 0:
-            u = urllib3.urlopen(ctx.message.attachments[0]["url"])
+            u = urllib.urlopen(ctx.message.attachments[0]["url"])
             filename = url.rsplit('/', 1)[1]
             f = open(filename, 'wb')
             try:
-                voice = await bot.join_voice_channel(channel)
+                voice = await self.bot.join_voice_channel(channel)
             except:
                 pass
-            player = await bot.create_ffmpeg_player(filename=f)
+            player = await self.bot.create_ffmpeg_player(filename=f)
             player.start()
 
 
