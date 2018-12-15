@@ -2,8 +2,8 @@ from cogs.voice_utilities import *
 from cogs.voice_utilities.playlist import *
 import discord
 from discord.ext import commands
-#from pydub import AudioSegment
-import requests
+from pydub import AudioSegment
+from urllib.request import Request, urlopen
 import math
 import time
 import asyncio
@@ -622,14 +622,15 @@ class Music:
         channel = self.bot.get_channel(channel)
         if len(ctx.message.attachments) != 0:
             url = ctx.message.attachments[0]["url"]
+            req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            u = urlopen(req)
             filename = url.rsplit('/', 1)[1]
-            r = requests.get(url)
+            f = open(filename, 'wb')
             try:
                 voice = await self.bot.join_voice_channel(channel)
             except:
-                voice = self.bot.voice_client_in(ctx.message.server)
-            print(filename)
-            player = await voice.create_ffmpeg_player(str(filename))
+                voice = self.bot.get_voice_client(ctx.message.server)
+            player = await voice.create_ffmpeg_player(filename=filename)
             player.start()
 
 
