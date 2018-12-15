@@ -2,11 +2,21 @@
 import asyncio
 import discord
 from discord.ext import commands
+import requests
 import random
 class Fun:
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.command(pass_context=True, aliases = ["rolo","shiba"])
+    async def shibe(self, ctx):
+        msg = await self.bot.send_message(ctx.message.channel, 'loading...')
+        e = discord.Embed(colour=0xffffff)
+        url = requests.get("https://dog.ceo/api/breed/shiba/images/random").json()["message"]
+        e.set_image(url=url)
+        e.set_footer(text='doggo requested by %s' % (ctx.message.author), icon_url='')
+        await self.bot.send_message(ctx.message.channel, embed=e, content='')
+        await self.bot.delete_message(msg)
 
     @commands.command(pass_context=True,aliases=["8ball"])
     async def eightball(self,ctx,string):
