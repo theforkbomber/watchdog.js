@@ -3,7 +3,7 @@ from cogs.voice_utilities.playlist import *
 import discord
 from discord.ext import commands
 from pydub import AudioSegment
-import urllib.request
+from urllib.request import Request, urlopen
 import math
 import time
 import asyncio
@@ -622,7 +622,8 @@ class Music:
         channel = self.bot.get_channel(channel)
         if len(ctx.message.attachments) != 0:
             url = ctx.message.attachments[0]["url"]
-            u = urllib.request.urlopen(ctx.message.attachments[0]["url"])
+            req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            u = urlopen(req)
             filename = url.rsplit('/', 1)[1]
             f = open(filename, 'wb')
             try:
