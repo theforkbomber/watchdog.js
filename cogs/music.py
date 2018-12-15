@@ -628,8 +628,7 @@ class Music:
                 voice = await self.bot.join_voice_channel(channel)
             except:
                 pass
-            player = await voice.create_ffmpeg_player(filename=filename)
-            player.start()
+            voice.play(discord.FFmpegPCMAudio(filename))
 
 
     @commands.command(pass_context=True, no_pm=True)
