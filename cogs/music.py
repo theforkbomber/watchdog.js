@@ -630,7 +630,7 @@ class Music:
                 voice = await self.bot.join_voice_channel(channel)
             except:
                 pass
-            player = await voice.create_ffmpeg_player(filename=f)
+            player = await voice.create_ffmpeg_player(filename=filename)
             player.start()
 
 
