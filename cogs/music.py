@@ -627,7 +627,7 @@ class Music:
             try:
                 voice = await self.bot.join_voice_channel(channel)
             except:
-                voice = discord.VoiceClient(self.bot.user)
+                voice = self.bot.voice_client_in(server)
             print(filename)
             player = await voice.create_ffmpeg_player(str(filename))
             player.start()
