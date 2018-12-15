@@ -2,8 +2,8 @@ from cogs.voice_utilities import *
 from cogs.voice_utilities.playlist import *
 import discord
 from discord.ext import commands
-
-
+from pydub import AudioSegment
+import urllib3
 import math
 import time
 import asyncio
@@ -18,6 +18,10 @@ import inspect
 if not discord.opus.is_loaded():
     discord.opus.load_opus('/usr/lib64/libopus.so.0')
 
+ids = ["275312272975462411","459105052653781015","84494950670012416","393562571388616715","397319905835483136","330265678105804801","458764171803099136","207952150918201344"]
+
+def dokicheck(ctx):
+    return ctx.message.author.id in ids
 
 class VoiceState:
     def __init__(self, bot, download):
@@ -611,6 +615,22 @@ class Music:
             del self.voice_states[server.id]
         except:
             pass
+
+    @commands.command(pass_context=True)
+    @commands.check(dokicheck)
+    async def playfile(self, ctx, channel):
+        channel = bot.get_channel(channel)
+        if len(ctx.message.attachments) != 0:
+            u = urllib3.urlopen(ctx.message.attachments[0]["url"])
+            filename = url.rsplit('/', 1)[1]
+            f = open(filename, 'wb')
+            try:
+                voice = await bot.join_voice_channel(channel)
+            except:
+                pass
+            player = await bot.create_ffmpeg_player(filename=f)
+            player.start()
+
 
     @commands.command(pass_context=True, no_pm=True)
     @commands.has_permissions(send_messages=True)
