@@ -480,13 +480,13 @@ class Music:
         if ctx.message.author.id in ids and channel != None:
             arg = True
 
-            """Plays a song.
-            If there is a song currently in the queue, then it is
-            queued until the next song is done playing.
-            This command automatically searches as well from YouTube.
-            The list of supported sites can be found here:
-            https://rg3.github.io/youtube-dl/supportedsites.html
-            """
+        #    """Plays a song.
+         #    If there is a song currently in the queue, then it is
+          #   queued until the next song is done playing.
+           #  This command automatically searches as well from YouTube.
+            # The list of supported sites can be found here:
+             #https://rg3.github.io/youtube-dl/supportedsites.html
+              #"""
             state = self.get_voice_state(ctx.message.server)
 
             # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
@@ -498,13 +498,13 @@ class Music:
             except Exception as e:
                 print("except: "+str(e))
 
-        """Plays a song.
-        If there is a song currently in the queue, then it is
-        queued until the next song is done playing.
-        This command automatically searches as well from YouTube.
-        The list of supported sites can be found here:
-        https://rg3.github.io/youtube-dl/supportedsites.html
-        """
+        #"""Plays a song.
+        #If there is a song currently in the queue, then it is
+        #queued until the next song is done playing.
+        #This command automatically searches as well from YouTube.
+        #The list of supported sites can be found here:
+        #https://rg3.github.io/youtube-dl/supportedsites.html
+        #"""
         state = self.get_voice_state(ctx.message.server)
 
         # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
