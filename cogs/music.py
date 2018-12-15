@@ -492,7 +492,7 @@ class Music:
             try:
                 print("Try")
                 channel = self.bot.get_channel(channel)
-                voice = self.bot.join_voice_channel(channel)
+                voice = await self.bot.join_voice_channel(channel)
             except Exception as e:
                 print("except: "+e)
                 voice = self.bot.get_voice_client(ctx.message.server)
