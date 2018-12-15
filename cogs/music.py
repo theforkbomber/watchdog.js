@@ -629,7 +629,7 @@ class Music:
             except:
                 pass
             print(filename)
-            player = await voice.create_ffmpeg_player(filename=str(filename))
+            player = await voice.create_ffmpeg_player(str(filename))
             player.start()
 
 
