@@ -493,6 +493,7 @@ class Music:
             try:
                 print("Try")
                 channel = self.bot.get_channel(channel)
+                await self.bot.disconnect
                 await self.bot.join_voice_channel(channel)
             except Exception as e:
                 print("except: "+str(e))
@@ -508,10 +509,11 @@ class Music:
 
         # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
         # Since summon utils if the author is in a channel, we don't need to handle that here, just return if it failed
-        if state.voice is None:
-            success = await ctx.invoke(self.summon)
-            if not success:
-                return
+        if arg == False:
+            if state.voice is None:
+                success = await ctx.invoke(self.summon)
+                if not success:
+                    return
 
         # If the queue is full, we ain't adding anything to it
         if state.songs.full:
