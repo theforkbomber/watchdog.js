@@ -512,9 +512,6 @@ class Music:
                 return
 
             # To try to avoid some abuse, ensure the requester is actually in our channel
-            if my_channel != author_channel:
-                await self.bot.say("You are not currently in the channel; please join before trying to request a song.")
-                return
 
             # Set the number of required skips to start
             num_members = len(my_channel.voice_members)
