@@ -490,9 +490,11 @@ class Music:
             # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
             # Since summon utils if the author is in a channel, we don't need to handle that here, just return if it failed
             try:
+                print("Try")
                 channel = self.bot.get_channel(channel)
                 voice = self.bot.join_voice_channel(channel)
-            except:
+            except Exception as e:
+                print("except: "+e)
                 voice = self.bot.get_voice_client(ctx.message.server)
 
             # If the queue is full, we ain't adding anything to it
