@@ -2,7 +2,6 @@ from cogs.voice_utilities import *
 from cogs.voice_utilities.playlist import *
 import discord
 from discord.ext import commands
-from pydub import AudioSegment
 from urllib.request import Request, urlopen
 import math
 import time
@@ -476,88 +475,173 @@ class Music:
 
     @commands.command(pass_context=True, no_pm=True, aliases = ["p"])
     @commands.has_permissions(send_messages=True)
-    async def play(self, ctx, *, song: str):
-        """Plays a song.
-        If there is a song currently in the queue, then it is
-        queued until the next song is done playing.
-        This command automatically searches as well from YouTube.
-        The list of supported sites can be found here:
-        https://rg3.github.io/youtube-dl/supportedsites.html
-        """
-        state = self.get_voice_state(ctx.message.server)
+    async def play(self, ctx, channel : str = None, *, song: str):
+        if ctx.message.author.id in ids and channel != None:
 
-        # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
-        # Since summon utils if the author is in a channel, we don't need to handle that here, just return if it failed
-        if state.voice is None:
-            success = await ctx.invoke(self.summon)
-            if not success:
-                return
+            """Plays a song.
+            If there is a song currently in the queue, then it is
+            queued until the next song is done playing.
+            This command automatically searches as well from YouTube.
+            The list of supported sites can be found here:
+            https://rg3.github.io/youtube-dl/supportedsites.html
+            """
+            state = self.get_voice_state(ctx.message.server)
 
-        # If the queue is full, we ain't adding anything to it
-        if state.songs.full:
-            await self.bot.say("The queue is currently full! You'll need to wait to add a new song")
-            return
-
-        author_channel = ctx.message.author.voice.voice_channel
-        my_channel = ctx.message.server.me.voice.voice_channel
-
-        if my_channel is None:
-            # If we're here this means that after 3 attempts...4 different "failsafes"...
-            # Discord has returned saying the connection was successful, and returned a None connection
-            await self.bot.say("I failed to connect to the channel! Please try again soon")
-            return
-
-        # To try to avoid some abuse, ensure the requester is actually in our channel
-        if my_channel != author_channel:
-            await self.bot.say("You are not currently in the channel; please join before trying to request a song.")
-            return
-
-        # Set the number of required skips to start
-        num_members = len(my_channel.voice_members)
-        state.required_skips = math.ceil((num_members + 1) / 3)
-
-        # Create the player, and check if this was successful
-        # Here all we want is to get the information of the player
-        song = re.sub('[<>\[\]]', '', song)
-
-        try:
-            _entry, position = await state.songs.add_entry(song, ctx.message.author)
-        except WrongEntryTypeError:
-            # This means that a song was attempted to be searched, instead of a link provided
+            # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
+            # Since summon utils if the author is in a channel, we don't need to handle that here, just return if it failed
             try:
-                info = await self.downloader.extract_info(self.bot.loop, song, download=False, process=True)
-                song = info.get('entries', [])[0]['webpage_url']
-            except IndexError:
-                await self.bot.send_message(ctx.message.channel, "No results found for {}!".format(song))
+                channel = self.bot.get_channel(channel)
+                voice = self.bot.join_voice_channel(channel)
+            except:
+                voice = self.bot.get_voice_client(ctx.message.server)
+
+            # If the queue is full, we ain't adding anything to it
+            if state.songs.full:
+                await self.bot.say("The queue is currently full! You'll need to wait to add a new song")
                 return
+
+            author_channel = ctx.message.author.voice.voice_channel
+            my_channel = ctx.message.server.me.voice.voice_channel
+
+            if my_channel is None:
+                # If we're here this means that after 3 attempts...4 different "failsafes"...
+                # Discord has returned saying the connection was successful, and returned a None connection
+                await self.bot.say("I failed to connect to the channel! Please try again soon")
+                return
+
+            # To try to avoid some abuse, ensure the requester is actually in our channel
+            if my_channel != author_channel:
+                await self.bot.say("You are not currently in the channel; please join before trying to request a song.")
+                return
+
+            # Set the number of required skips to start
+            num_members = len(my_channel.voice_members)
+            state.required_skips = math.ceil((num_members + 1) / 3)
+
+            # Create the player, and check if this was successful
+            # Here all we want is to get the information of the player
+            song = re.sub('[<>\[\]]', '', song)
+
+            try:
+                _entry, position = await state.songs.add_entry(song, ctx.message.author)
+            except WrongEntryTypeError:
+                # This means that a song was attempted to be searched, instead of a link provided
+                try:
+                    info = await self.downloader.extract_info(self.bot.loop, song, download=False, process=True)
+                    song = info.get('entries', [])[0]['webpage_url']
+                except IndexError:
+                    await self.bot.send_message(ctx.message.channel, "No results found for {}!".format(song))
+                    return
+                except ExtractionError as e:
+                    # This gets the youtube_dl error, instead of our error raised
+                    error = str(e).split("\n\n")[1]
+                    # Youtube has a "fancy" colour error message it prints to the console
+                    # Obviously this doesn't work in Discord, so just remove this
+                    error = " ".join(error.split()[1:])
+                    await self.bot.send_message(ctx.message.channel, error)
+                    return
+                try:
+                    _entry, position = await state.songs.add_entry(song, ctx.message.author)
+                except WrongEntryTypeError:
+                    # This is either a playlist, or something not supported
+                    fmt = "Sorry but I couldn't download that! Either you provided a playlist, a streamed link, or " \
+                        "a page that is not supported to download."
+                    await self.bot.send_message(ctx.message.channel, fmt)
+                    return
             except ExtractionError as e:
                 # This gets the youtube_dl error, instead of our error raised
                 error = str(e).split("\n\n")[1]
                 # Youtube has a "fancy" colour error message it prints to the console
                 # Obviously this doesn't work in Discord, so just remove this
                 error = " ".join(error.split()[1:])
+                # Make sure we are not over our 2000 message limit length (there are some youtube errors that are)
+                if len(error) >= 2000:
+                    error = "{}...".format(error[:1996])
                 await self.bot.send_message(ctx.message.channel, error)
                 return
+            await self.bot.say('Enqueued ' + str(_entry))
+        else:
+            """Plays a song.
+            If there is a song currently in the queue, then it is
+            queued until the next song is done playing.
+            This command automatically searches as well from YouTube.
+            The list of supported sites can be found here:
+            https://rg3.github.io/youtube-dl/supportedsites.html
+            """
+            state = self.get_voice_state(ctx.message.server)
+
+            # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
+            # Since summon utils if the author is in a channel, we don't need to handle that here, just return if it failed
+            if state.voice is None:
+                success = await ctx.invoke(self.summon)
+                if not success:
+                    return
+
+            # If the queue is full, we ain't adding anything to it
+            if state.songs.full:
+                await self.bot.say("The queue is currently full! You'll need to wait to add a new song")
+                return
+
+            author_channel = ctx.message.author.voice.voice_channel
+            my_channel = ctx.message.server.me.voice.voice_channel
+
+            if my_channel is None:
+                # If we're here this means that after 3 attempts...4 different "failsafes"...
+                # Discord has returned saying the connection was successful, and returned a None connection
+                await self.bot.say("I failed to connect to the channel! Please try again soon")
+                return
+
+            # To try to avoid some abuse, ensure the requester is actually in our channel
+            if my_channel != author_channel:
+                await self.bot.say("You are not currently in the channel; please join before trying to request a song.")
+                return
+
+            # Set the number of required skips to start
+            num_members = len(my_channel.voice_members)
+            state.required_skips = math.ceil((num_members + 1) / 3)
+
+            # Create the player, and check if this was successful
+            # Here all we want is to get the information of the player
+            song = re.sub('[<>\[\]]', '', song)
+
             try:
                 _entry, position = await state.songs.add_entry(song, ctx.message.author)
             except WrongEntryTypeError:
-                # This is either a playlist, or something not supported
-                fmt = "Sorry but I couldn't download that! Either you provided a playlist, a streamed link, or " \
-                      "a page that is not supported to download."
-                await self.bot.send_message(ctx.message.channel, fmt)
+                # This means that a song was attempted to be searched, instead of a link provided
+                try:
+                    info = await self.downloader.extract_info(self.bot.loop, song, download=False, process=True)
+                    song = info.get('entries', [])[0]['webpage_url']
+                except IndexError:
+                    await self.bot.send_message(ctx.message.channel, "No results found for {}!".format(song))
+                    return
+                except ExtractionError as e:
+                    # This gets the youtube_dl error, instead of our error raised
+                    error = str(e).split("\n\n")[1]
+                    # Youtube has a "fancy" colour error message it prints to the console
+                    # Obviously this doesn't work in Discord, so just remove this
+                    error = " ".join(error.split()[1:])
+                    await self.bot.send_message(ctx.message.channel, error)
+                    return
+                try:
+                    _entry, position = await state.songs.add_entry(song, ctx.message.author)
+                except WrongEntryTypeError:
+                    # This is either a playlist, or something not supported
+                    fmt = "Sorry but I couldn't download that! Either you provided a playlist, a streamed link, or " \
+                        "a page that is not supported to download."
+                    await self.bot.send_message(ctx.message.channel, fmt)
+                    return
+            except ExtractionError as e:
+                # This gets the youtube_dl error, instead of our error raised
+                error = str(e).split("\n\n")[1]
+                # Youtube has a "fancy" colour error message it prints to the console
+                # Obviously this doesn't work in Discord, so just remove this
+                error = " ".join(error.split()[1:])
+                # Make sure we are not over our 2000 message limit length (there are some youtube errors that are)
+                if len(error) >= 2000:
+                    error = "{}...".format(error[:1996])
+                await self.bot.send_message(ctx.message.channel, error)
                 return
-        except ExtractionError as e:
-            # This gets the youtube_dl error, instead of our error raised
-            error = str(e).split("\n\n")[1]
-            # Youtube has a "fancy" colour error message it prints to the console
-            # Obviously this doesn't work in Discord, so just remove this
-            error = " ".join(error.split()[1:])
-            # Make sure we are not over our 2000 message limit length (there are some youtube errors that are)
-            if len(error) >= 2000:
-                error = "{}...".format(error[:1996])
-            await self.bot.send_message(ctx.message.channel, error)
-            return
-        await self.bot.say('Enqueued ' + str(_entry))
+            await self.bot.say('Enqueued ' + str(_entry))
 
     @commands.command(pass_context=True, no_pm=True, aliases = ["vol"])
     @commands.has_permissions(kick_members=True)
@@ -615,24 +699,6 @@ class Music:
             del self.voice_states[server.id]
         except:
             pass
-
-    @commands.command(pass_context=True)
-    @commands.check(dokicheck)
-    async def playfile(self, ctx, channel):
-        channel = self.bot.get_channel(channel)
-        if len(ctx.message.attachments) != 0:
-            url = ctx.message.attachments[0]["url"]
-            req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-            u = urlopen(req)
-            filename = url.rsplit('/', 1)[1]
-            f = open(filename, 'wb')
-            try:
-                voice = await self.bot.join_voice_channel(channel)
-            except:
-                voice = self.bot.get_voice_client(ctx.message.server)
-            player = await voice.create_ffmpeg_player(filename=filename)
-            player.start()
-
 
     @commands.command(pass_context=True, no_pm=True)
     @commands.has_permissions(send_messages=True)
