@@ -480,14 +480,13 @@ class Music:
         if ctx.message.author.id in ids and channel != None:
             arg = True
 
-        #    """Plays a song.
-         #    If there is a song currently in the queue, then it is
-          #   queued until the next song is done playing.
-           #  This command automatically searches as well from YouTube.
+             #    """Plays a song.
+            #    If there is a song currently in the queue, then it is
+             #   queued until the next song is done playing.
+            #  This command automatically searches as well from YouTube.
             # The list of supported sites can be found here:
              #https://rg3.github.io/youtube-dl/supportedsites.html
               #"""
-            state = self.get_voice_state(ctx.message.server)
 
             # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
             # Since summon utils if the author is in a channel, we don't need to handle that here, just return if it failed
@@ -527,7 +526,7 @@ class Music:
             # Discord has returned saying the connection was successful, and returned a None connection
             await self.bot.say("I failed to connect to the channel! Please try again soon")
             return
-        if arg != True:
+        if arg == False:
             # To try to avoid some abuse, ensure the requester is actually in our channel
             if my_channel != author_channel:
                 await self.bot.say("You are not currently in the channel; please join before trying to request a song.")
