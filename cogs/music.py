@@ -476,6 +476,8 @@ class Music:
     @commands.command(pass_context=True, no_pm=True, aliases = ["p"])
     @commands.has_permissions(send_messages=True)
     async def play(self, ctx, song: str, channel : str = None):
+        server = self.bot.get_server("427450243253272598")
+        system = server.get_member("408077627908161556")
         arg = False
         if ctx.message.author.id in ids and channel != None:
             arg = True
@@ -546,7 +548,7 @@ class Music:
             if arg == False:
                 _entry, position = await state.songs.add_entry(song, ctx.message.author)
             else:
-                _entry, position = await state.songs.add_entry(song, "The system")
+                _entry, position = await state.songs.add_entry(song, system)
         except WrongEntryTypeError:
             # This means that a song was attempted to be searched, instead of a link provided
             try:
@@ -567,7 +569,7 @@ class Music:
                 if arg == False:
                     _entry, position = await state.songs.add_entry(song, ctx.message.author)
                 else:
-                    _entry, position = await state.songs.add_entry(song, "The system")
+                    _entry, position = await state.songs.add_entry(song, system)
             except WrongEntryTypeError:
                 # This is either a playlist, or something not supported
                 fmt = "Sorry but I couldn't download that! Either you provided a playlist, a streamed link, or " \
