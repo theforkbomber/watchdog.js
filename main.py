@@ -490,8 +490,7 @@ async def on_member_join(member):
                     moni = role
             await asyncio.sleep(2)
             await bot.add_roles(member, moni)
-    else:
-        pass
+
     greetfirst = ["Greetings ","Hello there ","Henlo, ","Hiya and welcome to the server ","Hiya "]
     greets = ["! Please read the rules in <#448470389836742656>! Also please check out the <#396008626017271811> for better introduction to the server!","! Please read the server's rules in <#448470389836742656>! Also, please check out <#396008626017271811> for a better introduction to the server show! Most importantly, however, I hope you'll enjoy your stay here!", ". Make sure to read <#448470389836742656> if you haven’t already to get a sense of the rules here. Most importantly however, enjoy your time on the server! If you have any questions feel free to ask!","! Be sure to read <#448470389836742656> and also read <#396008626017271811> if you’re looking for more information on the show that occurs weekly here. Most importantly, enjoy your time here and if you have any questions feel free to ask!",", and welcome to the server! Make sure to read <#448470389836742656> to get a sense of the rules and read <#396008626017271811> if you’d like to know more about the show and the going ons around here. Most importantly, enjoy your time here and feel free to ask if you have any questions!"]
     server = member.server
@@ -790,8 +789,6 @@ async def zipper():
         b.seek(0)
         await bot.send_file(channel, fp=b, filename=str(datetime.now().day)+"/"+str(datetime.now().month)+"/"+str(datetime.now().year)+"JMAFLogs.zip")
         shutil.rmtree("Just Monika (And Friends) #DAENATAKEOVER/")
-        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-        cursor = db.cursor()
         cursor.execute("truncate logs;")
         db.commit()
         db.close()

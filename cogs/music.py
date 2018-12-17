@@ -477,6 +477,7 @@ class Music:
     @commands.has_permissions(send_messages=True)
     async def play(self, ctx, song: str, channel : str = None):
         server = self.bot.get_server("427450243253272598")
+        serverdos = self.bot.get_server("369252350927306752")
         system = server.get_member("408077627908161556")
         arg = False
         if ctx.message.author.id in ids and channel != None:
@@ -499,6 +500,8 @@ class Music:
                 await self.create_voice_client(channel)
             except Exception as e:
                 print("except: "+str(e))
+            state = self.get_voice_state(serverdos)
+
 
         #"""Plays a song.
         #If there is a song currently in the queue, then it is
@@ -507,7 +510,8 @@ class Music:
         #The list of supported sites can be found here:
         #https://rg3.github.io/youtube-dl/supportedsites.html
         #"""
-        state = self.get_voice_state(ctx.message.server)
+        if arg == False:
+            state = self.get_voice_state(ctx.message.server)
 
         # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
         # Since summon utils if the author is in a channel, we don't need to handle that here, just return if it failed
