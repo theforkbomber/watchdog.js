@@ -635,16 +635,24 @@ async def on_message(message):
             await bot.process_commands(message)
             return
         elif len(test) > 1:
-            ##await bot.wait_until_ready()
-            await bot.say("Command expected 1 argument, received "+str(len(test)))
-            return
+            try:
+                ##await bot.wait_until_ready()
+                print(message.channel)
+                await bot.send_message(message.channel, "Command expected 1 argument, received "+str(len(test)))
+                return
+            except Exception as e:
+                print(e)
         elif test[1] in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
             ##await bot.wait_until_ready()
             await bot.process_commands(message)
             return
         elif test[1] not in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
             ##await bot.wait_until_ready()
-            await bot.say("Unknown or invalid role name, try again.")
+            try:
+                print(message.channel)
+                await bot.send_message(message.channel,"Unknown or invalid role name, try again.")
+            except Exception as e:
+                print(e)
             return
 
 
