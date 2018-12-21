@@ -630,11 +630,12 @@ async def on_message(message):
     if message.content.startswith(">os.roleme "):
         ##await bot.wait_until_ready()
         test = message.content.replace(">os.roleme ","")
+        test = test.split(" ")
         if test[1] in ["Cinnamon bun", "Cinnamon Bun", "cinnamon bun", "cinnamon Bun"]:
             message.content = ">os.roleme sayori"
             await bot.process_commands(message)
             return
-        elif len(test.split(" ")) > 1:
+        elif len(test) > 1:
             try:
                 ##await bot.wait_until_ready()
                 print(message.channel)
