@@ -21,8 +21,10 @@ class Fun:
         post_to_pick = random.randint(1, 100)
         for i in range(0, post_to_pick):
             submission = next(x for x in toebean_submissions if not x.stickied)
-
-        await self.bot.say(submission.url)
+        e = discord.Embed(colour=0xFFC0CB)
+        e.set_image(url=submission.url)
+        e.set_footer(text='Toe beans requested by %s' % (ctx.message.author), icon_url='')
+        await self.bot.send_message(ctx.message.channel, embed=e)
 
 
     @commands.command(pass_context=True, aliases = ["rolo","shiba"])
