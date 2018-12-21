@@ -634,7 +634,7 @@ async def on_message(message):
             message.content = ">os.roleme sayori"
             await bot.process_commands(message)
             return
-        elif len(test) > 1:
+        elif len(test.split(" ")) > 1:
             try:
                 ##await bot.wait_until_ready()
                 print(message.channel)
