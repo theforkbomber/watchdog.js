@@ -563,8 +563,6 @@ async def on_member_update(before, after):
 
 @bot.event
 async def on_message(message):
-    await bot.wait_until_ready()
-
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
     details = "Sent by "+message.author.name+" @"+str(message.timestamp)+"UTC"
@@ -625,22 +623,27 @@ async def on_message(message):
 # You can also type >os.help category for more info on a category.```"""
 #         await bot.send_message(message.channel, arg)
     if message.content.startswith(">os.silly sausage"):
+        await bot.wait_until_ready()
         d = message.content.replace(">os.silly sausage", ">os.detent")
         print(d)
         message.content = d
     if message.content.startswith(">os.roleme "):
+        await bot.wait_until_ready()
         test = message.content.replace(">os.roleme ","")
         if test[1] in ["Cinnamon bun", "Cinnamon Bun", "cinnamon bun", "cinnamon Bun"]:
             message.content = ">os.roleme sayori"
             await bot.process_commands(message)
             return
         if len(test) > 1:
+            await bot.wait_until_ready()
             await bot.say("Command expected 1 argument, received "+str(len(test)))
             return
         elif test[1] in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
+            await bot.wait_until_ready()
             await bot.process_commands(message)
             return
         else:
+            await bot.wait_until_ready()
             await bot.say("Unknown or invalid role name, try again.")
             return
 
