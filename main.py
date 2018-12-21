@@ -627,8 +627,27 @@ async def on_message(message):
         d = message.content.replace(">os.silly sausage", ">os.detent")
         print(d)
         message.content = d
+    if message.content.startswith(">os.roleme "):
+        test = message.content.replace(">os.roleme ","")
+        if test[1] in ["Cinnamon bun", "Cinnamon Bun", "cinnamon bun", "cinnamon Bun"]:
+            message.content = ">os.roleme sayori"
+            await bot.process_commands(message)
+            return
+        if len(test) > 1:
+            await bot.say("Command expected 1 argument, received "+str(len(test)))
+            return
+        elif test[1] in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
+            await bot.process_commands(message)
+            return
+        else:
+            await bot.say("Unknown or invalid role name, try again.")
+            return
+
+
+
     if message.content.startswith(">os."):
         await bot.process_commands(message)
+
     # try:
     
     # else:
