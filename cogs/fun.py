@@ -11,6 +11,7 @@ class Fun:
         self.bot = bot
 
     @commands.command(pass_context=True)
+    @commands.cooldown(10, commands.BucketType.user)
     async def toebeans(self, ctx):
         reddit = praw.Reddit(client_id=config.pid,
         client_secret=config.secret,
