@@ -563,6 +563,7 @@ async def on_member_update(before, after):
 
 @bot.event
 async def on_message(message):
+    await bot.wait_until_ready()
 
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
