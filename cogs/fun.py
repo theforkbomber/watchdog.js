@@ -18,7 +18,7 @@ class Fun:
         username='theforkbomber',
         password=config.reddit)
         toebean_submissions = reddit.subreddit('toebeans').hot()
-        post_to_pick = random.randint(1, 100)
+        post_to_pick = random.randint(1, 10)
         for i in range(0, post_to_pick):
             submission = next(x for x in toebean_submissions if not x.stickied)
 
