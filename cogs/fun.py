@@ -4,9 +4,26 @@ import discord
 from discord.ext import commands
 import requests
 import random
+import config
+import praw
 class Fun:
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.command(pass_context=True)
+    async def toebeans(self, ctx):
+        reddit = praw.Reddit(client_id='PERSONAL_USE_SCRIPT_14_CHARS',
+        client_secret=config.secret,
+        user_agent='watchdog',
+        username='theforkbomber',
+        password=config.reddit)
+        toebean_submissions = reddit.subreddit('toebeans').hot()
+        post_to_pick = random.randint(1, 100)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in toebean_submissions if not x.stickied)
+
+        await self.bot.say(submission.url)
+
 
     @commands.command(pass_context=True, aliases = ["rolo","shiba"])
     async def shibe(self, ctx):
