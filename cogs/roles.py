@@ -20,7 +20,7 @@ class Roles:
     async def monika(self, ctx, *, secondary=None):
         if secondary:
             listed = secondary.split(" ")
-            await self.bot.say("Command expected 1 argument, received "+str(len(listed)))
+            await self.bot.say("Command expected 1 argument, received "+str(len(listed)+1))
             return
         rolestoremove = []
         rolestogive = []
@@ -119,7 +119,7 @@ class Roles:
             pass
         elif secondary:
             listed = secondary.split(" ")
-            await self.bot.say("Command expected 1 argument, received "+str(len(listed)))
+            await self.bot.say("Command expected 1 argument, received "+str(len(listed)+1))
             return
         rolestoremove = []
         rolestogive = []
@@ -216,7 +216,7 @@ class Roles:
     async def natsuki(self, ctx, *, secondary=None):
         if secondary:
             listed = secondary.split(" ")
-            await self.bot.say("Command expected 1 argument, received "+str(len(listed)))
+            await self.bot.say("Command expected 1 argument, received "+str(len(listed)+1))
             return
         rolestoremove = []
         rolestogive = []
@@ -313,7 +313,7 @@ class Roles:
     async def misao(self, ctx, *, secondary=None):
         if secondary:
             listed = secondary.split(" ")
-            await self.bot.say("Command expected 1 argument, received "+str(len(listed)))
+            await self.bot.say("Command expected 1 argument, received "+str(len(listed)+1))
             return
         rolestoremove = []
         rolestogive = []
@@ -411,7 +411,7 @@ class Roles:
     async def protag(self, ctx, *, secondary=None):
         if secondary:
             listed = secondary.split(" ")
-            await self.bot.say("Command expected 1 argument, received "+str(len(listed)))
+            await self.bot.say("Command expected 1 argument, received "+str(len(listed)+1))
             return
         rolestoremove = []
         rolestogive = []
@@ -509,7 +509,7 @@ class Roles:
     async def yuri(self, ctx, *, secondary=None):
         if secondary:
             listed = secondary.split(" ")
-            await self.bot.say("Command expected 1 argument, received "+str(len(listed)))
+            await self.bot.say("Command expected 1 argument, received "+str(len(listed)+1))
             return
         rolestoremove = []
         rolestogive = []
