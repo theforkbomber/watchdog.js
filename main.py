@@ -631,7 +631,7 @@ async def on_message(message):
         ##await bot.wait_until_ready()
         test = message.content.replace(">os.roleme ","")
         test = test.split(" ")
-        if test[1] in ["Cinnamon bun", "Cinnamon Bun", "cinnamon bun", "cinnamon Bun"]:
+        if test[0] in ["Cinnamon bun", "Cinnamon Bun", "cinnamon bun", "cinnamon Bun"]:
             message.content = ">os.roleme sayori"
             await bot.process_commands(message)
             return
@@ -643,11 +643,11 @@ async def on_message(message):
                 return
             except Exception as e:
                 print(e)
-        elif test[1] in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
+        elif test[0] in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
             ##await bot.wait_until_ready()
             await bot.process_commands(message)
             return
-        elif test[1] not in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
+        elif test[0] not in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
             ##await bot.wait_until_ready()
             try:
                 print(message.channel)
