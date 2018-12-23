@@ -523,7 +523,7 @@ class Music:
             return
 
         author_channel = ctx.message.author.voice.voice_channel
-        my_channel = ctx.message.server.me.voice.voice_channel
+        my_channel = server.me.voice.voice_channel
 
         if my_channel is None:
             # If we're here this means that after 3 attempts...4 different "failsafes"...
