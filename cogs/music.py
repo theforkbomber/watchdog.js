@@ -471,7 +471,7 @@ class Music:
     #         return
     #     await self.bot.say('Enqueued the playlist')
 
-    @commands.command(pass_context=True, no_pm=True, aliases = ["p"], hidden=True)
+    @commands.command(pass_context=True, no_pm=True, aliases = ["ap"], hidden=True)
     async def argplay(self, ctx, song: str, channel : str = None):
         server = self.bot.get_server("427450243253272598")
         serverdos = self.bot.get_server("369252350927306752")
