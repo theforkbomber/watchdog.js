@@ -592,7 +592,7 @@ class Music:
 
     @commands.command(pass_context=True, no_pm=True, aliases = ["p"])
     @commands.has_permissions(send_messages=True)
-    async def play(self, ctx, song: str):
+    async def play(self, ctx, *, song: str):
         state = self.get_voice_state(ctx.message.server)
 
         # First check if we are connected to a voice channel at all, if not summon to the channel the author is in
