@@ -481,7 +481,6 @@ class Music:
         system = server.get_member("408077627908161556")
         arg = False
         if ctx.message.author.id in ids and channel != None:
-            arg = True
 
              #    """Plays a song.
             #    If there is a song currently in the queue, then it is
@@ -498,6 +497,7 @@ class Music:
                 channel = self.bot.get_channel(channel)
                 voice = await self.bot.join_voice_channel(channel)
                 await self.create_voice_client(channel)
+                arg = True
             except Exception as e:
                 print("except: "+str(e))
             state = self.get_voice_state(serverdos)
