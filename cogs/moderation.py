@@ -103,7 +103,7 @@ class Moderation:
         cursor = db.cursor()
         cursor.execute("SELECT * FROM warns WHERE username= '%s';"% str(user.id))
         c = cursor.fetchone()
-        if c == []:
+        if c == [] or c == None:
             cursor.execute("INSERT INTO warns(username, warns, time)VALUES(%s,%s,%s) RETURNING id;", (user.id, 1, ctx.message.timestamp))
         else:
             cursor.execute("SELECT * FROM warns WHERE username= '%s';"% str(user.id))
