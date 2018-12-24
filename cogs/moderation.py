@@ -138,7 +138,7 @@ class Moderation:
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(1)} strike.")
             else:
                 cursor.execute("UPDATE warns SET warns= %s WHERE username=%s;", (c[2] + 1, user.id))
-                print("C2 is"+c[2])
+                print("C2 is"+str(c[2]))
                 if c[2] == 1:
                     strike = "strike"
                 elif c[2] > 1:
