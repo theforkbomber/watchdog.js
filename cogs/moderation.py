@@ -140,10 +140,9 @@ class Moderation:
                 cursor.execute("UPDATE warns SET warns= %s WHERE username=%s;", (c[2] + 1, user.id))
                 print("C2 is"+str(c[2]))
                 if c[2] == 1:
-                    strike = "strike"
+                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2] + 1)} strike.")
                 elif c[2] > 1:
-                    strike = "strikes"
-                await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2] + 1)} {strike}.")
+                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2] + 1)} strikes.")
         db.commit()
         db.close()
 
