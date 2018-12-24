@@ -101,18 +101,18 @@ class Moderation:
     async def warn(self, ctx, user : discord.User, reason : str = "No reason specified :("):
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
-        cursor.execute("SELECT * FROM warns WHERE username= %s;"% (user.id))
+        cursor.execute("SELECT * FROM warns WHERE username= %s;"% str(user.id))
         c = cursor.fetchall()
         if c == []:
             cursor.execute("INSERT INTO warns(username, warns, time)VALUES(%s,%s,%s) RETURNING id;", (user.id, 1, ctx.message.timestamp))
         else:
-            cursor.execute("SELECT * FROM warns WHERE username= %s;", (user.id))
+            cursor.execute("SELECT * FROM warns WHERE username= %s;", str(user.id))
             c = cursor.fetchall()
             if c[2] == 2:
                 roler = []
                 guy = ctx.message.server.get_member(user.id)
                 if c[3] < (datetime.now() - timedelta(days=7)):
-                    cursor.execute("UPDATE warns SET warns= 0 WHERE username= %s;"% (user.id))
+                    cursor.execute("UPDATE warns SET warns= 0 WHERE username= %s;"% str(user.id))
                     for role in ctx.message.server.roles:
                         if role.name == "Detention":
                             rolee = False
@@ -132,7 +132,7 @@ class Moderation:
                     await self.bot.remove_roles(guy, *roler)
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {c[2]} strikes, that was the last straw and thus they have been detained.")
                 else:
-                    cursor.execute("UPDATE warns SET warns= 1 WHERE username= %s;"% (user.id))
+                    cursor.execute("UPDATE warns SET warns= 1 WHERE username= %s;"% str(user.id))
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {1} strike.")
             else:
                 cursor.execute("UPDATE warns SET warns= %s WHERE username= %s;", (c[2] + 1, user.id))
@@ -163,7 +163,7 @@ class Moderation:
         logs_channel = self.bot.get_channel("526179783994900491")
         detented = False
         for user in ctx.message.mentions:
-            member = server.get_member(user.id)
+            member = server.get_memberstr(user.id)
             print("DT")
             undetent = []
             db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
