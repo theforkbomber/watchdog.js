@@ -105,6 +105,7 @@ class Moderation:
         c = cursor.fetchone()
         if c == [] or c == None:
             cursor.execute("INSERT INTO warns(username, warns, time)VALUES(%s,%s,%s) RETURNING id;", (user.id, 1, ctx.message.timestamp))
+            await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on 1 strike.")
         else:
             cursor.execute("SELECT * FROM warns WHERE username= '%s';"% str(user.id))
             c = cursor.fetchone()
@@ -131,17 +132,17 @@ class Moderation:
                             roler.append(role)
                     print(roler)
                     await self.bot.remove_roles(guy, *roler)
-                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {c[2]} strikes, that was the last straw and thus they have been detained.")
+                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2])} strikes, that was the last straw and thus they have been detained.")
                 else:
                     cursor.execute("UPDATE warns SET warns= 1 WHERE username='%s';"% str(user.id))
-                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {1} strike.")
+                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(1)} strike.")
             else:
                 cursor.execute("UPDATE warns SET warns= %s WHERE username=%s;", (c[2] + 1, user.id))
                 if c[2] == 1:
                     strike = "strike"
                 else:
                     strike = "strikes"
-                await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {c[2] + 1} {strike}.")
+                await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2] + 1)} {strike}.")
         db.commit()
         db.close()
 
