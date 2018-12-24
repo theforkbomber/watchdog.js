@@ -113,7 +113,7 @@ class Moderation:
                 roler = []
                 guy = ctx.message.server.get_member(user.id)
                 if c[3] < (datetime.now() - timedelta(days=7)):
-                    cursor.execute("UPDATE warns SET warns= 0 WHERE username= %s;"% str(user.id))
+                    cursor.execute("UPDATE warns SET warns= 0 WHERE username='%s';"% str(user.id))
                     for role in ctx.message.server.roles:
                         if role.name == "Detention":
                             rolee = False
@@ -133,10 +133,10 @@ class Moderation:
                     await self.bot.remove_roles(guy, *roler)
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {c[2]} strikes, that was the last straw and thus they have been detained.")
                 else:
-                    cursor.execute("UPDATE warns SET warns= 1 WHERE username= %s;"% str(user.id))
+                    cursor.execute("UPDATE warns SET warns= 1 WHERE username='%s';"% str(user.id))
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {1} strike.")
             else:
-                cursor.execute("UPDATE warns SET warns= %s WHERE username= %s;", (c[2] + 1, user.id))
+                cursor.execute("UPDATE warns SET warns= %s WHERE username='%s';", (c[2] + 1, user.id))
                 if c[2] == 1:
                     strike = "strike"
                 else:
@@ -173,7 +173,7 @@ class Moderation:
             cursor = db.cursor()
             try:
                 username= str(member.id)
-                cursor.execute("SELECT * FROM detention WHERE username= %s", (username,))
+                cursor.execute("SELECT * FROM detention WHERE username='%s'", (username,))
                 results = cursor.fetchall()
                 print(results)
                 if results[0][1] == "FALSE":
@@ -199,7 +199,7 @@ class Moderation:
                     await self.bot.remove_roles(member, *roler)
 
                 elif results[0][1] == "TRUE":
-                    cursor.execute("SELECT * FROM roles WHERE username= %s", (username,))
+                    cursor.execute("SELECT * FROM roles WHERE username='%s'", (username,))
                     embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"{ctx.message.author.name} has freed {user.name}")
                     embed.set_footer(text=str(ctx.message.timestamp))
                     await self.bot.send_message(logs_channel, embed = embed)
@@ -234,7 +234,7 @@ class Moderation:
 
                 # db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
                 # cursor = db.cursor()
-                # cursor.execute("SELECT * FROM detention WHERE username= %s", str(member.id),)
+                # cursor.execute("SELECT * FROM detention WHERE username='%s'", str(member.id),)
                 # c = cursor.fetchall()
                 # print(c)
                 # roles = c[2]
