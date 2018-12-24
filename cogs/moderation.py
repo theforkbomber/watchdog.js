@@ -101,12 +101,12 @@ class Moderation:
     async def warn(self, ctx, user : discord.User, reason : str = "No reason specified :("):
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
-        cursor.execute("SELECT * FROM warns WHERE username= %s;"% str(user.id))
+        cursor.execute("SELECT * FROM warns WHERE username= '%s';"% str(user.id))
         c = cursor.fetchall()
         if c == []:
             cursor.execute("INSERT INTO warns(username, warns, time)VALUES(%s,%s,%s) RETURNING id;", (user.id, 1, ctx.message.timestamp))
         else:
-            cursor.execute("SELECT * FROM warns WHERE username= %s;", str(user.id))
+            cursor.execute("SELECT * FROM warns WHERE username= '%s';", str(user.id))
             c = cursor.fetchall()
             if c[2] == 2:
                 roler = []
