@@ -141,6 +141,8 @@ class Moderation:
                 else:
                     strike = "strikes"
                 await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {c[2]} {strike}.")
+        db.commit()
+        db.close()
 
         
 
