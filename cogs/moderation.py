@@ -95,7 +95,13 @@ class Moderation:
         txt.close()
         await self.bot.send_file(destination=destination, fp=open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","rb"), filename=ctx.message.channel.name+".txt")
         
+    # @commands.command(pass_context="True")
+    # @commands.has_permissions(manage_roles=True)
+    # async def warn(self, ctx, user : discord.User, reason : str = "No reason specified :("):
+        
 
+        
+    #     #week cooldown
     @commands.command(pass_context="True")
     @commands.has_permissions(manage_roles=True)
     async def addchannel(self, ctx, typer=None, *, name=None):
@@ -110,6 +116,7 @@ class Moderation:
     async def detain(self, ctx):
         server = ctx.message.server
         roler = []
+        logs_channel = self.bot.get_channel("526179783994900491")
         detented = False
         for user in ctx.message.mentions:
             member = server.get_member(user.id)
@@ -123,6 +130,9 @@ class Moderation:
                 results = cursor.fetchall()
                 print(results)
                 if results[0][1] == "FALSE":
+                    embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"{ctx.message.author.name} has detained {user.name}")
+                    embed.set_footer(text=str(ctx.message.timestamp))
+                    await self.bot.send_message(logs_channel, embed = embed)
                     print("help")
                     for role in server.roles:
                         if role.name == "Detention":
@@ -143,6 +153,9 @@ class Moderation:
 
                 elif results[0][1] == "TRUE":
                     cursor.execute("SELECT * FROM roles WHERE username= %s", (username,))
+                    embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"{ctx.message.author.name} has freed {user.name}")
+                    embed.set_footer(text=str(ctx.message.timestamp))
+                    await self.bot.send_message(logs_channel, embed = embed)
                     c = cursor.fetchall()
                     print(c)
                     rolled = c[0][2]

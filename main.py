@@ -1,4 +1,3 @@
-
 import asyncio
 import importlib
 import inspect
@@ -322,9 +321,13 @@ async def on_server_join(server):
             await bot.leave_server(server)
         except:
             await bot.leave_server(server)
-369252350927306752
+
 @bot.event
 async def on_member_join(member):
+    # if not ("everyone" in member.nick or "here" in member.nick):
+    #     pass
+    # elif "everyone" in member.nick or "here" in member.nick:
+
     server = member.server
     dokis = ["Monika", "Misao", "Sayori", "Natsuki", "Protagonist", "Yuri"]
     Doki = False
@@ -527,6 +530,7 @@ async def on_member_update(before, after):
             name = after.name
         else:
             name = after.nick
+            named = True
         nickcheck = nicknamecheck(name)
         if nickcheck != None and after.id != '` 1`':
             await bot.change_nickname(after, "Not"+nickcheck)
@@ -682,6 +686,7 @@ async def on_message(message):
             await bot.send_file(message.channel,open("MerryChristmas.mp4","rb"), content="***P A D O R U    P A D O R U***")
     
     if message.content.startswith(">os.") == False:
+        logs_channel = bot.get_channel("526179783994900491")
         if str(message.type) != "MessageType.default":
             return
         if message.author.permissions_in(message.channel).manage_roles == True or message.author.id == '275312272975462411':
@@ -727,6 +732,9 @@ async def on_message(message):
                                 await bot.send_message(message.author, "Warning, you've posted the same message "+steps+" times, carry on and you will be placed in detention.")
                                 strikes = str(int(results[4])+1)
                             elif message.content == results[3] and int(results[4]) == 6:
+                                embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"Watchdog has freed {message.author.name}")
+                                embed.set_footer(text=str(message.timestamp))
+                                await bot.send_message(logs_channel, embed = embed)
                                 for role in message.server.roles:
                                     if role.name == "Detention":
                                         rolee = False
