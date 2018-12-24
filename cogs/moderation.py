@@ -174,7 +174,7 @@ class Moderation:
             cursor = db.cursor()
             try:
                 username= str(member.id)
-                cursor.execute("SELECT * FROM detention WHERE username='%s'", (username,))
+                cursor.execute("SELECT * FROM detention WHERE username='%s'"% (username))
                 results = cursor.fetchall()
                 print(results)
                 if results[0][1] == "FALSE":
@@ -200,7 +200,7 @@ class Moderation:
                     await self.bot.remove_roles(member, *roler)
 
                 elif results[0][1] == "TRUE":
-                    cursor.execute("SELECT * FROM roles WHERE username='%s'", (username,))
+                    cursor.execute("SELECT * FROM roles WHERE username='%s'"% (username))
                     embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"{ctx.message.author.name} has freed {user.name}")
                     embed.set_footer(text=str(ctx.message.timestamp))
                     await self.bot.send_message(logs_channel, embed = embed)
