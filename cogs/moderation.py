@@ -125,23 +125,23 @@ class Moderation:
                                     rolee = True
                             break
                     roler = []
-                    for role in ctx.message.author.roles:
+                    for role in guy.roles:
                         if role.name == "Detention":
                             continue
                         else:
                             roler.append(role)
                     print(roler)
                     await self.bot.remove_roles(guy, *roler)
-                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2])} strikes, that was the last straw and thus they have been detained.")
+                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2]+1)} strikes, that was the last straw and thus they have been detained.")
                 else:
                     cursor.execute("UPDATE warns SET warns= 1 WHERE username='%s';"% str(user.id))
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(1)} strike.")
             else:
                 cursor.execute("UPDATE warns SET warns= %s WHERE username=%s;", (c[2] + 1, user.id))
                 print("C2 is"+str(c[2]))
-                if c[2] == 1:
+                if c[2] == 0:
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2] + 1)} strike.")
-                elif c[2] > 1:
+                elif c[2] > 0:
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2] + 1)} strikes.")
         db.commit()
         db.close()
