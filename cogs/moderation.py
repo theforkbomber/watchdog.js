@@ -106,7 +106,7 @@ class Moderation:
         if c == []:
             cursor.execute("INSERT INTO warns(username, warns, time)VALUES(%s,%s,%s) RETURNING id;", (user.id, 1, ctx.message.timestamp))
         else:
-            cursor.execute("SELECT * FROM warns WHERE username= '%s';", str(user.id))
+            cursor.execute("SELECT * FROM warns WHERE username= '%s';"% str(user.id))
             c = cursor.fetchall()
             if c[2] == 2:
                 roler = []
