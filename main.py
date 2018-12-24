@@ -737,7 +737,9 @@ async def on_message(message):
                             elif message.content == results[3] and int(results[4]) == 6:
                                 embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"Watchdog has freed {message.author.name}")
                                 embed.set_footer(text=str(message.timestamp))
-                                await bot.send_message(logs_channel, embed = embed)
+                                if ctx.message.server.id == "369252350927306752":
+                                    await self.bot.send_message(logs_channel, embed = embed)
+                
                                 for role in message.server.roles:
                                     if role.name == "Detention":
                                         rolee = False

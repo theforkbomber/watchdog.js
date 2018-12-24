@@ -180,7 +180,9 @@ class Moderation:
                 if results[0][1] == "FALSE":
                     embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"{ctx.message.author.name} has detained {user.name}")
                     embed.set_footer(text=str(ctx.message.timestamp))
-                    await self.bot.send_message(logs_channel, embed = embed)
+                    if ctx.message.server.id == "369252350927306752":
+                        await self.bot.send_message(logs_channel, embed = embed)
+                    
                     print("help")
                     for role in server.roles:
                         if role.name == "Detention":
@@ -203,7 +205,8 @@ class Moderation:
                     cursor.execute("SELECT * FROM roles WHERE username='%s'"% (username))
                     embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"{ctx.message.author.name} has freed {user.name}")
                     embed.set_footer(text=str(ctx.message.timestamp))
-                    await self.bot.send_message(logs_channel, embed = embed)
+                    if ctx.message.server.id == "369252350927306752":
+                        await self.bot.send_message(logs_channel, embed = embed)
                     c = cursor.fetchall()
                     print(c)
                     rolled = c[0][2]
