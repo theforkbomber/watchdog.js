@@ -99,6 +99,7 @@ class Moderation:
     @commands.command(pass_context="True")
     @commands.has_permissions(manage_roles=True)
     async def warn(self, ctx, user : discord.User, reason : str = "No reason specified :("):
+        logs_channel = self.bot.get_channel("526179783994900491")
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
         cursor.execute("SELECT * FROM warns WHERE username= '%s';"% str(user.id))
@@ -133,6 +134,10 @@ class Moderation:
                     print(roler)
                     await self.bot.remove_roles(guy, *roler)
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2]+1)} strikes, that was the last straw and thus they have been detained.")
+                    embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"{ctx.message.author.name} has detained {user.name}")
+                    embed.set_footer(text=str(ctx.message.timestamp))
+                    if ctx.message.server.id == "369252350927306752":
+                        await self.bot.send_message(logs_channel, embed = embed)
                 else:
                     cursor.execute("UPDATE warns SET warns= 1 WHERE username='%s';"% str(user.id))
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(1)} strike.")
@@ -145,6 +150,10 @@ class Moderation:
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2] + 1)} strikes.")
         db.commit()
         db.close()
+        embed = discord.Embed(colour = 0xff0000, title = "Warn", description = f"{ctx.message.author.name} has warned {user.name}")
+        embed.set_footer(text=str(ctx.message.timestamp))
+        if ctx.message.server.id == "369252350927306752":
+            await self.bot.send_message(logs_channel, embed = embed)
 
         
 
