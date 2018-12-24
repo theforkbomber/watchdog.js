@@ -167,7 +167,7 @@ class Moderation:
         logs_channel = self.bot.get_channel("526179783994900491")
         detented = False
         for user in ctx.message.mentions:
-            member = server.get_memberstr(user.id)
+            member = server.get_member(user.id)
             print("DT")
             undetent = []
             db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
