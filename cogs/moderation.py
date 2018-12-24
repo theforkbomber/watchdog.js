@@ -122,7 +122,7 @@ class Moderation:
                                 det = role
                                 print("Warn detention")
                                 await self.bot.add_roles(guy, det)
-                                if det in guy:
+                                if det in guy.roles:
                                     rolee = True
                             break
                     for role in ctx.message.author.roles:
@@ -138,9 +138,10 @@ class Moderation:
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(1)} strike.")
             else:
                 cursor.execute("UPDATE warns SET warns= %s WHERE username=%s;", (c[2] + 1, user.id))
+                print("C2 is"+c[2])
                 if c[2] == 1:
                     strike = "strike"
-                else:
+                elif c[2] > 1:
                     strike = "strikes"
                 await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2] + 1)} {strike}.")
         db.commit()
