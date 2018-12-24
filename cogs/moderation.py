@@ -108,6 +108,7 @@ class Moderation:
         else:
             cursor.execute("SELECT * FROM warns WHERE username= '%s';"% str(user.id))
             c = cursor.fetchall()
+            print(c)
             if c[2] == 2:
                 roler = []
                 guy = ctx.message.server.get_member(user.id)
