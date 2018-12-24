@@ -1,6 +1,7 @@
 import asyncio
 import discord
 import re
+from datetime import datetime, timedelta
 import os
 from discord.ext import commands
 import config
@@ -95,9 +96,52 @@ class Moderation:
         txt.close()
         await self.bot.send_file(destination=destination, fp=open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","rb"), filename=ctx.message.channel.name+".txt")
         
-    # @commands.command(pass_context="True")
-    # @commands.has_permissions(manage_roles=True)
-    # async def warn(self, ctx, user : discord.User, reason : str = "No reason specified :("):
+    @commands.command(pass_context="True")
+    @commands.has_permissions(manage_roles=True)
+    async def warn(self, ctx, user : discord.User, reason : str = "No reason specified :("):
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM warns WHERE username = %s;", (user.id))
+        c = cursor.fetchall()
+        if c == []:
+            cursor.execute("INSERT INTO warns(username, warns, time)VALUES(%s,%s,%s) RETURNING id;", (user.id, 1, ctx.message.timestamp))
+        else:
+            cursor.execute("SELECT * FROM warns WHERE username = %s;", (user.id))
+            c = cursor.fetchall()
+            if c[2] == 2:
+                roler = []
+                guy = ctx.message.server.get_member(user.id)
+                if c[3] < (datetime.now() - timedelta(days=7)):
+                    cursor.execute("UPDATE warns SET warns = 0 WHERE username = %s;", (user.id))
+                    for role in ctx.message.server.roles:
+                        if role.name == "Detention":
+                            rolee = False
+                            while rolee == False:
+                                det = role
+                                print("Warn detention")
+                                await self.bot.add_roles(guy, det)
+                                if det in guy:
+                                    rolee = True
+                            break
+                    for role in ctx.message.author.roles:
+                        if role.name == "Detention":
+                            continue
+                        else:
+                            roler.append(role)
+                    print(roler)
+                    await self.bot.remove_roles(guy, *roler)
+                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {c[2]} strikes, that was the last straw and thus they have been detained.")
+                else:
+                    cursor.execute("UPDATE warns SET warns = 1 WHERE username = %s;", (user.id))
+                    await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {1} strike.")
+            else:
+                cursor.execute("UPDATE warns SET warns = %s WHERE username = %s;", (c[2] + 1, user.id))
+                if c[2] == 1:
+                    strike = "strike"
+                else:
+                    strike = "strikes"
+                await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {c[2]} {strike}.")
+
         
 
         
