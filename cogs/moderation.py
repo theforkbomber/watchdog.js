@@ -111,7 +111,6 @@ class Moderation:
             c = cursor.fetchone()
             print(c)
             if c[2] == 2:
-                roler = []
                 guy = ctx.message.server.get_member(user.id)
                 if c[3] > (datetime.now() - timedelta(days=7)):
                     cursor.execute("UPDATE warns SET warns= 0 WHERE username='%s';"% str(user.id))
@@ -125,6 +124,7 @@ class Moderation:
                                 if det in guy.roles:
                                     rolee = True
                             break
+                    roler = []
                     for role in ctx.message.author.roles:
                         if role.name == "Detention":
                             continue
