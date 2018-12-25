@@ -657,7 +657,7 @@ async def on_message(message):
                 return
             except Exception as e:
                 print(e)
-        elif test[0] in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
+        elif test[0] in ["Nat", "destined", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
             ##await bot.wait_until_ready()
             await bot.process_commands(message)
             return

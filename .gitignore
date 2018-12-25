@@ -13,3 +13,4 @@ config.yml
 mindset-bot/
 test
 *.mp4
+test.py
