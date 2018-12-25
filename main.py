@@ -735,10 +735,10 @@ async def on_message(message):
                                 await bot.send_message(message.author, "Warning, you've posted the same message "+steps+" times, carry on and you will be placed in detention.")
                                 strikes = str(int(results[4])+1)
                             elif message.content == results[3] and int(results[4]) == 6:
-                                embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"Watchdog has freed {message.author.name}")
+                                embed = discord.Embed(colour = 0xff0000, title = "Detention", description = f"Watchdog has detained {message.author.name}")
                                 embed.set_footer(text=str(message.timestamp))
-                                if ctx.message.server.id == "369252350927306752":
-                                    await self.bot.send_message(logs_channel, embed = embed)
+                                if message.server.id == "369252350927306752":
+                                    await bot.send_message(logs_channel, embed = embed)
                 
                                 for role in message.server.roles:
                                     if role.name == "Detention":

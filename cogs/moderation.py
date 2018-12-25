@@ -150,7 +150,7 @@ class Moderation:
                     await self.bot.say(f"{user.name} has been warned by {ctx.message.author.name} because:\n{reason}\n{user.name} is on {str(c[2] + 1)} strikes.")
         db.commit()
         db.close()
-        embed = discord.Embed(colour = 0xff0000, title = "Warn", description = f"{ctx.message.author.name} has warned {user.name}")
+        embed = discord.Embed(colour = 0xff0000, title = "Warn", description = f"{ctx.message.author.name} has warned {user.name} because:\n{reason}")
         embed.set_footer(text=str(ctx.message.timestamp))
         if ctx.message.server.id == "369252350927306752":
             await self.bot.send_message(logs_channel, embed = embed)
