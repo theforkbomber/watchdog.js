@@ -583,24 +583,24 @@ class Roles:
             numbered = int(userid[len(userid)-3:len(userid)])
             if numbered < 166:
                 ctx.message.content = ">os.roleme Yuri"
-                await self.bot.process_commands(ctx.message)
+                
             elif 166 <= numbered < 166*2:
                 ctx.message.content = ">os.roleme Natsuki"
-                await self.bot.process_commands(ctx.message)
+                
             elif 166*2 <= numbered < 166*3:
                 ctx.message.content = ">os.roleme Monika"
-                await self.bot.process_commands(ctx.message)
+                
             elif 166*3 <= numbered < 166*4:
                 ctx.message.content = ">os.roleme Sayori"
-                await self.bot.process_commands(ctx.message)
+                
             elif 166*4 <= numbered < 166*5:
                 ctx.message.content = ">os.roleme Misao"
-                await self.bot.process_commands(ctx.message)
+                
             elif 166*5 <= numbered < 999:
                 ctx.message.content = ">os.roleme Dan"
-                await self.bot.process_commands(ctx.message)
+                
         chooser(ctx.message.author.id)
-
+        await self.bot.process_commands(ctx.message)
 
 def setup(bot):
     bot.add_cog(Roles(bot))
