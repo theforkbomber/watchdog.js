@@ -98,7 +98,7 @@ class Moderation:
         
     @commands.command(pass_context="True")
     @commands.has_permissions(manage_roles=True)
-    async def warn(self, ctx, user : discord.User, reason : str = "No reason specified :("):
+    async def warn(self, ctx, user : discord.User, *, reason : str = "No reason specified :("):
         logs_channel = self.bot.get_channel("526179783994900491")
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
