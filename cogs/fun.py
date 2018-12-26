@@ -27,6 +27,23 @@ class Fun:
         e.set_footer(text='Toe beans requested by %s' % (ctx.message.author), icon_url='')
         await self.bot.send_message(ctx.message.channel, embed=e)
 
+    @commands.command(pass_context=True)
+    @commands.cooldown(1, 10, commands.BucketType.user)
+    async def padoru(self, ctx):
+        reddit = praw.Reddit(client_id=config.pid,
+        client_secret=config.secret,
+        user_agent='watchdog',
+        username='theforkbomber',
+        password=config.reddit)
+        padoru_submissions = reddit.subreddit('padoru').hot()
+        post_to_pick = random.randint(1, 100)
+        for i in range(0, post_to_pick):
+            submission = next(x for x in padoru_submissions if not x.stickied)
+        e = discord.Embed(colour=0xFFC0CB)
+        e.set_image(url=submission.url)
+        e.set_footer(text='PADORUUUUUUU requested by %s' % (ctx.message.author), icon_url='')
+        await self.bot.send_message(ctx.message.channel, embed=e)
+
 
     @commands.command(pass_context=True, aliases = ["rolo","shiba"])
     async def shibe(self, ctx):
