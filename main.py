@@ -677,17 +677,17 @@ async def on_message(message):
 
     # try:
     
-    # else:
-    if message.content == "HASHIRE SORI YO" and message.channel.id != "398687305482764289":
-        await bot.wait_until_ready()
-        await bot.send_message(message.channel, "KAZE NO YOU NI")
+    # # else:
+    # if message.content == "HASHIRE SORI YO" and message.channel.id != "398687305482764289":
+    #     await bot.wait_until_ready()
+    #     await bot.send_message(message.channel, "KAZE NO YOU NI")
     
-    if message.content == "TSUKIMIHARA WO" and message.channel.id != "398687305482764289":
-        await bot.wait_until_ready()
-        if message.author.id == "343302587899969538":
-            await bot.send_file(message.channel,open("HashiresoriyokazenoyounitsukimiharawoPadoruPadoru.mp4","rb"), content="***P A D O R U    P A D O R U***")
-        else:
-            await bot.send_file(message.channel,open("MerryChristmas.mp4","rb"), content="***P A D O R U    P A D O R U***")
+    # if message.content == "TSUKIMIHARA WO" and message.channel.id != "398687305482764289":
+    #     await bot.wait_until_ready()
+    #     if message.author.id == "343302587899969538":
+    #         await bot.send_file(message.channel,open("HashiresoriyokazenoyounitsukimiharawoPadoruPadoru.mp4","rb"), content="***P A D O R U    P A D O R U***")
+    #     else:
+    #         await bot.send_file(message.channel,open("MerryChristmas.mp4","rb"), content="***P A D O R U    P A D O R U***")
     
     if message.content.startswith(">os.") == False:
         logs_channel = bot.get_channel("526179783994900491")
