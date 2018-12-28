@@ -481,7 +481,7 @@ class Roles:
         await self.bot.add_roles(ctx.message.author, *rolestogive)
         await asyncio.sleep(2)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
-        await self.bot.say("`Assigned user"+ctx.message.author.name+" the {Protagonist} flag.`")
+        await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Protagonist} flag.`")
 
     @roleme.command(pass_context=True, aliases = ["Yuri"])
     async def yuri(self, ctx):
@@ -1136,7 +1136,7 @@ class Roles:
             await self.bot.add_roles(ctx.message.author, *rolestogive)
             await asyncio.sleep(2)
             await self.bot.remove_roles(ctx.message.author, *rolestoremove)
-            await self.bot.say("`Assigned user"+ctx.message.author.name+" the {Protagonist} flag.`")
+            await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Protagonist} flag.`")
 
 def setup(bot):
     bot.add_cog(Roles(bot))

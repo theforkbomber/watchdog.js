@@ -484,7 +484,7 @@ class Moderation:
         await self.bot.add_roles(user, *rolestogive)
         await asyncio.sleep(2)
         await self.bot.remove_roles(user, *rolestoremove)
-        await self.bot.say("`Assigned user"+user.name+" the {Protagonist} flag.`")
+        await self.bot.say("`Assigned user "+user.name+" the {Protagonist} flag.`")
 
     @commands.command(pass_context=True, aliases = ["Yuri"])
     @commands.check(modcheck)
