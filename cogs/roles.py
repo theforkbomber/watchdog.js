@@ -485,97 +485,97 @@ class Roles:
 
     @roleme.command(pass_context=True, aliases = ["Yuri"])
     async def yuri(self, ctx):
-            rolestoremove = []
-            rolestogive = []
-            norm = False
-            rare = False
-            legacy = False
-            server = ctx.message.server
-            user = server.get_member(ctx.message.author.id)
-            server = self.bot.get_server('369252350927306752')
-            NatNorm = discord.utils.get(ctx.message.server.roles, name='Natsuki')
-            PenNorm = discord.utils.get(ctx.message.server.roles, name='Yuri')
-            FagNorm = discord.utils.get(ctx.message.server.roles, name='Misao')
-            CinnamonNorm = discord.utils.get(ctx.message.server.roles, name='Sayori')
-            BestBoyNorm = discord.utils.get(ctx.message.server.roles, name='Protagonist')
-            NatRare = discord.utils.get(ctx.message.server.roles, name='Natsuki (Rare)')
-            PenRare = discord.utils.get(ctx.message.server.roles, name='Yuri (Rare)')
-            FagRare = discord.utils.get(ctx.message.server.roles, name='Misao (Rare)')
-            CinnamonRare = discord.utils.get(ctx.message.server.roles, name='Sayori (Rare)')
-            BestBoyRare = discord.utils.get(ctx.message.server.roles, name='Protagonist (Rare)')
-            NatLegacy = discord.utils.get(ctx.message.server.roles, name='Natsuki (Legacy)')
-            PenLegacy = discord.utils.get(ctx.message.server.roles, name='Yuri (Legacy)')
-            FagLegacy = discord.utils.get(ctx.message.server.roles, name='Misao (Legacy)')
-            CinnamonLegacy = discord.utils.get(ctx.message.server.roles, name='Sayori (Legacy)')
-            BestBoyLegacy = discord.utils.get(ctx.message.server.roles, name='Protagonist (Legacy)')
-            Moni = discord.utils.get(ctx.message.server.roles, name='Monika')
-            MoniRare = discord.utils.get(ctx.message.server.roles, name='Monika (Rare)')
-            MoniLegacy = discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)')
+        rolestoremove = []
+        rolestogive = []
+        norm = False
+        rare = False
+        legacy = False
+        server = ctx.message.server
+        user = server.get_member(ctx.message.author.id)
+        server = self.bot.get_server('369252350927306752')
+        NatNorm = discord.utils.get(ctx.message.server.roles, name='Natsuki')
+        PenNorm = discord.utils.get(ctx.message.server.roles, name='Yuri')
+        FagNorm = discord.utils.get(ctx.message.server.roles, name='Misao')
+        CinnamonNorm = discord.utils.get(ctx.message.server.roles, name='Sayori')
+        BestBoyNorm = discord.utils.get(ctx.message.server.roles, name='Protagonist')
+        NatRare = discord.utils.get(ctx.message.server.roles, name='Natsuki (Rare)')
+        PenRare = discord.utils.get(ctx.message.server.roles, name='Yuri (Rare)')
+        FagRare = discord.utils.get(ctx.message.server.roles, name='Misao (Rare)')
+        CinnamonRare = discord.utils.get(ctx.message.server.roles, name='Sayori (Rare)')
+        BestBoyRare = discord.utils.get(ctx.message.server.roles, name='Protagonist (Rare)')
+        NatLegacy = discord.utils.get(ctx.message.server.roles, name='Natsuki (Legacy)')
+        PenLegacy = discord.utils.get(ctx.message.server.roles, name='Yuri (Legacy)')
+        FagLegacy = discord.utils.get(ctx.message.server.roles, name='Misao (Legacy)')
+        CinnamonLegacy = discord.utils.get(ctx.message.server.roles, name='Sayori (Legacy)')
+        BestBoyLegacy = discord.utils.get(ctx.message.server.roles, name='Protagonist (Legacy)')
+        Moni = discord.utils.get(ctx.message.server.roles, name='Monika')
+        MoniRare = discord.utils.get(ctx.message.server.roles, name='Monika (Rare)')
+        MoniLegacy = discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)')
 
-            if NatNorm in ctx.message.author.roles:
-                rolestoremove.append(NatNorm)
-                rolestogive.append(PenNorm)
-            if NatRare in ctx.message.author.roles:
-                rolestoremove.append(NatRare)
-                rolestogive.append(PenRare)
-            if NatLegacy in ctx.message.author.roles:
-                rolestoremove.append(NatLegacy)
-                rolestogive.append(PenLegacy)
+        if NatNorm in ctx.message.author.roles:
+            rolestoremove.append(NatNorm)
+            rolestogive.append(PenNorm)
+        if NatRare in ctx.message.author.roles:
+            rolestoremove.append(NatRare)
+            rolestogive.append(PenRare)
+        if NatLegacy in ctx.message.author.roles:
+            rolestoremove.append(NatLegacy)
+            rolestogive.append(PenLegacy)
 
-            if PenNorm in ctx.message.author.roles:
-                rolestoremove.append(PenNorm)
-                rolestogive.append(PenNorm)
-            if PenRare in ctx.message.author.roles:
-                rolestoremove.append(PenRare)
-                rolestogive.append(PenRare)
-            if PenLegacy in ctx.message.author.roles:
-                rolestoremove.append(PenLegacy)
-                rolestogive.append(PenLegacy)
+        if PenNorm in ctx.message.author.roles:
+            rolestoremove.append(PenNorm)
+            rolestogive.append(PenNorm)
+        if PenRare in ctx.message.author.roles:
+            rolestoremove.append(PenRare)
+            rolestogive.append(PenRare)
+        if PenLegacy in ctx.message.author.roles:
+            rolestoremove.append(PenLegacy)
+            rolestogive.append(PenLegacy)
+        
+        if CinnamonNorm in ctx.message.author.roles:
+            rolestoremove.append(CinnamonNorm)
+            rolestogive.append(PenNorm)
+        if CinnamonRare in ctx.message.author.roles:
+            rolestoremove.append(CinnamonRare)
+            rolestogive.append(PenRare)
+        if CinnamonLegacy in ctx.message.author.roles:
+            rolestoremove.append(CinnamonLegacy)
+            rolestogive.append(PenLegacy)
             
-            if CinnamonNorm in ctx.message.author.roles:
-                rolestoremove.append(CinnamonNorm)
-                rolestogive.append(PenNorm)
-            if CinnamonRare in ctx.message.author.roles:
-                rolestoremove.append(CinnamonRare)
-                rolestogive.append(PenRare)
-            if CinnamonLegacy in ctx.message.author.roles:
-                rolestoremove.append(CinnamonLegacy)
-                rolestogive.append(PenLegacy)
-                
-            if FagNorm in ctx.message.author.roles:
-                rolestoremove.append(FagNorm)
-                rolestogive.append(PenNorm)
-            if FagRare in ctx.message.author.roles:
-                rolestoremove.append(FagRare)
-                rolestogive.append(PenRare)
-            if FagLegacy in ctx.message.author.roles:
-                rolestoremove.append(FagLegacy)
-                rolestogive.append(PenLegacy)
+        if FagNorm in ctx.message.author.roles:
+            rolestoremove.append(FagNorm)
+            rolestogive.append(PenNorm)
+        if FagRare in ctx.message.author.roles:
+            rolestoremove.append(FagRare)
+            rolestogive.append(PenRare)
+        if FagLegacy in ctx.message.author.roles:
+            rolestoremove.append(FagLegacy)
+            rolestogive.append(PenLegacy)
 
-            if BestBoyNorm in ctx.message.author.roles:
-                rolestoremove.append(BestBoyNorm)
-                rolestogive.append(PenNorm)
-            if BestBoyRare in ctx.message.author.roles:
-                rolestoremove.append(BestBoyRare)
-                rolestogive.append(PenRare)
-            if BestBoyLegacy in ctx.message.author.roles:
-                rolestoremove.append(BestBoyLegacy)
-                rolestogive.append(PenLegacy)
-            
-            if Moni in ctx.message.author.roles:
-                rolestoremove.append(Moni)
-                rolestogive.append(PenNorm)
-            if MoniRare in ctx.message.author.roles:
-                rolestoremove.append(MoniRare)
-                rolestogive.append(PenRare)
-            if MoniLegacy in ctx.message.author.roles:
-                rolestoremove.append(MoniLegacy)
-                rolestogive.append(PenLegacy)
+        if BestBoyNorm in ctx.message.author.roles:
+            rolestoremove.append(BestBoyNorm)
+            rolestogive.append(PenNorm)
+        if BestBoyRare in ctx.message.author.roles:
+            rolestoremove.append(BestBoyRare)
+            rolestogive.append(PenRare)
+        if BestBoyLegacy in ctx.message.author.roles:
+            rolestoremove.append(BestBoyLegacy)
+            rolestogive.append(PenLegacy)
+        
+        if Moni in ctx.message.author.roles:
+            rolestoremove.append(Moni)
+            rolestogive.append(PenNorm)
+        if MoniRare in ctx.message.author.roles:
+            rolestoremove.append(MoniRare)
+            rolestogive.append(PenRare)
+        if MoniLegacy in ctx.message.author.roles:
+            rolestoremove.append(MoniLegacy)
+            rolestogive.append(PenLegacy)
 
-            await self.bot.add_roles(ctx.message.author, *rolestogive)
-            await asyncio.sleep(2)
-            await self.bot.remove_roles(ctx.message.author, *rolestoremove)
-            await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Yuri} flag.`")
+        await self.bot.add_roles(ctx.message.author, *rolestogive)
+        await asyncio.sleep(2)
+        await self.bot.remove_roles(ctx.message.author, *rolestoremove)
+        await self.bot.say("`Assigned user "+ctx.message.author.name+" the {Yuri} flag.`")
 
     @roleme.command(pass_context=True)
     async def destined(self, ctx):
