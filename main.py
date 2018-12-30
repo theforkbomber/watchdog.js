@@ -801,6 +801,7 @@ for extension in initial_extensions:
     bot.load_extension(extension)
 
 async def serverpfp():
+    print("serverpfp")
     try:
         await bot.wait_until_ready()
         server = bot.get_server('369252350927306752')
@@ -892,6 +893,7 @@ async def serverpfp():
         print(str(e))
 
 async def zipper():
+    print("zipper")
     try:
         await bot.wait_until_ready()
         channel = bot.get_channel('526179743616466955')
