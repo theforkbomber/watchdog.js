@@ -12,16 +12,13 @@ from os.path import isfile, join
 import io
 import shutil
 from datetime import datetime
-bot = commands.Bot(command_prefix=">os.")
-
-async def on_command_error(self, ctx, error):
-    return
+bot = discord.Client()
 
 async def serverpfp():
     print("serverpfp")
     try:
         await bot.wait_until_ready()
-        await asyncio.sleep(60*60*6)
+
         server = bot.get_server('369252350927306752')
         channel = bot.get_channel("418556524785303563")
         randomnum = random.randint(1,405)
@@ -106,7 +103,7 @@ async def serverpfp():
                     f.close()
                 await bot.edit_server(server, icon=p)
                 await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Yuri (Variant)")
-        
+        await asyncio.sleep(60*60*6)        
     except Exception as e:
         print(str(e))
 
