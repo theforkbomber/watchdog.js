@@ -812,13 +812,13 @@ async def serverpfp():
                 p = f.read()
                 f.close()
             await bot.edit_server(server, icon=p)
-            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Natsuki's Mother [Errors have been found within the file]")
+            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Natsuki's Mother (ERROR)")
         elif 10 < randomnum <= 30:
             with open("JMAF_Marissa.png","rb") as f:
                 p = f.read()
                 f.close()
             await bot.edit_server(server, icon=p)
-            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Marissa Marilland")
+            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Marissa")
         elif 30 < randomnum <= 60:
             with open("jmafseason3hype.png","rb") as f:
                 p = f.read()
@@ -830,25 +830,25 @@ async def serverpfp():
                 p = f.read()
                 f.close()
             await bot.edit_server(server, icon=p)
-            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Dan Voslata")
+            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Dan")
         elif 100 < randomnum <= 150:
             with open("jmafmonika.png","rb") as f:
                 p = f.read()
                 f.close()
             await bot.edit_server(server, icon=p)
-            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika Salvato")
+            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika")
         elif 150 < randomnum <= 205:
             with open("jmafsayori2.png","rb") as f:
                 p = f.read()
                 f.close()
             await bot.edit_server(server, icon=p)
-            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Sayori Kanzaki (Variant)")
+            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Sayori (Variant)")
         elif 205 < randomnum <= 265:
             with open("monikajmaf.png","rb") as f:
                 p = f.read()
                 f.close()
             await bot.edit_server(server, icon=p)
-            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika Salvato (Season 4)")
+            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 4)")
         elif 265 < randomnum <= 355:
             randomnum2 = random.randint(1,6)
             if randomnum2 == 1:
@@ -857,37 +857,37 @@ async def serverpfp():
                     f.close()
                 await bot.edit_server(server, icon=p)
                 await bot.send_message(channel)
-                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Natsuki Takara")
+                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Natsuki")
             elif randomnum2 == 2:
                 with open("JMAF_ICON_3.png","rb") as f:
                     p = f.read()
                     f.close()
                 await bot.edit_server(server, icon=p)
-                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Sayori Kanzaki")
+                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Sayori")
             elif randomnum2 == 3:
                 with open("JMAF_ICON_4.png","rb") as f:
                     p = f.read()
                     f.close()
                 await bot.edit_server(server, icon=p)
-                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Yuri Libitina")
+                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Yuri")
             elif randomnum2 == 4:
                 with open("Misao_JMAF.png","rb") as f:
                     p = f.read()
                     f.close()
                 await bot.edit_server(server, icon=p)
-                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Misao Sanguine")
+                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Misao")
             elif randomnum2 == 5:
                 with open("jmafmonika2.png","rb") as f:
                     p = f.read()
                     f.close()
                 await bot.edit_server(server, icon=p)
-                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika Salvato (Season 1-2)")
+                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 1-2)")
             elif randomnum2 == 6:
                 with open("jmafyuricon3.png","rb") as f:
                     p = f.read()
                     f.close()
                 await bot.edit_server(server, icon=p)
-                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Yuri Libitina (Variant)")
+                await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Yuri (Variant)")
         await asyncio.sleep(60*60*6)
     except Exception as e:
         print(str(e))
