@@ -812,7 +812,7 @@ async def serverpfp():
                 p = f.read()
                 f.close()
             await bot.edit_server(server, icon=p)
-            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Natsuki's Mother (ERROR)")
+            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Kyo Takara (ERROR)")
         elif 10 < randomnum <= 30:
             with open("JMAF_Marissa.png","rb") as f:
                 p = f.read()
