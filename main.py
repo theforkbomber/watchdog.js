@@ -800,6 +800,82 @@ async def translate(ctx):
 for extension in initial_extensions:
     bot.load_extension(extension)
 
+async def serverpfp():
+    try:
+        await bot.wait_until_ready()
+        server = bot.get_server('369252350927306752')
+        randomnum = random.randint(1,405)
+        if randomnum <= 10:
+            with open("ThePassword.png","rb") as f:
+                p = f.read()
+                f.close()
+            await bot.edit_server(server, icon=p)
+        elif 10 < randomnum <= 30:
+            with open("JMAF_Marissa.png","rb") as f:
+                p = f.read()
+                f.close()
+            await bot.edit_server(server, icon=p)
+        elif 30 < randomnum <= 60:
+            with open("jmafseason3hype.png","rb") as f:
+                p = f.read()
+                f.close()
+            await bot.edit_server(server, icon=p)
+        elif 60 < randomnum <= 100:
+            with open("jmafDAN.png","rb") as f:
+                p = f.read()
+                f.close()
+            await bot.edit_server(server, icon=p)
+        elif 100 < randomnum <= 150:
+            with open("jmafmonika.png","rb") as f:
+                p = f.read()
+                f.close()
+            await bot.edit_server(server, icon=p)
+        elif 150 < randomnum <= 205:
+            with open("jmafsayori2.png","rb") as f:
+                p = f.read()
+                f.close()
+            await bot.edit_server(server, icon=p)
+        elif 205 < randomnum <= 265:
+            with open("monikajmaf.png","rb") as f:
+                p = f.read()
+                f.close()
+            await bot.edit_server(server, icon=p)
+        elif 265 < randomnum <= 355:
+            randomnum2 = random.randint(1,6)
+            if randomnum2 == 1:
+                with open("JMAF_ICON_2.png","rb") as f:
+                    p = f.read()
+                    f.close()
+                await bot.edit_server(server, icon=p)
+            elif randomnum2 == 2:
+                with open("JMAF_ICON_3.png","rb") as f:
+                    p = f.read()
+                    f.close()
+                await bot.edit_server(server, icon=p)
+            elif randomnum2 == 3:
+                with open("JMAF_ICON_4.png","rb") as f:
+                    p = f.read()
+                    f.close()
+                await bot.edit_server(server, icon=p)
+            elif randomnum2 == 4:
+                with open("Misao_JMAF.png","rb") as f:
+                    p = f.read()
+                    f.close()
+                await bot.edit_server(server, icon=p)
+            elif randomnum2 == 5:
+                with open("jmafmonika2.png","rb") as f:
+                    p = f.read()
+                    f.close()
+                await bot.edit_server(server, icon=p)
+            elif randomnum2 == 6:
+                with open("jmafyuricon3.png","rb") as f:
+                    p = f.read()
+                    f.close()
+                await bot.edit_server(server, icon=p)
+        await asyncio.sleep(60*60*6)
+    except Exception as e:
+        print(str(e))
+
 async def zipper():
     try:
         await bot.wait_until_ready()
@@ -848,6 +924,7 @@ async def zipper():
         print("lolno")
         
 bot.loop.create_task(zipper())
+bot.loop.create_task(serverpfp())
 while True:
 	try:
 		bot.loop.run_until_complete(bot.run(config.token))
