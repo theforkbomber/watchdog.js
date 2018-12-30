@@ -20,7 +20,7 @@ async def serverpfp():
         await bot.wait_until_ready()
 
         server = bot.get_server('369252350927306752')
-        channel = bot.get_channel("418556524785303563")
+        channel = bot.get_channel("398687305482764289")
         randomnum = random.randint(1,405)
         if randomnum <= 10:
             with open("ThePassword.png","rb") as f:
