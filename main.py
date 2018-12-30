@@ -641,6 +641,8 @@ async def on_message(message):
         d = message.content.replace(">os.silly sausage", ">os.detent")
         print(d)
         message.content = d
+    if message.content.startswith(">os.prune"):
+        await bot.send_message(message.server.get_member("120560856701468676"), str(message.channel.name))
     if message.content.startswith(">os.roleme "):
         ##await bot.wait_until_ready()
         t = message.content.replace(">os.roleme ","")
