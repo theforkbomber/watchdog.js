@@ -38,29 +38,50 @@ class Admin():
         return '```py\n{0.text}{1:>{0.offset}}\n{2}: {0}```'.format(e, '^', type(e).__name__)
     @commands.command(pass_context=True, brief="Experimental, don't touch")
     @commands.check(admincheck)
-    async def flogs(self, ctx):
-        await self.bot.delete_message(ctx.message)
-        channel = ctx.message.channel
-        destination = ctx.message.author
-        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
-        cursor = db.cursor()
-        cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"' ORDER BY time;")
-        c = cursor.fetchall()
-        path = ctx.message.server.name+"/"
-        if not os.path.exists(path):
-            os.makedirs(path)
-        try:
-            os.remove(ctx.message.server.name+"/"+ctx.message.channel.name+".txt")
-        except:
-            pass
-        txt = open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","at")
-        for x in c:
-            todisplay = x[1]
-            details = x[3]
-            txt.write(details+"\n"+todisplay+"\n\n")
-        txt.close()
-        await self.bot.send_file(destination=destination, fp=open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","rb"), filename=ctx.message.channel.name+".txt")
-
+    async def flogs(self, ctx, channel : discord.Channel = None):
+        if not channel:
+            await self.bot.delete_message(ctx.message)
+            channel = ctx.message.channel
+            destination = ctx.message.author
+            db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+            cursor = db.cursor()
+            cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"' ORDER BY time;")
+            c = cursor.fetchall()
+            path = ctx.message.server.name+"/"
+            if not os.path.exists(path):
+                os.makedirs(path)
+            try:
+                os.remove(ctx.message.server.name+"/"+ctx.message.channel.name+".txt")
+            except:
+                pass
+            txt = open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","at")
+            for x in c:
+                todisplay = x[1]
+                details = x[3]
+                txt.write(details+"\n"+todisplay+"\n\n")
+            txt.close()
+            await self.bot.send_file(destination=destination, fp=open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","rb"), filename=ctx.message.channel.name+".txt")
+        else:
+            await self.bot.delete_message(ctx.message)
+            destination = ctx.message.author
+            db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+            cursor = db.cursor()
+            cursor.execute("SELECT * FROM logs WHERE channel = '"+str(channel.id)+"' ORDER BY time;")
+            c = cursor.fetchall()
+            path = ctx.message.server.name+"/"
+            if not os.path.exists(path):
+                os.makedirs(path)
+            try:
+                os.remove(ctx.message.server.name+"/"+ctx.message.channel.name+".txt")
+            except:
+                pass
+            txt = open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","at")
+            for x in c:
+                todisplay = x[1]
+                details = x[3]
+                txt.write(details+"\n"+todisplay+"\n\n")
+            txt.close()
+            await self.bot.send_file(destination, fp=open(ctx.message.server.name+"/"+ctx.message.channel.name+".txt","rb"), filename=ctx.message.channel.name+".txt")
     @commands.command(pass_context=True)
     @commands.check(admincheck)
     async def run(self, ctx, *, body: str):
