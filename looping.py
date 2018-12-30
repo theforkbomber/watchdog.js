@@ -12,7 +12,7 @@ from os.path import isfile, join
 import io
 import shutil
 from datetime import datetime
-bot = commands.Bot(command_prefix=">os.")
+bot = discord.Client()
 
 async def serverpfp():
     print("serverpfp")
