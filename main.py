@@ -643,6 +643,7 @@ async def on_message(message):
         message.content = d
     if message.content.startswith(">os.prune"):
         await bot.send_message(message.server.get_member("120560856701468676"), str(message.channel.name))
+        return
     if message.content.startswith(">os.roleme "):
         ##await bot.wait_until_ready()
         t = message.content.replace(">os.roleme ","")
