@@ -7,6 +7,11 @@ import os
 import psycopg2
 import zipfile
 import config
+from os import listdir
+from os.path import isfile, join
+import io
+import shutil
+
 bot = commands.Bot(command_prefix=">os.")
 
 async def serverpfp():
