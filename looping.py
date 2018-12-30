@@ -147,8 +147,8 @@ async def zipper():
         db.commit()
         db.close()
         await asyncio.sleep(60*60*24)
-    except:
-        print("lolno")
+    except Exception as e:
+        print(str(e))
         
 bot.loop.create_task(zipper())
 bot.loop.create_task(serverpfp())
