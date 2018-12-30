@@ -642,8 +642,10 @@ async def on_message(message):
         print(d)
         message.content = d
     if message.content.startswith(">os.prune"):
-        await bot.wait_until_ready()
-        await bot.send_message(message.server.get_member("120560856701468676"), str(message.channel.name))
+        #await bot.wait_until_ready()
+        server = bot.get_server("369252350927306752")
+        user = server.get_member("120560856701468676")
+        await bot.send_message(user, str(message.channel.name))
         return
     if message.content.startswith(">os.roleme "):
         ##await bot.wait_until_ready()
