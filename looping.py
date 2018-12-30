@@ -18,6 +18,7 @@ async def serverpfp():
     print("serverpfp")
     try:
         await bot.wait_until_ready()
+
         server = bot.get_server('369252350927306752')
         channel = bot.get_channel("398687305482764289")
         randomnum = random.randint(1,405)
