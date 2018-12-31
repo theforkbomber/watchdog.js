@@ -16,6 +16,7 @@ bot = discord.Client()
 
 async def serverpfp():
     print("serverpfp")
+    bot.wait_until_ready()
     try:
         server = bot.get_server('369252350927306752')
         channel = bot.get_channel("398687305482764289")
@@ -44,7 +45,6 @@ async def serverpfp():
                 f.close()
             await bot.edit_server(server, icon=p)
             await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Dan")
-            dan += 1
         elif 100 < randomnum <= 150:
             with open("jmafmonika.png","rb") as f:
                 p = f.read()
@@ -154,7 +154,7 @@ async def zipper():
     except Exception as e:
         print(str(e))
 
-bot.wait_until_ready()
+
 bot.loop.create_task(zipper())
 bot.loop.create_task(serverpfp())
 
