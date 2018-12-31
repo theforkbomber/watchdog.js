@@ -17,8 +17,6 @@ bot = discord.Client()
 async def serverpfp():
     print("serverpfp")
     try:
-        await bot.wait_until_ready()
-
         server = bot.get_server('369252350927306752')
         channel = bot.get_channel("398687305482764289")
         randomnum = random.randint(1,405)
@@ -46,6 +44,7 @@ async def serverpfp():
                 f.close()
             await bot.edit_server(server, icon=p)
             await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Dan")
+            dan += 1
         elif 100 < randomnum <= 150:
             with open("jmafmonika.png","rb") as f:
                 p = f.read()
@@ -58,13 +57,13 @@ async def serverpfp():
                 f.close()
             await bot.edit_server(server, icon=p)
             await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Sayori (Variant)")
-        elif 205 < randomnum <= 265:
-            with open("monikajmaf.png","rb") as f:
-                p = f.read()
-                f.close()
-            await bot.edit_server(server, icon=p)
-            await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 4)")
-        elif 265 < randomnum <= 355:
+        # elif 205 < randomnum <= 265:
+        #     with open("monikajmaf.png","rb") as f:
+        #         p = f.read()
+        #         f.close()
+        #     await bot.edit_server(server, icon=p)
+        #     await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 4)")
+        elif 205 < randomnum <= 355:
             randomnum2 = random.randint(1,6)
             if randomnum2 == 1:
                 with open("JMAF_ICON_2.png","rb") as f:
@@ -154,7 +153,8 @@ async def zipper():
         await asyncio.sleep(60*60*24)
     except Exception as e:
         print(str(e))
-        
+
+bot.wait_until_ready()
 bot.loop.create_task(zipper())
 bot.loop.create_task(serverpfp())
 
