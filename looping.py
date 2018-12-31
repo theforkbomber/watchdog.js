@@ -16,7 +16,7 @@ bot = discord.Client()
 
 async def serverpfp():
     print("serverpfp")
-    bot.wait_until_ready()
+    await bot.wait_until_ready()
     try:
         server = bot.get_server('369252350927306752')
         channel = bot.get_channel("398687305482764289")
