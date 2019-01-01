@@ -96,7 +96,7 @@ async def serverpfp():
                         p = f.read()
                         f.close()
                     await bot.edit_server(server, icon=p)
-                    await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: JMAF Season 3 Banner")
+                    await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: America Arc Banner")
                     kyo = 0
                     mari = 0
                     season3 = 0
@@ -123,7 +123,7 @@ async def serverpfp():
                             changes = True
             elif 60 < randomnum <= 100 or dan == 0:
                 if dan == 0:
-                    with open("jmafDAN.png","rb") as f:
+                    with open("jMAFDAN.png","rb") as f:
                         p = f.read()
                         f.close()
                     await bot.edit_server(server, icon=p)
