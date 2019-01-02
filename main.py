@@ -615,7 +615,7 @@ async def on_message(message):
         await bot.delete_message(message)
         await bot.send_message(message.author, "You aren't permitted to advertise in this server.")
     else:
-        print("NOT MATCHED OR MOD")
+        pass
 
     if message.content.startswith(">os.help"):
         
