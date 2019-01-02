@@ -275,7 +275,6 @@ async def on_message_delete(message):
     prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li|link)|discordapp.com/invite)/.+[a-z]')
     line = str(message.content)
     if prog.search(line) and not message.author.server_permissions.manage_roles:
-        print(f"MATCHED\nUser: {message.author.name}\nInvite: {message.content}")
         return
     # cursor.execute('''DROP TABLE deleted''')
     # db.commit()
