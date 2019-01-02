@@ -614,6 +614,7 @@ async def on_message(message):
         print("MATCHED")
         await bot.delete_message(message)
         await bot.send_message(message.author, "You aren't permitted to advertise in this server.")
+        return
     else:
         pass
 
