@@ -324,6 +324,7 @@ async def on_message_delete(message):
         r = r[0]
         todisplay = r+"(DELETED)"+str(ts)+" UTC"+"\n"
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
+        ts = message.edited_timestamp
     elif message.edited_timestamp == None:
         print("it hasn't been edited")
         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
