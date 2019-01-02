@@ -302,18 +302,18 @@ async def on_message_delete(message):
             msg = message.attachments[0]["proxy_url"]
         except:
             pass
-    try:
-        msg = message.embeds[0]["author"]["name"]
-    except:
-        pass
-    try:
-        msg = msg +"\n"+message.embeds[0]["description"]
-    except:
-        pass
-    try:
-        msg = msg +"\n"+message.embeds[0]["footer"]["text"]
-    except:
-        pass
+        try:
+            msg = message.embeds[0]["author"]["name"]
+        except:
+            pass
+        try:
+            msg = msg +"\n"+message.embeds[0]["description"]
+        except:
+            pass
+        try:
+            msg = msg +"\n"+message.embeds[0]["footer"]["text"]
+        except:
+            pass
     ts = message.timestamp
     ch = str(message.channel.id)
     author = message.author.id
