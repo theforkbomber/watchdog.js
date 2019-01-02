@@ -618,7 +618,8 @@ async def on_message(message):
         print(f"MATCHED\nUser: {message.author.name}\nInvite: {message.content}")
         result = m.group(0) if m else ""
         if result:
-            c = await bot.get_invite(result)
+            print(str(result))
+            c = await bot.get_invite(str(result))
             if c.server.id in ["369252350927306752", "372766620977725441"]:
                 return
         await bot.delete_message(message)
