@@ -253,8 +253,8 @@ platform.version(),
             server = ctx.message.server
             cursor = db.cursor()
             cursortwo = db.cursor()
-            cursor.execute('''SELECT * FROM deleted WHERE channel = %s'''% (ctx.message.channel.id))
-            cursortwo.execute('''SELECT * FROM edited WHERE channel = %s'''% (ctx.message.channel.id))
+            cursor.execute('''SELECT * FROM deleted WHERE channel = '%s' '''% (ctx.message.channel.id))
+            cursortwo.execute('''SELECT * FROM edited WHERE channel = '%s' '''% (ctx.message.channel.id))
             chan = cursor.fetchone()
             chane = cursortwo.fetchone()
             print(chan)
@@ -262,12 +262,12 @@ platform.version(),
             notFound = True
             if chan[1] == ctx.message.channel.id:
                 notFound = False
-                meme = x
-                msgde = chan[meme][2]
+                # meme = x
+                msgde = chan[2]
             if chane[1] == ctx.message.channel.id:
-                memes = x
-                msge = chane[memes][2]
-                aftermsg = chane[memes][3]
+                # memes = x
+                msge = chane[2]
+                aftermsg = chane[3]
                 notFound = False
             if notFound == True:
                 em = discord.Embed(description="There are no sniped messages in this channel")
@@ -276,13 +276,13 @@ platform.version(),
                 return
             elif notFound == False:
                 try:
-                    deletetime = chan[meme][3]
+                    deletetime = chan[3]
                     deleted = True
                 except:
                     deleted = None
                     pass
                 try:
-                    edittime = chane[memes][4]
+                    edittime = chane[4]
                     edited = True
                 except:
                     edited = None
@@ -291,14 +291,14 @@ platform.version(),
                 # edittime = datetime.strptime(edittime, '%Y-%m-%d %H:%M:%S.%f')
                 if edited != None and deleted != None:
                     if edittime < deletetime:
-                        author = chan[meme][4]
+                        author = chan[4]
                         membername = server.get_member(author)
                         em = discord.Embed(description=msgde)
                         em.set_author(name=membername.name+" said...")
                         em.set_footer(text=str(deletetime))
                         await self.bot.send_message(ctx.message.channel, embed=em)
                     elif edittime > deletetime:
-                        author = chane[memes][5]
+                        author = chane[5]
                         membername = server.get_member(author)
                         if membername.bot == True:
                             return
@@ -308,14 +308,14 @@ platform.version(),
                             em.set_footer(text=str(edittime))
                             await self.bot.send_message(ctx.message.channel, embed=em)
                 elif edited == None:
-                    author = chan[meme][4]
+                    author = chan[4]
                     membername = server.get_member(author)
                     em = discord.Embed(description=msgde)
                     em.set_author(name=membername.name+" said...")
                     em.set_footer(text=str(deletetime))
                     await self.bot.send_message(ctx.message.channel, embed=em)
                 elif deleted == None:
-                    author = chane[memes][5]
+                    author = chane[5]
                     membername = server.get_member(author)
                     if membername.bot == True:
                         return
