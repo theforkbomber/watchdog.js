@@ -275,7 +275,7 @@ async def on_message_delete(message):
     prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li|link)|discordapp.com/invite)/.+[a-z]')
     line = str(message.content)
     if prog.search(line) and not message.author.server_permissions.manage_roles:
-        print("MATCHED")
+        print(f"MATCHED\nUser: {message.author.name}\nInvite: {message.content}")
         return
     # cursor.execute('''DROP TABLE deleted''')
     # db.commit()
@@ -615,7 +615,7 @@ async def on_message(message):
     prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li|link)|discordapp.com/invite)/.+[a-z]')
     line = str(message.content)
     if prog.search(line) and not message.author.server_permissions.manage_roles:
-        print("MATCHED")
+        print(f"MATCHED\nUser: {message.author.name}\nInvite: {message.content}")
         await bot.delete_message(message)
         await bot.send_message(message.author, "You aren't permitted to advertise in this server.")
         return
