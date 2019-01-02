@@ -257,6 +257,8 @@ platform.version(),
             cursortwo.execute('''SELECT * FROM edited''')
             chan = cursor.fetchall()
             chane = cursortwo.fetchall()
+            print(chan)
+            print(chane)
             notFound = True
             for x in range(0,len(chan)):
                 if chan[x][1] == ctx.message.channel.id:
