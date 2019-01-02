@@ -253,25 +253,22 @@ platform.version(),
             server = ctx.message.server
             cursor = db.cursor()
             cursortwo = db.cursor()
-            cursor.execute('''SELECT * FROM deleted''')
-            cursortwo.execute('''SELECT * FROM edited''')
-            chan = cursor.fetchall()
-            chane = cursortwo.fetchall()
+            cursor.execute('''SELECT * FROM deleted WHERE channel = %s'''% (ctx.message.channel.id))
+            cursortwo.execute('''SELECT * FROM edited WHERE channel = %s'''% (ctx.message.channel.id))
+            chan = cursor.fetchone()
+            chane = cursortwo.fetchone()
             print(chan)
             print(chane)
             notFound = True
-            for x in range(0,len(chan)):
-                if chan[x][1] == ctx.message.channel.id:
-                    notFound = False
-                    meme = x
-                    msgde = chan[meme][2]
-
-            for x in range(0,len(chane)):
-                if chane[x][1] == ctx.message.channel.id:
-                    memes = x
-                    msge = chane[memes][2]
-                    aftermsg = chane[memes][3]
-                    notFound = False
+            if chan[1] == ctx.message.channel.id:
+                notFound = False
+                meme = x
+                msgde = chan[meme][2]
+            if chane[1] == ctx.message.channel.id:
+                memes = x
+                msge = chane[memes][2]
+                aftermsg = chane[memes][3]
+                notFound = False
             if notFound == True:
                 em = discord.Embed(description="There are no sniped messages in this channel")
                 em.set_author(name="Whoops!")
