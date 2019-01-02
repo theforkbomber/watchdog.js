@@ -198,7 +198,7 @@ async def on_command_error(error, ctx):
 
 @bot.event
 async def on_message_edit(before, after):
-    prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li|link)|discordapp.com/invite)/.+[A-Za-z0-9]')
+    prog = re.compile(r'(https?:\/\/)?(www.)?((discord).(gg|io|me|li|link)|discordapp.com\/invite|invite.(gg|io|me|li|link))\/.+[a-zA-Z0-9]')
     line = str(after.content)
     if prog.search(line) and not after.author.server_permissions.manage_roles:
         m = prog.search(line)
@@ -627,7 +627,7 @@ async def on_message(message):
     if message.channel.is_private == True:
         return
 
-    prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li|link)|discordapp.com/invite)/.+[A-Za-z0-9]')
+    prog = re.compile(r'(https?:\/\/)?(www.)?((discord).(gg|io|me|li|link)|discordapp.com\/invite|invite.(gg|io|me|li|link))\/.+[a-zA-Z0-9]')
     line = str(message.content)
     if prog.search(line) and not message.author.server_permissions.manage_roles:
         m = prog.search(line)
