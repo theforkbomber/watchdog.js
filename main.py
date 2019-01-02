@@ -614,7 +614,13 @@ async def on_message(message):
     prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li|link)|discordapp.com/invite)/.+[a-z]')
     line = str(message.content)
     if prog.search(line) and not message.author.server_permissions.manage_roles:
+        m = prog.search(line)
         print(f"MATCHED\nUser: {message.author.name}\nInvite: {message.content}")
+        result = m.group(0) if m else ""
+        if result:
+            c = await bot.get_invite(result)
+            if c.server.id in ["369252350927306752", "372766620977725441"]:
+                return
         await bot.delete_message(message)
         await bot.send_message(message.author, "You aren't permitted to advertise in this server.")
         return
