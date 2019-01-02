@@ -608,7 +608,7 @@ async def on_message(message):
     if message.channel.is_private == True:
         return
 
-    prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li)|discordapp.com/invite)/.+[a-z]')
+    prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li|link)|discordapp.com/invite)/.+[a-z]')
     line = str(message.content)
     if prog.search(line) and not message.author.server_permissions.manage_roles:
         print("MATCHED")
