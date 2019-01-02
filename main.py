@@ -608,6 +608,15 @@ async def on_message(message):
     if message.channel.is_private == True:
         return
 
+    prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li)|discordapp.com/invite)/.+[a-z]')
+    line = str(message.content)
+    if prog.search(line) and not message.author.server_permissions.manage_roles:
+        print("MATCHED")
+        await bot.delete_message(message)
+        await bot.send_message(message.author, "You aren't permitted to advertise in this server.")
+    else:
+        print("NOT MATCHED OR MOD")
+
     if message.content.startswith(">os.help"):
         
         payload = """This is still a work in progess, but have *you* got any suggestions or ideas? Ping me in <#466802471876952095>!"""
