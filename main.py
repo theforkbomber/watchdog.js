@@ -199,18 +199,18 @@ async def on_command_error(error, ctx):
 @bot.event
 async def on_message_edit(before, after):
     prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li|link)|discordapp.com/invite)/.+[A-Za-z0-9]')
-    line = str(message.content)
-    if prog.search(line) and not message.author.server_permissions.manage_roles:
+    line = str(after.content)
+    if prog.search(line) and not after.author.server_permissions.manage_roles:
         m = prog.search(line)
-        print(f"MATCHED\nUser: {message.author.name}\nInvite: {message.content}")
+        print(f"MATCHED\nUser: {after.author.name}\nInvite: {after.content}")
         result = m.group(0) if m else ""
         if result:
             print(str(result))
             c = await bot.get_invite(str(result))
             if c.server.id in ["369252350927306752", "372766620977725441"]:
                 return
-        await bot.delete_message(message)
-        await bot.send_message(message.author, "You aren't permitted to advertise in this server.")
+        await bot.delete_message(after)
+        await bot.send_message(after.author, "You aren't permitted to advertise in this server.")
         return
     try:
         if str(before.channel.type) == "private":
