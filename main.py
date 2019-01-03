@@ -329,7 +329,7 @@ async def on_message_delete(message):
         print("it hasn't been edited")
         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
-    if not ("nigger" in message.content and message.author.id == "418828859069300742"):
+    if not ("nigger" in message.content.lower() and message.author.id == "418828859069300742"):
         cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
         cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
 
@@ -599,7 +599,7 @@ async def on_member_update(before, after):
 
 @bot.event
 async def on_message(message):
-    if "nigger" in message.content and message.author.id == "418828859069300742":
+    if "nigger" in message.content.lower() and message.author.id == "418828859069300742":
         await bot.delete_message(message)
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
