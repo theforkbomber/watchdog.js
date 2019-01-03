@@ -316,9 +316,9 @@ async def on_message_delete(message):
         except:
             pass
     ts = message.timestamp
-    mem = message.server.get_member(author)
     ch = str(message.channel.id)
     author = message.author.id
+    mem = message.server.get_member(author)
     if message.edited_timestamp != None:
         print("it has been edited")
         cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
