@@ -319,9 +319,9 @@ async def on_message_delete(message):
     ch = str(message.channel.id)
     author = message.author.id
     mem = message.server.get_member(author)
-    print("niggerfilter: "+(("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) ^ (mem.bot == False))
+    print(str("niggerfilter: "+(("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) ^ (mem.bot == False)))
     print(mem.bot)
-    print("asda"+(("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) == (mem.bot == False))
+    print(str("asda"+(("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) == (mem.bot == False)))
     if message.edited_timestamp != None:
         print("it has been edited")
         cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
