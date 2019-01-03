@@ -260,15 +260,21 @@ platform.version(),
             print(chan)
             print(chane)
             notFound = True
-            if chan[1] == ctx.message.channel.id:
-                notFound = False
-                # meme = x
-                msgde = chan[2]
-            if chane[1] == ctx.message.channel.id:
-                # memes = x
-                msge = chane[2]
-                aftermsg = chane[3]
-                notFound = False
+            try:
+                if chan[1] == ctx.message.channel.id:
+                    notFound = False
+                    # meme = x
+                    msgde = chan[2]
+            except:
+                pass
+            try:
+                if chane[1] == ctx.message.channel.id:
+                    # memes = x
+                    msge = chane[2]
+                    aftermsg = chane[3]
+                    notFound = False
+            except:
+                pass
             if notFound == True:
                 em = discord.Embed(description="There are no sniped messages in this channel")
                 em.set_author(name="Whoops!")
