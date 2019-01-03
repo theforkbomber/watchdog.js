@@ -276,8 +276,9 @@ async def on_message_edit(before, after):
                 r = r[0]
                 todisplay = r+"\n(EDITED)"+str(ts)+" UTC"+"\n"+aftermsg
                 cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(before.id)))
-                cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
-                cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
+                if not mem.bot:
+                    cursor.execute('''DELETE FROM edited WHERE channel ='%s';'''% str(ch),)
+                    cursor.execute('''INSERT INTO edited(channel, messagebefore, messageafter, timestamp, author)VALUES(%s,%s,%s,%s,%s) RETURNING id;''', (ch, beforemsg, aftermsg, ts, author))
                 db.commit()
                 db.close()
             db.close()
@@ -315,6 +316,7 @@ async def on_message_delete(message):
         except:
             pass
     ts = message.timestamp
+    mem = server.get_member(author)
     ch = str(message.channel.id)
     author = message.author.id
     if message.edited_timestamp != None:
@@ -329,7 +331,7 @@ async def on_message_delete(message):
         print("it hasn't been edited")
         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
-    if not ("nigger" in message.content.lower() and message.author.id == "418828859069300742"):
+    if not ("nigger" in message.content.lower() and message.author.id == "418828859069300742") or not mem.bot:
         cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
         cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
 
