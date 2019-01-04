@@ -287,6 +287,8 @@ async def on_message_edit(before, after):
 
 @bot.event
 async def on_message_delete(message):
+    if ">os.logs" in message.content or ">os.flogs" in message.content:
+        return
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
     prog = re.compile(r'(https?://)?(www.)?(discord.(gg|io|me|li|link)|discordapp.com/invite)/.+[a-z]')
