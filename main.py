@@ -335,9 +335,10 @@ async def on_message_delete(message):
         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
     if (("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) ^ (mem.bot == False):
-        cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
-        cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
-    if (("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) == (mem.bot == False):
+        if mem.bot == True:
+            db.commit()
+            db.close()
+            return
         cursor.execute('''DELETE FROM deleted WHERE channel ='%s';'''% str(ch),)
         cursor.execute('''INSERT INTO deleted(channel, message, timestamp, author)VALUES(%s,%s,%s,%s) RETURNING id;''', (ch, msg, str(ts), author))
     db.commit()
