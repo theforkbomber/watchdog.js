@@ -334,7 +334,7 @@ async def on_message_delete(message):
         print("it hasn't been edited")
         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
-    if (("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) ^ (mem.bot == False):
+    if not (("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) ^ (mem.bot == False):
         if mem.bot == True:
             db.commit()
             db.close()
