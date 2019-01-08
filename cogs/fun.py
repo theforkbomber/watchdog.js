@@ -35,10 +35,16 @@ class Fun:
         user_agent='watchdog',
         username='theforkbomber',
         password=config.reddit)
-        eyebleach_submissions = reddit.subreddit('eyebleach').hot()
-        post_to_pick = random.randint(1, 100)
-        for i in range(0, post_to_pick):
-            submission = next(x for x in eyebleach_submissions if not x.stickied)
+        chosen = False
+        while chosen == False:
+            eyebleach_submissions = reddit.subreddit('eyebleach').hot()
+            post_to_pick = random.randint(1, 100)
+            for i in range(0, post_to_pick):
+                submission = next(x for x in eyebleach_submissions if not x.stickied)
+            if ".gifv" in str(submission.url):
+                pass
+            else:
+                break
         e = discord.Embed(colour=0xFFC0CB)
         e.set_image(url=submission.url)
         e.set_footer(text='Eyebleach requested by %s' % (ctx.message.author), icon_url='')
