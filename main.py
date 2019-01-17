@@ -362,7 +362,6 @@ async def on_member_join(member):
     # if not ("everyone" in member.nick or "here" in member.nick):
     #     pass
     # elif "everyone" in member.nick or "here" in member.nick:
-
     server = member.server
     dokis = ["Monika", "Misao", "Sayori", "Natsuki", "Protagonist", "Yuri"]
     Doki = False
@@ -378,7 +377,7 @@ async def on_member_join(member):
     else:
         name = member.nick
     nickcheck = nicknamecheck(name)
-    if nickcheck != None:
+    if nickcheck != None and member.id != '487029456397926420':
         await bot.change_nickname(member, "Not"+nickcheck)
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
