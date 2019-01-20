@@ -63,7 +63,9 @@ class Fun:
             post_to_pick = random.randint(1, 100)
             for i in range(0, post_to_pick):
                 submission = next(x for x in eyebleach_submissions if not x.stickied)
-            if not (".png" in str(submission.url)) or not (".jpg" in str(submission.url)):
+            if ".png" in str(submission.url) == False:
+                pass
+            if ".jpg" in str(submission.url) == False:
                 pass
             else:
                 break
