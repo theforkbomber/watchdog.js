@@ -66,7 +66,7 @@ class Fun:
             if ".png" in str(submission.url) == False:
                 pass
             if ".jpg" in str(submission.url) == False:
-                pass
+                continue
             else:
                 break
         print(submission.url)
