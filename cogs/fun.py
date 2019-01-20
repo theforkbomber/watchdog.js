@@ -63,12 +63,12 @@ class Fun:
             post_to_pick = random.randint(1, 100)
             for i in range(0, post_to_pick):
                 submission = next(x for x in eyebleach_submissions if not x.stickied)
-            if ".png" in str(submission.url) == True:
+            if ".png" in str(submission.url):
                 break
-            if ".jpg" in str(submission.url) == True:
+            if ".jpg" in str(submission.url):
                 break
             else:
-                continue
+                pass
         print(submission.url)
         e = discord.Embed(colour=0xFFC0CB)
         e.set_image(url=submission.url)
