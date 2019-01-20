@@ -57,10 +57,17 @@ class Fun:
         user_agent='watchdog',
         username='theforkbomber',
         password=config.reddit)
-        toebean_submissions = reddit.subreddit('shiba').hot()
-        post_to_pick = random.randint(1, 100)
-        for i in range(0, post_to_pick):
-            submission = next(x for x in toebean_submissions if not x.stickied)
+        chosen = False
+        while chosen == False:
+            eyebleach_submissions = reddit.subreddit('shibe').hot()
+            post_to_pick = random.randint(1, 100)
+            for i in range(0, post_to_pick):
+                submission = next(x for x in eyebleach_submissions if not x.stickied)
+            if ".gifv" in str(submission.url):
+                pass
+            else:
+                break
+        print(submission.url)
         e = discord.Embed(colour=0xFFC0CB)
         e.set_image(url=submission.url)
         e.set_footer(text='Doggo requested by %s' % (ctx.message.author), icon_url='')
