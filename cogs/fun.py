@@ -77,7 +77,7 @@ class Fun:
         e = discord.Embed(colour=0xFFC0CB)
         e.set_image(url=submission.url)
         e.set_footer(text='Pupper requested by %s' % (ctx.message.author), icon_url='')
-        await self.bot.edit_message(message, new_content="Done!" embed=e)
+        await self.bot.edit_message(message, new_content="Done!", embed=e)
 
     @commands.command(pass_context=True, aliases = ["rolo","shiba"])
     async def shibe(self, ctx):
