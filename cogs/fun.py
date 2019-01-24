@@ -58,7 +58,7 @@ class Fun:
         username='theforkbomber',
         password=config.reddit)
         chosen = False
-        message = await self.bot.send_message("Loading...")
+        message = await self.bot.send_message(ctx.message.channel, "Loading...")
         while chosen == False:
             eyebleach_submissions = reddit.subreddit('puppies').hot()
             post_to_pick = random.randint(1, 100)
