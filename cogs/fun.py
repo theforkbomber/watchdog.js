@@ -64,6 +64,9 @@ class Fun:
             for i in range(0, post_to_pick):
                 submission = next(x for x in eyebleach_submissions if not x.stickied)
             if ".png" in str(submission.url):
+                await self.bot.send_message(ctx.message.channel, submission.url)
+                return
+            if ".png" in str(submission.url):
                 break
             if ".jpg" in str(submission.url):
                 break
