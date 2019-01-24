@@ -58,13 +58,14 @@ class Fun:
         username='theforkbomber',
         password=config.reddit)
         chosen = False
+        message = await self.bot.send_message("Loading...")
         while chosen == False:
             eyebleach_submissions = reddit.subreddit('puppies').hot()
             post_to_pick = random.randint(1, 100)
             for i in range(0, post_to_pick):
                 submission = next(x for x in eyebleach_submissions if not x.stickied)
             if ".png" in str(submission.url):
-                await self.bot.send_message(ctx.message.channel, submission.url)
+                await self.bot.edit_message(message, submission.url)
                 return
             if ".png" in str(submission.url):
                 break
@@ -76,7 +77,7 @@ class Fun:
         e = discord.Embed(colour=0xFFC0CB)
         e.set_image(url=submission.url)
         e.set_footer(text='Pupper requested by %s' % (ctx.message.author), icon_url='')
-        await self.bot.send_message(ctx.message.channel, embed=e)
+        await self.bot.edit_message(message, embed=e)
 
     @commands.command(pass_context=True, aliases = ["rolo","shiba"])
     async def shibe(self, ctx):
