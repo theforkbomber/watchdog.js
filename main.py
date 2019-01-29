@@ -608,10 +608,22 @@ async def on_member_update(before, after):
 
 @bot.event
 async def on_message(message):
-    if "nigger" in message.content.lower() and message.author.id == "418828859069300742":
-        await bot.delete_message(message)
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
+    cursor.execute("""SELECT last_message_sent FROM nuggies WHERE playerid = '%s'"""% message.author.id)
+    last_sent = cursor.fetchone()
+    if last_sent[0] == None:
+        cursor.execute("""INSERT INTO nuggies(playerid, nuggies)VALUES(%s, %s, %s)""", (message.author.id, 100))
+    if last_sent[0] != None:
+        if last_sent[0] >= (datetime.now() - timedelta(days=1)):
+            pass
+        else:
+            cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
+            nuggies = cursor.fetchone()
+            cursor.execute('''UPDATE nuggies SET last_sent = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
+            cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
+    if "nigger" in message.content.lower() and not "N-Word Pass" in [r.name for r in ctx.message.author.roles]:
+        await bot.delete_message(message)
     details = "Sent by "+message.author.name+" @"+str(message.timestamp)+"UTC"
     msg = message.content
     if len(message.attachments) > 0:
@@ -719,7 +731,7 @@ async def on_message(message):
             ##await bot.wait_until_ready()
             await bot.process_commands(message)
             return
-        elif test[0] not in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "Dan","Protag", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
+        elif test[0] not in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
             ##await bot.wait_until_ready()
             try:
                 print(message.channel)
