@@ -77,7 +77,10 @@ class NuggiesCommands():
         embed.set_footer(text = "When purchasing, use the EXACT name provided ^.^")
         print(found)
         if found[0] != None:
-            itemlist = found[0].split("|")
+            # try:
+            #     itemlist = found[5].split("|")
+            # else:
+
             user_roles = [r.name for r in ctx.message.author.roles]
             if not "Doki Doki" in user_roles:
                 x += 1
@@ -104,7 +107,7 @@ class NuggiesCommands():
                 keys += str(x)+""". Princess Key - "Grants access to Marissa's bedroom. Not sure why you'd want this, but if you're into that sort of thing...\n"""
                 buyables.update({"princess' bedroom", 900})
                 emotes.update({x:"princess' bedroom"})
-            if not "N word pass" in itemlist:
+            if not "N-Word Pass" in user_roles:
                 x += 1
                 passes += str(x)+""". N Card - "I knew a guy who knew a guy who knew an African American, and with this, you can say it all you want! (Just don't go too overboard.)\n"""
                 buyables.update({"n word pass", 200})
