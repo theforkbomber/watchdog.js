@@ -79,7 +79,7 @@ class NuggiesCommands():
         buyables = {}
         x = 0
         em = False
-        embed = discord.Embed(title = f"{discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')} MIYUKI'S NICE NUGGIE MARKET {discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')}", description = "Current Balance: "+str(balance))
+        embed = discord.Embed(title = f"{discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')} MIYUKI'S NICE NUGGIE MARKET {discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')}", description = "Current Balance: "+str(balance)+" <:nuggies:539932838318047244>")
         embed.set_footer(text = "Use the :votex: emotes to purchase goods")
         print(found)
         if found[0] != None:
