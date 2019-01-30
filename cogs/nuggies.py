@@ -103,9 +103,9 @@ class NuggiesCommands():
                 emotes.update({x:"$player$"})
             if not "Gold Member" in user_roles:
                 x += 1
-                keys += f"""{reactioned[x-1]} 200 <:nuggies:539932838318047244> Doki Do-key :heart:\n"""
-                buyables.update({"doki doki":200})
-                emotes.update({x:"doki doki"})
+                keys += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Gold Member \n"""
+                buyables.update({"gold member":100000})
+                emotes.update({x:"gold member"})
             if not "Doki Doki" in user_roles:
                 x += 1
                 keys += f"""{reactioned[x-1]} <:dokidokey:539971188387086336> 200 <:nuggies:539932838318047244> Doki Do-key :heart:\n"""
