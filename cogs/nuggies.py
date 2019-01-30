@@ -172,7 +172,7 @@ class NuggiesCommands():
                         print(checker.reaction)
                     except:
                         pass
-                    await self.bot.say(str(checker.reaction.emoji in reactioned))
+                    # await self.bot.say(str(checker.reaction.emoji in reactioned))
                     if checker.reaction.emoji in reactioned:
                         reacted = reactioncheck(checker.reaction.emoji)
                         item = emotes[reacted]
