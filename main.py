@@ -624,7 +624,7 @@ async def on_message(message):
                 nuggies = cursor.fetchone()
                 cursor.execute('''UPDATE nuggies SET last_sent = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
                 cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
-        if "nigger" in message.content.lower() and not "N-Word Pass" in [r.name for r in ctx.message.author.roles]:
+        if "nigger" in message.content.lower() and not "N-Word Pass" in [r.name for r in message.author.roles]:
             await bot.delete_message(message)
     details = "Sent by "+message.author.name+" @"+str(message.timestamp)+"UTC"
     msg = message.content
