@@ -183,7 +183,7 @@ class NuggiesCommands():
                         else:
                             t = await self.bot.say("I'm sorry, but you can't buy that, chief.")
                             await asyncio.sleep(3)
-                            await self.bot.remove_message(t)
+                            await self.bot.delete_message(t)
                     else:
                         t = await self.bot.say("That's not in the store, chief, did you use the exact name :/")
                         await asyncio.sleep(3)
