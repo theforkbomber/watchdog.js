@@ -177,18 +177,21 @@ async def on_ready():
 
 @bot.event
 async def on_reaction_add(reaction, user):
-    if reaction == discord.Reaction(emoji="🛑") and user.id == "275312272975462411":
-        await bot.delete_message(reaction.message)
-    elif len(reaction.message.embeds) != 0:
-        payload = reaction.message.embeds[0]['description']
-    else:
-        payload = reaction.message.content
-    if reaction in listoflangs:
-        lang = listoflangs[reaction]
-        print(lang, reaction)
-        await bot.send_typing(reaction.message.channel)
-        em = discord.Embed(description=translateerrr(payload, lang), colour=0x53bceb)
-        await bot.send_message(reaction.message.channel, embed=em)
+    try:
+        if reaction == discord.Reaction(emoji="🛑") and user.id == "275312272975462411":
+            await bot.delete_message(reaction.message)
+        elif len(reaction.message.embeds) != 0:
+            payload = reaction.message.embeds[0]['description']
+        else:
+            payload = reaction.message.content
+        if reaction in listoflangs:
+            lang = listoflangs[reaction]
+            print(lang, reaction)
+            await bot.send_typing(reaction.message.channel)
+            em = discord.Embed(description=translateerrr(payload, lang), colour=0x53bceb)
+            await bot.send_message(reaction.message.channel, embed=em)
+    except:
+        pass
 
 @bot.event
 async def on_command_error(error, ctx):

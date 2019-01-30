@@ -164,7 +164,7 @@ class NuggiesCommands():
                         await asyncio.sleep(0.4)
                     checker = await self.bot.wait_for_reaction(user = ctx.message.author, message = newmessage, timeout = 60)
                     if checker == None:
-                        await self.bot.say("Come again soon!")
+                        await self.bot.say("Time's up! Come again soon when you've thought about your purchase! :owo:")
                         cancelled = True
 
                     if checker.reaction in reactioned:
