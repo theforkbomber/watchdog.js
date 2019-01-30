@@ -100,7 +100,7 @@ class NuggiesCommands():
                 emotes.update({x:"$player$"})
             if not "Doki Do-key" in user_roles:
                 x += 1
-                keys += f"""{reactioned[x-1]} <:dokidokey:539971188638613554> `200 nugs` Doki Doki :heart:\n"""
+                keys += f"""{reactioned[x-1]} <:dokidokey:539971188387086336> `200 nugs` Doki Doki :heart:\n"""
                 buyables.update({"doki doki":200})
                 emotes.update({x:"doki doki"})
             if not "Princess' Bedroom" in user_roles:
