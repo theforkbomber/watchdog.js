@@ -172,40 +172,43 @@ class NuggiesCommands():
                         await self.bot.add_reaction(newmessage, x)
                         await asyncio.sleep(0.4)
                     checker = await self.bot.wait_for_reaction(user = ctx.message.author, message = newmessage, timeout = 60)
-                    if checker.reaction.emoji == None:
-                        reaction = discord.utils.get(ctx.message.server.emojis, id = "389266641348853760")
-                        await self.bot.say(f"Time's up! Come again soon when you've thought about your purchase! {reaction}")
-                        cancelled = True
-                        break
                     try:
-                        print(checker.reaction)
-                    except:
-                        pass
-                    # await self.bot.say(str(checker.reaction.emoji in reactioned))
-                    if checker.reaction.emoji in reactioned:
-                        reacted = reactioncheck(checker.reaction.emoji)
-                        item = emotes[reacted]
-                        cost = buyables[item]
-                        cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
-                        balance = cursor.fetchone()
-                        balance = balance[0]
-                        print("bal:"+str(balance))
-                        print("cost:"+str(cost))
-                        if balance >= cost:
-                            balance = balance - cost
-                            await chck(self, ctx.message.server, item, ctx.message.author)
-                            # ser nam mem
-                            cursor.execute("""UPDATE nuggies SET nuggies = %s WHERE playerid = %s""", (balance, ctx.message.author.id))
-                            db.commit()
-                            await self.bot.say(f"You have successfully bought: `{item}`!")
+                        if checker.reaction.emoji == None:
+                            reaction = discord.utils.get(ctx.message.server.emojis, id = "389266641348853760")
+                            await self.bot.say(f"Time's up! Come again soon when you've thought about your purchase! {reaction}")
+                            cancelled = True
+                            break
+                        try:
+                            print(checker.reaction)
+                        except:
+                            pass
+                        # await self.bot.say(str(checker.reaction.emoji in reactioned))
+                        if checker.reaction.emoji in reactioned:
+                            reacted = reactioncheck(checker.reaction.emoji)
+                            item = emotes[reacted]
+                            cost = buyables[item]
+                            cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
+                            balance = cursor.fetchone()
+                            balance = balance[0]
+                            print("bal:"+str(balance))
+                            print("cost:"+str(cost))
+                            if balance >= cost:
+                                balance = balance - cost
+                                await chck(self, ctx.message.server, item, ctx.message.author)
+                                # ser nam mem
+                                cursor.execute("""UPDATE nuggies SET nuggies = %s WHERE playerid = %s""", (balance, ctx.message.author.id))
+                                db.commit()
+                                await self.bot.say(f"You have successfully bought: `{item}`!")
+                            else:
+                                t = await self.bot.say("I'm sorry, but you can't buy that, chief.")
+                                await asyncio.sleep(3)
+                                await self.bot.delete_message(t)
                         else:
-                            t = await self.bot.say("I'm sorry, but you can't buy that, chief.")
+                            t = await self.bot.say("That's not in the store, chief, did you use the exact name :/")
                             await asyncio.sleep(3)
                             await self.bot.delete_message(t)
-                    else:
-                        t = await self.bot.say("That's not in the store, chief, did you use the exact name :/")
-                        await asyncio.sleep(3)
-                        await self.bot.delete_message(t)
+                    except:
+                        pass
         db.commit()
         db.close()
 def setup(bot):
