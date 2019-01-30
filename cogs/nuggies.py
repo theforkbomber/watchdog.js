@@ -63,7 +63,7 @@ class NuggiesCommands():
                 return 10
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
-        cursor.execute("""SELECT items_purchased FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
+        cursor.execute("""SELECT * FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
         found = cursor.fetchone()
         roles_available = ""
         keys = ""
