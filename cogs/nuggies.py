@@ -39,7 +39,7 @@ class NuggiesCommands():
     async def nuggystore(self, ctx):
         print("trying to nug")
         jserver = self.bot.get_server("369252350927306752")
-        reactioned = [discord.utils.get(jserver.emojis, id = "388471019914002433"), discord.utils.get(jserver.emojis, id = "388471020417318912"), discord.utils.get(jserver.emojis, id = "388471020341821450"), discord.utils.get(jserver.emojis, id = "388471020220055553"), discord.utils.get(jserver.emojis, id = "388471020220186626"), discord.utils.get(jserver.emojis, id = "388471020593479681"), discord.utils.get(jserver.emojis, id = "388471020190695426"), discord.utils.get(jserver.emojis, id = "388471020362661890"), discord.utils.get(jserver.emojis, id = "388471020581027844"), discord.utils.get(jserver.emojis, id = "388471020572377099")]
+        reactioned = [discord.utils.get(jserver.emojis, id = "388471019914002433").emoji, discord.utils.get(jserver.emojis, id = "388471020417318912").emoji, discord.utils.get(jserver.emojis, id = "388471020341821450").emoji, discord.utils.get(jserver.emojis, id = "388471020220055553").emoji, discord.utils.get(jserver.emojis, id = "388471020220186626").emoji, discord.utils.get(jserver.emojis, id = "388471020593479681").emoji, discord.utils.get(jserver.emojis, id = "388471020190695426").emoji, discord.utils.get(jserver.emojis, id = "388471020362661890").emoji, discord.utils.get(jserver.emojis, id = "388471020581027844").emoji, discord.utils.get(jserver.emojis, id = "388471020572377099").emoji]
         def reactioncheck(reaction):
             if reaction == reactioned[0]:
                 return 1
@@ -168,9 +168,9 @@ class NuggiesCommands():
                         await self.bot.say(f"Time's up! Come again soon when you've thought about your purchase! {reaction}")
                         cancelled = True
                     print(checker.reaction)
-                    await self.bot.say(str(checker.reaction in reactioned))
-                    if checker.reaction in reactioned:
-                        reacted = reactioncheck(checker.reaction)
+                    await self.bot.say(str(checker.reaction.emoji in reactioned))
+                    if checker.reaction.emoji in reactioned:
+                        reacted = reactioncheck(checker.reaction.emoji)
                         item = emotes[reacted]
                         cost = buyables[item]
                         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
