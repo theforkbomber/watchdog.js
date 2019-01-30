@@ -642,6 +642,10 @@ async def on_message(message):
             db.commit()
             db.close()
             return
+    if message.channel.id == "398333869327122432" and not "nonugs" in message.content:
+        cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
+        nuggies = cursor.fetchone()
+        cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+515, str(message.author.id)))
     if (messages[0] % 100)== 0:
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
         nuggies = cursor.fetchone()
