@@ -119,7 +119,7 @@ class NuggiesCommands():
             buyables.update({"custom pic":100000})
             emotes.update({x:"custom pic"})
             x += 1
-            roles_available += f"""{reactioned[x-1]} `100k nugs` Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
+            custom += f"""{reactioned[x-1]} `100k nugs` Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
             buyables.update({"custom role":100000})
             emotes.update({x:"custom role"})
             if roles_available != "":
