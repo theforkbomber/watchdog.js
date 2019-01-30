@@ -98,9 +98,9 @@ class NuggiesCommands():
                 roles_available += f"""{reactioned[x-1]} `5151 nugs` $PLAYER$ - "An exclusive role, this one is you!!! The faint colour emitting from the other side of your monitor. :eyes:\n"""
                 buyables.update({"$player$":5151})
                 emotes.update({x:"$player$"})
-            if not "Doki Do-key" in user_roles:
+            if not "Doki Doki" in user_roles:
                 x += 1
-                keys += f"""{reactioned[x-1]} <:dokidokey:539971188387086336> `200 nugs` Doki Doki :heart:\n"""
+                keys += f"""{reactioned[x-1]} <:dokidokey:539971188387086336> `200 nugs` Doki Do-key :heart:\n"""
                 buyables.update({"doki doki":200})
                 emotes.update({x:"doki doki"})
             if not "Princess' Bedroom" in user_roles:
