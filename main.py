@@ -136,6 +136,7 @@ initial_extensions = (
     'cogs.roles',
     'cogs.fun',
     'cogs.music',
+    'cogs.nuggies'
 )
 
 
