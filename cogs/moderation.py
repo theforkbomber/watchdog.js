@@ -131,7 +131,7 @@ class Moderation:
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% user.id)
         nuggies = cursor.fetchone()
         cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+n, str(user.id)))
-        await self.bot.say(f"Successfully added {str(n)} from {user.name}.")
+        await self.bot.say(f"Successfully added {str(n)} to {user.name}.")
         db.commit()
         db.close()
 
