@@ -92,6 +92,10 @@ class NuggiesCommands():
             #     roles_available += str(x)+". Protagonist :chibidanjump:\n"
             #     buyables.update({"protagonist", 5000})
             #     emotes.update({x:"protagonist"})
+            x += 1
+            roles_available += str(x)+""". Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
+            buyables.update({"custom role":100000})
+            emotes.update({x:"custom role"})
             if not "Miyuki" in user_roles:
                 x += 1
                 roles_available += str(x)+""". Miyuki - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile: Once purchased, it will be unlocked in your #role-requests flags\n."""
@@ -112,10 +116,7 @@ class NuggiesCommands():
                 passes += str(x)+""". N Card - "I knew a guy who knew a guy who knew an African American, and with this, you can say it all you want! (Just don't go too overboard.)\n"""
                 buyables.update({"n word pass":200})
                 emotes.update({x:"n word pass"})
-            x += 1
-            roles_available += str(x)+""". Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
-            buyables.update({"custom role":100000})
-            emotes.update({x:"custom role"})
+            
             x += 1
             custom += str(x)+""". Custom Pictures Command - "Get your own little pictures command, like >os.rolo!\n"""""
             buyables.update({"custom pic":100000})
@@ -158,6 +159,9 @@ class NuggiesCommands():
                     #             await self.bot.say("I'm sorry, but you can't buy that, chief.")
                     #     else:
                     #         await self.bot.say("That's not in the store, chief, did you use the exact name :/")
+                    for x in reactioned:
+                        await self.bot.add_reaction(ctx.message, x)
+                        await asyncio.sleep(0.4)
                     checker = await self.bot.wait_for_reaction(user = ctx.message.author, message = ctx.message, timeout = 60)
                     if checker == None:
                         await self.bot.say("Come again soon!")
