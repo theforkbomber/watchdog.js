@@ -4,64 +4,69 @@ import psycopg2
 import asyncio
 import config
 
+
+
+
+
+    
+
+
+async def chck(self, server, name, member):
+    if name == "doki doki":
+        role = discord.utils.get(server.roles, name = "Doki Doki")
+        await self.bot.add_roles(member, role)
+        # if name == "protagonist":
+        #     role = discord.utils.get(server.roles, name = "Protagonist")
+        #     await self.bot.add_roles(member, role)
+    if name == "miyuki":
+        role = discord.utils.get(server.roles, name = "Miyuki")
+        await self.bot.add_roles(member, role)
+    if name == "$player$":
+        role = discord.utils.get(server.roles, name = "$PLAYER$")
+        await self.bot.add_roles(member, role)
+    if name == "princess' bedroom":
+        role = discord.utils.get(server.roles, name = "Princess' Bedroom")
+        await self.bot.add_roles(member, role)
+    if name == "n word pass":
+        role = discord.utils.get(server.roles, name = "N-Word Pass")
+        await self.bot.add_roles(member, role)
+    if name == "custom role":
+        await self.bot.send_message(self.bot.get_channel('526179783994900491'), member.name+" wants a custom role!")
+    if name == "custom pic":
+        c = await self.bot.application_info()
+        owner = c.owner.id
+        await self.bot.send_message(owner, member.name+" wants a custom command!")
+
+
 class NuggiesCommands:
     def __init__(self, bot):
         self.bot = bot
-    jserver = bot.get_server("369252350927306752")
-    reactioned = [discord.utils.get(jserver.emojis, id = "388471019914002433"), discord.utils.get(jserver.emojis, id = "388471020417318912"), discord.utils.get(jserver.emojis, id = "388471020341821450"), discord.utils.get(jserver.emojis, id = "388471020220055553"), discord.utils.get(jserver.emojis, id = "388471020220186626"), discord.utils.get(jserver.emojis, id = "388471020593479681"), discord.utils.get(jserver.emojis, id = "388471020190695426"), discord.utils.get(jserver.emojis, id = "388471020362661890"), discord.utils.get(jserver.emojis, id = "388471020581027844"), discord.utils.get(jserver.emojis, id = "388471020572377099")]
 
-    def reactioncheck(reaction):
-        if reaction == jserver[0]:
-            return 1
-        if reaction == jserver[1]:
-            return 2
-        if reaction == jserver[2]:
-            return 3
-        if reaction == jserver[3]:
-            return 4
-        if reaction == jserver[4]:
-            return 5
-        if reaction == jserver[5]:
-            return 6
-        if reaction == jserver[6]:
-            return 7
-        if reaction == jserver[7]:
-            return 8
-        if reaction == jserver[8]:
-            return 9
-        if reaction == jserver[9]:
-            return 10
-        
-
-
-    def chck(server, name, member):
-        if name == "doki doki":
-            role = discord.utils.get(server.roles, name = "Doki Doki")
-            await self.bot.add_roles(member, role)
-            # if name == "protagonist":
-            #     role = discord.utils.get(server.roles, name = "Protagonist")
-            #     await self.bot.add_roles(member, role)
-        if name == "miyuki":
-            role = discord.utils.get(server.roles, name = "Miyuki")
-            await self.bot.add_roles(member, role)
-        if name == "$player$":
-            role = discord.utils.get(server.roles, name = "$PLAYER$")
-            await self.bot.add_roles(member, role)
-        if name == "princess' bedroom":
-            role = discord.utils.get(server.roles, name = "Princess' Bedroom")
-            await self.bot.add_roles(member, role)
-        if name == "n word pass":
-            role = discord.utils.get(server.roles, name = "N-Word Pass")
-            await self.bot.add_roles(member, role)
-        if name == "custom role":
-            await self.bot.send_message(self.bot.get_channel('526179783994900491'), member.name+" wants a custom role!")
-        if name == "custom pic":
-            c = await bot.application_info()
-            owner = c.owner.id
-            await self.bot.send_message(owner, member.name+" wants a custom command!")
-    
     @commands.command
     async def nuggystore(self, ctx):
+        jserver = self.bot.get_server("369252350927306752")
+        reactioned = [discord.utils.get(jserver.emojis, id = "388471019914002433"), discord.utils.get(jserver.emojis, id = "388471020417318912"), discord.utils.get(jserver.emojis, id = "388471020341821450"), discord.utils.get(jserver.emojis, id = "388471020220055553"), discord.utils.get(jserver.emojis, id = "388471020220186626"), discord.utils.get(jserver.emojis, id = "388471020593479681"), discord.utils.get(jserver.emojis, id = "388471020190695426"), discord.utils.get(jserver.emojis, id = "388471020362661890"), discord.utils.get(jserver.emojis, id = "388471020581027844"), discord.utils.get(jserver.emojis, id = "388471020572377099")]
+        def reactioncheck(reaction):
+            if reaction == reactioned[0]:
+                return 1
+            if reaction == reactioned[1]:
+                return 2
+            if reaction == reactioned[2]:
+                return 3
+            if reaction == reactioned[3]:
+                return 4
+            if reaction == reactioned[4]:
+                return 5
+            if reaction == reactioned[5]:
+                return 6
+            if reaction == reactioned[6]:
+                return 7
+            if reaction == reactioned[7]:
+                return 8
+            if reaction == reactioned[8]:
+                return 9
+            if reaction == reactioned[9]:
+                return 10
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
         cursor.execute("""SELECT items_purchased FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
@@ -110,7 +115,7 @@ class NuggiesCommands:
                 buyables.update({"n word pass", 200})
                 emotes.update({x:"n word pass"})
             x += 1
-            roles_available += str(x)+""". Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n""""
+            roles_available += str(x)+""". Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
             buyables.update({"custom role", 100000})
             emotes.update({x:"custom role"})
             x += 1
@@ -160,7 +165,7 @@ class NuggiesCommands:
                         await self.bot.say("Come again soon!")
                         cancelled = True
 
-                    if checker.reaction in reactions:
+                    if checker.reaction in reactioned:
                         reacted = reactioncheck(checker.reaction)
                         item = emotes[reacted]
                         cost = buyables[item]
@@ -169,10 +174,10 @@ class NuggiesCommands:
                         balance = balance[0]
                         if balance >= cost:
                             balance = balance - cost
-                            chck(ctx.message.server, item, ctx.message.author)
+                            chck(self, ctx.message.server, item, ctx.message.author)
                             # ser nam mem
                             cursor.execute("""UPDATE nuggies SET nuggies = %s WHERE playerid = %s""", (balance, ctx.message.author.id))
-                            await bot.say(f"You have successfully bought: `{item}`!")
+                            await self.bot.say(f"You have successfully bought: `{item}`!")
                         else:
                             t = await self.bot.say("I'm sorry, but you can't buy that, chief.")
                             await asyncio.sleep(3)
