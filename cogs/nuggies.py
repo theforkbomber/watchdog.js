@@ -136,7 +136,7 @@ class NuggiesCommands():
             if em != True:
                 await self.bot.say("Nothing new in the shop yet, chief.")
             else:
-                await self.bot.send_message(ctx.message.channel, embed = embed)
+                newmessage = await self.bot.send_message(ctx.message.channel, embed = embed)
                 cancelled = False
                 while cancelled == False:
                     # checker = await self.bot.wait_for_message(author = ctx.message.author, channel = ctx.message.channel, timeout = 60)
@@ -160,9 +160,9 @@ class NuggiesCommands():
                     #     else:
                     #         await self.bot.say("That's not in the store, chief, did you use the exact name :/")
                     for x in reactioned:
-                        await self.bot.add_reaction(ctx.message, x)
+                        await self.bot.add_reaction(newmessage, x)
                         await asyncio.sleep(0.4)
-                    checker = await self.bot.wait_for_reaction(user = ctx.message.author, message = ctx.message, timeout = 60)
+                    checker = await self.bot.wait_for_reaction(user = ctx.message.author, message = newmessage, timeout = 60)
                     if checker == None:
                         await self.bot.say("Come again soon!")
                         cancelled = True
