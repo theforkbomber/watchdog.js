@@ -166,7 +166,7 @@ class NuggiesCommands():
                     if checker == None:
                         await self.bot.say("Time's up! Come again soon when you've thought about your purchase! :owo:")
                         cancelled = True
-
+                    print(checker.reaction)
                     if checker.reaction in reactioned:
                         reacted = reactioncheck(checker.reaction)
                         item = emotes[reacted]
@@ -187,7 +187,7 @@ class NuggiesCommands():
                     else:
                         t = await self.bot.say("That's not in the store, chief, did you use the exact name :/")
                         await asyncio.sleep(3)
-                        await self.bot.remove_message(t)
+                        await self.bot.delete_message(t)
         db.commit()
         db.close()
 def setup(bot):
