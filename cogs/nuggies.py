@@ -164,7 +164,8 @@ class NuggiesCommands():
                         await asyncio.sleep(0.4)
                     checker = await self.bot.wait_for_reaction(user = ctx.message.author, message = newmessage, timeout = 60)
                     if checker == None:
-                        await self.bot.say("Time's up! Come again soon when you've thought about your purchase! :owo:")
+                        reaction = discord.utils.get(ctx.message.server.emojis, id = "389266641348853760")
+                        await self.bot.say(f"Time's up! Come again soon when you've thought about your purchase! {reaction}")
                         cancelled = True
                     print(checker.reaction)
                     await self.bot.say(str(checker.reaction in reactioned))
