@@ -167,6 +167,7 @@ class NuggiesCommands():
                         await self.bot.say("Time's up! Come again soon when you've thought about your purchase! :owo:")
                         cancelled = True
                     print(checker.reaction)
+                    await self.bot.say(str(checker.reaction in reactioned))
                     if checker.reaction in reactioned:
                         reacted = reactioncheck(checker.reaction)
                         item = emotes[reacted]
