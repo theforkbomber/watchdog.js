@@ -74,7 +74,7 @@ class NuggiesCommands():
         x = 0
         em = False
         embed = discord.Embed(title = "Store")
-        embed.set_footer(text = "When purchasing, use the EXACT name provided ^.^")
+        embed.set_footer(text = "Use the :votex: emotes to purchase goods")
         print(found)
         if found[0] != None:
             # try:
