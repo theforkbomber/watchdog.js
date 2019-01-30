@@ -192,6 +192,7 @@ class NuggiesCommands():
     async def donate(self, ctx, user : discord.User, n : int):
         if user.id == ctx.message.author.id:
             await self.bot.say("Nice try, but no lol")
+            return
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
