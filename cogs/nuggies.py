@@ -4,13 +4,6 @@ import psycopg2
 import asyncio
 import config
 
-
-
-
-
-    
-
-
 async def chck(self, server, name, member):
     if name == "doki doki":
         role = discord.utils.get(server.roles, name = "Doki Doki")
@@ -38,7 +31,7 @@ async def chck(self, server, name, member):
         await self.bot.send_message(owner, member.name+" wants a custom command!")
 
 
-class NuggiesCommands:
+class NuggiesCommands():
     def __init__(self, bot):
         self.bot = bot
 
