@@ -622,12 +622,14 @@ async def on_message(message):
     if last_sent == None:
         if message.channel.id == "384536425023930379":
             cursor.execute("""INSERT INTO nuggies(playerid, nuggies, last_message_sent, last_gn, messages)VALUES(%s, %s, %s, %s, %s) RETURNING id;""", (message.author.id, 100, message.timestamp, message.timestamp, 1))
+            return
     cursor.execute("""SELECT messages FROM nuggies WHERE playerid = '%s'"""% message.author.id)
     messages = cursor.fetchone()
     try:
         cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (messages[0]+1, str(message.author.id)))
     except:
         cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (1, str(message.author.id)))
+        return
     if (messages[0] % 100)== 0:
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
         nuggies = cursor.fetchone()
