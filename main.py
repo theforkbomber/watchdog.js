@@ -632,12 +632,12 @@ async def on_message(message):
     if last_sent != None:
         if last_sent[0] >= (datetime.now() - timedelta(days=1)):
             pass
-        if last_gn == None and message.channel.id == "384536425023930379":
+        if last_gn[0] == None and message.channel.id == "384536425023930379":
             cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
             nuggies = cursor.fetchone()
             cursor.execute('''UPDATE nuggies SET last_gn = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
             cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
-        if last_gn != None:
+        if last_gn[0] != None:
             if last_gn[0] < (datetime.now() - timedelta(days=1)) and message.channel.id == "384536425023930379":
                 cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
                 nuggies = cursor.fetchone()
