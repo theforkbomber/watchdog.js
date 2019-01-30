@@ -633,14 +633,15 @@ async def on_message(message):
 
     cursor.execute("""SELECT messages FROM nuggies WHERE playerid = '%s'"""% message.author.id)
     messages = cursor.fetchone()
-    try:
-        cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (messages[0]+1, str(message.author.id)))
-    except Exception as e:
-        print(str(e))
-        cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (1, str(message.author.id)))
-        db.commit()
-        db.close()
-        return
+    if message.channel.id != "395690294659776532" and message.channel.id != "417756656684761118":
+        try:
+            cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (messages[0]+1, str(message.author.id)))
+        except Exception as e:
+            print(str(e))
+            cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (1, str(message.author.id)))
+            db.commit()
+            db.close()
+            return
     if (messages[0] % 100)== 0:
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
         nuggies = cursor.fetchone()

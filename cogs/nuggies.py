@@ -267,16 +267,16 @@ class NuggiesCommands():
                 emotes.update({x:"rare"})
             elif rare_roles != [] and legacy_roles == []:
                 x += 1
-                roles_available += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Unlock Legacy Tier (:arrow_double_up: UPGRADE) - "The third tier role, you were eligible for this role if you joined before a certain date. People with this role are a rare breed. Buy this and you'll have the legacy roles unlocked in your #role-requests flags"\n"""
+                roles_available += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Unlock Legacy Tier (:arrow_double_up: UPGRADE) - "The third tier role, you were eligible for this role if you joined before a certain date. People with this role are a rare breed. Buy this and you'll have the legacy roles unlocked in your <#390197949780590603> flags"\n"""
                 buyables.update({"legacy":100000})
                 emotes.update({x:"legacy"})
             elif rare_roles == [] and legacy_roles != []:
-                roles_available += f"""{reactioned[x-1]} 1k <:nuggies:539932838318047244> Unlock Rare Tier (:arrow_double_up: UPGRADE) - "The second tier role, if you were lucky, you were given this when you joined, or given it later on. If you're less than lucky, buy this and you'll have the rare roles unlocked in your #role-requests flags"\n"""
+                roles_available += f"""{reactioned[x-1]} 1k <:nuggies:539932838318047244> Unlock Rare Tier (:arrow_double_up: UPGRADE) - "The second tier role, if you were lucky, you were given this when you joined, or given it later on. If you're less than lucky, buy this and you'll have the rare roles unlocked in your <#390197949780590603> flags"\n"""
                 buyables.update({"rare":1000})
                 emotes.update({x:"rare"})
             if not "Protagonist" in user_roles:
                 x += 1
-                roles_available += f"""{reactioned[x-1]} 5k <:nuggies:539932838318047244> Protagonist - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile:"\n"""
+                roles_available += f"""{reactioned[x-1]} 5k <:nuggies:539932838318047244> Protagonist - "An exclusive role, this one is Dan! The colour of his eyes! :eyes:. Once purchased, it will be unlocked in your #role-requests flags""\n"""
                 buyables.update({"protagonist":5000})
                 emotes.update({x:"protagonist"})
             if not "Miyuki" in user_roles:
