@@ -37,6 +37,7 @@ class NuggiesCommands():
 
     @commands.command(pass_context=True)
     async def nuggystore(self, ctx):
+        print("trying to nug")
         jserver = self.bot.get_server("369252350927306752")
         reactioned = [discord.utils.get(jserver.emojis, id = "388471019914002433"), discord.utils.get(jserver.emojis, id = "388471020417318912"), discord.utils.get(jserver.emojis, id = "388471020341821450"), discord.utils.get(jserver.emojis, id = "388471020220055553"), discord.utils.get(jserver.emojis, id = "388471020220186626"), discord.utils.get(jserver.emojis, id = "388471020593479681"), discord.utils.get(jserver.emojis, id = "388471020190695426"), discord.utils.get(jserver.emojis, id = "388471020362661890"), discord.utils.get(jserver.emojis, id = "388471020581027844"), discord.utils.get(jserver.emojis, id = "388471020572377099")]
         def reactioncheck(reaction):
