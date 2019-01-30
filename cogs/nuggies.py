@@ -73,7 +73,7 @@ class NuggiesCommands():
         buyables = {}
         x = 0
         em = False
-        embed = discord.Embed(title = "Store")
+        embed = discord.Embed(title = f"{discord.utils.get(bot.get_server('427450243253272598').emojis, id = '539932838170984489')} MIYUKI'S NICE NUGGIE MARKET {discord.utils.get(bot.get_server('427450243253272598').emojis, id = '539932838170984489')}")
         embed.set_footer(text = "Use the :votex: emotes to purchase goods")
         print(found)
         if found[0] != None:
@@ -82,23 +82,15 @@ class NuggiesCommands():
             # else:
 
             user_roles = [r.name for r in ctx.message.author.roles]
-            if not "Doki Doki" in user_roles:
-                x += 1
-                roles_available += f"""{reactioned[x-1]} `200 nugs` Doki Doki :heart:\n"""
-                buyables.update({"doki doki":200})
-                emotes.update({x:"doki doki"})
+            
             # if not "Protagonist" in user_roles:
             #     x += 1
             #     roles_available += reactioned[x-1],". Protagonist :chibidanjump:\n"
             #     buyables.update({"protagonist", 5000})
             #     emotes.update({x:"protagonist"})
-            x += 1
-            roles_available += f"""{reactioned[x-1]} `100k nugs` Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
-            buyables.update({"custom role":100000})
-            emotes.update({x:"custom role"})
             if not "Miyuki" in user_roles:
                 x += 1
-                roles_available += f"""{reactioned[x-1]} `10k nugs` Miyuki - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile: Once purchased, it will be unlocked in your #role-requests flags\n."""
+                roles_available += f"""{reactioned[x-1]} `10k nugs` Miyuki - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile: Once purchased, it will be unlocked in your #role-requests flags\n"""
                 buyables.update({"miyuki":10000})
                 emotes.update({x:"miyuki"})
             if not "$PLAYER$" in user_roles:
@@ -106,9 +98,14 @@ class NuggiesCommands():
                 roles_available += f"""{reactioned[x-1]} `5151 nugs` $PLAYER$ - "An exclusive role, this one is you!!! The faint colour emitting from the other side of your monitor. :eyes:\n"""
                 buyables.update({"$player$":5151})
                 emotes.update({x:"$player$"})
+            if not "Doki Do-key" in user_roles:
+                x += 1
+                keys += f"""{reactioned[x-1]} <:dokidokey:539971188638613554> `200 nugs` Doki Doki :heart:\n"""
+                buyables.update({"doki doki":200})
+                emotes.update({x:"doki doki"})
             if not "Princess' Bedroom" in user_roles:
                 x += 1
-                keys += f"""{reactioned[x-1]} `900 nugs` Princess Key - "Grants access to Marissa's bedroom. Not sure why you'd want this, but if you're into that sort of thing...\n"""
+                keys += f"""{reactioned[x-1]} <:princesskey:539971188638613554>  `900 nugs` Princess Key - "Grants access to Marissa's bedroom. Not sure why you'd want this, but if you're into that sort of thing...\n"""
                 buyables.update({"princess' bedroom":900})
                 emotes.update({x:"princess' bedroom"})
             if not "N-Word Pass" in user_roles:
@@ -121,6 +118,10 @@ class NuggiesCommands():
             custom += f"""{reactioned[x-1]} `100k nugs` Custom Pictures Command - "Get your own little pictures command, like >os.rolo!\n"""""
             buyables.update({"custom pic":100000})
             emotes.update({x:"custom pic"})
+            x += 1
+            roles_available += f"""{reactioned[x-1]} `100k nugs` Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
+            buyables.update({"custom role":100000})
+            emotes.update({x:"custom role"})
             if roles_available != "":
                 em = True
                 embed.add_field(name = "Roles", value = roles_available)
