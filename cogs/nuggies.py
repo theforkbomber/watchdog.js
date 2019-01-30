@@ -176,6 +176,8 @@ class NuggiesCommands():
                         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
                         balance = cursor.fetchone()
                         balance = balance[0]
+                        print("bal:"+balance)
+                        print("cost:"+cost)
                         if balance >= cost:
                             balance = balance - cost
                             chck(self, ctx.message.server, item, ctx.message.author)
