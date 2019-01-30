@@ -610,21 +610,21 @@ async def on_member_update(before, after):
 async def on_message(message):
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
-    # if message.server.id != "369252350927306752":
-    #     cursor.execute("""SELECT last_message_sent FROM nuggies WHERE playerid = '%s'"""% message.author.id)
-    #     last_sent = cursor.fetchone()
-    #     if last_sent == None:
-    #         cursor.execute("""INSERT INTO nuggies(playerid, nuggies, last_message_sent)VALUES(%s, %s)""", (message.author.id, 100, message.timestamp))
-    #     if last_sent != None:
-    #         if last_sent[0] >= (datetime.now() - timedelta(days=1)):
-    #             pass
-    #         else:
-    #             cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
-    #             nuggies = cursor.fetchone()
-    #             cursor.execute('''UPDATE nuggies SET last_sent = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
-    #             cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
-    #     if "nigger" in message.content.lower() and not "N-Word Pass" in [r.name for r in ctx.message.author.roles]:
-    #         await bot.delete_message(message)
+    if message.server.id != "369252350927306752":
+        cursor.execute("""SELECT last_message_sent FROM nuggies WHERE playerid = '%s'"""% message.author.id)
+        last_sent = cursor.fetchone()
+        if last_sent == None:
+            cursor.execute("""INSERT INTO nuggies(playerid, nuggies, last_message_sent)VALUES(%s, %s)""", (message.author.id, 100, message.timestamp))
+        if last_sent != None:
+            if last_sent[0] >= (datetime.now() - timedelta(days=1)):
+                pass
+            else:
+                cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
+                nuggies = cursor.fetchone()
+                cursor.execute('''UPDATE nuggies SET last_sent = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
+                cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
+        if "nigger" in message.content.lower() and not "N-Word Pass" in [r.name for r in ctx.message.author.roles]:
+            await bot.delete_message(message)
     details = "Sent by "+message.author.name+" @"+str(message.timestamp)+"UTC"
     msg = message.content
     if len(message.attachments) > 0:
