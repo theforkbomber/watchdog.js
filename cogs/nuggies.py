@@ -14,6 +14,146 @@ async def chck(self, server, name, member):
     if name == "miyuki":
         role = discord.utils.get(server.roles, name = "Miyuki")
         await self.bot.add_roles(member, role)
+    if name == "rare":
+        monirole = discord.utils.get(server.roles, name = "Monika")
+        yurirole = discord.utils.get(server.roles, name = "Yuri")
+        natsrole = discord.utils.get(server.roles, name = "Natsuki")
+        sayorole = discord.utils.get(server.roles, name = "Sayori")
+        misarole = discord.utils.get(server.roles, name = "Misao")
+        protrole = discord.utils.get(server.roles, name = "Protagonist")
+        if monirole in member.roles:
+            role = discord.utils.get(server.roles, name = "Monika (Rare)")
+            await self.bot.add_roles(member, role)
+        if yurirole in member.roles:
+            role = discord.utils.get(server.roles, name = "Yuri (Rare)")
+            await self.bot.add_roles(member, role)
+        if natsrole in member.roles:
+            role = discord.utils.get(server.roles, name = "Natsuki (Rare)")
+            await self.bot.add_roles(member, role)
+        if misarole in member.roles:
+            role = discord.utils.get(server.roles, name = "Misao (Rare)")
+            await self.bot.add_roles(member, role)
+        if protrole in member.roles:
+            role = discord.utils.get(server.roles, name = "Protagonist (Rare)")
+            await self.bot.add_roles(member, role)
+        if sayorole in member.roles:
+            role = discord.utils.get(server.roles, name = "Sayori (Rare)")
+            await self.bot.add_roles(member, role)
+
+    if name == "legacy":
+        monirole = discord.utils.get(server.roles, name = "Monika")
+        yurirole = discord.utils.get(server.roles, name = "Yuri")
+        natsrole = discord.utils.get(server.roles, name = "Natsuki")
+        sayorole = discord.utils.get(server.roles, name = "Sayori")
+        misarole = discord.utils.get(server.roles, name = "Misao")
+        protrole = discord.utils.get(server.roles, name = "Protagonist")
+        if monirole in member.roles:
+            role = discord.utils.get(server.roles, name = "Monika (Legacy)")
+            await self.bot.add_roles(member, role)
+        if yurirole in member.roles:
+            role = discord.utils.get(server.roles, name = "Yuri (Legacy)")
+            await self.bot.add_roles(member, role)
+        if natsrole in member.roles:
+            role = discord.utils.get(server.roles, name = "Natsuki (Legacy)")
+            await self.bot.add_roles(member, role)
+        if misarole in member.roles:
+            role = discord.utils.get(server.roles, name = "Misao (Legacy)")
+            await self.bot.add_roles(member, role)
+        if protrole in member.roles:
+            role = discord.utils.get(server.roles, name = "Protagonist (Legacy)")
+            await self.bot.add_roles(member, role)
+        if sayorole in member.roles:
+            role = discord.utils.get(server.roles, name = "Sayori (Legacy)")
+            await self.bot.add_roles(member, role)
+    if name == "protagonist":
+        rolestoremove = []
+        rolestogive = []
+        norm = False
+        rare = False
+        legacy = False
+        server = self.bot.get_server('369252350927306752')
+        NatNorm = discord.utils.get(server.roles, name='Natsuki')
+        PenNorm = discord.utils.get(server.roles, name='Yuri')
+        FagNorm = discord.utils.get(server.roles, name='Misao')
+        CinnamonNorm = discord.utils.get(server.roles, name='Sayori')
+        BestBoyNorm = discord.utils.get(server.roles, name='Protagonist')
+        NatRare = discord.utils.get(server.roles, name='Natsuki (Rare)')
+        PenRare = discord.utils.get(server.roles, name='Yuri (Rare)')
+        FagRare = discord.utils.get(server.roles, name='Misao (Rare)')
+        CinnamonRare = discord.utils.get(server.roles, name='Sayori (Rare)')
+        BestBoyRare = discord.utils.get(server.roles, name='Protagonist (Rare)')
+        NatLegacy = discord.utils.get(server.roles, name='Natsuki (Legacy)')
+        PenLegacy = discord.utils.get(server.roles, name='Yuri (Legacy)')
+        FagLegacy = discord.utils.get(server.roles, name='Misao (Legacy)')
+        CinnamonLegacy = discord.utils.get(server.roles, name='Sayori (Legacy)')
+        BestBoyLegacy = discord.utils.get(server.roles, name='Protagonist (Legacy)')
+        Moni = discord.utils.get(server.roles, name='Monika')
+        MoniRare = discord.utils.get(server.roles, name='Monika (Rare)')
+        MoniLegacy = discord.utils.get(server.roles, name='Monika (Legacy)')
+
+        if NatNorm in member.roles.roles:
+            rolestoremove.append(NatNorm)
+            rolestogive.append(BestBoyNorm)
+        if NatRare in member.roles.roles:
+            rolestoremove.append(NatRare)
+            rolestogive.append(BestBoyRare)
+        if NatLegacy in member.roles.roles:
+            rolestoremove.append(NatLegacy)
+            rolestogive.append(BestBoyLegacy)
+
+        if PenNorm in member.roles.roles:
+            rolestoremove.append(PenNorm)
+            rolestogive.append(BestBoyNorm)
+        if PenRare in member.roles.roles:
+            rolestoremove.append(PenRare)
+            rolestogive.append(BestBoyRare)
+        if PenLegacy in member.roles.roles:
+            rolestoremove.append(PenLegacy)
+            rolestogive.append(BestBoyLegacy)
+        
+        if CinnamonNorm in member.roles.roles:
+            rolestoremove.append(CinnamonNorm)
+            rolestogive.append(BestBoyNorm)
+        if CinnamonRare in member.roles.roles:
+            rolestoremove.append(CinnamonRare)
+            rolestogive.append(BestBoyRare)
+        if CinnamonLegacy in member.roles.roles:
+            rolestoremove.append(CinnamonLegacy)
+            rolestogive.append(BestBoyLegacy)
+            
+        if FagNorm in member.roles.roles:
+            rolestoremove.append(FagNorm)
+            rolestogive.append(BestBoyNorm)
+        if FagRare in member.roles.roles:
+            rolestoremove.append(FagRare)
+            rolestogive.append(BestBoyRare)
+        if FagLegacy in member.roles.roles:
+            rolestoremove.append(FagLegacy)
+            rolestogive.append(BestBoyLegacy)
+
+        # if BestBoyNorm in member.roles.roles:
+        #     rolestoremove.append(BestBoyNorm)
+        #     rolestogive.append(FagNorm)
+        # if BestBoyRare in member.roles.roles:
+        #     rolestoremove.append(BestBoyRare)
+        #     rolestogive.append(FagRare)
+        # if BestBoyLegacy in member.roles.roles:
+        #     rolestoremove.append(BestBoyLegacy)
+        #     rolestogive.append(FagLegacy)
+        
+        if Moni in member.roles.roles:
+            rolestoremove.append(Moni)
+            rolestogive.append(BestBoyNorm)
+        if MoniRare in member.roles.roles:
+            rolestoremove.append(MoniRare)
+            rolestogive.append(BestBoyRare)
+        if MoniLegacy in member.roles.roles:
+            rolestoremove.append(MoniLegacy)
+            rolestogive.append(BestBoyLegacy)
+
+        await self.bot.add_roles(member, *rolestogive)
+        await asyncio.sleep(2)
+        await self.bot.remove_roles(member, *rolestoremove)
     if name == "$player$":
         role = discord.utils.get(server.roles, name = "$PLAYER$")
         await self.bot.add_roles(member, role)
@@ -39,8 +179,34 @@ class NuggiesCommands():
         self.bot = bot
 
     @commands.command(pass_context=True)
+    async def balance(self, ctx):
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
+        balance = cursor.fetchone()
+        balance = balance[0]
+        await self.bot.say("Current Balance: "+str(balance)+" <:nuggies:539932838318047244>")
+        db.close()
+
+    @commands.command(pass_context=True)
+    async def donate(self, ctx, user : discord.User, n : int):
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
+        balance = cursor.fetchone()
+        balance = balance[0]
+        if n > balance:
+            await self.bot.say("You don't have enough nugs to give away the amount passed.")
+        else:
+            cursor.execute("""UPDATE nuggies SET nuggies = %s WHERE playerid = %s""", (balance-n, ctx.message.author.id))
+            cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% user.id)
+            balance = cursor.fetchone()
+            balance = balance[0]
+            cursor.execute("""UPDATE nuggies SET nuggies = %s WHERE playerid = %s""", (balance+n, user.id))
+            db.commit()
+
+    @commands.command(pass_context=True)
     async def shop(self, ctx):
-        print("trying to nug")
         jserver = self.bot.get_server("369252350927306752")
         reactioned = [discord.utils.get(jserver.emojis, id = "388471019914002433"), discord.utils.get(jserver.emojis, id = "388471020417318912"), discord.utils.get(jserver.emojis, id = "388471020341821450"), discord.utils.get(jserver.emojis, id = "388471020220055553"), discord.utils.get(jserver.emojis, id = "388471020220186626"), discord.utils.get(jserver.emojis, id = "388471020593479681"), discord.utils.get(jserver.emojis, id = "388471020190695426"), discord.utils.get(jserver.emojis, id = "388471020362661890"), discord.utils.get(jserver.emojis, id = "388471020581027844"), discord.utils.get(jserver.emojis, id = "388471020572377099")]
         def reactioncheck(reaction):
@@ -81,19 +247,33 @@ class NuggiesCommands():
         em = False
         embed = discord.Embed(title = f"{discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')} MIYUKI'S NICE NUGGIE MARKET {discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')}", description = "Current Balance: "+str(balance)+" <:nuggies:539932838318047244>")
         embed.set_footer(text = "Use the :votex: emotes to purchase goods")
-        print(found)
         if found[0] != None:
             # try:
             #     itemlist = found[5].split("|")
             # else:
 
             user_roles = [r.name for r in ctx.message.author.roles]
-            
-            # if not "Protagonist" in user_roles:
-            #     x += 1
-            #     roles_available += reactioned[x-1],". Protagonist :chibidanjump:\n"
-            #     buyables.update({"protagonist", 5000})
-            #     emotes.update({x:"protagonist"})
+            rare_roles = [r.name for r in ctx.message.author.roles if "(Rare)" in r.name]
+            legacy_roles = [r.name for r in ctx.message.author.roles if "(Legacy)" in r.name]
+            if rare_roles == [] and legacy_roles == []:
+                x += 1
+                roles_available += f"""{reactioned[x-1]} 1k <:nuggies:539932838318047244> Unlock Rare Tier (:arrow_double_up: UPGRADE) - "The second tier role, if you were lucky, you were given this when you joined, or given it later on. If you're less than lucky, buy this and you'll have the rare roles unlocked in your #role-requests flags"\n"""
+                buyables.update({"rare":1000})
+                emotes.update({x:"rare"})
+            elif rare_roles != [] and legacy_roles == []:
+                x += 1
+                roles_available += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Unlock Legacy Tier (:arrow_double_up: UPGRADE) - "The third tier role, you were eligible for this role if you joined before a certain date. People with this role are a rare breed. Buy this and you'll have the legacy roles unlocked in your #role-requests flags"\n"""
+                buyables.update({"legacy":100000})
+                emotes.update({x:"legacy"})
+            elif rare_roles == [] and legacy_roles != []:
+                roles_available += f"""{reactioned[x-1]} 1k <:nuggies:539932838318047244> Unlock Rare Tier (:arrow_double_up: UPGRADE) - "The second tier role, if you were lucky, you were given this when you joined, or given it later on. If you're less than lucky, buy this and you'll have the rare roles unlocked in your #role-requests flags"\n"""
+                buyables.update({"rare":1000})
+                emotes.update({x:"rare"})
+            if not "Protagonist" in user_roles:
+                x += 1
+                roles_available += f"""{reactioned[x-1]} 5k <:nuggies:539932838318047244> Protagonist - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile:"\n"""
+                buyables.update({"protagonist":5000})
+                emotes.update({x:"protagonist"})
             if not "Miyuki" in user_roles:
                 x += 1
                 roles_available += f"""{reactioned[x-1]} 10k <:nuggies:539932838318047244> Miyuki - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile:"\n"""
@@ -182,7 +362,7 @@ class NuggiesCommands():
                             cancelled = True
                             break
                         try:
-                            print(checker.reaction)
+                            print(checker.reaction.emoji)
                         except:
                             pass
                         # await self.bot.say(str(checker.reaction.emoji in reactioned))
@@ -193,8 +373,6 @@ class NuggiesCommands():
                             cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
                             balance = cursor.fetchone()
                             balance = balance[0]
-                            print("bal:"+str(balance))
-                            print("cost:"+str(cost))
                             if balance >= cost:
                                 balance = balance - cost
                                 await chck(self, ctx.message.server, item, ctx.message.author)

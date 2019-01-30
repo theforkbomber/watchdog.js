@@ -108,6 +108,33 @@ class Moderation:
         await self.bot.remove_roles(user, *rolestoremove)
         await self.bot.say("`Assigned user "+user.name+" the {Monika} flag.`")
 
+    @commands.command(pass_context=True)
+    @commands.check(modcheck)
+    async def removenugs(self, ctx, user : discord.User, n : int):
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% user.id)
+        nuggies = cursor.fetchone()
+        if nuggies[0]-n < 0:
+            cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (0, str(user.id)))
+        else:
+            cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]-n, str(user.id)))
+        await self.bot.say(f"Successfully removed {str(n)} from {user.name}.")
+        db.commit()
+        db.close()
+
+    @commands.command(pass_context=True)
+    @commands.check(modcheck)
+    async def addnugs(self, ctx, user : discord.User, n : int):
+        db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
+        cursor = db.cursor()
+        cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% user.id)
+        nuggies = cursor.fetchone()
+        cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+n, str(user.id)))
+        await self.bot.say(f"Successfully added {str(n)} from {user.name}.")
+        db.commit()
+        db.close()
+
     @commands.command(pass_context=True, aliases = ["Cinnamon bun", "Cinnamon Bun", "cinnamon bun", "cinnamon Bun", "Sayori", "sayo", "Sayo"])
     @commands.check(modcheck)
     async def sayori(self, ctx, user : discord.User):

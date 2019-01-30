@@ -617,8 +617,11 @@ async def on_message(message):
     # if message.server.id != "369252350927306752":
     cursor.execute("""SELECT last_message_sent FROM nuggies WHERE playerid = '%s'"""% message.author.id)
     last_sent = cursor.fetchone()
+    cursor.execute("""SELECT last_gn FROM nuggies WHERE playerid = '%s'"""% message.author.id)
+    last_gn = cursor.fetchone()
     if last_sent == None:
-        cursor.execute("""INSERT INTO nuggies(playerid, nuggies, last_message_sent, messages)VALUES(%s, %s, %s, %s) RETURNING id;""", (message.author.id, 100, message.timestamp, 1))
+        if message.channel.id == "384536425023930379":
+            cursor.execute("""INSERT INTO nuggies(playerid, nuggies, last_message_sent, last_gn, messages)VALUES(%s, %s, %s, %s, %s) RETURNING id;""", (message.author.id, 100, message.timestamp, message.timestamp, 1))
     cursor.execute("""SELECT messages FROM nuggies WHERE playerid = '%s'"""% message.author.id)
     messages = cursor.fetchone()
     cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (messages[0]+1, str(message.author.id)))
@@ -629,7 +632,18 @@ async def on_message(message):
     if last_sent != None:
         if last_sent[0] >= (datetime.now() - timedelta(days=1)):
             pass
-        else:
+        if last_gn == None and message.channel.id == "384536425023930379":
+            cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
+            nuggies = cursor.fetchone()
+            cursor.execute('''UPDATE nuggies SET last_gn = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
+            cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
+        if last_gn != None:
+            if last_gn[0] < (datetime.now() - timedelta(days=1)) and message.channel.id == "384536425023930379":
+                cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
+                nuggies = cursor.fetchone()
+                cursor.execute('''UPDATE nuggies SET last_gn = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
+                cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
+        if last_sent[0] < (datetime.now() - timedelta(days=1)):
             cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
             nuggies = cursor.fetchone()
             cursor.execute('''UPDATE nuggies SET last_sent = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
