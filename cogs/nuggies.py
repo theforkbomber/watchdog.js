@@ -66,6 +66,9 @@ class NuggiesCommands():
                 return 10
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
+        cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
+        balance = cursor.fetchone()
+        balance = balance[0]
         cursor.execute("""SELECT * FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
         found = cursor.fetchone()
         roles_available = ""
@@ -76,7 +79,7 @@ class NuggiesCommands():
         buyables = {}
         x = 0
         em = False
-        embed = discord.Embed(title = f"{discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')} MIYUKI'S NICE NUGGIE MARKET {discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')}")
+        embed = discord.Embed(title = f"{discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')} MIYUKI'S NICE NUGGIE MARKET {discord.utils.get(self.bot.get_server('427450243253272598').emojis, id = '539932838170984489')}", description = "Current Balance: "+str(balance))
         embed.set_footer(text = "Use the :votex: emotes to purchase goods")
         print(found)
         if found[0] != None:
