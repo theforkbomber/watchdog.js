@@ -167,7 +167,10 @@ class NuggiesCommands():
                         reaction = discord.utils.get(ctx.message.server.emojis, id = "389266641348853760")
                         await self.bot.say(f"Time's up! Come again soon when you've thought about your purchase! {reaction}")
                         cancelled = True
-                    print(checker.reaction)
+                    try:
+                        print(checker.reaction)
+                    except:
+                        pass
                     await self.bot.say(str(checker.reaction.emoji in reactioned))
                     if checker.reaction.emoji in reactioned:
                         reacted = reactioncheck(checker.reaction.emoji)
@@ -176,8 +179,8 @@ class NuggiesCommands():
                         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% ctx.message.author.id)
                         balance = cursor.fetchone()
                         balance = balance[0]
-                        print("bal:"+balance)
-                        print("cost:"+cost)
+                        print("bal:"+str(balance))
+                        print("cost:"+str(cost))
                         if balance >= cost:
                             balance = balance - cost
                             chck(self, ctx.message.server, item, ctx.message.author)
