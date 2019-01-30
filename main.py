@@ -619,6 +619,7 @@ async def on_message(message):
     last_sent = cursor.fetchone()
     cursor.execute("""SELECT messages FROM nuggies WHERE playerid = '%s'"""% message.author.id)
     messages = cursor.fetchone()
+    print(messages)
     cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (messages[0]+1, str(message.author.id)))
     if messages[0] // 100 == 0:
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
