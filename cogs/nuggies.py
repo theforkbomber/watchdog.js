@@ -203,7 +203,9 @@ class NuggiesCommands():
             balance = cursor.fetchone()
             balance = balance[0]
             cursor.execute("""UPDATE nuggies SET nuggies = %s WHERE playerid = %s""", (balance+n, user.id))
-            db.commit()
+            await self.bot.say(f"{str(n)} <:nuggies:539932838318047244> have successfully been transferred to {user.name}'s account!'")
+        db.commit()
+        db.close()
 
     @commands.command(pass_context=True)
     async def shop(self, ctx):

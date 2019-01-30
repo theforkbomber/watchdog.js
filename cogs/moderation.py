@@ -119,7 +119,7 @@ class Moderation:
             cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (0, str(user.id)))
         else:
             cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]-n, str(user.id)))
-        await self.bot.say(f"Successfully removed {str(n)} from {user.name}.")
+        await self.bot.say(f"Successfully removed {str(n)} <:nuggies:539932838318047244> from {user.name}.")
         db.commit()
         db.close()
 
@@ -131,7 +131,7 @@ class Moderation:
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% user.id)
         nuggies = cursor.fetchone()
         cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+n, str(user.id)))
-        await self.bot.say(f"Successfully added {str(n)} to {user.name}.")
+        await self.bot.say(f"Successfully added {str(n)} <:nuggies:539932838318047244> to {user.name}.")
         db.commit()
         db.close()
 
