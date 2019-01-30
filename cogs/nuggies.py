@@ -23,6 +23,9 @@ async def chck(self, server, name, member):
     if name == "n word pass":
         role = discord.utils.get(server.roles, name = "N-Word Pass")
         await self.bot.add_roles(member, role)
+    if name == "gold member":
+        role = discord.utils.get(server.roles, name = "Gold Member")
+        await self.bot.add_roles(member, role)
     if name == "custom role":
         await self.bot.send_message(self.bot.get_channel('526179783994900491'), member.name+" wants a custom role!")
     if name == "custom pic":
@@ -90,36 +93,41 @@ class NuggiesCommands():
             #     emotes.update({x:"protagonist"})
             if not "Miyuki" in user_roles:
                 x += 1
-                roles_available += f"""{reactioned[x-1]} `10k nugs` Miyuki - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile: Once purchased, it will be unlocked in your #role-requests flags\n"""
+                roles_available += f"""{reactioned[x-1]} 10k <:nuggies:539932838318047244> Miyuki - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile: Once purchased, it will be unlocked in your #role-requests flags\n"""
                 buyables.update({"miyuki":10000})
                 emotes.update({x:"miyuki"})
             if not "$PLAYER$" in user_roles:
                 x += 1
-                roles_available += f"""{reactioned[x-1]} `5151 nugs` $PLAYER$ - "An exclusive role, this one is you!!! The faint colour emitting from the other side of your monitor. :eyes:\n"""
+                roles_available += f"""{reactioned[x-1]} 5151 <:nuggies:539932838318047244> $PLAYER$ - "An exclusive role, this one is you!!! The faint colour emitting from the other side of your monitor. :eyes:\n"""
                 buyables.update({"$player$":5151})
                 emotes.update({x:"$player$"})
+            if not "Gold Member" in user_roles:
+                x += 1
+                keys += f"""{reactioned[x-1]} 200 <:nuggies:539932838318047244> Doki Do-key :heart:\n"""
+                buyables.update({"doki doki":200})
+                emotes.update({x:"doki doki"})
             if not "Doki Doki" in user_roles:
                 x += 1
-                keys += f"""{reactioned[x-1]} <:dokidokey:539971188387086336> `200 nugs` Doki Do-key :heart:\n"""
+                keys += f"""{reactioned[x-1]} <:dokidokey:539971188387086336> 200 <:nuggies:539932838318047244> Doki Do-key :heart:\n"""
                 buyables.update({"doki doki":200})
                 emotes.update({x:"doki doki"})
             if not "Princess' Bedroom" in user_roles:
                 x += 1
-                keys += f"""{reactioned[x-1]} <:princesskey:539971188638613554>  `900 nugs` Princess Key - "Grants access to Marissa's bedroom. Not sure why you'd want this, but if you're into that sort of thing...\n"""
+                keys += f"""{reactioned[x-1]} <:princesskey:539971188638613554>  900 <:nuggies:539932838318047244> Princess Key - "Grants access to Marissa's bedroom. Not sure why you'd want this, but if you're into that sort of thing...\n"""
                 buyables.update({"princess' bedroom":900})
                 emotes.update({x:"princess' bedroom"})
             if not "N-Word Pass" in user_roles:
                 x += 1
-                passes += f"""{reactioned[x-1]} `200 nugs` N Card - "I knew a guy who knew a guy who knew an African American, and with this, you can say it all you want! (Just don't go too overboard.)\n"""
+                passes += f"""{reactioned[x-1]} 200 <:nuggies:539932838318047244> N Card - "I knew a guy who knew a guy who knew an African American, and with this, you can say it all you want! (Just don't go too overboard.)\n"""
                 buyables.update({"n word pass":200})
                 emotes.update({x:"n word pass"})
             
             x += 1
-            custom += f"""{reactioned[x-1]} `100k nugs` Custom Pictures Command - "Get your own little pictures command, like >os.rolo!\n"""""
+            custom += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Custom Pictures Command - "Get your own little pictures command, like >os.rolo!\n"""""
             buyables.update({"custom pic":100000})
             emotes.update({x:"custom pic"})
             x += 1
-            custom += f"""{reactioned[x-1]} `100k nugs` Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
+            custom += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
             buyables.update({"custom role":100000})
             emotes.update({x:"custom role"})
             if roles_available != "":
@@ -164,10 +172,11 @@ class NuggiesCommands():
                         await self.bot.add_reaction(newmessage, x)
                         await asyncio.sleep(0.4)
                     checker = await self.bot.wait_for_reaction(user = ctx.message.author, message = newmessage, timeout = 60)
-                    if checker == None:
+                    if checker.reaction.emoji == None:
                         reaction = discord.utils.get(ctx.message.server.emojis, id = "389266641348853760")
                         await self.bot.say(f"Time's up! Come again soon when you've thought about your purchase! {reaction}")
                         cancelled = True
+                        break
                     try:
                         print(checker.reaction)
                     except:
