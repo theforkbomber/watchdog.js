@@ -276,7 +276,7 @@ class NuggiesCommands():
                 emotes.update({x:"rare"})
             if not "Protagonist" in user_roles:
                 x += 1
-                roles_available += f"""{reactioned[x-1]} 5k <:nuggies:539932838318047244> Protagonist - "An exclusive role, this one is Dan! The colour of his eyes! :eyes:. Once purchased, it will be unlocked in your #role-requests flags""\n"""
+                roles_available += f"""{reactioned[x-1]} 5k <:nuggies:539932838318047244> Protagonist - "An exclusive role, this one is Dan! The colour of his eyes! :eyes:. Once purchased, it will be unlocked in your <#390197949780590603> flags"\n"""
                 buyables.update({"protagonist":5000})
                 emotes.update({x:"protagonist"})
             if not "Miyuki" in user_roles:
