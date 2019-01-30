@@ -262,7 +262,7 @@ class NuggiesCommands():
             legacy_roles = [r.name for r in ctx.message.author.roles if "(Legacy)" in r.name]
             if rare_roles == [] and legacy_roles == []:
                 x += 1
-                roles_available += f"""{reactioned[x-1]} 1k <:nuggies:539932838318047244> Unlock Rare Tier (:arrow_double_up: UPGRADE) - "The second tier role, if you were lucky, you were given this when you joined, or given it later on. If you're less than lucky, buy this and you'll have the rare roles unlocked in your #role-requests flags"\n"""
+                roles_available += f"""{reactioned[x-1]} 1k <:nuggies:539932838318047244> Unlock Rare Tier (:arrow_double_up: UPGRADE) - "The second tier role, if you were lucky, you were given this when you joined, or given it later on. If you're less than lucky, buy this and you'll have the rare roles unlocked in your <#390197949780590603> flags"\n"""
                 buyables.update({"rare":1000})
                 emotes.update({x:"rare"})
             elif rare_roles != [] and legacy_roles == []:
@@ -363,6 +363,7 @@ class NuggiesCommands():
                     try:
                         if checker.reaction.emoji == None:
                             reaction = discord.utils.get(ctx.message.server.emojis, id = "389266641348853760")
+                            embed = discord.Embed(title="Time's up!")
                             await self.bot.say(f"Time's up! Come again soon when you've thought about your purchase! {reaction}")
                             cancelled = True
                             break
