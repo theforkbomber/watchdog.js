@@ -75,6 +75,7 @@ class NuggiesCommands():
         em = False
         embed = discord.Embed(title = "Store")
         embed.set_footer(text = "When purchasing, use the EXACT name provided ^.^")
+        print(found)
         if found[0] != None:
             itemlist = found[0].split("|")
             user_roles = [r.name for r in ctx.message.author.roles]
