@@ -187,6 +187,7 @@ class NuggiesCommands():
                             await chck(self, ctx.message.server, item, ctx.message.author)
                             # ser nam mem
                             cursor.execute("""UPDATE nuggies SET nuggies = %s WHERE playerid = %s""", (balance, ctx.message.author.id))
+                            db.commit()
                             await self.bot.say(f"You have successfully bought: `{item}`!")
                         else:
                             t = await self.bot.say("I'm sorry, but you can't buy that, chief.")
