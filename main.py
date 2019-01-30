@@ -613,9 +613,9 @@ async def on_message(message):
     if message.server.id != "369252350927306752":
         cursor.execute("""SELECT last_message_sent FROM nuggies WHERE playerid = '%s'"""% message.author.id)
         last_sent = cursor.fetchone()
-        if last_sent[0] == None:
+        if last_sent == None:
             cursor.execute("""INSERT INTO nuggies(playerid, nuggies)VALUES(%s, %s, %s)""", (message.author.id, 100))
-        if last_sent[0] != None:
+        if last_sent != None:
             if last_sent[0] >= (datetime.now() - timedelta(days=1)):
                 pass
             else:
