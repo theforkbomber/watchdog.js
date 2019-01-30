@@ -625,11 +625,18 @@ async def on_message(message):
             db.commit()
             db.close()
             return
+        else:
+            cursor.execute("""INSERT INTO nuggies(playerid, nuggies, last_message_sent, messages)VALUES(%s, %s, %s, %s) RETURNING id;""", (message.author.id, 100, message.timestamp, 1))
+            db.commit()
+            db.close()
+            return
+
     cursor.execute("""SELECT messages FROM nuggies WHERE playerid = '%s'"""% message.author.id)
     messages = cursor.fetchone()
     try:
         cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (messages[0]+1, str(message.author.id)))
-    except:
+    except Exception as e:
+        print(str(e))
         cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (1, str(message.author.id)))
         db.commit()
         db.close()

@@ -394,8 +394,8 @@ class NuggiesCommands():
                             t = await self.bot.say("That's not in the store, chief, did you use the exact name :/")
                             await asyncio.sleep(3)
                             await self.bot.delete_message(t)
-                    except:
-                        pass
+                    except Exception as e:
+                        print(str(e))
         db.commit()
         db.close()
 def setup(bot):
