@@ -85,7 +85,7 @@ class NuggiesCommands():
             if not "Doki Doki" in user_roles:
                 x += 1
                 roles_available += str(x)+". Doki Doki :heart:\n"
-                buyables.update({"doki doki", 200})
+                buyables.update({"doki doki":200})
                 emotes.update({x:"doki doki"})
             # if not "Protagonist" in user_roles:
             #     x += 1
@@ -95,30 +95,30 @@ class NuggiesCommands():
             if not "Miyuki" in user_roles:
                 x += 1
                 roles_available += str(x)+""". Miyuki - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile: Once purchased, it will be unlocked in your #role-requests flags\n."""
-                buyables.update({"miyuki", 10000})
+                buyables.update({"miyuki":10000})
                 emotes.update({x:"miyuki"})
             if not "$PLAYER$" in user_roles:
                 x += 1
                 roles_available += str(x)+""". $PLAYER$ - "An exclusive role, this one is you!!! The faint colour emitting from the other side of your monitor. :eyes:\n"""
-                buyables.update({"$player$", 5151})
+                buyables.update({"$player$":5151})
                 emotes.update({x:"$player$"})
             if not "Princess' Bedroom" in user_roles:
                 x += 1
                 keys += str(x)+""". Princess Key - "Grants access to Marissa's bedroom. Not sure why you'd want this, but if you're into that sort of thing...\n"""
-                buyables.update({"princess' bedroom", 900})
+                buyables.update({"princess' bedroom":900})
                 emotes.update({x:"princess' bedroom"})
             if not "N-Word Pass" in user_roles:
                 x += 1
                 passes += str(x)+""". N Card - "I knew a guy who knew a guy who knew an African American, and with this, you can say it all you want! (Just don't go too overboard.)\n"""
-                buyables.update({"n word pass", 200})
+                buyables.update({"n word pass":200})
                 emotes.update({x:"n word pass"})
             x += 1
             roles_available += str(x)+""". Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:\n"""
-            buyables.update({"custom role", 100000})
+            buyables.update({"custom role":100000})
             emotes.update({x:"custom role"})
             x += 1
             custom += str(x)+""". Custom Pictures Command - "Get your own little pictures command, like >os.rolo!\n"""""
-            buyables.update({"custom pic", 100000})
+            buyables.update({"custom pic":100000})
             emotes.update({x:"custom pic"})
             if roles_available != "":
                 em = True
