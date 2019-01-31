@@ -130,7 +130,7 @@ class Admin():
 
     @commands.command(pass_context=True)
     @commands.check(admincheck)
-    async def say(self, *, text : str):
+    async def say(self, ctx, *, text : str):
         await self.bot.say(text)
 
     @commands.command(pass_context=True)
