@@ -91,63 +91,63 @@ async def chck(self, server, name, member):
         MoniRare = discord.utils.get(server.roles, name='Monika (Rare)')
         MoniLegacy = discord.utils.get(server.roles, name='Monika (Legacy)')
 
-        if NatNorm in member.roles.roles:
+        if NatNorm in member.roles:
             rolestoremove.append(NatNorm)
             rolestogive.append(BestBoyNorm)
-        if NatRare in member.roles.roles:
+        if NatRare in member.roles:
             rolestoremove.append(NatRare)
             rolestogive.append(BestBoyRare)
-        if NatLegacy in member.roles.roles:
+        if NatLegacy in member.roles:
             rolestoremove.append(NatLegacy)
             rolestogive.append(BestBoyLegacy)
 
-        if PenNorm in member.roles.roles:
+        if PenNorm in member.roles:
             rolestoremove.append(PenNorm)
             rolestogive.append(BestBoyNorm)
-        if PenRare in member.roles.roles:
+        if PenRare in member.roles:
             rolestoremove.append(PenRare)
             rolestogive.append(BestBoyRare)
-        if PenLegacy in member.roles.roles:
+        if PenLegacy in member.roles:
             rolestoremove.append(PenLegacy)
             rolestogive.append(BestBoyLegacy)
         
-        if CinnamonNorm in member.roles.roles:
+        if CinnamonNorm in member.roles:
             rolestoremove.append(CinnamonNorm)
             rolestogive.append(BestBoyNorm)
-        if CinnamonRare in member.roles.roles:
+        if CinnamonRare in member.roles:
             rolestoremove.append(CinnamonRare)
             rolestogive.append(BestBoyRare)
-        if CinnamonLegacy in member.roles.roles:
+        if CinnamonLegacy in member.roles:
             rolestoremove.append(CinnamonLegacy)
             rolestogive.append(BestBoyLegacy)
             
-        if FagNorm in member.roles.roles:
+        if FagNorm in member.roles:
             rolestoremove.append(FagNorm)
             rolestogive.append(BestBoyNorm)
-        if FagRare in member.roles.roles:
+        if FagRare in member.roles:
             rolestoremove.append(FagRare)
             rolestogive.append(BestBoyRare)
-        if FagLegacy in member.roles.roles:
+        if FagLegacy in member.roles:
             rolestoremove.append(FagLegacy)
             rolestogive.append(BestBoyLegacy)
 
-        # if BestBoyNorm in member.roles.roles:
+        # if BestBoyNorm in member.roles:
         #     rolestoremove.append(BestBoyNorm)
         #     rolestogive.append(FagNorm)
-        # if BestBoyRare in member.roles.roles:
+        # if BestBoyRare in member.roles:
         #     rolestoremove.append(BestBoyRare)
         #     rolestogive.append(FagRare)
-        # if BestBoyLegacy in member.roles.roles:
+        # if BestBoyLegacy in member.roles:
         #     rolestoremove.append(BestBoyLegacy)
         #     rolestogive.append(FagLegacy)
         
-        if Moni in member.roles.roles:
+        if Moni in member.roles:
             rolestoremove.append(Moni)
             rolestogive.append(BestBoyNorm)
-        if MoniRare in member.roles.roles:
+        if MoniRare in member.roles:
             rolestoremove.append(MoniRare)
             rolestogive.append(BestBoyRare)
-        if MoniLegacy in member.roles.roles:
+        if MoniLegacy in member.roles:
             rolestoremove.append(MoniLegacy)
             rolestogive.append(BestBoyLegacy)
 
