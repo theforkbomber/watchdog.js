@@ -365,6 +365,7 @@ class NuggiesCommands():
                             reaction = discord.utils.get(ctx.message.server.emojis, id = "389266641348853760")
                             embed = discord.Embed(title="Time's up!")
                             await self.bot.edit_message(newmessage, embed = embed)
+                            await self.bot.clear_reactions(newmessage)
                             cancelled = True
                             break
                         try:
