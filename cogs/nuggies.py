@@ -361,7 +361,7 @@ class NuggiesCommands():
                         await asyncio.sleep(0.4)
                     checker = await self.bot.wait_for_reaction(user = ctx.message.author, message = newmessage, timeout = 60)
                     try:
-                        if checker.reaction == None:
+                        if checker == None:
                             reaction = discord.utils.get(ctx.message.server.emojis, id = "389266641348853760")
                             embed = discord.Embed(title="Time's up!")
                             await self.bot.edit_message(newmessage, embed = embed)
