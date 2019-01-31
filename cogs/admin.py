@@ -130,6 +130,11 @@ class Admin():
 
     @commands.command(pass_context=True)
     @commands.check(admincheck)
+    async def say(self, *, text : str):
+        await self.bot.say(text)
+
+    @commands.command(pass_context=True)
+    @commands.check(admincheck)
     async def initialise(self, ctx):
         server = ctx.message.server
         role = discord.utils.get(server.roles, name='whoops', server = server)
