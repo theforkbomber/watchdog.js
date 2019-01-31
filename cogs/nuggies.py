@@ -5,16 +5,16 @@ import asyncio
 import config
 
 async def chck(self, server, name, member):
-    if name == "doki doki":
+    if name == "Doki Do-key":
         role = discord.utils.get(server.roles, name = "Doki Doki")
         await self.bot.add_roles(member, role)
         # if name == "protagonist":
         #     role = discord.utils.get(server.roles, name = "Protagonist")
         #     await self.bot.add_roles(member, role)
-    if name == "miyuki":
+    if name == "Miyuki":
         role = discord.utils.get(server.roles, name = "Miyuki")
         await self.bot.add_roles(member, role)
-    if name == "rare":
+    if name == "Rare Upgrade":
         monirole = discord.utils.get(server.roles, name = "Monika")
         yurirole = discord.utils.get(server.roles, name = "Yuri")
         natsrole = discord.utils.get(server.roles, name = "Natsuki")
@@ -40,7 +40,7 @@ async def chck(self, server, name, member):
             role = discord.utils.get(server.roles, name = "Sayori (Rare)")
             await self.bot.add_roles(member, role)
 
-    if name == "legacy":
+    if name == "Legacy Upgrade":
         monirole = discord.utils.get(server.roles, name = "Monika")
         yurirole = discord.utils.get(server.roles, name = "Yuri")
         natsrole = discord.utils.get(server.roles, name = "Natsuki")
@@ -65,7 +65,7 @@ async def chck(self, server, name, member):
         if sayorole in member.roles:
             role = discord.utils.get(server.roles, name = "Sayori (Legacy)")
             await self.bot.add_roles(member, role)
-    if name == "protagonist":
+    if name == "Protagonist":
         rolestoremove = []
         rolestogive = []
         norm = False
@@ -154,21 +154,21 @@ async def chck(self, server, name, member):
         await self.bot.add_roles(member, *rolestogive)
         await asyncio.sleep(2)
         await self.bot.remove_roles(member, *rolestoremove)
-    if name == "$player$":
+    if name == "$PLAYER$":
         role = discord.utils.get(server.roles, name = "$PLAYER$")
         await self.bot.add_roles(member, role)
-    if name == "princess' bedroom":
+    if name == "Princess' Bedroom Key":
         role = discord.utils.get(server.roles, name = "Princess' Bedroom")
         await self.bot.add_roles(member, role)
-    if name == "n word pass":
+    if name == "N Card":
         role = discord.utils.get(server.roles, name = "N-Word Pass")
         await self.bot.add_roles(member, role)
-    if name == "gold member":
+    if name == "Gold Member":
         role = discord.utils.get(server.roles, name = "Gold Member")
         await self.bot.add_roles(member, role)
-    if name == "custom role":
+    if name == "Custom Role":
         await self.bot.send_message(self.bot.get_channel('526179783994900491'), member.name+" wants a custom role!")
-    if name == "custom pic":
+    if name == "Custom Picture Command":
         c = await self.bot.application_info()
         owner = c.owner.id
         await self.bot.send_message(owner, member.name+" wants a custom command!")
@@ -312,12 +312,12 @@ class NuggiesCommands():
             
             x += 1
             custom += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Custom Pictures Command - "Get your own little pictures command, like >os.rolo!"\n"""""
-            buyables.update({"custom pic":100000})
+            buyables.update({"Custom Picture Command":100000})
             emotes.update({x:"Custom Picture Command"})
             x += 1
             custom += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:"\n"""
-            buyables.update({"custom role":100000})
-            emotes.update({x:"custom role"})
+            buyables.update({"Custom Role":100000})
+            emotes.update({x:"Custom Role"})
             if roles_available != "":
                 em = True
                 embed.add_field(name = "Roles", value = roles_available)
