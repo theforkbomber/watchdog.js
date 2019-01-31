@@ -667,7 +667,7 @@ async def on_message(message):
         if last_sent[0] < (datetime.now() - timedelta(days=1)):
             cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
             nuggies = cursor.fetchone()
-            cursor.execute('''UPDATE nuggies SET last_sent = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
+            cursor.execute('''UPDATE nuggies SET last_message_sent = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
             cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
     if "nigger" in message.content.lower() and not "N-Word Pass" in [r.name for r in message.author.roles]:
         await bot.delete_message(message)
