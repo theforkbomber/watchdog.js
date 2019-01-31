@@ -184,7 +184,7 @@ async def on_reaction_add(reaction, user):
             payload = reaction.message.embeds[0]['description']
         else:
             payload = reaction.message.content
-        if reaction in listoflangs:
+        if reaction in listoflangs and reaction.message.channel.id != "418556524785303563":
             lang = listoflangs[reaction]
             print(lang, reaction)
             await bot.send_typing(reaction.message.channel)
