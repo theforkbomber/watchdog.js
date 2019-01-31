@@ -264,56 +264,56 @@ class NuggiesCommands():
                 x += 1
                 roles_available += f"""{reactioned[x-1]} 1k <:nuggies:539932838318047244> Unlock Rare Tier (:arrow_double_up: UPGRADE) - "The second tier role, if you were lucky, you were given this when you joined, or given it later on. If you're less than lucky, buy this and you'll have the rare roles unlocked in your <#390197949780590603> flags"\n"""
                 buyables.update({"rare":1000})
-                emotes.update({x:"rare"})
+                emotes.update({x:"Rare Upgrade"})
             elif rare_roles != [] and legacy_roles == []:
                 x += 1
                 roles_available += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Unlock Legacy Tier (:arrow_double_up: UPGRADE) - "The third tier role, you were eligible for this role if you joined before a certain date. People with this role are a rare breed. Buy this and you'll have the legacy roles unlocked in your <#390197949780590603> flags"\n"""
                 buyables.update({"legacy":100000})
-                emotes.update({x:"legacy"})
+                emotes.update({x:"Legacy Upgrade"})
             elif rare_roles == [] and legacy_roles != []:
                 roles_available += f"""{reactioned[x-1]} 1k <:nuggies:539932838318047244> Unlock Rare Tier (:arrow_double_up: UPGRADE) - "The second tier role, if you were lucky, you were given this when you joined, or given it later on. If you're less than lucky, buy this and you'll have the rare roles unlocked in your <#390197949780590603> flags"\n"""
                 buyables.update({"rare":1000})
-                emotes.update({x:"rare"})
+                emotes.update({x:"Rare Upgrade"})
             if not "Protagonist" in user_roles:
                 x += 1
                 roles_available += f"""{reactioned[x-1]} 5k <:nuggies:539932838318047244> Protagonist - "An exclusive role, this one is Dan! The colour of his eyes! :eyes:. Once purchased, it will be unlocked in your <#390197949780590603> flags"\n"""
                 buyables.update({"protagonist":5000})
-                emotes.update({x:"protagonist"})
+                emotes.update({x:"Protagonist"})
             if not "Miyuki" in user_roles:
                 x += 1
                 roles_available += f"""{reactioned[x-1]} 10k <:nuggies:539932838318047244> Miyuki - "An exclusive role, this one is me!!! The colour of my eyes! :slight_smile:"\n"""
                 buyables.update({"miyuki":10000})
-                emotes.update({x:"miyuki"})
+                emotes.update({x:"Miyuki"})
             if not "$PLAYER$" in user_roles:
                 x += 1
                 roles_available += f"""{reactioned[x-1]} 5151 <:nuggies:539932838318047244> $PLAYER$ - "An exclusive role, this one is you!!! The faint colour emitting from the other side of your monitor. :eyes:"\n"""
                 buyables.update({"$player$":5151})
-                emotes.update({x:"$player$"})
+                emotes.update({x:"$PLAYER$"})
             if not "Gold Member" in user_roles:
                 x += 1
                 keys += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Gold Member "Gain access to all six waifu wars channels, and a few new exclusives!"\n"""
                 buyables.update({"gold member":100000})
-                emotes.update({x:"gold member"})
+                emotes.update({x:"Gold Member"})
             if not "Doki Doki" in user_roles:
                 x += 1
                 keys += f"""{reactioned[x-1]} <:dokidokey:539971188387086336> 200 <:nuggies:539932838318047244> Doki Do-key :heart: "A special role that will give you access to the server's venting text channel.  To join the voice channel, the venter needs to allow you access."\n"""
                 buyables.update({"doki doki":200})
-                emotes.update({x:"doki doki"})
+                emotes.update({x:"Doki Do-key"})
             if not "Princess' Bedroom" in user_roles:
                 x += 1
                 keys += f"""{reactioned[x-1]} <:princesskey:539971188638613554>  900 <:nuggies:539932838318047244> Princess Key - "Grants access to Marissa's bedroom. Not sure why you'd want this, but if you're into that sort of thing..."\n"""
                 buyables.update({"princess' bedroom":900})
-                emotes.update({x:"princess' bedroom"})
+                emotes.update({x:"Princess' Bedroom Key"})
             if not "N-Word Pass" in user_roles:
                 x += 1
                 passes += f"""{reactioned[x-1]} 200 <:nuggies:539932838318047244> N Card - "I knew a guy who knew a guy who knew an African American, and with this, you can say it all you want! (Just don't go too overboard.)"\n"""
                 buyables.update({"n word pass":200})
-                emotes.update({x:"n word pass"})
+                emotes.update({x:"N Card"})
             
             x += 1
             custom += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Custom Pictures Command - "Get your own little pictures command, like >os.rolo!"\n"""""
             buyables.update({"custom pic":100000})
-            emotes.update({x:"custom pic"})
+            emotes.update({x:"Custom Picture Command"})
             x += 1
             custom += f"""{reactioned[x-1]} 100k <:nuggies:539932838318047244> Custom Role - "Your very own role, fit with a separate listing above Gold Member, and a colour of your choice! :confetti_ball:"\n"""
             buyables.update({"custom role":100000})

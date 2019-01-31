@@ -10,6 +10,9 @@ import psycopg2
 def modcheck(ctx):
     return ctx.message.author.id == "275312272975462411" or ctx.message.author.server_permissions.manage_roles
 
+def nugcheck(ctx):
+    return ctx.message.author.id == "275312272975462411" or ctx.message.author.id == "458714925934575616"
+
 class Moderation:
     def __init__(self, bot):
         self.bot = bot
@@ -109,7 +112,7 @@ class Moderation:
         await self.bot.say("`Assigned user "+user.name+" the {Monika} flag.`")
 
     @commands.command(pass_context=True)
-    @commands.check(modcheck)
+    @commands.check(nugcheck)
     async def removenugs(self, ctx, user : discord.User, n : int):
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
@@ -124,7 +127,7 @@ class Moderation:
         db.close()
 
     @commands.command(pass_context=True)
-    @commands.check(modcheck)
+    @commands.check(nugcheck)
     async def addnugs(self, ctx, user : discord.User, n : int):
         db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
         cursor = db.cursor()
