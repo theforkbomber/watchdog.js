@@ -617,7 +617,8 @@ async def on_member_update(before, after):
 
 @bot.event
 async def on_message(message):
-    if "<@&541323335930347532>" in message.content and message.author.id == "458714925934575616":
+    if "<@&541323335930347532>" in message.content and (message.author.id == "275312272975462411") or (message.author.id == "458714925934575616"):
+        rvsn = bot.get_server("427450243253272598")
         react = discord.utils.get(rvsn.emojis, id = "539932839102119979")
         await bot.add_reaction(message, react)
     #     rvsn = bot.get_server("427450243253272598")
