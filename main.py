@@ -180,15 +180,19 @@ async def on_reaction_add(reaction, user):
     rvsn = bot.get_server("427450243253272598")
     thingy = discord.utils.get(rvsn.emojis, id = "539932839102119979")
     print(reaction.emoji, thingy)
+    if reaction == thingy and (reaction.message.channel.id == "418556524785303563" or reaction.message.channel.id == "539966436290986014"):
+        print("Come on")
+    
+        await bot.remove_roles(bot.get_server(reaction.message.server.id).get_member(user.id), discord.utils.get(message.server.roles, name = "Audience"))
     try:
+        #if reaction == thingy and (reaction.message.channel.id == "418556524785303563" or reaction.message.channel.id == "539966436290986014"):
+            #await bot.remove_roles(bot.get_server(reaction.message.server.id).get_member(user.id), discord.utils.get(message.server.roles, name = "Audience"))
         if reaction == discord.Reaction(emoji="🛑") and user.id == "275312272975462411":
             await bot.delete_message(reaction.message)
         elif len(reaction.message.embeds) != 0:
             payload = reaction.message.embeds[0]['description']
         else:
             payload = reaction.message.content
-        if reaction == thingy and (reaction.message.channel.id == "418556524785303563" or reaction.message.channel.id == "539966436290986014"):
-            await bot.remove_roles(bot.get_server(reaction.message.server.id).get_member(user.id), discord.utils.get(message.server.roles, name = "Audience"))
         if reaction in listoflangs and reaction.message.channel.id != "418556524785303563":
             lang = listoflangs[reaction]
             print(lang, reaction)
