@@ -188,7 +188,7 @@ async def on_reaction_add(reaction, user):
         else:
             payload = reaction.message.content
         if reaction == thingy and (reaction.message.channel.id == "418556524785303563" or reaction.message.channel.id == "539966436290986014"):
-            await bot.remove_roles(user, discord.utils.get(message.server.roles, name = "Audience"))
+            await bot.remove_roles(bot.get_server(reaction.message.server.id).get_member(user.id), discord.utils.get(message.server.roles, name = "Audience"))
         if reaction in listoflangs and reaction.message.channel.id != "418556524785303563":
             lang = listoflangs[reaction]
             print(lang, reaction)
