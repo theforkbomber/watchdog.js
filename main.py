@@ -370,9 +370,11 @@ async def on_member_join(member):
     #     pass
     # elif "everyone" in member.nick or "here" in member.nick:
     server = member.server
+    await bot.add_roles(member, discord.utils.get(server.roles, name = "Audience"))
     dokis = ["Monika", "Misao", "Sayori", "Natsuki", "Protagonist", "Yuri"]
     Doki = False
     wb = []
+    wb.append(discord.utils.get(server.roles, name = "Audience"))
     def nicknamecheck(a):
         names = ["Monika", "Natsuki", "Yuri", "Dan", "Misao", "Sayori"]
         for x in range(0,len(names)):
