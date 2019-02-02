@@ -137,14 +137,12 @@ class Admin():
     @commands.check(admincheck)
     async def initialise(self, ctx):
         server = ctx.message.server
-        role = discord.utils.get(server.roles, name='whoops', server = server)
-        await self.bot.say("Learning users' roles...")
+        role = discord.utils.get(server.roles, name='Audience', server = server)
+        await self.bot.say("Initialising audience...")
         for x in server.members:
             await self.bot.add_roles(x, role)
             await asyncio.sleep(2)
-            await self.bot.remove_roles(x, role)
-            await asyncio.sleep(2)
-        await self.bot.say("Learnt all roles, <@275312272975462411>!")
+        await self.bot.say("Complete, <@275312272975462411>!")
 
     # @commands.command(pass_context=True)
     # @commands.check(admincheck)

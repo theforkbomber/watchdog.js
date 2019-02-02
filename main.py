@@ -612,6 +612,18 @@ async def on_member_update(before, after):
 
 @bot.event
 async def on_message(message):
+    if "<@&541323335930347532>" in message.content and message.author.id == "458714925934575616":
+        rvsn = bot.get_server("427450243253272598")
+        react = discord.utils.get(rvsn.emojis, id = "539932839102119979")
+        await bot.add_reaction(message, react)
+        cancelled = False
+        while cancelled == False:
+            t = await bot.wait_for_reaction(message = message, timeout = 60*60)
+            if t == None:
+                cancelled = True
+            await bot.remove_roles(t.user, discord.utils.get(message.server.roles, name = "Audience"))
+
+
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
     cursor = db.cursor()
     # if message.server.id != "369252350927306752":
