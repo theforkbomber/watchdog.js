@@ -185,7 +185,7 @@ async def on_reaction_add(reaction, user):
             payload = reaction.message.embeds[0]['description']
         else:
             payload = reaction.message.content
-        if reaction == discord.utils.get(rvsn.emojis, id = "539932839102119979") and (reaction.channel.id == "418556524785303563" or reaction.channel.id == "539966436290986014"):
+        if reaction.emoji == discord.utils.get(rvsn.emojis, id = "539932839102119979") and (reaction.channel.id == "418556524785303563" or reaction.channel.id == "539966436290986014"):
             await bot.remove_roles(user, discord.utils.get(message.server.roles, name = "Audience"))
         if reaction in listoflangs and reaction.message.channel.id != "418556524785303563":
             lang = listoflangs[reaction]
