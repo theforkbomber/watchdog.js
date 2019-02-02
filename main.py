@@ -179,7 +179,7 @@ async def on_ready():
 async def on_reaction_add(reaction, user):
     rvsn = bot.get_server("427450243253272598")
     thingy = discord.utils.get(rvsn.emojis, id = "539932839102119979")
-    print(reaction, thingy)
+    print(reaction.emoji, thingy)
     try:
         if reaction == discord.Reaction(emoji="🛑") and user.id == "275312272975462411":
             await bot.delete_message(reaction.message)
