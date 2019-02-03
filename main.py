@@ -678,7 +678,7 @@ async def on_message(message):
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
         nuggies = cursor.fetchone()
         cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
-        print("% 100 "+str(message.timestamp), message.content, message.author.name)
+        print("% 100 "+str(message.timestamp), message.content, message.author.name, str(messages[0]))
     if last_sent != None:
         if last_sent[0] >= (datetime.now() - timedelta(days=1)):
             pass
