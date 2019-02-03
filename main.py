@@ -376,7 +376,6 @@ async def on_member_join(member):
     #     pass
     # elif "everyone" in member.nick or "here" in member.nick:
     server = member.server
-    await bot.add_roles(member, discord.utils.get(server.roles, name = "Audience"))
     dokis = ["Monika", "Misao", "Sayori", "Natsuki", "Protagonist", "Yuri"]
     Doki = False
     wb = []
@@ -401,6 +400,7 @@ async def on_member_join(member):
         cursor.execute("SELECT * FROM detention WHERE username= %s", (username,))
         results = cursor.fetchone()
         print(results)
+        # await bot.add_roles(member, discord.utils.get(server.roles, name = "Audience"))
         if results[1] == "TRUE":
             for role in server.roles:
                 if role.name == "Detention":
@@ -418,6 +418,7 @@ async def on_member_join(member):
         elif results[1] == "FALSE":
             cursor.execute("SELECT * FROM roles WHERE username= %s", (username,))
             c = cursor.fetchall()
+            await bot.add_roles(member, discord.utils.get(server.roles, name = "Audience"))
             print(c)
             rolled = c[0][2]
             print(rolled)
