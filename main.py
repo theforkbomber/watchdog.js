@@ -672,12 +672,12 @@ async def on_message(message):
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
         nuggies = cursor.fetchone()
         cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+515, str(message.author.id)))
-        print("Literature "+message.timestamp, message.content, message.author.name)
+        print("Literature "+str(message.timestamp), message.content, message.author.name)
     if (messages[0] % 100)== 0:
         cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
         nuggies = cursor.fetchone()
         cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
-        print("% 100 "+message.timestamp, message.content, message.author.name)
+        print("% 100 "+str(message.timestamp), message.content, message.author.name)
     if last_sent != None:
         if last_sent[0] >= (datetime.now() - timedelta(days=1)):
             pass
@@ -686,20 +686,20 @@ async def on_message(message):
             nuggies = cursor.fetchone()
             cursor.execute('''UPDATE nuggies SET last_gn = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
             cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
-            print("Last goodnight one "+message.timestamp, message.content, message.author.name)
+            print("Last goodnight one "+str(message.timestamp), message.content, message.author.name)
         if last_gn[0] != None:
             if last_gn[0] > (datetime.now() - timedelta(days=1)) and message.channel.id == "384536425023930379":
                 cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
                 nuggies = cursor.fetchone()
                 cursor.execute('''UPDATE nuggies SET last_gn = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
                 cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
-                print("Last goodnight two "+message.timestamp, message.content, message.author.name)
+                print("Last goodnight two "+str(message.timestamp), message.content, message.author.name)
         if last_sent[0] > (datetime.now() - timedelta(days=1)):
             cursor.execute("""SELECT nuggies FROM nuggies WHERE playerid = '%s'"""% message.author.id)
             nuggies = cursor.fetchone()
             cursor.execute('''UPDATE nuggies SET last_message_sent = %s WHERE playerid = %s;''', (message.timestamp, str(message.author.id)))
             cursor.execute('''UPDATE nuggies SET nuggies = %s WHERE playerid = %s;''', (nuggies[0]+100, str(message.author.id)))
-            print("Dailies "+message.timestamp, message.content, message.author.name)
+            print("Dailies "+str(message.timestamp), message.content, message.author.name)
     if "nigger" in message.content.lower() and not "N-Word Pass" in [r.name for r in message.author.roles]:
         await bot.delete_message(message)
     details = "Sent by "+message.author.name+" @"+str(message.timestamp)+"UTC"
