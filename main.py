@@ -179,9 +179,9 @@ async def on_ready():
 async def on_reaction_add(reaction, user):
     rvsn = bot.get_server("427450243253272598")
     thingy = discord.utils.get(rvsn.emojis, id = "539932839102119979")
-    print(reaction.emoji, thingy)
+    #print(reaction.emoji, thingy)
     if reaction.emoji == thingy and (reaction.message.channel.id == "418556524785303563" or reaction.message.channel.id == "539966436290986014"):
-        print("Come on")
+        #print("Come on")
     
         await bot.remove_roles(bot.get_server(reaction.message.server.id).get_member(user.id), discord.utils.get(reaction.message.server.roles, name = "Audience"))
     try:
@@ -195,7 +195,7 @@ async def on_reaction_add(reaction, user):
             payload = reaction.message.content
         if reaction in listoflangs and reaction.message.channel.id != "418556524785303563":
             lang = listoflangs[reaction]
-            print(lang, reaction)
+            #print(lang, reaction)
             await bot.send_typing(reaction.message.channel)
             em = discord.Embed(description=translateerrr(payload, lang), colour=0x53bceb)
             await bot.send_message(reaction.message.channel, embed=em)
@@ -334,11 +334,11 @@ async def on_message_delete(message):
     ch = str(message.channel.id)
     author = message.author.id
     mem = message.server.get_member(author)
-    print("niggerfilter: "+str((("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) ^ (mem.bot == False)))
-    print(mem.bot)
-    print("asda"+str((("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) == (mem.bot == False)))
+    #print("niggerfilter: "+str((("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) ^ (mem.bot == False)))
+    #print(mem.bot)
+    #print("asda"+str((("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) == (mem.bot == False)))
     if message.edited_timestamp != None:
-        print("it has been edited")
+        #print("it has been edited")
         cursor.execute("SELECT todisplay FROM logs WHERE id = '%s'"% str(message.id))
         r = cursor.fetchone()
         r = r[0]
@@ -346,7 +346,7 @@ async def on_message_delete(message):
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
         ts = message.edited_timestamp
     elif message.edited_timestamp == None:
-        print("it hasn't been edited")
+        #print("it hasn't been edited")
         todisplay = "(DELETED)"+str(ts)+" UTC"+"\n"+msg
         cursor.execute('''UPDATE logs SET todisplay = %s WHERE id = %s;''', (todisplay, str(message.id)))
     if not (("nigger" in message.content.lower() and message.author.id == "418828859069300742") == False) ^ (mem.bot == False):
@@ -399,7 +399,7 @@ async def on_member_join(member):
         username = str(member.id)
         cursor.execute("SELECT * FROM detention WHERE username= %s", (username,))
         results = cursor.fetchone()
-        print(results)
+        #print(results)
         # await bot.add_roles(member, discord.utils.get(server.roles, name = "Audience"))
         if results[1] == "TRUE":
             for role in server.roles:
@@ -409,7 +409,7 @@ async def on_member_join(member):
                         det = role
                         Doki = True
                         await bot.add_roles(member, det)
-                        print("hm?")
+                        #print("hm?")
                         if det in member.roles:
                             rolee = True
                     break
@@ -419,9 +419,9 @@ async def on_member_join(member):
             cursor.execute("SELECT * FROM roles WHERE username= %s", (username,))
             c = cursor.fetchall()
             await bot.add_roles(member, discord.utils.get(server.roles, name = "Audience"))
-            print(c)
+            #print(c)
             rolled = c[0][2]
-            print(rolled)
+            #print(rolled)
             rolled = rolled.split("|")
             for x in rolled:
                 try:
@@ -664,7 +664,7 @@ async def on_message(message):
         try:
             cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (messages[0]+1, str(message.author.id)))
         except Exception as e:
-            print(str(e))
+            #print(str(e))
             cursor.execute('''UPDATE nuggies SET messages = %s WHERE playerid = %s;''', (1, str(message.author.id)))
             db.commit()
             db.close()
@@ -787,7 +787,7 @@ async def on_message(message):
     if message.content.startswith(">os.silly sausage"):
         ##await bot.wait_until_ready()
         d = message.content.replace(">os.silly sausage", ">os.detent")
-        print(d)
+        #print(d)
         message.content = d
     if message.content.startswith(">os.prune"):
         #await bot.wait_until_ready()
@@ -806,7 +806,7 @@ async def on_message(message):
         elif len(test) > 1:
             try:
                 ##await bot.wait_until_ready()
-                print(message.channel)
+                #print(message.channel)
                 await bot.send_message(message.channel, "Command expected 1 argument, received "+str(len(test)))
                 return
             except Exception as e:
@@ -818,7 +818,7 @@ async def on_message(message):
         elif test[0] not in ["Nat", "natsuki", "Natsuki", "nat", "tsundere", "Misao", "misao", "yuri", "Yuri", "monika", "Monika", "moni","Moni", "sayori", "Sayori", "sayo", "Sayo"]:
             ##await bot.wait_until_ready()
             try:
-                print(message.channel)
+                #print(message.channel)
                 await bot.send_message(message.channel,"Unknown or invalid role name, try again.")
             except Exception as e:
                 print(e)
@@ -900,7 +900,7 @@ async def on_message(message):
                                         rolee = False
                                         while rolee == False:
                                             det = role
-                                            print("hm?")
+                                            #print("hm?")
                                             await bot.add_roles(message.author, det)
                                             if det in message.author.roles:
                                                 rolee = True
@@ -910,7 +910,7 @@ async def on_message(message):
                                         continue
                                     else:
                                         roler.append(role)
-                                print(roler)
+                                #print(roler)
                                 await bot.remove_roles(message.author, *roler)
                                 desc = "Spammed the same message 6 times."
                             elif message.content == results[3]:
