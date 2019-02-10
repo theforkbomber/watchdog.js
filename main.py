@@ -205,7 +205,7 @@ async def on_reaction_add(reaction, user):
 @bot.event
 async def on_command_error(error, ctx):
     if isinstance(error, commands.CommandOnCooldown):
-        my_time = (datetime(1970,1,1) + timedelta(seconds=int(error.retry_after))).time() 
+        my_time = (timedelta(seconds=int(error.retry_after))).time() 
         await bot.send_message(ctx.message.channel, content=str(my_time)+' left on the cooldown.')
     raise error  # re-raise the error so all the errors will still show up in console
 
