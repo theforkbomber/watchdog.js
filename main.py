@@ -211,6 +211,8 @@ async def on_command_error(error, ctx):
 
 @bot.event
 async def on_message_edit(before, after):
+    if "nigger" in after.content.lower() and not "N-Word Pass" in [r.name for r in after.author.roles]:
+        await bot.delete_message(after)
     prog = re.compile(r'(https?:\/\/)?(www.)?((discord).(gg|io|me|li|link)|discordapp.com\/invite|invite.(gg|io|me|li|link))\/.+[a-zA-Z0-9]')
     line = str(after.content)
     if prog.search(line) and not after.author.server_permissions.manage_roles:
