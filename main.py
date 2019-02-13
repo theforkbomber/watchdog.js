@@ -179,7 +179,7 @@ async def on_ready():
 async def on_reaction_add(reaction, user):
     rvsn = bot.get_server("427450243253272598")
     thingy = discord.utils.get(rvsn.emojis, id = "539932839102119979")
-    #print(reaction.emoji, thingy)
+    print(str(reaction.emoji))
     if reaction.emoji == thingy and (reaction.message.channel.id == "418556524785303563" or reaction.message.channel.id == "539966436290986014"):
         #print("Come on")
     
