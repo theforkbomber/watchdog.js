@@ -34,7 +34,7 @@ async def serverpfp():
                         p = f.read()
                         f.close()
                     await bot.edit_server(server, icon=p)
-                    await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Kyo Takara (ERROR)")
+                    #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Kyo Takara (ERROR)")
                     kyo += 1
                     # kyo = 0
                     mari = 0
@@ -65,7 +65,7 @@ async def serverpfp():
                         p = f.read()
                         f.close()
                     await bot.edit_server(server, icon=p)
-                    await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Marissa")
+                    #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Marissa")
                     kyo = 0
                     mari = 0
                     season3 = 0
@@ -96,7 +96,7 @@ async def serverpfp():
                         p = f.read()
                         f.close()
                     await bot.edit_server(server, icon=p)
-                    await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: America Arc Banner")
+                    #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: America Arc Banner")
                     kyo = 0
                     mari = 0
                     season3 = 0
@@ -127,7 +127,7 @@ async def serverpfp():
                         p = f.read()
                         f.close()
                     await bot.edit_server(server, icon=p)
-                    await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Dan")
+                    #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Dan")
                     kyo = 0
                     mari = 0
                     season3 = 0
@@ -158,7 +158,7 @@ async def serverpfp():
                         p = f.read()
                         f.close()
                     await bot.edit_server(server, icon=p)
-                    await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 3)")
+                    #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 3)")
                     kyo = 0
                     mari = 0
                     season3 = 0
@@ -189,7 +189,7 @@ async def serverpfp():
                         p = f.read()
                         f.close()
                     await bot.edit_server(server, icon=p)
-                    await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Sayori (Variant)")
+                    #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Sayori (Variant)")
                     kyo = 0
                     mari = 0
                     season3 = 0
@@ -220,7 +220,7 @@ async def serverpfp():
                         p = f.read()
                         f.close()
                     await bot.edit_server(server, icon=p)
-                    await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 4)")
+                    #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 4)")
                     kyo = 0
                     mari = 0
                     season3 = 0
@@ -253,8 +253,8 @@ async def serverpfp():
                             p = f.read()
                             f.close()
                         await bot.edit_server(server, icon=p)
-                        await bot.send_message(channel)
-                        await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Natsuki")
+                        #await bot.send_message(channel)
+                        #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Natsuki")
                         kyo = 0
                         mari = 0
                         season3 = 0
@@ -289,7 +289,7 @@ async def serverpfp():
                             p = f.read()
                             f.close()
                         await bot.edit_server(server, icon=p)
-                        await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Sayori")
+                        #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Sayori")
                         kyo = 0
                         mari = 0
                         season3 = 0
@@ -324,7 +324,7 @@ async def serverpfp():
                             p = f.read()
                             f.close()
                         await bot.edit_server(server, icon=p)
-                        await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Yuri")
+                        #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Yuri")
                         kyo = 0
                         mari = 0
                         season3 = 0
@@ -359,7 +359,7 @@ async def serverpfp():
                             p = f.read()
                             f.close()
                         await bot.edit_server(server, icon=p)
-                        await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Misao")
+                        #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Misao")
                         kyo = 0
                         mari = 0
                         season3 = 0
@@ -395,7 +395,7 @@ async def serverpfp():
                             p = f.read()
                             f.close()
                         await bot.edit_server(server, icon=p)
-                        await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 1-2)")
+                        #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Monika (Season 1-2)")
                         kyo = 0
                         mari = 0
                         season3 = 0
@@ -430,7 +430,7 @@ async def serverpfp():
                             p = f.read()
                             f.close()
                         await bot.edit_server(server, icon=p)
-                        await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Yuri (Variant)")
+                        #await bot.send_message(channel, "The server image has changed! CURRENT ARTWORK: Yuri (Variant)")
                         kyo = 0
                         mari = 0
                         season3 = 0
