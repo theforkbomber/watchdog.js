@@ -911,11 +911,11 @@ class Moderation:
             except Exception as e:
                 getid = ctx.message.server.get_member("506885595470102549")
                 if getid.server_permissions.manage_server == False:
-                    em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+e, colour=0xf44242)
+                    em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+str(e), colour=0xf44242)
                     em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                     my_message = await self.bot.send_message(ctx.message.channel, embed=em)  
                 else:
-                    em = discord.Embed(description="Caught an error!\nDETAILS:\n"+e, colour=0xf44242)
+                    em = discord.Embed(description="Caught an error!\nDETAILS:\n"+str(e), colour=0xf44242)
                     em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                     my_message = await self.bot.send_message(ctx.message.channel, embed=em) 
         else:
@@ -930,11 +930,11 @@ class Moderation:
                 e = str(e)
                 getid = ctx.message.server.get_member("506885595470102549")
                 if getid.server_permissions.manage_server == False:
-                    em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+e, colour=0xf44242)
+                    em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+str(e), colour=0xf44242)
                     em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                     my_message = await self.bot.send_message(ctx.message.channel, embed=em)  
                 else:
-                    em = discord.Embed(description="Caught an error!\nDETAILS:\n"+e, colour=0xf44242)
+                    em = discord.Embed(description="Caught an error!\nDETAILS:\n"+str(e), colour=0xf44242)
                     em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                     my_message = await self.bot.send_message(ctx.message.channel, embed=em)
 
@@ -953,11 +953,11 @@ class Moderation:
                 except Exception as e:
                     getid = ctx.message.server.get_member("506885595470102549")
                     if getid.server_permissions.manage_server == False:
-                        em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+e, colour=0xf44242)
+                        em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+str(e), colour=0xf44242)
                         em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                         my_message = await self.bot.send_message(ctx.message.channel, embed=em)  
                     else:
-                        em = discord.Embed(description="Caught an error!\nDETAILS:\n"+e, colour=0xf44242)
+                        em = discord.Embed(description="Caught an error!\nDETAILS:\n"+str(e), colour=0xf44242)
                         em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                         my_message = await self.bot.send_message(ctx.message.channel, embed=em) 
             else:
@@ -972,11 +972,11 @@ class Moderation:
                     e = str(e)
                     getid = ctx.message.server.get_member("506885595470102549")
                     if getid.server_permissions.manage_server == False:
-                        em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+e, colour=0xf44242)
+                        em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+str(e), colour=0xf44242)
                         em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                         my_message = await self.bot.send_message(ctx.message.channel, embed=em)  
                     else:
-                        em = discord.Embed(description="Caught an error!\nDETAILS:\n"+e, colour=0xf44242)
+                        em = discord.Embed(description="Caught an error!\nDETAILS:\n"+str(e), colour=0xf44242)
                         em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                         my_message = await self.bot.send_message(ctx.message.channel, embed=em)
 
@@ -995,11 +995,11 @@ class Moderation:
             except Exception as e:
                 getid = ctx.message.server.get_member("506885595470102549")
                 if getid.server_permissions.manage_server == False:
-                    em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+e, colour=0xf44242)
+                    em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+str(e), colour=0xf44242)
                     em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                     my_message = await self.bot.send_message(ctx.message.channel, embed=em)  
                 else:
-                    em = discord.Embed(description="Caught an error!\nDETAILS:\n"+e, colour=0xf44242)
+                    em = discord.Embed(description="Caught an error!\nDETAILS:\n"+str(e), colour=0xf44242)
                     em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                     my_message = await self.bot.send_message(ctx.message.channel, embed=em) 
         else:
@@ -1015,11 +1015,11 @@ class Moderation:
                 e = str(e)
                 getid = ctx.message.server.get_member("506885595470102549")
                 if getid.server_permissions.manage_server == False:
-                    em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+e, colour=0xf44242)
+                    em = discord.Embed(description="Requirements not met:\n-Manage server\nDETAILS:\n"+str(e), colour=0xf44242)
                     em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                     my_message = await self.bot.send_message(ctx.message.channel, embed=em)  
                 else:
-                    em = discord.Embed(description="Caught an error!\nDETAILS:\n"+e, colour=0xf44242)
+                    em = discord.Embed(description="Caught an error!\nDETAILS:\n"+str(e), colour=0xf44242)
                     em.set_author(name="Failed to purge bot messages.", icon_url=ctx.message.author.avatar_url)
                     my_message = await self.bot.send_message(ctx.message.channel, embed=em) 
 
