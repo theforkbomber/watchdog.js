@@ -137,6 +137,7 @@ class Roles:
         Moni = discord.utils.get(ctx.message.server.roles, name='Monika')
         MoniRare = discord.utils.get(ctx.message.server.roles, name='Monika (Rare)')
         MoniLegacy = discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)')
+        print("'>os.roleme sayo kk'")
         if NatNorm in ctx.message.author.roles:
             rolestoremove.append(NatNorm)
             rolestogive.append(CinnamonNorm)
