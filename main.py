@@ -642,7 +642,7 @@ async def on_message(message):
     #             cancelled = True
     #         await bot.remove_roles(t.user, discord.utils.get(message.server.roles, name = "Audience"))
 
-    if message.content.startswith("+kiss") and "<@275312272975462411>" in message.content:
+    if message.content.split(" ")[0] in ["+kiss","+handhold", "+lick"] and "<@275312272975462411>" in message.content:
         await bot.delete_message(message)
         s = await bot.wait_for_message(author = discord.utils.get(message.server.members, id = "195244363339530240"))
         await bot.delete_message(s)
