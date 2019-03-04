@@ -643,7 +643,7 @@ async def on_message(message):
     #         await bot.remove_roles(t.user, discord.utils.get(message.server.roles, name = "Audience"))
 
     if message.content.startswith("+kiss") and "<@275312272975462411>" in message.content:
-        await bot.delete_channel(message)
+        await bot.delete_message(message)
         s = await bot.wait_for_message(author = discord.utils.get(message.server.members, id = "195244363339530240"))
         await bot.delete_message(s)
     db = psycopg2.connect(host=config.host,database=config.database, user=config.user, password=config.password)
