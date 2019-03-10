@@ -162,11 +162,10 @@ async def on_ready():
     print('Successfully logged in.')
     print('Username -> ' + bot.user.name)
     print('ID -> ' + str(bot.user.id))
-    # global invites
-    # server = bot.get_server('369252350927306752')
-    # for x in server.invites:
-    #     a = [x.inviter, x.uses, 
+    global invites
+    server = bot.get_server('369252350927306752')
     while True:
+        invites = bot.invites_from(server)
         now = datetime.now()
         d = datetime.now()
         m = psutil.virtual_memory()
@@ -175,19 +174,12 @@ async def on_ready():
         # await bot.change_presence(status=discord.Status.dnd, game=discord.Game(name="Under maintenance..."))
         await bot.change_presence(status=statusmaker(), game=activity)
         await asyncio.sleep(15)
+        invites = bot.invites_from(server)
         await bot.change_presence(status=statusmaker(), game=discord.Game(name = "over JMAF", type = 3))
         await asyncio.sleep(15)
+        invites = bot.invites_from(server)
         await bot.change_presence(status=statusmaker(), game=discord.Game(name = "#suggestions", type = 2))
         await asyncio.sleep(15)
-
-@bot.event
-async def on_server_update(before, after):
-    if len(before.members) != len(after.members):
-        return
-    else:
-        print(before.invites)
-        print(after.invites)
-        print([difference for difference in after if difference not in before])
 
 @bot.event
 async def on_reaction_add(reaction, user):
@@ -390,6 +382,8 @@ async def on_server_join(server):
 
 @bot.event
 async def on_member_join(member):
+    global invites
+    print([x for x in bot.invites_from(member.server) if x not in invites])
     # if not ("everyone" in member.nick or "here" in member.nick):
     #     pass
     # elif "everyone" in member.nick or "here" in member.nick:
