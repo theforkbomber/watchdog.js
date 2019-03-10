@@ -389,8 +389,13 @@ async def on_member_join(member):
             newlist = [x for x in test if x.uses not in [y.uses for y in invites]]
             em = discord.Embed(description = f"New user: {member}")
             em.set_author(name = "Invite Tracker 9000", icon_url=member.avatar_url)
-            em.add_field(name = "Inviter", value = f"{newlist[0].inviter}")
-            em.add_field(name = "Invite URL", value = f"{newlist[0].url}")
+            if len(newlist) != 1:
+                inviters = [x.inviter for x in newlist]
+                em.add_field(name = "Inviter", value = f"{set(inviters)}")
+                em.add_field(name = "Invite URL", value = "Multiple Invites Detected")
+            elif len(newlist) == 0:
+                em.add_field(name = "Inviter", value = f"{newlist[0].inviter}")
+                em.add_field(name = "Invite URL", value = f"{newlist[0].url}")
             await bot.send_message(logs_channel, embed = em)
         except Exception as e:
             print(str(e))
