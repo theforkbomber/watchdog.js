@@ -163,7 +163,8 @@ async def on_ready():
     print('Username -> ' + bot.user.name)
     print('ID -> ' + str(bot.user.id))
     global invites
-    server = bot.get_server('369252350927306752')
+    # server = bot.get_server('369252350927306752')
+    server = bot.get_server('427450243253272598')
     while True:
         invites = await bot.invites_from(server)
         now = datetime.now()
@@ -384,14 +385,7 @@ async def on_server_join(server):
 async def on_member_join(member):
     global invites
     test = await bot.invites_from(member.server)
-    print(test)
-    print(invites)
-    # print([x.uses for x in test if not x in [y.uses for y in invites]])
-    for x in test:
-        if x in invites:
-            next
-        else:
-            print(x.inviter)
+    print([x.uses for x in test if not x in [y.uses for y in invites]])
     # if not ("everyone" in member.nick or "here" in member.nick):
     #     pass
     # elif "everyone" in member.nick or "here" in member.nick:
