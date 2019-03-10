@@ -386,7 +386,8 @@ async def on_member_join(member):
     global invites
     test = await bot.invites_from(member.server)
     print(invites == test)
-    print([x.uses for x in test if x.uses not in [y.uses for y in invites]])
+    newlist = [x for x in test if x.uses not in [y.uses for y in invites]]
+    print(f"Inviter: {newlist[0].inviter}\nInvite URL: {newlist[0].url}")
     # if not ("everyone" in member.nick or "here" in member.nick):
     #     pass
     # elif "everyone" in member.nick or "here" in member.nick:
