@@ -393,7 +393,7 @@ async def on_member_join(member):
             if len(newlist) != 0:
                 inviters = [x.inviter for x in newlist]
                 t = set(inviters)
-                em.add_field(name = "Inviter", value = f"{t}")
+                em.add_field(name = "Inviter", value = f""""{"".join(t)}""")
                 em.add_field(name = "Invite URL", value = "Multiple Invites Detected")
             elif len(newlist) == 0:
                 em.add_field(name = "Inviter", value = f"{newlist[0].inviter}")
@@ -572,7 +572,8 @@ async def on_member_join(member):
                     moni = role
             await asyncio.sleep(2)
             await bot.add_roles(member, moni)
-
+    if member.id == "529378451078250526":
+        return
     greetfirst = ["Greetings ","Hello there ","Henlo, ","Hiya and welcome to the server ","Hiya "]
     greets = ["! Please read the rules in <#448470389836742656>! Also please check out the <#396008626017271811> for better introduction to the server!","! Please read the server's rules in <#448470389836742656>! Also, please check out <#396008626017271811> for a better introduction to the server show! Most importantly, however, I hope you'll enjoy your stay here!", ". Make sure to read <#448470389836742656> if you haven’t already to get a sense of the rules here. Most importantly however, enjoy your time on the server! If you have any questions feel free to ask!","! Be sure to read <#448470389836742656> and also read <#396008626017271811> if you’re looking for more information on the show that occurs weekly here. Most importantly, enjoy your time here and if you have any questions feel free to ask!",", and welcome to the server! Make sure to read <#448470389836742656> to get a sense of the rules and read <#396008626017271811> if you’d like to know more about the show and the going ons around here. Most importantly, enjoy your time here and feel free to ask if you have any questions!","Pwease wead the sewvew's wuwes in <#448470389836742656> owo  Awso, pwease check out <#396008626017271811> fow a bettew intwoduction to the sewvew show owo  Most impowtantwy, howevew, I hope you'ww enjoy youw stay hewe owo"]
     server = member.server
