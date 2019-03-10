@@ -390,12 +390,12 @@ async def on_member_join(member):
             em = discord.Embed(description = f"New user: {member}")
             em.set_author(name = "Invite Tracker 9000", icon_url=member.avatar_url)
             print(len(newlist))
-            if len(newlist) != 0:
+            if len(newlist) != 1:
                 inviters = [str(x.inviter) for x in newlist]
                 t = set(inviters)
                 em.add_field(name = "Inviter", value = f""""{" ".join(t)}""")
                 em.add_field(name = "Invite URL", value = "Multiple Invites Detected")
-            elif len(newlist) == 0:
+            elif len(newlist) == 1:
                 em.add_field(name = "Inviter", value = f"{newlist[0].inviter}")
                 em.add_field(name = "Invite URL", value = f"{newlist[0].url}")
             await bot.send_message(logs_channel, embed = em)
