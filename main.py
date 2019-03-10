@@ -390,9 +390,10 @@ async def on_member_join(member):
             em = discord.Embed(description = f"New user: {member}")
             em.set_author(name = "Invite Tracker 9000", icon_url=member.avatar_url)
             print(len(newlist))
-            if len(newlist) != 1:
+            if len(newlist) != 0:
                 inviters = [x.inviter for x in newlist]
-                em.add_field(name = "Inviter", value = f"{set(inviters)}")
+                t = set(inviters)
+                em.add_field(name = "Inviter", value = f"{t}")
                 em.add_field(name = "Invite URL", value = "Multiple Invites Detected")
             elif len(newlist) == 0:
                 em.add_field(name = "Inviter", value = f"{newlist[0].inviter}")
