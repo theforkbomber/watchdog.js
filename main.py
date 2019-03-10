@@ -165,7 +165,7 @@ async def on_ready():
     global invites
     server = bot.get_server('369252350927306752')
     while True:
-        invites = bot.invites_from(server)
+        invites = await bot.invites_from(server)
         now = datetime.now()
         d = datetime.now()
         m = psutil.virtual_memory()
@@ -174,10 +174,10 @@ async def on_ready():
         # await bot.change_presence(status=discord.Status.dnd, game=discord.Game(name="Under maintenance..."))
         await bot.change_presence(status=statusmaker(), game=activity)
         await asyncio.sleep(15)
-        invites = bot.invites_from(server)
+        invites = await bot.invites_from(server)
         await bot.change_presence(status=statusmaker(), game=discord.Game(name = "over JMAF", type = 3))
         await asyncio.sleep(15)
-        invites = bot.invites_from(server)
+        invites = await bot.invites_from(server)
         await bot.change_presence(status=statusmaker(), game=discord.Game(name = "#suggestions", type = 2))
         await asyncio.sleep(15)
 
