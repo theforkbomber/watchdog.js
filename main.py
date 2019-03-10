@@ -1123,7 +1123,7 @@ async def invite_tracker():
         global invites
         server = bot.get_server('369252350927306752')
         invites = await bot.invites_from(server)
-        asyncio.sleep(1)
+        asyncio.sleep(2)
 bot.loop.create_task(invite_tracker())
 # bot.loop.create_task(serverpfp())
 while True:
