@@ -1112,9 +1112,11 @@ for extension in initial_extensions:
 #         print("lolno")
 
 async def invite_tracker():
-    global invites
-    server = bot.get_server('427450243253272598')
-    invites = await bot.invites_from(server)
+    while True:
+        global invites
+        server = bot.get_server('427450243253272598')
+        invites = await bot.invites_from(server)
+        asyncio.sleep(1)
 bot.loop.create_task(invite_tracker())
 # bot.loop.create_task(serverpfp())
 while True:
