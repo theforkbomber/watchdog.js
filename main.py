@@ -1112,6 +1112,7 @@ for extension in initial_extensions:
 #         print("lolno")
 
 async def invite_tracker():
+    await bot.wait_until_ready()
     while True:
         global invites
         server = bot.get_server('427450243253272598')
