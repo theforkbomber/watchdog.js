@@ -383,7 +383,8 @@ async def on_server_join(server):
 @bot.event
 async def on_member_join(member):
     global invites
-    print([x for x in bot.invites_from(member.server) if x not in invites])
+    test = await bot.invites_from(member.server)
+    print([x for x in test if x not in invites])
     # if not ("everyone" in member.nick or "here" in member.nick):
     #     pass
     # elif "everyone" in member.nick or "here" in member.nick:
