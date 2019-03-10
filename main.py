@@ -386,7 +386,7 @@ async def on_member_join(member):
         test = await bot.invites_from(member.server)
         print(invites == test)
         newlist = [x for x in test if x.uses not in [y.uses for y in invites]]
-        em = discord.Embed()
+        em = discord.Embed(description = f"New user: {member}")
         em.set_author(name = "Invite Tracker 9000", icon_url=member.avatar_url)
         em.add_field(name = "Inviter", value = f"{newlist[0].inviter}")
         em.add_field(name = "Invite URL", value = f"{newlist[0].url}")
