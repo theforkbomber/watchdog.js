@@ -393,7 +393,7 @@ async def on_member_join(member):
             if len(newlist) != 1:
                 inviters = [str(x.inviter) for x in newlist]
                 t = set(inviters)
-                em.add_field(name = "Inviter", value = f""""{" ".join(t)}""")
+                em.add_field(name = "Inviter", value = f"""{" ".join(t)}""")
                 em.add_field(name = "Invite URL", value = "Multiple Invites Detected")
             elif len(newlist) == 1:
                 em.add_field(name = "Inviter", value = f"{newlist[0].inviter}")
