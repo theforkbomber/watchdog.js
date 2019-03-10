@@ -29,6 +29,7 @@ from PyDictionary import PyDictionary
 import config
 from opus_loader import load_opus_lib
 
+invites = []
 load_opus_lib()
 then = datetime.now()
 bot = commands.Bot(command_prefix=">os.")
@@ -161,6 +162,10 @@ async def on_ready():
     print('Successfully logged in.')
     print('Username -> ' + bot.user.name)
     print('ID -> ' + str(bot.user.id))
+    # global invites
+    # server = bot.get_server('369252350927306752')
+    # for x in server.invites:
+    #     a = [x.inviter, x.uses, 
     while True:
         now = datetime.now()
         d = datetime.now()
@@ -174,6 +179,15 @@ async def on_ready():
         await asyncio.sleep(15)
         await bot.change_presence(status=statusmaker(), game=discord.Game(name = "#suggestions", type = 2))
         await asyncio.sleep(15)
+
+@bot.event
+async def on_server_update(before, after):
+    if len(before.members) != len(after.members):
+        return
+    else:
+        print(before.invites)
+        print(after.invites)
+        print([difference for difference in after if difference not in before])
 
 @bot.event
 async def on_reaction_add(reaction, user):
