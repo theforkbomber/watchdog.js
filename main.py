@@ -166,7 +166,6 @@ async def on_ready():
     # server = bot.get_server('369252350927306752')
     server = bot.get_server('427450243253272598')
     while True:
-        invites = await bot.invites_from(server)
         now = datetime.now()
         d = datetime.now()
         m = psutil.virtual_memory()
@@ -175,10 +174,8 @@ async def on_ready():
         # await bot.change_presence(status=discord.Status.dnd, game=discord.Game(name="Under maintenance..."))
         await bot.change_presence(status=statusmaker(), game=activity)
         await asyncio.sleep(15)
-        invites = await bot.invites_from(server)
         await bot.change_presence(status=statusmaker(), game=discord.Game(name = "over JMAF", type = 3))
         await asyncio.sleep(15)
-        invites = await bot.invites_from(server)
         await bot.change_presence(status=statusmaker(), game=discord.Game(name = "#suggestions", type = 2))
         await asyncio.sleep(15)
 
@@ -1113,8 +1110,12 @@ for extension in initial_extensions:
 #         await asyncio.sleep(60*60*24)
 #     except:
 #         print("lolno")
-        
-# bot.loop.create_task(zipper())
+
+async def invite_tracker():
+    global invites
+    server = bot.get_server('427450243253272598')
+    invites = await bot.invites_from(server)
+bot.loop.create_task(invite_tracker())
 # bot.loop.create_task(serverpfp())
 while True:
 	try:
