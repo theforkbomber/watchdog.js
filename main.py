@@ -1136,7 +1136,6 @@ async def invite_tracker():
             server = bot.get_server('369252350927306752')
             invites = await bot.invites_from(server)
             await asyncio.sleep(12)
-            print("Updated")
         except:
             pass
 bot.loop.create_task(invite_tracker())
