@@ -378,11 +378,11 @@ async def on_server_join(server):
 
 @bot.event
 async def on_member_join(member):
-    if member.server != bot.get_server("369252350927306752"):
+    if member.server != bot.get_server("427450243253272598"):
         pass
     else:
         global invites
-        logs_channel = bot.get_channel("526179783994900491")
+        logs_channel = bot.get_channel("528769035358437376")
         test = await bot.invites_from(member.server)
         print(invites == test)
         newlist = [x for x in test if x.uses not in [y.uses for y in invites]]
@@ -1121,7 +1121,7 @@ async def invite_tracker():
     await bot.wait_until_ready()
     while True:
         global invites
-        server = bot.get_server('369252350927306752')
+        server = bot.get_server('427450243253272598')
         invites = await bot.invites_from(server)
         asyncio.sleep(1)
 bot.loop.create_task(invite_tracker())
