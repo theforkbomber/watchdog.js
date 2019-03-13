@@ -35,7 +35,7 @@ class Roles:
         if any(i for i in LegacyRoles if i in ctx.message.author.roles):
             rolestoremove.append([i for i in LegacyRoles if i in ctx.message.author.roles])
             rolestogive.append(discord.utils.get(ctx.message.server.roles, name='Monika (Legacy)'))
-
+        print(rolestogive, rolestoremove)
         await self.bot.remove_roles(ctx.message.author, *rolestoremove)
         await asyncio.sleep(2)
         await self.bot.add_roles(ctx.message.author, *rolestogive)
