@@ -399,6 +399,8 @@ async def on_member_join(member):
                 em.add_field(name = "Inviter", value = f"{newlist[0].inviter}")
                 em.add_field(name = "Invite URL", value = f"{newlist[0].url}")
             await bot.send_message(logs_channel, embed = em)
+            server = bot.get_server('369252350927306752')
+            invites = await bot.invites_from(server)
         except Exception as e:
             print(str(e))
     # if not ("everyone" in member.nick or "here" in member.nick):
