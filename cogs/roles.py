@@ -18,6 +18,7 @@ class Roles:
 
     @roleme.command(pass_context=True, aliases = ["Monika", "moni","Moni"])
     async def monika(self, ctx):
+        print("Test")
         rolestoremove = []
         rolestogive = []
         server = ctx.message.server
